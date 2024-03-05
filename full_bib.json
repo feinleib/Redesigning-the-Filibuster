@@ -286,7 +286,7 @@
 		}
 	},
 	{
-		"id": "unitedstatessenateSenateActionCloture2023",
+		"id": "unitedstatessenateSenateActionCloture2024",
 		"type": "dataset",
 		"title": "Senate action on cloture motions",
 		"URL": "https://www.senate.gov/legislative/cloture/clotureCounts.htm",
@@ -307,9 +307,7 @@
 		"issued": {
 			"date-parts": [
 				[
-					"2023",
-					12,
-					1
+					"2024"
 				]
 			]
 		}
@@ -983,7 +981,7 @@
 		"publisher": "The Brookings Institution",
 		"publisher-place": "Washington, DC",
 		"source": "Zotero",
-		"title": "Filibuster Reform Is Coming—Here’s How: Seven Ideas for Change",
+		"title": "Filibuster reform is coming—here’s how: Seven ideas for change",
 		"title-short": "Filibuster reform is coming",
 		"URL": "https://www.brookings.edu/articles/fiilibuster-reform-is-coming-heres-how/",
 		"author": [
@@ -1041,11 +1039,16 @@
 		}
 	},
 	{
-		"id": "LegislationRecords",
+		"id": "unitedstatessenateLegislationRecords",
 		"type": "webpage",
 		"container-title": "U.S. Senate",
-		"title": "Legislation & Records",
+		"title": "Legislation & records",
 		"URL": "https://www.senate.gov/legislative/legislative_home.htm",
+		"author": [
+			{
+				"literal": "United States Senate"
+			}
+		],
 		"accessed": {
 			"date-parts": [
 				[
@@ -1434,7 +1437,7 @@
 		"source": "GitHub",
 		"title": "filibustr: Data utilities for congressional research",
 		"title-short": "filibustr",
-		"URL": "https://github.com/feinleib/filibustr",
+		"URL": "https://CRAN.R-project.org/package=filibustr",
 		"version": "0.1.1",
 		"author": [
 			{
@@ -1456,7 +1459,7 @@
 				[
 					"2024",
 					2,
-					1
+					13
 				]
 			]
 		}
@@ -1857,7 +1860,8 @@
 		"container-title": "The New Republic",
 		"ISSN": "0028-6583",
 		"source": "The New Republic",
-		"title": "For Patrick Leahy, The Vietnam War Is Finally Ending",
+		"title": "For Patrick Leahy, the Vietnam War is finally ending",
+		"title-short": "For Patrick Leahy",
 		"URL": "https://newrepublic.com/article/169542/patrick-leahy-vietnam-war-finally-ending",
 		"author": [
 			{
@@ -1945,7 +1949,8 @@
 		"note": "publisher: Now Publishers, Inc.",
 		"page": "469-511",
 		"source": "nowpublishers.com",
-		"title": "The Reputation Politics of the Filibuster",
+		"title": "The reputation politics of the filibuster",
+		"title-short": "The reputation politics",
 		"URL": "https://nowpublishers.com/article/Details/QJPS-20109",
 		"volume": "18",
 		"author": [
@@ -1984,7 +1989,7 @@
 		"language": "fr",
 		"note": "English title: Gallicagram: applying textual statistics to press archives",
 		"source": "DOI.org (Crossref)",
-		"title": "Gallicagram: les archives de presse sous les rotatives de la statistique textuelle",
+		"title": "Gallicagram: Les archives de presse sous les rotatives de la statistique textuelle",
 		"title-short": "Gallicagram",
 		"URL": "http://journals.openedition.org/corpus/7944",
 		"author": [
@@ -2037,7 +2042,7 @@
 		"note": "DOI: 10.31235/osf.io/84bf3",
 		"publisher": "SocArXiv",
 		"source": "DOI.org (Crossref)",
-		"title": "Gallicagram: un outil de lexicométrie pour la recherche",
+		"title": "Gallicagram: Un outil de lexicométrie pour la recherche",
 		"title-short": "Gallicagram",
 		"URL": "https://doi.org/10.31235/osf.io/84bf3",
 		"author": [
@@ -2081,7 +2086,7 @@
 		"publisher": "W.W. Norton & Company",
 		"publisher-place": "New York London",
 		"source": "K10plus ISBN",
-		"title": "Analyzing politics: rationality, behavior, and institutions",
+		"title": "Analyzing politics: Rationality, behavior, and institutions",
 		"title-short": "Analyzing politics",
 		"author": [
 			{
@@ -2109,7 +2114,7 @@
 		"language": "en",
 		"page": "303-315",
 		"source": "DOI.org (Crossref)",
-		"title": "Buying Supermajorities",
+		"title": "Buying supermajorities",
 		"URL": "https://www.cambridge.org/core/product/identifier/S0003055400206217/type/journal_article",
 		"volume": "90",
 		"author": [
@@ -2270,16 +2275,16 @@
 		}
 	},
 	{
-		"id": "pettiBaseballrPackageWritten2024",
+		"id": "pettiBaseballrAcquiringAnalyzing2024",
 		"type": "software",
 		"abstract": "A package written for R focused on baseball analysis. Currently in development.",
 		"genre": "R",
 		"license": "MIT License",
 		"note": "original-date: 2016-01-04T11:49:06Z",
 		"source": "GitHub",
-		"title": "baseballr: A package written for R focused on baseball analysis",
+		"title": "baseballr: Acquiring and analyzing baseball data",
 		"title-short": "baseballr",
-		"URL": "https://billpetti.github.io/baseballr/",
+		"URL": "https://CRAN.R-project.org/package=baseballr",
 		"version": "1.6.0",
 		"author": [
 			{
@@ -2594,7 +2599,7 @@
 	{
 		"id": "diaz-balartSecureBorderAct2023",
 		"type": "bill",
-		"abstract": "Summary of H.R.2 - 118th Congress (2023-2024): Secure the Border Act of 2023",
+		"abstract": "This bill makes various changes to immigration law, including by imposing limits on asylum eligibility and requiring employers to use an electronic system to verify the employment eligibility of new employees.",
 		"chapter-number": "118th Cong.",
 		"language": "eng",
 		"license": "Text is government work",
@@ -2691,7 +2696,8 @@
 		"issued": {
 			"date-parts": [
 				[
-					"2024"
+					"2024",
+					1
 				]
 			]
 		}
@@ -2726,6 +2732,393 @@
 			"date-parts": [
 				[
 					"1975"
+				]
+			]
+		}
+	},
+	{
+		"id": "solenderCapitolHillStunner2023",
+		"type": "webpage",
+		"abstract": "Just 20 bills have been passed by both chambers and signed into law this year.",
+		"container-title": "Axios",
+		"language": "en",
+		"title": "Capitol Hill stunner: 2023 led to fewest laws in decades",
+		"title-short": "Capitol Hill stunner",
+		"URL": "https://www.axios.com/2023/12/19/118-congress-bills-least-unproductive-chart",
+		"author": [
+			{
+				"family": "Solender",
+				"given": "Andrew"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					19
+				]
+			]
+		}
+	},
+	{
+		"id": "parwaniBillsEnactedCongressional2023",
+		"type": "graphic",
+		"language": "en",
+		"medium": "Chart",
+		"title": "Bills enacted, by congressional session",
+		"URL": "https://www.axios.com/2023/12/19/118-congress-bills-least-unproductive-chart",
+		"author": [
+			{
+				"family": "Parwani",
+				"given": "Simran"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					18
+				]
+			]
+		}
+	},
+	{
+		"id": "http://zotero.org/users/7979996/items/FUHQTSL4",
+		"type": "document",
+		"title": "105369_book_item_105369.pdf",
+		"URL": "https://www.sagepub.com/sites/default/files/upm-assets/105369_book_item_105369.pdf",
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					15
+				]
+			]
+		}
+	},
+	{
+		"id": "davidsonCongressItsMembers2023",
+		"type": "book",
+		"edition": "19th",
+		"language": "en",
+		"number-of-pages": "656",
+		"publisher": "CQ Press",
+		"title": "Congress and its members",
+		"URL": "https://us.sagepub.com/en-us/nam/congress-and-its-members/book277300",
+		"author": [
+			{
+				"family": "Davidson",
+				"given": "Roger H."
+			},
+			{
+				"family": "Oleszek",
+				"given": "Walter J"
+			},
+			{
+				"family": "Lee",
+				"given": "Frances E."
+			},
+			{
+				"family": "Schickler",
+				"given": "Eric"
+			},
+			{
+				"family": "Curry",
+				"given": "James M."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					15
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					10,
+					10
+				]
+			]
+		}
+	},
+	{
+		"id": "gattisSenatorTubervilleMore2023",
+		"type": "webpage",
+		"abstract": "Chair of Senate Armed Services Committee raises possibility in floor speech Wednesday.",
+		"container-title": "AL.com",
+		"language": "en",
+		"note": "section: News",
+		"title": "Senator: Is Tuberville more interested in ‘spotlight’ in continuing military holds?",
+		"title-short": "Senator",
+		"URL": "https://www.al.com/news/2023/09/senator-is-tuberville-more-interested-in-spotlight-in-continuing-military-holds.html",
+		"author": [
+			{
+				"family": "Gattis",
+				"given": "Paul"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					16
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					9,
+					6
+				]
+			]
+		}
+	},
+	{
+		"id": "jalonickRepublicansConfrontTuberville2023",
+		"type": "webpage",
+		"abstract": "Republican senators angrily challenged Sen. Tommy Tuberville on his blockade of almost 400 military officers Wednesday evening, taking over the Senate floor for more than four hours to call for individual confirmation votes after a monthslong stalemate.",
+		"container-title": "AP News",
+		"language": "en-US",
+		"title": "Republicans confront Tuberville over military holds in extraordinary showdown on Senate floor",
+		"title-short": "Republicans confront Tuberville",
+		"URL": "https://apnews.com/article/tuberville-holds-military-schumer-nominations-99a156198d325a329a98208785ea80f9",
+		"author": [
+			{
+				"family": "Jalonick",
+				"given": "Mary Clare"
+			},
+			{
+				"family": "Baldor",
+				"given": "Lolita C."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					16
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					11,
+					2
+				]
+			]
+		}
+	},
+	{
+		"id": "sliscoTommyTubervilleHas2023",
+		"type": "webpage",
+		"abstract": "General Charles Q. Brown Jr. was confirmed by the Senate as the next chairman of the Joint Chiefs of Staff despite Tuberville's anti-abortion blockade.",
+		"container-title": "Newsweek",
+		"language": "en",
+		"note": "section: News",
+		"title": "Tommy Tuberville has \"accomplished nothing\" as blockade bucked: Schumer",
+		"title-short": "Tommy Tuberville has \"accomplished nothing\"",
+		"URL": "https://www.newsweek.com/tommy-tuberville-has-accomplished-nothing-blockade-bucked-schumer-1828689",
+		"author": [
+			{
+				"family": "Slisco",
+				"given": "Alia"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					16
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					9,
+					20
+				]
+			]
+		}
+	},
+	{
+		"id": "voldenLegislativeEffectivenessUnited2014",
+		"type": "book",
+		"abstract": "This book explores why some members of Congress are more effective than others at navigating the legislative process and what this means for how Congress is organized and what policies it produces. Craig Volden and Alan E. Wiseman develop a new metric of individual legislator effectiveness (the Legislative Effectiveness Score) that will be of interest to scholars, voters, and politicians alike. They use these scores to study party influence in Congress, the successes or failures of women and African Americans in Congress, policy gridlock, and the specific strategies that lawmakers employ to advance their agendas.",
+		"ISBN": "978-0-521-76152-9",
+		"language": "en",
+		"note": "DOI: 10.1017/CBO9781139032360",
+		"publisher": "Cambridge University Press",
+		"source": "DOI.org (Crossref)",
+		"title": "Legislative effectiveness in the United States Congress: The lawmakers",
+		"title-short": "Legislative effectiveness in the United States Congress",
+		"URL": "https://www.cambridge.org/core/product/identifier/9781139032360/type/book",
+		"author": [
+			{
+				"family": "Volden",
+				"given": "Craig"
+			},
+			{
+				"family": "Wiseman",
+				"given": "Alan E."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					28
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2014",
+					10,
+					27
+				]
+			]
+		}
+	},
+	{
+		"id": "voldenLegislativeEffectivenessScores2023",
+		"type": "dataset",
+		"language": "en-US",
+		"publisher": "Center for Effective Lawmaking",
+		"title": "Legislative Effectiveness Scores",
+		"URL": "https://thelawmakers.org/",
+		"author": [
+			{
+				"family": "Volden",
+				"given": "Craig"
+			},
+			{
+				"family": "Wiseman",
+				"given": "Alan E."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					2,
+					29
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023"
+				]
+			]
+		}
+	},
+	{
+		"id": "lewisVoteviewCongressionalRollcall2024",
+		"type": "webpage",
+		"title": "Voteview: Congressional roll-call votes database",
+		"title-short": "Voteview",
+		"URL": "https://voteview.com/",
+		"author": [
+			{
+				"family": "Lewis",
+				"given": "Jeffrey B."
+			},
+			{
+				"family": "Poole",
+				"given": "Keith"
+			},
+			{
+				"family": "Rosenthal",
+				"given": "Howard"
+			},
+			{
+				"family": "Boche",
+				"given": "Adam"
+			},
+			{
+				"family": "Rudkin",
+				"given": "Aaron"
+			},
+			{
+				"family": "Sonnet",
+				"given": "Luke"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					4
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2024"
+				]
+			]
+		}
+	},
+	{
+		"id": "Senate",
+		"type": "webpage",
+		"title": "U.S. Senate",
+		"URL": "https://www.senate.gov/"
+	},
+	{
+		"id": "unitedstatessenateDatesSessionsCongress2024",
+		"type": "dataset",
+		"title": "Dates of sessions of the Congress",
+		"URL": "https://www.senate.gov/legislative/DatesofSessionsofCongress.htm",
+		"author": [
+			{
+				"literal": "United States Senate"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					4
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2024"
 				]
 			]
 		}
