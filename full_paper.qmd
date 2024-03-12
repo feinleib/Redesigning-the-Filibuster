@@ -115,9 +115,9 @@ I combine these findings on the impact of partisanship and polarization in Congr
 ## The Legislative Goods
 The aim of any institutional rule, like the Senate cloture rule, is to improve the function of a body according to some set of goals. I define a set of legislative goods upon which I can evaluate different rule proposals surrounding the filibuster and cloture. These legislative goods include:
 
-* Promoting productivity/limiting gridlock.
-* Promoting bipartisanship, dealmaking, and compromise.
-* Promoting policy stability/limiting policy volatility.
+* Promoting **productivity** over gridlock.
+* Promoting **bipartisanship**, dealmaking, and compromise over partisan position-taking.
+* Promoting **policy stability** over policy volatility.
 
 These legislative goods are naturally normative, and as such, there is room for disagreement on the importance of these legislative goods. Indeed, pursuing any one of these goals in isolation, at the expense of the other goals, would likely be harmful to the Senate. Therefore, it is important for a filibuster rule proposal to accomplish these legislative goods together with some balance.
 I define and discuss each legislative good in more detail below.
