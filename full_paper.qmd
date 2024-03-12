@@ -35,7 +35,14 @@ number-sections: true
 
 ```{r packages}
 #| echo: false
+#| message: false
+
 # packages used
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+
+library(filibustr)
 library(rbbt)
 library(rlang)
 ```
@@ -62,7 +69,44 @@ So far, the filibuster and the de facto requirement for a 60-vote supermajority 
 
 ### Parties, Partisanship, and Polarization in Congress
 The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes [@krehbielPivotalPoliticsTheory1998]. According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the *filibuster pivot* — that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the *veto pivot* as well (the senator whose vote puts the majority over the veto override threshold).
-Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s [@grayUnpackingPivotalPolitics2017], when the use of the cloture rule skyrocketed [@unitedstatessenateSenateActionCloture2024]. Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.
+Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s [@grayUnpackingPivotalPolitics2017], when the use of the cloture rule skyrocketed, as shown in @fig-cloture-graph below [@unitedstatessenateSenateActionCloture2024].
+Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.
+
+```{r cloture actions graph}
+#| echo: false
+#| label: fig-cloture-graph
+#| fig-cap: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
+# #| fig-asp: 1.1
+
+cloture_data <- get_senate_cloture_votes() |> 
+  filter(congress < 118) |> 
+  select(-years) |> 
+  pivot_longer(c(motions_filed, votes_on_cloture, cloture_invoked),
+               names_to = "action_type", values_to = "n_actions") |> 
+  mutate(action_type = factor(action_type, 
+                              levels = c("motions_filed", "votes_on_cloture", "cloture_invoked")))
+
+ggplot(cloture_data, aes(x = congress, y = n_actions)) +
+  geom_line(aes(color = action_type), linewidth = 0.7) +
+  # mark rules reforms
+  annotate("text", label = "1917: Rule XXII introduced", x = 66.5, y = 200, angle = 90) + 
+  geom_vline(xintercept = 92.5, lty = 2, color = "gray70") +
+  annotate("text", label = "1972: two-track system", x = 91, y = 200, angle = 90) + 
+  geom_vline(xintercept = 94, lty = 2, color = "gray70") +
+  annotate("text", label = "1975: cloture threshold lowered", x = 95.5, y = 200, angle = 90) + 
+  # plot appearance
+  scale_x_continuous(breaks = c(65, seq(70, 110, 10), 117), limits = c(65, 119), expand = c(0,0)) +
+  scale_y_continuous(limits = c(0, 400)) +
+  scale_color_manual(labels = c("Motions filed", "Votes on cloture", "Cloture invoked"), 
+                     values = c("gold", "green3", "dodgerblue")) +
+  labs(x = "Congress", y = "Number of actions", 
+       color = "Action type", 
+       caption = "Data: United States Senate (2024)") +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major.x = element_blank())
+```
+
 
 Another key factor in the effects of the filibuster is the interaction between the filibuster and the high levels of polarization and partisanship in Congress today. Since the early 1970s, when the current filibuster rules were formed, ideological polarization in the Senate — defined as the gap between the average ideology of the two parties — has grown by 0.34 points, according to DW-NOMINATE [@desilverPolarizationTodayCongress2022]. Despite the growing polarization in the Senate, bipartisanship remains an important step in passing laws. On a whole-Congress level, the “enacting coalitions” for major laws were as bipartisan in the 2010s as they were in the 1970s [@curryNonpartyGovernmentBipartisan2019]. Even with the parties farther apart than they have been in generations, successful lawmaking still requires the support of legislators from both parties. The durability and benefits of bipartisanship also apply on an individual legislator level. Bipartisan behavior makes legislators more successful at enacting their policy goals, regardless of party polarization and whether the legislator is in the majority or minority party [@harbridge-yongBipartisanPathEffective2023]. Together, these studies show that bipartisanship helps legislative productivity, both for individual legislators and for Congress as a whole.
 
