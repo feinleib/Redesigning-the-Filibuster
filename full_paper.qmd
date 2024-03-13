@@ -57,6 +57,23 @@ To predict the effects of these rule changes, I extend Wawro and Schickler’s e
 ## Literature Review
 Research on the filibuster falls under the broader research area of parties, partisanship, and polarization in Congress. Much of the existing research on the filibuster aims to explain the evolution of the tactic and model the effect of the current and previous filibuster and cloture rules on legislative conflicts. I extend this research by applying formal modeling techniques to predict the effects of proposed new Senate rules around the filibuster and identify the best rule proposal for improving the functioning of the Senate.
 
+### History of the Filibuster
+The modern practice of the filibuster is the product of a long history of evolutions and changes to the Senate's rules and norms. 
+
+* Original Senate: Senate Code, plus previous question motion
+* 1806: previous question rule dropped
+* 1841: Calhoun's filibuster
+* 1917: introduction of Rule XXII (two-thirds of present+voting sens)
+* 1970s: a series of rule changes that took years before their effects were realized
+  * 1972: start of legislative two-tracking
+  * 1974: introduction of budget reconciliation [@jacobiFilibusterReconciliationFuture2013]
+  * 1975: cloture threshold lowered (three-fifths of all sens)
+* 2010s-20s: efforts to break the strength of the filibuster
+  * 2010-2011: desire for and hearings on rule changes
+  * 2013: Filibuster abolished for non-SCOTUS nominations
+  * 2017: Filibuster abolished for SCOTUS nominations
+  * 2021: Dems failed to implement talking filibuster on John Lewis Freedom to Vote Act
+
 ### The Senate Filibuster
 Two prominent books on the filibuster have most directly inspired my research. The first of these is @wawroFilibusterObstructionLawmaking2006, which explained the impact of the Senate's original 1917 cloture rule by modeling the incentives of legislative entrepreneurs before and after the introduction of the rule.
 @kogerFilibusteringPoliticalHistory2010 responded to Wawro and Schickler by focusing more heavily on the costs of legislative obstruction (and the costs to the majority of withstanding it). Koger also presented a different model of the filibuster that is more explicitly based on game theory. My model incorporates Koger's focus on costs into Wawro and Schickler's original model.
