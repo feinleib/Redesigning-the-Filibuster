@@ -165,7 +165,7 @@
 				[
 					"2023",
 					5,
-					10
+					11
 				]
 			]
 		},
@@ -199,7 +199,7 @@
 				[
 					"2023",
 					5,
-					10
+					11
 				]
 			]
 		},
@@ -2319,7 +2319,7 @@
 				[
 					"2024",
 					2,
-					1
+					2
 				]
 			]
 		},
@@ -3119,6 +3119,26 @@
 			"date-parts": [
 				[
 					"2024"
+				]
+			]
+		}
+	},
+	{
+		"id": "SenateRulesProposition1925",
+		"type": "article-magazine",
+		"container-title": "Manufacturers News",
+		"issue": "13",
+		"page": "399, 415, 417",
+		"title": "The Senate rules: The proposition to limit senatorial debate",
+		"title-short": "The Senate rules",
+		"URL": "https://www.google.com/books/edition/Manufacturers_News/LvnmAAAAMAAJ?hl=en",
+		"volume": "27",
+		"issued": {
+			"date-parts": [
+				[
+					"1925",
+					3,
+					28
 				]
 			]
 		}

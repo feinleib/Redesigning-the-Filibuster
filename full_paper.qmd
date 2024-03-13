@@ -92,8 +92,8 @@ ggplot(cloture_data, aes(x = congress, y = n_actions)) +
   geom_line(aes(color = action_type), linewidth = 0.7) +
   # mark rules reforms
   annotate("text", label = "1917: Rule XXII introduced", x = 66.5, y = 200, angle = 90) + 
-  geom_vline(xintercept = 92.5, lty = 2, color = "gray70") +
-  annotate("text", label = "1972: two-track system", x = 91, y = 200, angle = 90) + 
+  geom_vline(xintercept = 92, lty = 2, color = "gray70") +
+  annotate("text", label = "1972: two-track system", x = 90.5, y = 200, angle = 90) + 
   geom_vline(xintercept = 94, lty = 2, color = "gray70") +
   annotate("text", label = "1975: cloture threshold lowered", x = 95.5, y = 200, angle = 90) + 
   # plot appearance
@@ -347,7 +347,7 @@ Similar to bill proponents, the obstructionists receive benefits if they success
 $$
 EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 $$
-where $\beta_{block}$ and $\beta_{position}$ represent the obstructionists' benefits for blocking a bill and their position-taking benefits, respectively. These terms are measured relative to the proponents' benefits $B$, which are fixed to a maximum. If the proponents' benefits from a bill are small in real terms, then the obstructionists' benefits will appear relatively large by contrast. This may occur when the obstructionists have stronger preference intensity than the proponents.
+where $\beta_{block}$ and $\beta_{position}$ represent the obstructionists' benefits for blocking a bill and their position-taking benefits, respectively. These terms are measured relative to the proponents' benefits $B$, which are fixed to a maximum of 1. If the proponents' benefits from a bill are small in real terms, then the obstructionists' benefits will appear relatively large by contrast. This may occur when the obstructionists have stronger preference intensity than the proponents. This imbalanced preference intensity is often the key factor that helps a filibuster succeed.
 
 As with proponents, the probability and benefits of success for obstructionists depend on the size of the obstructionist faction.
 Both forms of benefits for the obstructionists are shared among all the members of the obstructionist faction. Thus, for an individual obstructionist, the benefits of obstruction are:
@@ -402,7 +402,8 @@ This utility-based method to predict the winner of a legislative fight is possib
 
 At first glance, this rule to predict winners using expected utility may appear rigid, as if either the proponents or obstructionists are doomed from the start of a legislative fight. How does this rule explain the negotiation process that is so critical for proponents to grow the coalition to pass a bill, or for obstructionists to kill it? The answer is that the expected utility of these two factions constantly varies as the factions grow and shrink and they change their cost-benefit calculations.
 
-As an example of how the factions' expected utilities vary over time, take Sen. Tommy Tuberville's (R–AL) high-profile use of the hold (a form of filibuster) in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:
+#### An Example Legislative Fight
+It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen. Tommy Tuberville's (R–AL) high-profile use of the hold (a form of filibuster) in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:
 
 1. Sen. Tuberville began his hold on military nominations in February 2023 after the Department of Defense instituted their new policy covering servicemembers' travel expenses for reproductive healthcare and abortions [@swetlikTubervillePutsHold2023]. Tuberville represented a single obstructionist. He ostensibly evaluated significant benefits to this action (in terms of position-taking benefits at the very least, regardless of whether he expected to successfully reverse the Pentagon's policy). His costs were minimal, as he did not have to hold the floor or even be in attendance to sustain his obstruction.
 2. Senators from both parties criticized Sen. Tuberville's hold throughout 2023, but they were unable to break the hold. The proponents of the military promotions made up a supermajority of the Senate, but the process of holding cloture votes on every single nomination would have taken an immense amount of time [@jalonickWhySingleSenator2023]. At this stage, the costs of all those votes outweighed the benefits of confirming the nominees.
@@ -415,9 +416,23 @@ The example of Sen. Tuberville's military holds shows how the expected utility f
 To analyze each of the proposed changes to the filibuster and cloture rule, we will predict how it affects the benefits and/or costs for the proponent and obstructionist factions. These impacts on the benefits and costs for each faction translate into probable impacts on the legislative goods of productivity, bipartisanship, and policy stability.
 
 ### Proposal 1: Abolishing the Filibuster
-Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits and decreasing their costs. The expected benefits increase because the probability of passage would increase from $\pi(\alpha)$ to $\pi(\alpha^*)$ for coalitions of less than 60 votes (see @sec-wsk, especially @fig-wsk). This allows legislative entrepreneurs to pass bills with smaller proponent coalitions. Reducing the cloture threshold to a simple majority would also decrease costs to the proponents because they would be able to end debate without having 60 votes.
+Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits $EB_{prop}$ and decreasing their costs. The expected benefits increase because the probability of passage would increase from $\pi(\alpha)$ to $\pi(\alpha^*)$ for coalitions of less than 60 votes, as shown in @fig-abolish-filibuster below.
 
-Due to both of these factors, it is very likely that abolishing the filibuster would increase productivity in the Senate.
+```{r abolishing the filibuster figure}
+#| echo: false
+#| label: fig-abolish-filibuster
+#| fig-cap: "Change in proponents' expected benefits after abolishing the filibuster"
+#| fig-asp: 0.57
+
+par(mfrow = c(1, 2))
+plot_eb_k(alpha = 0.25, alpha_star = 0.1, k = 0.60)
+plot_eb(0.1)
+```
+
+
+This change in expected benefits allows legislative entrepreneurs to pass bills with smaller proponent coalitions. Reducing the cloture threshold to a simple majority would also decrease costs to the proponents, especially the cost of consuming floor time $C_{prop,t}$ and the cost of debate and attendance $C_{prop,d}$, because they would be able to end debate without having 60 votes. To be clear, the obstructionists do not fully disappear from the model after abolishing the filibuster. The obstructionists still have the ability to attempt a filibuster; it is just much easier for proponents to quickly defeat the filibuster with a simple majority.^[Perhaps "abolishing the filibuster" is not the most accurate term. The term has been around for likely well over a century, however [@SenateRulesProposition1925, p. 399], and I am in no position to rename it.] Therefore, the expected benefits to the obstructionists of filibustering $EB_{obst}$ largely vanish.
+
+Due to these effects on the proponent and obstructionist factions, it is very likely that abolishing the filibuster would increase productivity in the Senate because the expected utility of the proponents would outweigh that of the obstructionists far more often than it does today.
 However, abolishing the filibuster also decreases the incentives for majority-party Senators to reach across the aisle and build bipartisan coalitions. They can pass policies closer to their ideal points because they no longer have to make compromises to reach 60 supporters. As a result, abolishing the filibuster would likely decrease bipartisanship and compromise.
 In addition, abolishing the filibuster would likely increase policy volatility in the Senate. Whenever the majority changes, they can pass a litany of policy priorities over all protest from the minority party. This is the current state of affairs in the House, in which new majorities often pass lengthy policy wish lists, such as the Democrats' For the People Act of 2019 and the Republicans' Secure the Border Act of 2023 [@sarbanesPeopleAct20192019; @diaz-balartSecureBorderAct2023]. If the Senate was also able to end debate with a simple majority, these large policy packages would become law, introducing much more policy volatility.
 
@@ -428,9 +443,11 @@ Restoring the talking filibuster would modestly increase expected benefits for t
 
 Similar to abolishing the filibuster, restoring the talking filibuster would increase the probability of passage for coalitions between 51 and 60 votes. The probability would not increase up to $\pi(\alpha^*)$ because invoking cloture would still take 60 votes, but it would be easier for proponents to get those 60 cloture votes if the alternative is a costly talking filibuster.
 
-Under this rule, the cost of filibustering would increase massively for obstructionists. Nowadays, obstructionists just have to *threaten* a filibuster to force a supermajority cloture vote. With the talking filibuster, obstructionists would actually have to continuously hold the floor and debate to prevent a simple majority vote on passage. It would be physically difficult for small groups of obstructionists to continue their debate long enough to defeat a determined majority.
-The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time [Mondale, in @ExaminingFilibuster2010]. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns [@hammModifyingFilibusterMeans2012].
+Under this rule, the cost of filibustering would increase massively for obstructionists. Nowadays, obstructionists just have to *threaten* a filibuster to force a supermajority cloture vote. With the talking filibuster, obstructionists would actually have to continuously hold the floor and debate to prevent a simple majority vote on passage. It would be physically difficult for small groups of obstructionists to continue their debate long enough to defeat a determined majority. In the terms of the model, restoring the talking filibuster would produce a huge increase in $C_{obst,d}$.
+
+The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. This increases costs on both sides ($C_{prop,t}$ and $C_{obst,t}$ in the model). The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time [Mondale, in @ExaminingFilibuster2010]. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns [@hammModifyingFilibusterMeans2012].
 Supporters of restoring the talking filibuster, including Sen. Jeff Merkley [@merkleyFilibusteredHowFix2024] and former Sen. Patrick Leahy (D–VT) [-@leahy2024], believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen. Leahy, "you might see one or two [filibusters] a year" after this reform.
+Sen. Leahy's prediction is well-founded in the history of the filibuster. Before the institution of legislative two-tracking began the elimination of the talking filibuster, there had never been more than seven cloture motions in a full two-year Congress [@unitedstatessenateSenateActionCloture2024, as shown in @fig-cloture-graph above]. However, with partisan polarization much stronger and the Senate norms much weaker today than they were in the 1970s, it is no certainty that filibusters would go back to those historical levels.
 
 The effects of restoring the talking filibuster would be more uncertain than the effects of abolishing the filibuster. It seems more likely than not that the productivity increase from the decreased number of filibusters would outweigh the longer time spent on each filibuster. The effects on bipartisanship and policy stability would also be smaller than under a Senate with an abolished filibuster. The ability of minority party senators to filibuster particularly objectionable bills would preserve incentives for bipartisanship and prevent the most extreme policy proposals from passing.
 
@@ -439,8 +456,8 @@ Restoring the talking filibuster might have a smaller impact than abolishing the
 ### Proposal 3: Flipping the Cloture Vote
 Flipping the cloture vote is somewhat different than the other two rule proposals because it is mechanically very similar to the current cloture rule (where a 59-41 vote to invoke cloture fails, but a 60-40 vote succeeds). The effects of flipping the cloture vote would come through the altered psychology and optics of the cloture vote. This reform would likely have few changes to the expected utility for proponents, but it may decrease benefits and increase costs for the obstructionists.
 
-The primary premise behind flipping the cloture vote is that it increases costs on obstructionists by forcing them to maintain 41 senators in attendance. When all senators are in attendance, this adds no extra cost. However, flipping the cloture vote at least forces obstructionists to stay in Washington in order to sustain a filibuster.
-A secondary goal of flipping the cloture vote is to make obstruction more visible to the American public. Currently, journalists seem to find cloture votes difficult to explain, referring to them instead as mere "procedural" votes. If the cloture vote were flipped, it would be simple to explain that a group of senators voted to prolong their obstruction. This would make obstruction, a negative action, more visible to voters, possibly decreasing the position-taking benefits of obstruction.
+The primary premise behind flipping the cloture vote is that it increases costs on obstructionists by forcing them to maintain 41 senators in attendance. When all senators are in attendance, this adds no extra cost. However, flipping the cloture vote at least forces obstructionists to stay in Washington in order to sustain a filibuster, increasing $C_{obst, d}$.
+A secondary goal of flipping the cloture vote is to make obstruction more visible to the American public. Currently, journalists seem to find cloture votes difficult to explain, merely referring to them using the obfuscatory term "procedural votes." If the cloture vote were flipped, it would be simple to explain that a group of senators voted to prolong their obstruction. This would make obstruction, a negative action, more visible to voters, possibly decreasing the position-taking benefits of obstruction $\beta_{block}$.
 
 On its own, flipping the cloture vote appears to have only minor effects on the legislative goods. It may slightly increase productivity by making it more politically painful for obstructionists to enforce gridlock. It is unclear what effects this rule would have on bipartisanship and policy stability. Flipping the cloture vote seems to be a more marginal reform than abolishing the filibuster or restoring the talking filibuster.
 
