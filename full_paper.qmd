@@ -76,15 +76,17 @@ Therefore, a natural avenue for reforming the filibuster is to change which sena
 #| echo: false
 #| label: fig-cloture-graph
 #| fig-cap: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
-# #| fig-asp: 1.1
 
 cloture_data <- get_senate_cloture_votes() |> 
   filter(congress < 118) |> 
   select(-years) |> 
   pivot_longer(c(motions_filed, votes_on_cloture, cloture_invoked),
-               names_to = "action_type", values_to = "n_actions") |> 
+               names_to = "action_type", 
+               values_to = "n_actions") |> 
   mutate(action_type = factor(action_type, 
-                              levels = c("motions_filed", "votes_on_cloture", "cloture_invoked")))
+                              levels = c("motions_filed", 
+                                         "votes_on_cloture", 
+                                         "cloture_invoked")))
 
 ggplot(cloture_data, aes(x = congress, y = n_actions)) +
   geom_line(aes(color = action_type), linewidth = 0.7) +
@@ -338,17 +340,15 @@ I add a series of extensions to Wawro and Schickler's model, making it better fo
 #### Bill Obstructionists
 One of the important findings from the literature on the filibuster is that not all senators who oppose a bill are necessarily willing to engage in obstruction to prevent the bill from coming up for a vote. This, of course, was an important element of the pre-cloture Senate. Before the cloture rule, the Senate operated on the norm that bill opponents, sensing they had lost a debate, would allow bills to pass on a majority vote [@jentlesonKillSwitchRise2022]. 
 Even in the modern context, senators who oppose bills must weigh the costs of actively engaging in obstruction as compared to simply voting against a bill [@kogerFilibusteringPoliticalHistory2010].
-Obstructionists represent a distinct and meaningful faction in a legislative debate. The obstructionists are a subset of the bill opponents, a group with size $1 - \eta$. Thus, I label the size of the obstructionist faction $\omega \in [0, 1 - \eta]$.
+Obstructionists represent a distinct and meaningful faction in a legislative debate. The obstructionists are a subset of the bill opponents. As the opponents are a group with size $1 - \eta$, I label the size of the obstructionist faction $\omega \in [0, 1 - \eta]$.
 
 #### The Benefits for Bill Obstructionists
-Similar to bill proponents, the obstructionists receive benefits if they successfully kill a bill. They also may receive position-taking benefits for the act of obstruction regardless of the bill's outcome. Thus, the expected benefits of obstruction are:
+Similar to bill proponents, the obstructionists receive benefits if they successfully kill a bill. These blocking benefits represent the obstructionists' preference for the status quo over the new policy proposal. They also may receive position-taking benefits for the act of obstruction regardless of the bill's outcome. By committing effort to actively obstruct a bill, obstructionists publicly demonstrate the strength of their policy commitments, which may improve their reputation with voters [@gibbsReputationPoliticsFilibuster2023]. Thus, the expected benefits of obstruction are:
 $$
 EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 $$
-where $\beta_{block}$ and $\beta_{position}$ represent the obstructionists' benefits for blocking a bill and their position-taking benefits, respectively. These terms are measured using the proponents' benefits $B$ as a baseline. If the proponents' benefits from a bill are small, then the obstructionists' benefits will appear relatively large by contrast.
+where $\beta_{block}$ and $\beta_{position}$ represent the obstructionists' benefits for blocking a bill and their position-taking benefits, respectively. These terms are measured relative to the proponents' benefits $B$, which are fixed to a maximum. If the proponents' benefits from a bill are small in real terms, then the obstructionists' benefits will appear relatively large by contrast. This may occur when the obstructionists have stronger preference intensity than the proponents.
 
-<!-- TODO: figure out $\pi$ and $\beta$ curves -->
-<!-- * How does $\omega$ impact $\pi$? Should I expand the equation from WS~K~? -->
 As with proponents, the probability and benefits of success for obstructionists depend on the size of the obstructionist faction.
 Both forms of benefits for the obstructionists are shared among all the members of the obstructionist faction. Thus, for an individual obstructionist, the benefits of obstruction are:
 $$
