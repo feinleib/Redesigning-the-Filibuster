@@ -97,7 +97,8 @@ ggplot(cloture_data, aes(x = congress, y = n_actions)) +
   geom_vline(xintercept = 94, lty = 2, color = "gray70") +
   annotate("text", label = "1975: cloture threshold lowered", x = 95.5, y = 200, angle = 90) + 
   # plot appearance
-  scale_x_continuous(breaks = c(65, seq(70, 110, 10), 117), limits = c(65, 119), expand = c(0,0)) +
+  scale_x_continuous(breaks = c(65, seq(70, 110, 10), 117), 
+                     limits = c(65, 119), expand = c(0,0)) +
   scale_y_continuous(limits = c(0, 400)) +
   scale_color_manual(labels = c("Motions filed", "Votes on cloture", "Cloture invoked"), 
                      values = c("gold", "green3", "dodgerblue")) +
@@ -237,6 +238,7 @@ plot_max_eb <- function(eb_fn, ...) {
                              FUN = \(x) eb_fn(x, ...),
                              FUN.VALUE = numeric(1))) * 0.01 + 0.5
   points(max_eb, eb_fn(max_eb, ...), 
+         # diamond shape
          pch = 18, cex = 2)
 }
 ```
