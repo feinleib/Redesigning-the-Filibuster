@@ -9,7 +9,7 @@ author:
         city: Evanston
         state: IL
         url: https://www.northwestern.edu
-date: 2024-02-01
+date: 2024-03-13
 date-format: long
 abstract: |
   In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
@@ -177,11 +177,11 @@ $$
 \pi(\alpha) = \left( \frac{\eta - .5}{.5} \right) ^ \alpha
 $$
 
-  * $\alpha$ is a parameter indicating how much each additional coalition member contributes to the probability of passage. In effect, this parameter controls the steepness of the $\pi$ curve.
+  * $\alpha$ is a parameter indicating how much each additional coalition member contributes to the probability of passage. In effect, this parameter controls the steepness of the $\pi$ curve. As shown in @fig-ws, a higher value of $\alpha$ means that it takes more legislators in the supporting coalition to reach the same probability of passing a bill.
     * $\alpha \in (0, 1]$, so that as $\alpha$ increases toward 1, each additional legislator in the supporting coalition has a larger impact on the probability of passage.
   * $\pi$ is strictly increasing in $\eta$. Note that when $\eta = .50$, $\pi = 0$ (i.e., you need at least a minimum majority to pass a bill), and when $\eta = 1$, $\pi = 1$ (i.e., a bill with unanimous support is guaranteed to pass).
   
-* $B$: The benefits to the LE of passing their bill, which is also a function of $\eta$:
+* $B$: The benefits to the LE of passing their bill, which is also a function of $\eta$. The benefits to the LE diminish as they add more supporters, as the LE may have to make compromises on the policy content of the bill or share credit with a larger group of supporters.
 $$
 B = \frac{1 - \eta}{.5}
 $$
