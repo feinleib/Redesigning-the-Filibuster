@@ -790,11 +790,13 @@
 	},
 	{
 		"id": "glassmanGameTheoryRepublican2023",
-		"type": "webpage",
+		"type": "post-weblog",
 		"abstract": "The moderates finally fought back against the Freedom Caucus. But how to solve for the equilibrium isn't so clear.",
+		"container-title": "Silver Bulletin",
 		"language": "en",
 		"title": "The game theory of the Republican speakership crisis",
-		"URL": "https://www.natesilver.net/p/the-game-theory-of-the-republican?publication_id=1198116&utm_campaign=email-post-title&r=1pcux7",
+		"title-short": "The game theory",
+		"URL": "https://www.natesilver.net/p/the-game-theory-of-the-republican",
 		"author": [
 			{
 				"family": "Glassman",
@@ -3139,6 +3141,88 @@
 					"1925",
 					3,
 					28
+				]
+			]
+		}
+	},
+	{
+		"id": "wangHouseHeadsHome2023",
+		"type": "article-newspaper",
+		"abstract": "House Speaker Kevin McCarthy (R-Calif.) admitted he was \"blindsided\" by the rebuke, but insisted the Republican caucus would emerge stronger.",
+		"container-title": "Washington Post",
+		"ISSN": "0190-8286",
+		"language": "en-US",
+		"source": "www.washingtonpost.com",
+		"title": "House heads home after hard-right Republicans defy McCarthy, block legislation",
+		"title-short": "House heads home",
+		"URL": "https://www.washingtonpost.com/politics/2023/06/07/house-republicans-mccarthy-freedom-caucus/",
+		"author": [
+			{
+				"family": "Wang",
+				"given": "Amy B."
+			},
+			{
+				"family": "Sotomayor",
+				"given": "Marianna"
+			},
+			{
+				"family": "Caldwell",
+				"given": "Leigh Ann"
+			},
+			{
+				"family": "Kane",
+				"given": "Paul"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					13
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					6,
+					8
+				]
+			]
+		}
+	},
+	{
+		"id": "brooksMcCarthyFreedomCaucus2024",
+		"type": "webpage",
+		"abstract": "Former Speaker Kevin McCarthy (R-Calif.) accused the House Freedom Caucus of preventing the Republican majority from governing.",
+		"container-title": "The Hill",
+		"language": "en-US",
+		"title": "McCarthy: Freedom Caucus has 'stopped Republicans from being able to govern'",
+		"title-short": "McCarthy: Freedom Caucus has 'stopped Republicans'",
+		"URL": "https://thehill.com/homenews/house/4422346-mccarthy-freedom-caucus-republicans/",
+		"author": [
+			{
+				"family": "Brooks",
+				"given": "Emily"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					13
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2024",
+					1,
+					22
 				]
 			]
 		}
