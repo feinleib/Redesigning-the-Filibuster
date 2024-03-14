@@ -541,7 +541,7 @@
 	{
 		"id": "grayUnpackingPivotalPolitics2017",
 		"type": "article-journal",
-		"abstract": "Formal models of politics regularly combine assumptions about a variety of actors and institutions to produce equilibrium expectations, which serve as the primary target for empirical testing. Yet the underlying assumptions can vary in their accuracy among actors and across time and context. We focus on the pivotal politics model of lawmaking and argue that a full evaluation of the theory requires a granular analysis of its two primary components: the ﬁlibuster and veto ‘‘pivots’’ in Congress. We show that both types of pivots contribute to the success of pivotal politics in explaining postwar lawmaking, but that the relevance of each varies based on institution-speciﬁc contexts. Speciﬁcally, the ﬁlibuster pivot has little explanatory power before the 1970s, when norms of ﬁlibuster use were quite restrictive, while the veto pivot’s explanatory power is limited to situations in which the president has sufﬁcient public backing to be a force in the legislative process.",
+		"abstract": "Formal models of politics regularly combine assumptions about a variety of actors and institutions to produce equilibrium expectations, which serve as the primary target for empirical testing. Yet the underlying assumptions can vary in their accuracy among actors and across time and context. We focus on the pivotal politics model of lawmaking and argue that a full evaluation of the theory requires a granular analysis of its two primary components: the ﬁlibuster and veto \"pivots\" in Congress. We show that both types of pivots contribute to the success of pivotal politics in explaining postwar lawmaking, but that the relevance of each varies based on institution-speciﬁc contexts. Speciﬁcally, the ﬁlibuster pivot has little explanatory power before the 1970s, when norms of ﬁlibuster use were quite restrictive, while the veto pivot’s explanatory power is limited to situations in which the president has sufﬁcient public backing to be a force in the legislative process.",
 		"container-title": "Public Choice",
 		"DOI": "10.1007/s11127-017-0450-z",
 		"ISSN": "0048-5829, 1573-7101",
@@ -3223,6 +3223,102 @@
 					"2024",
 					1,
 					22
+				]
+			]
+		}
+	},
+	{
+		"id": "coenenOriginalistCaseCongressional2012",
+		"type": "article-journal",
+		"abstract": "Controversy over the Senate's filibuster practice dominates modem discussion of American legislative government. With increasing frequency, commentators have urged that the upper chamber's requirement of sixty votes to close debate on pending matters violates a majority-rule-based norm of constitutional law. Proponents of this view, however, tend to gloss over a more basic question: Does the Constitution's Rules of Proceedings Clause permit the houses of Congress to adopt internal parliamentary requirements under which a bill is deemed \"passed\" only if it receives supermajority support? This question is important. Indeed, the House already has such a rule in place, and any challenge to the Senate cloture rule is doomed from the start if that body may self-impose supermajority voting thresholds even for the actual enactment of laws. Existing scholarly work in this area, however, is incomplete. The most elaborate treatments invoke originalist principles to claim that the chambers of Congress may freely adopt supermajority (as well as submajority) bill-voting requirements. These treatments have spawned critical responses, but none of them focuses in full-blown fashion on the words and deeds of the Framers themselves. This Article fills the resulting gap by offering a wide-ranging argument against supermajority voting rules based on constitutional text, constitutional structure, and background understandings that pervaded the framing period. Taken as a whole, these controlling indicators of original meaning establish that a bill is passed if and only if it receives a majority vote.",
+		"container-title": "Northwestern University Law Review",
+		"issue": "3",
+		"journalAbbreviation": "Nw. U. L. Rev.",
+		"language": "en",
+		"page": "1091-1152",
+		"source": "HeinOnline",
+		"title": "The originalist case against congressional supermajority voting rules",
+		"title-short": "The originalist case",
+		"URL": "https://heinonline.org/HOL/P?h=hein.journals/illlr106&i=1115",
+		"volume": "106",
+		"author": [
+			{
+				"family": "Coenen",
+				"given": "Dan T."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2012"
+				]
+			]
+		}
+	},
+	{
+		"id": "farrandRecordsFederalConvention1911",
+		"type": "book",
+		"event-place": "New Haven",
+		"ISBN": "978-0-300-00081-8",
+		"language": "en",
+		"note": "Google-Books-ID: N9OFAAAAMAAJ",
+		"number-of-pages": "682",
+		"number-of-volumes": "3",
+		"publisher": "Yale University Press",
+		"publisher-place": "New Haven",
+		"source": "Google Books",
+		"title": "The records of the Federal Convention of 1787",
+		"title-short": "The records of the Federal Convention",
+		"URL": "https://www.google.com/books/edition/The_Records_of_the_Federal_Convention_of/N9OFAAAAMAAJ",
+		"volume": "2",
+		"editor": [
+			{
+				"family": "Farrand",
+				"given": "Max"
+			}
+		],
+		"issued": {
+			"date-parts": [
+				[
+					"1911"
+				]
+			]
+		}
+	},
+	{
+		"id": "TextPresidentStatement1917",
+		"type": "article-newspaper",
+		"container-title": "The New York Times",
+		"language": "en",
+		"page": "1",
+		"source": "TimesMachine",
+		"title": "Text of the president's statement to the public",
+		"title-short": "Text of the president's statement",
+		"URL": "https://timesmachine.nytimes.com/timesmachine/1917/03/05/issue.html",
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"1917",
+					3,
+					5
 				]
 			]
 		}
