@@ -520,19 +520,9 @@ Abolishing the filibuster would have the biggest impact on productivity, at the 
 Performing formal analysis, such as the analysis in this paper, is an important step in choosing the best option for the Senate filibuster moving forward. Empirical analysis is still needed to validate these findings, but this is the first step on the way from guessing to proving the effects of redesigning the Senate filibuster.
 
 ### Extensions and Limitations
-<!-- 
-* measuring the parameters (alpha, betas, C's)
-* considering more filibuster rules?
-* empirical evidence for the coalition sizes I predict
-* becoming more certain of the effects of each rule
-* addressing the issues in "Buying Supermajorities"
-  * (want to be a couple votes above the threshold)
--->
-The primary extension needed to corroborate my findings is empirical evidence for my predictions. This starts with structurally estimating the parameters of the model. @kogerFilibusteringPoliticalHistory2010 performed this sort of estimation in response to the findings of @wawroFilibusterObstructionLawmaking2006. Similar work is needed to evaluate this expanded model. Empirical work will make the predicted effects of different cloture rules more certain.
+The primary extension needed to corroborate my findings is empirical evidence for my predictions. I plan to use a mix of empirical approaches to back up my model. First, I plan to test how the nuclear option on presidential nominations changed the passing coalitions on executive branch and judicial confirmation votes. Second, I plan to measure how large of a cost filibustering would need to impose in order to change bill outcomes. For this component, I could either analyze a few bills as case studies, or do a large-N study to observe an overall "cost curve" for votes.
 
 A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically [@uslanerPartisanshipCoalitionFormation1975]. To explain this, @grosecloseBuyingSupermajorities1996 show how it may be "cheaper" for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. I plan to accommodate this finding into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model will help prevent it from overly predicting minimal majorities.
-
-As I submit this paper, I am only halfway through my senior year. I plan to continue to expand and strengthen my findings in the upcoming months. Submitting for this early deadline, though, has accelerated my progress toward what will surely be a much stronger thesis in the end.
 
 ## The `filibustr` Package {.appendix}
 In addition to the primary findings of my research, I intend to benefit future political science researchers by providing publicly available solutions to the data challenges I face in my work. I am publishing these solutions in the form of an open-source R package, named `filibustr` [@feinleibFilibustrDataUtilities2024]. The `filibustr` package provides a set of utilities to improve the data-gathering process for research on Congress.
