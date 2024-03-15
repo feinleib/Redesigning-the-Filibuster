@@ -3322,5 +3322,44 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "riegerWhereDemocraticSenators2024",
+		"type": "webpage",
+		"abstract": "An analysis of the positions where Democratic senators stand on changing or eliminating the filibuster",
+		"container-title": "Washington Post",
+		"language": "en",
+		"note": "original-date: 2021-06-22",
+		"title": "Where Democratic senators stand on changing or eliminating the filibuster",
+		"title-short": "Where Democratic senators stand",
+		"URL": "https://www.washingtonpost.com/politics/interactive/2021/filibuster-vote-count/",
+		"author": [
+			{
+				"family": "Rieger",
+				"given": "J. M."
+			},
+			{
+				"family": "Blanco",
+				"given": "Adrian"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					3,
+					14
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2024",
+					1,
+					20
+				]
+			]
+		}
 	}
 ]
