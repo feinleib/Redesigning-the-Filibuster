@@ -1,0 +1,19 @@
+---
+title: "Nominations analysis"
+author: 
+  - name: Max H. Feinleib
+    orcid: 0009-0002-9604-3533
+    email: maxfeinleib2024@u.northwestern.edu
+    affiliation:
+      - name: Northwestern University
+        city: Evanston
+        state: IL
+        url: https://www.northwestern.edu
+bibliography: "full_bib.json"
+csl: apa.csl
+toc: true
+number-sections: true
+---
+
+## Introduction
+
