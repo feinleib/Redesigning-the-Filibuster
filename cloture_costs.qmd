@@ -25,10 +25,42 @@ library(filibustr)
 I measure the distance between the breakpoints on failed cloture votes and the ideal point of the potential 60th vote for cloture. This distance can be interpreted as a measurement of the cost a new filibuster rule would have to impose to change the outcome of a cloture vote.
 
 # Data
-* failed cloture votes
+* failed cloture votes (on final passage, not a motion to proceed)
 
 ```{r data import}
-sen_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 117)
-sen_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 117)
+s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 117)
+s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 117)
+s_mem_data <- get_voteview_members(chamber = "s", congress = 117)
+```
+
+Filter to failed cloture votes for a final passage vote.
+```{r}
+s_failed_cvotes <- s_votes_data |> 
+  filter(vote_result == "Cloture Motion Rejected")
+
+s_mem_positions <- s_mem_data |> 
+  # remove presidents
+  filter(chamber == "Senate") |> 
+  # relevant columns
+  select(congress, chamber, icpsr, bioname, party_code, 
+         state_icpsr, state_abbrev, nominate_dim1, nominate_dim2)
+
+# cast codes (source: https://voteview.com/articles/data_help_votes)
+# TODO: use `filibustr` version when that's available
+voteview_cast_codes <- tibble(cast_code = 0:9,
+                              vote_cast = c("Not a Member", 
+                                            "Yea", "Paired Yea", "Announced Yea", 
+                                            "Announced Nay", "Paired Nay", "Nay",
+                                            "Present", "Present", "Not Voting"))
+
+s_mem_failed_cvotes <- s_mem_votes_data |> 
+  # sen_mem_votes_data uses the `rollnumber` as a foreign key
+  semi_join(s_failed_cvotes, by = c("congress", "rollnumber")) |> 
+  # add cast_code descriptions for easier reading
+  left_join(voteview_cast_codes, by = "cast_code") |> 
+  # add member ideologies
+  left_join(s_mem_positions, by = c("congress", "chamber", "icpsr"))
+
+
 ```
 
