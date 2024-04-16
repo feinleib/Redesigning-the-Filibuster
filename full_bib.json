@@ -165,7 +165,7 @@
 				[
 					"2023",
 					5,
-					11
+					10
 				]
 			]
 		},
@@ -199,7 +199,7 @@
 				[
 					"2023",
 					5,
-					11
+					10
 				]
 			]
 		},
@@ -2321,7 +2321,7 @@
 				[
 					"2024",
 					2,
-					2
+					1
 				]
 			]
 		},
@@ -3358,6 +3358,154 @@
 					"2024",
 					1,
 					20
+				]
+			]
+		}
+	},
+	{
+		"id": "kogerWeStillHave2016",
+		"type": "webpage",
+		"container-title": "Vox",
+		"title": "We still have the filibuster, right? Maybe.",
+		"title-short": "We still have the filibuster, right?",
+		"URL": "https://www.vox.com/mischiefs-of-faction/2016/11/9/13575170/will-filibuster-survive",
+		"author": [
+			{
+				"family": "Koger",
+				"given": "Gregory"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					9
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2016",
+					11,
+					9
+				]
+			]
+		}
+	},
+	{
+		"id": "kogerConventionalOption2014",
+		"type": "article-journal",
+		"abstract": "The filibuster in the United States Senate effectively imposes a supermajority vote requirement to pass any legislation. Both supporters and critics of the filibuster agree that any filibuster reform would require extraordinary measures. In contrast to this consensus, this Article describes a method we call the “conventional option,” which allows the filibuster to be reformed by a simple majority of senators at any time using ordinary Senate procedures. As we show below, a majority of senators\nusing the conventional option (1) cannot be filibustered; (2) can act on any day the Senate is in session (not just at the beginning of a new Congress); and (3) does not need to invoke the Constitution. In fact, this Article shows that both the U.S. House of Representatives and the Senate have limited filibustering in the past by using the conventional option described here.",
+		"container-title": "Washington University Law Review",
+		"ISSN": "2166-8000",
+		"issue": "4",
+		"journalAbbreviation": "Wash. U. L. Rev.",
+		"language": "en",
+		"note": "number: 4\npublisher: Washington University in St. Louis School of Law",
+		"page": "867-909",
+		"source": "journals.library.wustl.edu",
+		"title": "The conventional option",
+		"URL": "https://journals.library.wustl.edu/lawreview/article/id/5508/",
+		"volume": "91",
+		"author": [
+			{
+				"family": "Koger",
+				"given": "Gregory"
+			},
+			{
+				"family": "Campos",
+				"given": "Sergio J."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					9
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2014",
+					1,
+					1
+				]
+			]
+		}
+	},
+	{
+		"id": "victorLisaMurkowskiUnusual2018",
+		"type": "webpage",
+		"abstract": "Sen. Lisa Murkowski paired her vote with another Republican in a rare and savvy move.",
+		"container-title": "Vox",
+		"language": "en",
+		"title": "Lisa Murkowski’s unusual vote on Kavanaugh, explained",
+		"title-short": "Lisa Murkowski's unusual vote",
+		"URL": "https://www.vox.com/mischiefs-of-faction/2018/10/8/17949756/murkowski-unusual-vote-explained",
+		"author": [
+			{
+				"family": "Victor",
+				"given": "Jennifer"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					11
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2018",
+					10,
+					8
+				]
+			]
+		}
+	},
+	{
+		"id": "oleszekHoldsSenate2017",
+		"type": "report",
+		"abstract": "The Senate \"hold\" is an informal practice whereby Senators communicate to Senate leaders, often in the form of a letter, their policy views and scheduling preferences regarding measures and matters available for floor consideration. Unique to the upper chamber, holds can be understood as information-sharing devices predicated on the unanimous consent nature of Senate decisionmaking. Senators place holds to accomplish a variety of purposes—to receive notification of upcoming legislative proceedings, for instance, or to express objections to a particular proposal or executive nomination—but ultimately the decision to honor a hold request, and for how long, rests with the majority leader. Scheduling Senate business is the fundamental prerogative of the majority leader, and this responsibility is typically carried out in consultation with the minority leader.",
+		"event-place": "Washington, DC",
+		"language": "en",
+		"number": "R43563",
+		"publisher": "Congressional Research Service",
+		"publisher-place": "Washington, DC",
+		"source": "Zotero",
+		"title": "\"Holds\" in the Senate",
+		"title-short": "Holds",
+		"URL": "https://crsreports.congress.gov/product/pdf/R/R43563",
+		"author": [
+			{
+				"family": "Oleszek",
+				"given": "Mark J"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					16
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2017",
+					1,
+					24
 				]
 			]
 		}
