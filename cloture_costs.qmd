@@ -132,18 +132,14 @@ vote_costs <- pivotal_votes |>
             .groups = "drop") |> 
   mutate(probXdist = prob * nominate_spread_dist / 100,
          pd_rank = row_number(probXdist)) |> 
-  arrange(probXdist) ## |> mutate(pd_diff2 = probXdist - lag(probXdist, n = 2L))
+  arrange(probXdist)
 ```
 
-Finally, I plot the CDF of the vote costs.
+Finally, I plot the cumulative distribution function of the vote costs. This shows how many cloture votes would flip as the costs of filibustering increase. Costs are translated into an equivalent movement on the DW-NOMINATE scale.
 ```{r plot vote costs}
-plot(ecdf(vote_costs$probXdist))
+# plot(ecdf(vote_costs$probXdist))
 plot(vote_costs$probXdist, vote_costs$pd_rank, type = "l",
      xlab = "DW-NOMINATE equivalent of additional costs", ylab = "Cloture votes flipped",
      main = "Potential impact of rule changes on failed cloture votes")
-
-# plot(vote_costs$probXdist, vote_costs$pd_diff2, type = "l",
-#      xlab = "DW-NOMINATE equivalent of additional costs", ylab = "Cloture votes flipped",
-#      main = "Potential impact of rule changes on failed cloture votes")
 ```
 
