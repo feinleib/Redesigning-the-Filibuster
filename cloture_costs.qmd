@@ -18,6 +18,7 @@ number-sections: true
 ```{r packages, message=FALSE}
 # packages used
 library(dplyr)
+library(stringr)
 library(filibustr)
 ```
 
@@ -26,41 +27,123 @@ I measure the distance between the breakpoints on failed cloture votes and the i
 
 # Data
 * failed cloture votes (on final passage, not a motion to proceed)
+* since 1977 (so all votes are under the current cloture rules)
 
 ```{r data import}
-s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 117)
-s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 117)
-s_mem_data <- get_voteview_members(chamber = "s", congress = 117)
+s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 95:117)
+s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 95:117)
+s_mem_data <- get_voteview_members(chamber = "s", congress = 95:117)
 ```
 
 Filter to failed cloture votes for a final passage vote.
-```{r}
+```{r find failed cloture votes}
+## failed cloture votes
+# calculate whether cloture threshold is 51 or 60
+# TODO: doesn't consider VP tiebreakers
+get_cloture_threshold <- function(df) {
+  # nuclear option dates
+  nuclear_2013 <- as.Date("2013-11-21")
+  nuclear_2017 <- as.Date("2017-04-06")
+  
+  df |> 
+    mutate(
+      nomination = str_starts(bill_number, "PN[:digit:]"),
+      scotus = str_detect(vote_desc, "(Associate|Chief) Justice"),
+      threshold = case_when(
+        # SCOTUS nominations
+        nomination & scotus
+        & (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) ~ 51,
+        # other nominations
+        nomination & !scotus 
+        & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)) ~ 51,
+        # 60 for everything else
+        .default = 60),
+      .after = nay_count
+    ) |> 
+    select(-nomination, -scotus)
+}
+
 s_failed_cvotes <- s_votes_data |> 
-  filter(vote_result == "Cloture Motion Rejected")
+  filter(vote_result == "Cloture Motion Rejected") |> 
+  get_cloture_threshold() |> 
+  mutate(
+    votes_needed = threshold - yea_count,
+    # use hypotenuse of spread to measure distances
+    nominate_spread_dist = sqrt(nominate_spread_1 ** 2 + nominate_spread_2 ** 2),
+    .after = threshold
+  )
+
+s_failed_cvotes |> 
+  mutate(total_votes = yea_count + nay_count, .before = yea_count) |> 
+  arrange(total_votes)
+```
+
+Now, I find the pivotal member on these failed cloture votes. I filter to Nay votes with a probability greater than 50% (so they are explained by pivotal models). I also filter out votes with 100% probability, as these votes are unlikely to change in the face of higher-cost filibustering.
+```{r lowest-probability Nays on failed cloture votes}
+## finding pivotal votes
 
 s_mem_positions <- s_mem_data |> 
   # remove presidents
   filter(chamber == "Senate") |> 
   # relevant columns
-  select(congress, chamber, icpsr, bioname, party_code, 
-         state_icpsr, state_abbrev, nominate_dim1, nominate_dim2)
+  select(congress, chamber, icpsr, bioname, party_code, state_abbrev, nominate_dim1, nominate_dim2)
 
 # cast codes (source: https://voteview.com/articles/data_help_votes)
 # TODO: use `filibustr` version when that's available
 voteview_cast_codes <- tibble(cast_code = 0:9,
-                              vote_cast = c("Not a Member", 
-                                            "Yea", "Paired Yea", "Announced Yea", 
-                                            "Announced Nay", "Paired Nay", "Nay",
-                                            "Present", "Present", "Not Voting"))
+                              vote_cast = factor(
+                                c("Not a Member", 
+                                  "Yea", "Paired Yea", "Announced Yea", 
+                                  "Announced Nay", "Paired Nay", "Nay",
+                                  "Present", "Present", "Not Voting")
+                                ))
 
 s_mem_failed_cvotes <- s_mem_votes_data |> 
-  # sen_mem_votes_data uses the `rollnumber` as a foreign key
+  # filter: sen_mem_votes_data uses the `rollnumber` as a foreign key
   semi_join(s_failed_cvotes, by = c("congress", "rollnumber")) |> 
   # add cast_code descriptions for easier reading
   left_join(voteview_cast_codes, by = "cast_code") |> 
+  # filter: Nay votes with 50-99.9% probability
+  filter(str_detect(vote_cast, "Nay"), prob >= 50, prob < 100) |> 
   # add member ideologies
-  left_join(s_mem_positions, by = c("congress", "chamber", "icpsr"))
+  left_join(s_mem_positions, by = c("congress", "chamber", "icpsr")) |> 
+  arrange(rollnumber, prob)
 
+# find (60-yeas)'th member with lowest probability of Nay vote
+pivotal_votes <- s_mem_failed_cvotes |> 
+  left_join(s_failed_cvotes |> 
+              select(congress, rollnumber, threshold, votes_needed, nominate_spread_dist, bill_number),
+            by = c("congress", "rollnumber")) |> 
+  group_by(congress, rollnumber, bill_number, threshold, votes_needed) |> 
+  # ensure there are enough flippable votes
+  filter(n() >= votes_needed) |> 
+  # find pivotal votes
+  mutate(rank = min_rank(prob)) |> 
+  filter(rank <= votes_needed) |> 
+  filter(rank == max(rank))
+```
 
+I multiply the pivotal vote's probability by the spread of the probabilities to estimate the distance
+```{r calculate vote costs}
+vote_costs <- pivotal_votes |> 
+  summarize(prob = first(prob),
+            nominate_spread_dist = first(nominate_spread_dist),
+            n_pivotal_votes = n(), 
+            .groups = "drop") |> 
+  mutate(probXdist = prob * nominate_spread_dist / 100,
+         pd_rank = row_number(probXdist)) |> 
+  arrange(probXdist) ## |> mutate(pd_diff2 = probXdist - lag(probXdist, n = 2L))
+```
+
+Finally, I plot the CDF of the vote costs.
+```{r plot vote costs}
+plot(ecdf(vote_costs$probXdist))
+plot(vote_costs$probXdist, vote_costs$pd_rank, type = "l",
+     xlab = "DW-NOMINATE equivalent of additional costs", ylab = "Cloture votes flipped",
+     main = "Potential impact of rule changes on failed cloture votes")
+
+# plot(vote_costs$probXdist, vote_costs$pd_diff2, type = "l",
+#      xlab = "DW-NOMINATE equivalent of additional costs", ylab = "Cloture votes flipped",
+#      main = "Potential impact of rule changes on failed cloture votes")
 ```
 
