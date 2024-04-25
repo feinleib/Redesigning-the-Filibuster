@@ -18,26 +18,37 @@ number-sections: true
 ```{r packages, message=FALSE}
 # packages used
 library(dplyr)
+library(ggplot2)
+library(readr)
 library(stringr)
 library(filibustr)
 ```
 
 # Introduction
-I measure the distance between the breakpoints on failed cloture votes and the ideal point of the potential 60th vote for cloture. This distance can be interpreted as a measurement of the cost a new filibuster rule would have to impose to change the outcome of a cloture vote.
+I measure the distance between the breakpoints on failed cloture votes and the ideal point of the potential pivotal vote for cloture. This distance can be interpreted as a measurement of the cost a new filibuster rule would have to impose to change the outcome of a cloture vote.
 
 # Data
+For this analysis, I used:
 * failed cloture votes (on final passage, not a motion to proceed)
-* since 1977 (so all votes are under the current cloture rules)
+* since 1977 (so that all votes are under the current cloture rules).
 
-```{r data import}
-s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 95:117)
-s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 95:117)
-s_mem_data <- get_voteview_members(chamber = "s", congress = 95:117)
+```{r data import, message=FALSE}
+# downloading from Voteview
+# s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 95:117)
+# s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 95:117)
+# s_mem_data <- get_voteview_members(chamber = "s", congress = 95:117)
+
+# use local files
+s_votes_data <- read_csv("s_votes_data.csv")
+s_mem_votes_data <- read_csv("s_mem_votes_data.csv")
+s_mem_data <- read_csv("s_mem_data.csv")
 ```
 
-Filter to failed cloture votes for a final passage vote.
+# Analysis
+First, I filter to failed cloture votes for a final passage vote.
 ```{r find failed cloture votes}
 ## failed cloture votes
+
 # calculate whether cloture threshold is 51 or 60
 # TODO: doesn't consider VP tiebreakers
 get_cloture_threshold <- function(df) {
@@ -72,13 +83,9 @@ s_failed_cvotes <- s_votes_data |>
     nominate_spread_dist = sqrt(nominate_spread_1 ** 2 + nominate_spread_2 ** 2),
     .after = threshold
   )
-
-s_failed_cvotes |> 
-  mutate(total_votes = yea_count + nay_count, .before = yea_count) |> 
-  arrange(total_votes)
 ```
 
-Now, I find the pivotal member on these failed cloture votes. I filter to Nay votes with a probability greater than 50% (so they are explained by pivotal models). I also filter out votes with 100% probability, as these votes are unlikely to change in the face of higher-cost filibustering.
+Now, I find the pivotal member on these failed cloture votes. I filter the votes to Nay votes with a probability greater than 50% (so they are explained by pivotal models). I also filter out votes with 100% probability, as these votes are unlikely to change in the face of higher-cost filibustering.
 ```{r lowest-probability Nays on failed cloture votes}
 ## finding pivotal votes
 
@@ -112,9 +119,9 @@ s_mem_failed_cvotes <- s_mem_votes_data |>
 # find (60-yeas)'th member with lowest probability of Nay vote
 pivotal_votes <- s_mem_failed_cvotes |> 
   left_join(s_failed_cvotes |> 
-              select(congress, rollnumber, threshold, votes_needed, nominate_spread_dist, bill_number),
+              select(congress, rollnumber, threshold, votes_needed, nominate_spread_dist, bill_number, vote_desc),
             by = c("congress", "rollnumber")) |> 
-  group_by(congress, rollnumber, bill_number, threshold, votes_needed) |> 
+  group_by(congress, rollnumber, bill_number, vote_desc, threshold, votes_needed) |> 
   # ensure there are enough flippable votes
   filter(n() >= votes_needed) |> 
   # find pivotal votes
@@ -123,23 +130,38 @@ pivotal_votes <- s_mem_failed_cvotes |>
   filter(rank == max(rank))
 ```
 
-I multiply the pivotal vote's probability by the spread of the probabilities to estimate the distance
+I multiply the pivotal vote's probability by the DW-NOMINATE spread of the probabilities to estimate the distance equival.
 ```{r calculate vote costs}
 vote_costs <- pivotal_votes |> 
   summarize(prob = first(prob),
+            prob_left = prob - 50,
             nominate_spread_dist = first(nominate_spread_dist),
             n_pivotal_votes = n(), 
             .groups = "drop") |> 
-  mutate(probXdist = prob * nominate_spread_dist / 100,
+  # distance you have to move: (prob - 50) * spread
+  mutate(probXdist = prob_left * nominate_spread_dist / 100,
          pd_rank = row_number(probXdist)) |> 
   arrange(probXdist)
 ```
 
+# Findings
 Finally, I plot the cumulative distribution function of the vote costs. This shows how many cloture votes would flip as the costs of filibustering increase. Costs are translated into an equivalent movement on the DW-NOMINATE scale.
-```{r plot vote costs}
-# plot(ecdf(vote_costs$probXdist))
-plot(vote_costs$probXdist, vote_costs$pd_rank, type = "l",
+```{r plot vote costs, echo=FALSE}
+rule_change_impact_plot <- plot(vote_costs$probXdist, vote_costs$pd_rank, type = "l",
      xlab = "DW-NOMINATE equivalent of additional costs", ylab = "Cloture votes flipped",
      main = "Potential impact of rule changes on failed cloture votes")
+
+rule_impact_ggplot <- ggplot(vote_costs, aes(x = probXdist, y = pd_rank)) +
+  geom_area(fill = "#77777733", color = "#777777", linewidth = 1) +
+  labs(x = "DW-NOMINATE equivalent of additional costs", 
+       y = "Cloture votes flipped",
+       title = "Potential impact of cloture rule changes on failed cloture votes",
+       subtitle = "95th through 117th Congresses (1977-2022)") +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank())
+
+rule_change_impact_plot
+rule_impact_ggplot
 ```
 
+Based on the slope of the graph, the largest impact on cloture votes would appear to come from rule changes that impose costs equivalent to 0.1-0.2 units on the DW-NOMINATE scale.
