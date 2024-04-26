@@ -49,8 +49,8 @@ First, I filter to failed cloture votes for a final passage vote.
 ```{r find failed cloture votes}
 ## failed cloture votes
 
-# calculate whether cloture threshold is 51 or 60
-# TODO: doesn't consider VP tiebreakers
+# calculate whether cloture threshold is 50 or 60
+# assumes you need 50 votes for a presidential nominee, as the VP likely supports the nominee and can therefore cast the tiebreaking vote.
 get_cloture_threshold <- function(df) {
   # nuclear option dates
   nuclear_2013 <- as.Date("2013-11-21")
@@ -63,10 +63,10 @@ get_cloture_threshold <- function(df) {
       threshold = case_when(
         # SCOTUS nominations
         nomination & scotus
-        & (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) ~ 51,
+        & (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) ~ 50,
         # other nominations
         nomination & !scotus 
-        & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)) ~ 51,
+        & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)) ~ 50,
         # 60 for everything else
         .default = 60),
       .after = nay_count
@@ -119,9 +119,9 @@ s_mem_failed_cvotes <- s_mem_votes_data |>
 # find (60-yeas)'th member with lowest probability of Nay vote
 pivotal_votes <- s_mem_failed_cvotes |> 
   left_join(s_failed_cvotes |> 
-              select(congress, rollnumber, threshold, votes_needed, nominate_spread_dist, bill_number, vote_desc),
+              select(congress, rollnumber, date, threshold, votes_needed, nominate_spread_dist, bill_number, vote_desc),
             by = c("congress", "rollnumber")) |> 
-  group_by(congress, rollnumber, bill_number, vote_desc, threshold, votes_needed) |> 
+  group_by(congress, rollnumber, date, bill_number, vote_desc, threshold, votes_needed) |> 
   # ensure there are enough flippable votes
   filter(n() >= votes_needed) |> 
   # find pivotal votes
