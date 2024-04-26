@@ -25,6 +25,8 @@ keywords:
 format:
   pdf: default
   html: default
+execute:
+  echo: false
 bibliography: "full_bib.json"
 csl: apa.csl
 toc: true
@@ -34,7 +36,6 @@ number-sections: true
 \pagebreak
 
 ```{r packages}
-#| echo: false
 #| message: false
 
 # packages used
@@ -43,8 +44,8 @@ library(ggplot2)
 library(tidyr)
 
 library(filibustr)
-library(rbbt)
-library(rlang)
+library(rbbt) # citations
+library(rlang) # expr()'s used in plots
 ```
 
 ## Introduction
@@ -76,7 +77,6 @@ A formal rule for ending debate in the Senate finally came in 1917. At the end o
 Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in @fig-cloture-graph below, the cloture rule was used only on rare occasions for the first several decades after 1917 [@unitedstatessenateSenateActionCloture2024].
 
 ```{r cloture actions graph}
-#| echo: false
 #| label: fig-cloture-graph
 #| fig-cap: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
 
@@ -118,8 +118,6 @@ ggplot(cloture_data, aes(x = congress, y = n_actions)) +
 The Senate was generally able to pass legislation without resorting to the cloture rule &mdash; with the exception of civil rights bills, which were frequently and systematically filibustered. Southern Democratic senators successfully killed nine of the 12 civil rights bills considered in the Senate between 1901 and 1956 with filibusters [@kogerFilibusteringPoliticalHistory2010, p. 116]. The longest speech in Senate history, a continuous speech of over 24 hours by Sen. Strom Thurmond (D–SC), came in protest of the 1957 Civil Rights Act, which ultimately passed despite the filibuster. Then-Majority Leader Lyndon Johnson (D–TX) threatened the southern Democrats that he would impose a majority cloture rule if they didn't let the 1957 Civil Rights Act pass; otherwise, they likely would have gone all-out to kill this bill, too [@kogerFilibusteringPoliticalHistory2010, p. 121]. The landmark 1964 Civil Rights Act faced the longest filibuster in Senate history &mdash; 57 working days before the bill finally passed [@kogerFilibusteringPoliticalHistory2010, p. 170]. It is important to note that these filibusters required the obstructionists to continuously hold the floor to filibuster. The length of these filibusters was determined by the endurance of the obstructionists. If debate ended at any point, the bills were able to pass by majority vote.
 
 ```{r cloture stats}
-#| echo: false
-
 # first Congress with >= 70 cloture votes
 first_over_70_votes <- cloture_actions |> 
   filter(votes_on_cloture >= 70) |> 
@@ -246,8 +244,6 @@ $$
 Since $\pi$ is an increasing function in $\eta$, and $B$ is a decreasing function in $\eta$, there is an inherent tradeoff in forming an optimally sized coalition. @fig-ws below, reproduced from @wawroFilibusterObstructionLawmaking2006 [p. 216], illustrates how the expected benefits vary with $\eta$ for different values of $\alpha$. @wawroFilibusterObstructionLawmaking2006 [p. 217] found that an $\alpha$ around 0.25 best fit the Senate of the late-19th and early-20th centuries.
 
 ```{r WS helper functions}
-#| echo: false
-
 prob_pass <- function(x, alpha) ((x - 0.5) / 0.5) ^ alpha
 benefits <- function(x) (1 - x) / 0.5
 eb_pass <- function(x, alpha) prob_pass(x, alpha) * benefits(x)
@@ -293,7 +289,6 @@ plot_max_eb <- function(eb_fn, ...) {
 ```
 
 ```{r plot EB of passage under WS}
-#| echo: false
 #| label: fig-ws
 #| fig-cap: Expected benefits of passage under WS (maximum expected benefits marked)
 #| fig-asp: 1.1
@@ -339,8 +334,6 @@ $$
 
 @fig-wsk below, based on the figure from @wawroFilibusterObstructionLawmaking2006 [p. 218] shows the expected benefits curves under the WS~K~ model, with the current cloture threshold of $K = 0.60$.
 ```{r WS_K helper functions}
-#| echo: false
-
 prob_pass_k <- function(x, alpha, alpha_star, k) {
   ifelse(x < k,
          prob_pass(x, alpha),
@@ -353,7 +346,6 @@ eb_pass_k <- function(x, alpha, alpha_star, k) {
 ```
 
 ```{r plot EB of passage under WS_K}
-#| echo: false
 #| label: fig-wsk
 #| fig-cap: Expected benefits of passage under WS~K~ with a three-fifths cloture rule (maximum expected benefits marked)
 #| fig-asp: 1.1
@@ -470,7 +462,6 @@ To analyze each of the proposed changes to the filibuster and cloture rule, we w
 Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits $EB_{prop}$ and decreasing their costs. The expected benefits increase because the probability of passage would increase from $\pi(\alpha)$ to $\pi(\alpha^*)$ for coalitions of less than 60 votes, as shown in @fig-abolish-filibuster below.
 
 ```{r abolishing the filibuster figure}
-#| echo: false
 #| label: fig-abolish-filibuster
 #| fig-cap: "Change in proponents' expected benefits after abolishing the filibuster"
 #| fig-asp: 0.57
