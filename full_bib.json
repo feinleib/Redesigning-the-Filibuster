@@ -3509,5 +3509,183 @@
 				]
 			]
 		}
+	},
+	{
+		"id": "agiestaCNNPollAmericans2021",
+		"type": "webpage",
+		"abstract": "Americans of all political stripes agree that attempts at bipartisanship in Washington are a good thing, but expectations that such efforts are likely to be successful on upcoming major legislation are low in a new CNN Poll conducted by SSRS.",
+		"container-title": "CNN",
+		"language": "en",
+		"title": "CNN Poll: Americans want bipartisanship, but most don’t think it will happen",
+		"title-short": "CNN Poll",
+		"URL": "https://www.cnn.com/2021/04/29/politics/cnn-poll-bipartisanship/index.html",
+		"author": [
+			{
+				"family": "Agiesta",
+				"given": "Jennifer"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					25
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2021",
+					4,
+					29
+				]
+			]
+		}
+	},
+	{
+		"id": "yokleyVotersLargelyBelieve2021",
+		"type": "webpage",
+		"abstract": "The White House introduced a new definition for what the concept of bipartisanship means in Washington during the first few months of Joe Biden’s presidency.",
+		"container-title": "Morning Consult Pro",
+		"language": "en",
+		"title": "Voters largely believe Biden wants bipartisanship, but they don't agree with White House’s new definition of the term",
+		"title-short": "Voters largely believe Biden wants bipartisanship",
+		"URL": "https://pro.morningconsult.com/articles/bipartisanship-gop-democrats-biden-polling",
+		"author": [
+			{
+				"family": "Yokley",
+				"given": "Eli"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					25
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2021",
+					6,
+					1
+				]
+			]
+		}
+	},
+	{
+		"id": "skelleyHowMuchAmericans2021",
+		"type": "webpage",
+		"abstract": "Welcome to Pollapalooza, our weekly polling roundup. Poll(s) of the week Despite the country’s deeply polarized politics, President Biden has suggested he can g…",
+		"container-title": "FiveThirtyEight",
+		"language": "en-US",
+		"title": "How much do Americans really care about bipartisanship?",
+		"title-short": "How much do Americans really care?",
+		"URL": "https://fivethirtyeight.com/features/how-much-do-americans-really-care-about-bipartisanship/",
+		"author": [
+			{
+				"family": "Skelley",
+				"given": "Geoffrey"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					25
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2021",
+					6,
+					4
+				]
+			]
+		}
+	},
+	{
+		"id": "harbridgePublicPreferencesBipartisanship2014",
+		"type": "article-journal",
+		"abstract": "At a time of a high level of polarization in Congress, public opinion surveys routinely find that Americans want politicians to compromise. When evaluating legislation, does the preference for bipartisanship in the legislative process trump partisan identities? We find that it does not. We conduct two experiments in which we alter aspects of the political context to see how people respond to parties (not) coming together to achieve broadly popular public policy goals. Although citizens can recognize bipartisan processes, preferences for bipartisan legislating do not outweigh partisan desires in the evaluation of public policies.",
+		"container-title": "Legislative Studies Quarterly",
+		"DOI": "10.1111/lsq.12048",
+		"ISSN": "1939-9162",
+		"issue": "3",
+		"language": "en",
+		"license": "© 2014 The Comparative Legislative Research Center of The University of Iowa",
+		"note": "_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/lsq.12048",
+		"page": "327-355",
+		"source": "Wiley Online Library",
+		"title": "Public preferences for bipartisanship in the policymaking process",
+		"title-short": "Public preferences for bipartisanship",
+		"URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/lsq.12048",
+		"volume": "39",
+		"author": [
+			{
+				"family": "Harbridge",
+				"given": "Laurel"
+			},
+			{
+				"family": "Malhotra",
+				"given": "Neil"
+			},
+			{
+				"family": "Harrison",
+				"given": "Brian F."
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					25
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2014"
+				]
+			]
+		}
+	},
+	{
+		"id": "TiebreakingVotesCast2023",
+		"type": "webpage",
+		"abstract": "Under Article I, Section 3, Clause 4 of the U.S. Constitution, the vice president of the United States also serves as the president of the Senate. In this capacity, he or she may cast the deciding vote when there is a tie in the Senate.",
+		"container-title": "Ballotpedia",
+		"language": "en",
+		"title": "Tie-breaking votes cast by vice presidents in the Senate",
+		"title-short": "Tie-breaking votes",
+		"URL": "https://ballotpedia.org/Tie-breaking_votes_cast_by_vice_presidents_in_the_Senate",
+		"accessed": {
+			"date-parts": [
+				[
+					"2024",
+					4,
+					25
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2023",
+					12,
+					5
+				]
+			]
+		}
 	}
 ]
