@@ -9,7 +9,7 @@ author:
         city: Evanston
         state: IL
         url: https://www.northwestern.edu
-date: 2024-03-13
+date: 2024-04-30
 date-format: long
 abstract: |
   In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
