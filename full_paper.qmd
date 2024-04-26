@@ -41,6 +41,8 @@ number-sections: true
 # packages used
 library(dplyr)
 library(ggplot2)
+library(readr)
+library(stringr)
 library(tidyr)
 
 library(filibustr)
@@ -502,6 +504,85 @@ The primary premise behind flipping the cloture vote is that it increases costs 
 A secondary goal of flipping the cloture vote is to make obstruction more visible to the American public. Currently, journalists seem to find cloture votes difficult to explain, merely referring to them using the obfuscatory term "procedural votes." If the cloture vote were flipped, it would be simple to explain that a group of senators voted to prolong their obstruction. This would make obstruction, a negative action, more visible to voters, possibly decreasing the position-taking benefits of obstruction $\beta_{block}$.
 
 On its own, flipping the cloture vote appears to have only minor effects on the legislative goods. It may slightly increase productivity by making it more politically painful for obstructionists to enforce gridlock. It is unclear what effects this rule would have on bipartisanship and policy stability. Flipping the cloture vote seems to be a more marginal reform than abolishing the filibuster or restoring the talking filibuster.
+
+## Quantitative Analysis: How Much Impact Would Rule Changes Have?
+
+I present two quantitative analyses measuring the potential impacts of changes to the filibuster and cloture rule. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of these failed cloture votes. Second, I test the effect of the most notable filibuster rule change in the past 50 years: the nuclear option on presidential nominations.
+
+### The Costs Necessary to Flip Cloture Votes
+One of the main goals of any of the above filibuster reforms would be to enable the passage of bills that would otherwise be killed by a filibuster under the current rules. With a new cloture rule, or new costs of filibustering, legislators would be less willing and/or able to obstruct bills that have majority support in the Senate. As a result, bills that originally failed at the cloture stage might pass under new rules. This is especially true for bills that had less intense opposition by obstructionist senators. Under new rules, mild obstructionists would be more likely to yield to the wishes of the majority.
+
+Using a framework inspired by pivotal politics, I estimate how many failed cloture votes would have instead passed under rules that make filibustering more costly. In this analysis, I measure costs by translating them to the DW-NOMINATE ideological scale. Under pivotal politics, a legislator's utility from a bill relates to how much it moves policy toward their ideal point [@krehbielPivotalPoliticsTheory1998]. Therefore, under more costly filibuster rules, a legislator might allow a bill they oppose to pass if the personal costs of filibustering outweigh the ideological costs of the bill becoming law.
+
+To estimate the costs necessary to flip a cloture vote, I first find the pivotal senator; that is, the senator who voted Nay but could have been the 60th vote in favor of a cloture vote.^[On presidential nominations since the nuclear option, the threshold is a simple majority. I assume the vice president supports their president's nominees and would therefore cast a tie-breaking vote to invoke cloture, so the majority threshold is 50 votes. This is supported by vice presidents' records on cloture votes. Through the end of 2023, Vice President Kamala Harris cast the tie-breaking vote to invoke cloture on 13 of Joe Biden's nominees. Former Vice President Mike Pence did the same for 3 of Donald Trump's nominees [@TiebreakingVotesCast2023].] Then, I find how far that senator was in policy space from Voteview's Yea-Nay cutting line on the cloture vote.
+
+```{r cloture costs data import, echo=FALSE}
+#| message: false
+
+# downloading from Voteview
+# s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 95:117)
+# s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 95:117)
+# s_mem_data <- get_voteview_members(chamber = "s", congress = 95:117)
+
+# use local files
+s_votes_data <- read_csv("data/s_votes_data.csv")
+s_mem_votes_data <- read_csv("data/s_mem_votes_data.csv")
+s_mem_data <- read_csv("data/s_mem_data.csv")
+```
+
+```{r find failed cloture votes}
+## failed cloture votes
+
+# calculate whether cloture threshold is 50 or 60
+# assumes you need 50 votes for a presidential nominee, as the VP likely supports the nominee and can therefore cast the tiebreaking vote.
+get_cloture_threshold <- function(df) {
+  # nuclear option dates
+  nuclear_2013 <- as.Date("2013-11-21")
+  nuclear_2017 <- as.Date("2017-04-06")
+  
+  df |> 
+    mutate(
+      nomination = str_starts(bill_number, "PN[:digit:]"),
+      scotus = str_detect(vote_desc, "(Associate|Chief) Justice"),
+      threshold = case_when(
+        # SCOTUS nominations
+        nomination & scotus
+        & (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) ~ 50,
+        # other nominations
+        nomination & !scotus 
+        & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)) ~ 50,
+        # 60 for everything else
+        .default = 60),
+      .after = nay_count
+    ) |> 
+    select(-nomination, -scotus)
+}
+
+s_failed_cvotes <- s_votes_data |> 
+  filter(vote_result == "Cloture Motion Rejected") |> 
+  get_cloture_threshold() |> 
+  mutate(
+    votes_needed = threshold - yea_count,
+    # use hypotenuse of spread to measure distances
+    nominate_spread_dist = sqrt(nominate_spread_1 ** 2 + nominate_spread_2 ** 2),
+    .after = threshold
+  )
+```
+
+For this analysis, I use the `r nrow(s_failed_cvotes)` failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.
+
+#### Analysis
+To find potential pivotal votes for cloture, I use Voteview's calculated probabilities of members' roll call votes. As shown below, Voteview uses members' DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote [@lewisVoteviewCongressionalRollcall2024]. 
+@fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022. Senators' actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.
+
+![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."}
+
+![Voteview vote probabilities on the Inflation Reduction Act (2022)](images/voteview_ira.png){#fig-ira fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
+
+To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering.
+Then, I find the *pivotal vote* on each failed cloture vote. If a cloture motion fell $n$ votes short of passing, I find the $n$th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.
+
+<!-- explain probability * spread calculation -->
 
 ## Conclusion
 By extending Wawro and Schickler's model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.
