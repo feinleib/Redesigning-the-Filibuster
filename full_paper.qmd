@@ -23,14 +23,17 @@ keywords:
   - filibuster
   - cloture
 format:
-  pdf: default
+  pdf:
+    shift-heading-level-by: -1
   html: default
-execute:
-  echo: false
 bibliography: full_bib.json
 csl: apa.csl
 toc: true
 number-sections: true
+lof: true
+lot: true
+execute:
+  echo: false
 ---
 
 \pagebreak
@@ -46,6 +49,7 @@ library(stringr)
 library(tidyr)
 
 library(filibustr)
+library(kableExtra)
 library(rbbt) # citations
 library(rlang) # expr()'s used in plots
 ```
@@ -573,16 +577,141 @@ For this analysis, I use the `r nrow(s_failed_cvotes)` failed cloture votes betw
 
 #### Analysis
 To find potential pivotal votes for cloture, I use Voteview's calculated probabilities of members' roll call votes. As shown below, Voteview uses members' DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote [@lewisVoteviewCongressionalRollcall2024]. 
-@fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022. Senators' actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.
+<!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  -->
+For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. @fig-ira shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and @fig-iija shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021.
+Senators' actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.
 
-![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."}
+<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
 
 ![Voteview vote probabilities on the Inflation Reduction Act (2022)](images/voteview_ira.png){#fig-ira fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
 
-To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering.
-Then, I find the *pivotal vote* on each failed cloture vote. If a cloture motion fell $n$ votes short of passing, I find the $n$th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.
+![Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)](images/voteview_iija.png){#fig-iija fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
 
-<!-- explain probability * spread calculation -->
+```{r find pivotal Nays on failed cloture votes}
+## finding pivotal votes
+
+s_mem_positions <- s_mem_data |> 
+  # remove presidents
+  filter(chamber == "Senate") |> 
+  # drop irrelevant columns
+  select(congress, chamber, icpsr, bioname, party_code, state_abbrev, 
+         nominate_dim1, nominate_dim2)
+
+# cast codes (source: https://voteview.com/articles/data_help_votes)
+# TODO: use `filibustr` version when that's available (and local data)
+voteview_cast_codes <- tibble(cast_code = 0:9,
+                              vote_cast = factor(
+                                c("Not a Member", 
+                                  "Yea", "Paired Yea", "Announced Yea", 
+                                  "Announced Nay", "Paired Nay", "Nay",
+                                  "Present", "Present", "Not Voting")
+                                ))
+
+# 50%-99.9% probability Nay votes on failed cloture votes
+s_mem_failed_cvotes <- s_mem_votes_data |> 
+  # filter: sen_mem_votes_data uses the `rollnumber` as a foreign key
+  semi_join(s_failed_cvotes, by = c("congress", "rollnumber")) |> 
+  # add cast_code descriptions for easier reading
+  left_join(voteview_cast_codes, by = "cast_code") |> 
+  # filter: Nay votes with 50-99.9% probability
+  filter(str_detect(vote_cast, "Nay"), prob >= 50, prob < 100) |> 
+  # add member ideologies
+  left_join(s_mem_positions, by = c("congress", "chamber", "icpsr")) |> 
+  arrange(rollnumber, prob)
+
+# find (60-yeas)'th member with lowest probability of Nay vote (pivotal members)
+pivotal_votes <- s_mem_failed_cvotes |> 
+  left_join(s_failed_cvotes |> 
+              select(congress, rollnumber, date, threshold, votes_needed,
+                     nominate_spread_dist, bill_number, vote_desc),
+            by = c("congress", "rollnumber")) |> 
+  group_by(congress, rollnumber, date, bill_number, vote_desc, threshold, votes_needed) |> 
+  # ensure there are enough flippable votes
+  filter(n() >= votes_needed) |> 
+  # find pivotal votes
+  mutate(rank = min_rank(prob)) |> 
+  filter(rank <= votes_needed) |> 
+  filter(rank == max(rank))
+```
+
+To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering.
+Then, I found the *pivotal vote* on each failed cloture vote. If a cloture motion fell $n$ votes short of passing, I found the $n$th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.
+
+```{r calculate vote costs}
+vote_costs <- pivotal_votes |> 
+  summarize(prob = first(prob),
+            prob_left = prob - 50,
+            nominate_spread_dist = first(nominate_spread_dist),
+            n_pivotal_votes = n(), 
+            .groups = "drop") |> 
+  # distance you have to move: (prob - 50) * spread
+  mutate(probXdist = prob_left * nominate_spread_dist / 100,
+         pd_rank = row_number(probXdist)) |> 
+  arrange(probXdist)
+```
+
+Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in @fig-ira and @fig-iija, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members' votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE.
+To account for these differences, I used the spread estimates included in the Voteview data downloads (columns `nominate_spread_1` and `nominate_spread_2` in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements.
+Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote's distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.
+
+#### Results
+
+@fig-cloture-costs shows the cumulative distribution of these distances. The plot answers the question: "If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?"
+
+```{r plot vote costs}
+#| label: fig-cloture-costs
+#| fig-cap: "Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)"
+
+rule_impact_ggplot <- ggplot(vote_costs, aes(x = probXdist, y = pd_rank)) +
+  geom_area(fill = "#77777733", color = "#777777", linewidth = 1) +
+  labs(x = "DW-NOMINATE equivalent of additional costs", 
+       y = "Cloture votes flipped",
+       title = "Potential impact of cloture rule changes on failed cloture votes",
+       subtitle = "95th through 117th Congresses (1977-2022)") +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank())
+
+rule_impact_ggplot
+```
+
+A useful decision-making question extending from this information is: "How much higher cost would it take to meaningfully change the Senate?" The slope of the plot can help answer that question. Low cost increases (0-0.07 units) would not be strong enough to flip a large number of cloture votes. The slope of the curve is highest between 0.1 and 0.2 units. Increasing costs by this amount would have large marginal impacts on filibusters relative to their absolute costs. Beyond 0.2 units, the slope begins to level off, meaning that increasing costs by the same amount would produce less real-life change in cloture outcomes.
+In short, rule changes that add costs equivalent to 0.1-0.2 units in policy space would produce the largest impact on filibustering relative to the size of the costs. In the modern Senate, this is about the space between each party's median and the beginning of their liberal and conservative wings. @tbl-distances shows the median members of each Senate caucus in the 118th Congress, and members who are 0.15 units in either direction of the party median.
+
+```{r table of 0.15 distances}
+#| label: tbl-distances
+#| tbl-cap: "Senators 0.15 units away from their party medians, 118th Congress"
+
+party_medians <- get_voteview_parties(chamber = "s", congress = 118) |> 
+  filter(party_name != "Independent") |> 
+  select(congress, chamber, party_code, party_name, nominate_dim1_median)
+
+dem_median <- party_medians |> filter(party_name == "Democrat") |> pull(nominate_dim1_median)
+gop_median <- party_medians |> filter(party_name == "Republican") |> pull(nominate_dim1_median)
+
+# members <- get_voteview_members(chamber = "s", congress = 118)
+
+dwnom_tbl <- tibble(Party = c("Democrat", "Republican"),
+                    `DW-NOMINATE Dim-1 median` = round(c(dem_median, gop_median), 2),
+                    `Liberal member` = c("Tammy Baldwin (-0.49)", 
+                                         "Pete Ricketts (0.39)"),
+                    `Median member` = c("Richard Durbin (-0.35)", 
+                                        "John Barrasso (0.54)"),
+                    `Conservative member` = c("Mark Warner (-0.21)", 
+                                              "Rick Scott (0.68)"))
+
+kbl(dwnom_tbl, booktabs = TRUE) |> 
+  kable_styling() |> 
+  # controlling column widths in PDF
+  column_spec(2, width = "3cm") |> 
+  column_spec(3:5, width = "2.8cm")
+```
+
+A filibuster rule change that imposes costs equivalent to 0.15-0.2 units in policy space would have directly flipped the outcomes of about 4 cloture votes a year, turning 4 more failed bills each year into law. This estimate is conservative, as the analysis doesn't consider bills that never came up for a cloture vote because proponents expected the vote to fail.
+
+This analysis answers important questions senators may have about the efficacy of potential filibuster reforms. Reform-minded senators can use this analysis to evaluate how significant they would like to make their reforms in order to achieve a desired effect on filibustering.
+Another source of data on the impact of filibuster reforms is the primary change to the filibuster in the past few decades: the nuclear option on presidential nominations. Next, I explore the impact that the nuclear option has had on these nominations.
+
+### The Results of the Nuclear Option on Presidential Nominations
 
 ## Conclusion
 By extending Wawro and Schickler's model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.

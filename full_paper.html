@@ -56,6 +56,8 @@ div.csl-indent {
 <script src="full_paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="full_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="full_paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="full_paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="full_paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -130,6 +132,7 @@ window.Quarto = {
   <li><a href="#quantitative-analysis-how-much-impact-would-rule-changes-have" id="toc-quantitative-analysis-how-much-impact-would-rule-changes-have" class="nav-link" data-scroll-target="#quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</a>
   <ul class="collapse">
   <li><a href="#the-costs-necessary-to-flip-cloture-votes" id="toc-the-costs-necessary-to-flip-cloture-votes" class="nav-link" data-scroll-target="#the-costs-necessary-to-flip-cloture-votes"><span class="header-section-number">7.1</span> The Costs Necessary to Flip Cloture Votes</a></li>
+  <li><a href="#the-results-of-the-nuclear-option-on-presidential-nominations" id="toc-the-results-of-the-nuclear-option-on-presidential-nominations" class="nav-link" data-scroll-target="#the-results-of-the-nuclear-option-on-presidential-nominations"><span class="header-section-number">7.2</span> The Results of the Nuclear Option on Presidential Nominations</a></li>
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a>
   <ul class="collapse">
@@ -495,30 +498,97 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 <p>For this analysis, I use the 431 failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.</p>
 <section id="analysis" class="level4" data-number="7.1.1">
 <h4 data-number="7.1.1" class="anchored" data-anchor-id="analysis"><span class="header-section-number">7.1.1</span> Analysis</h4>
-<p>To find potential pivotal votes for cloture, I use Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. <a href="#fig-chips-act" class="quarto-xref">Figure&nbsp;5</a> shows how senators voted on the CHIPS and Science Act, and <a href="#fig-ira" class="quarto-xref">Figure&nbsp;6</a> shows the votes for the Inflation Reduction Act of 2022. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
-<div id="fig-chips-act" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote.">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-chips-act-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/voteview_chips_act.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote.">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chips-act-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Voteview vote probabilities on the CHIPS and Science Act (2022)
-</figcaption>
-</figure>
-</div>
+<p>To find potential pivotal votes for cloture, I use Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. <!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  --> For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a> shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
+<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
 <div id="fig-ira" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="images/voteview_ira.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Voteview vote probabilities on the Inflation Reduction Act (2022)
+Figure&nbsp;5: Voteview vote probabilities on the Inflation Reduction Act (2022)
 </figcaption>
 </figure>
 </div>
-<p>To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering. Then, I find the <em>pivotal vote</em> on each failed cloture vote. If a cloture motion fell <span class="math inline">\(n\)</span> votes short of passing, I find the <span class="math inline">\(n\)</span>th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.</p>
-<!-- explain probability * spread calculation -->
+<div id="fig-iija" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/voteview_iija.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)
+</figcaption>
+</figure>
+</div>
+<p>To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering. Then, I found the <em>pivotal vote</em> on each failed cloture vote. If a cloture motion fell <span class="math inline">\(n\)</span> votes short of passing, I found the <span class="math inline">\(n\)</span>th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.</p>
+<p>Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a>, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members’ votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE. To account for these differences, I used the spread estimates included in the Voteview data downloads (columns <code>nominate_spread_1</code> and <code>nominate_spread_2</code> in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements. Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote’s distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.</p>
 </section>
+<section id="results" class="level4" data-number="7.1.2">
+<h4 data-number="7.1.2" class="anchored" data-anchor-id="results"><span class="header-section-number">7.1.2</span> Results</h4>
+<p><a href="#fig-cloture-costs" class="quarto-xref">Figure&nbsp;7</a> shows the cumulative distribution of these distances. The plot answers the question: “If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?”</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-cloture-costs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="full_paper_files/figure-html/fig-cloture-costs-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A useful decision-making question extending from this information is: “How much higher cost would it take to meaningfully change the Senate?” The slope of the plot can help answer that question. Low cost increases (0-0.07 units) would not be strong enough to flip a large number of cloture votes. The slope of the curve is highest between 0.1 and 0.2 units. Increasing costs by this amount would have large marginal impacts on filibusters relative to their absolute costs. Beyond 0.2 units, the slope begins to level off, meaning that increasing costs by the same amount would produce less real-life change in cloture outcomes. In short, rule changes that add costs equivalent to 0.1-0.2 units in policy space would produce the largest impact on filibustering relative to the size of the costs. In the modern Senate, this is about the space between each party’s median and the beginning of their liberal and conservative wings. <a href="#tbl-distances" class="quarto-xref">Table&nbsp;1</a> shows the median members of each Senate caucus in the 118th Congress, and members who are 0.15 units in either direction of the party median.</p>
+<div class="cell">
+<div id="tbl-distances" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-distances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
+</figcaption>
+<div aria-describedby="tbl-distances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Party</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DW-NOMINATE Dim-1 median</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Liberal member</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Median member</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Conservative member</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Democrat</td>
+<td style="text-align: right; width: 3cm;">-0.35</td>
+<td style="text-align: left; width: 2.8cm;">Tammy Baldwin (-0.49)</td>
+<td style="text-align: left; width: 2.8cm;">Richard Durbin (-0.35)</td>
+<td style="text-align: left; width: 2.8cm;">Mark Warner (-0.21)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Republican</td>
+<td style="text-align: right; width: 3cm;">0.54</td>
+<td style="text-align: left; width: 2.8cm;">Pete Ricketts (0.39)</td>
+<td style="text-align: left; width: 2.8cm;">John Barrasso (0.54)</td>
+<td style="text-align: left; width: 2.8cm;">Rick Scott (0.68)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>A filibuster rule change that imposes costs equivalent to 0.15-0.2 units in policy space would have directly flipped the outcomes of about 4 cloture votes a year, turning 4 more failed bills each year into law. This estimate is conservative, as the analysis doesn’t consider bills that never came up for a cloture vote because proponents expected the vote to fail.</p>
+<p>This analysis answers important questions senators may have about the efficacy of potential filibuster reforms. Reform-minded senators can use this analysis to evaluate how significant they would like to make their reforms in order to achieve a desired effect on filibustering. Another source of data on the impact of filibuster reforms is the primary change to the filibuster in the past few decades: the nuclear option on presidential nominations. Next, I explore the impact that the nuclear option has had on these nominations.</p>
+</section>
+</section>
+<section id="the-results-of-the-nuclear-option-on-presidential-nominations" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="the-results-of-the-nuclear-option-on-presidential-nominations"><span class="header-section-number">7.2</span> The Results of the Nuclear Option on Presidential Nominations</h3>
 </section>
 </section>
 <section id="conclusion" class="level2" data-number="8">
