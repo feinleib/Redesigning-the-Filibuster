@@ -1,5 +1,5 @@
 ---
-title: "Redesigning the Filibuster for More Effective Lawmaking in a Polarized Senate"
+title: Redesigning the Filibuster for More Effective Lawmaking in a Polarized Senate
 author: 
   - name: Max H. Feinleib
     orcid: 0009-0002-9604-3533
@@ -9,7 +9,7 @@ author:
         city: Evanston
         state: IL
         url: https://www.northwestern.edu
-date: 2024-03-13
+date: 2024-04-30
 date-format: long
 abstract: |
   In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
@@ -23,28 +23,35 @@ keywords:
   - filibuster
   - cloture
 format:
-  pdf: default
+  pdf:
+    shift-heading-level-by: -1
   html: default
-bibliography: "full_bib.json"
+bibliography: full_bib.json
 csl: apa.csl
 toc: true
 number-sections: true
+lof: true
+lot: true
+execute:
+  echo: false
 ---
 
 \pagebreak
 
 ```{r packages}
-#| echo: false
 #| message: false
 
 # packages used
 library(dplyr)
 library(ggplot2)
+library(readr)
+library(stringr)
 library(tidyr)
 
 library(filibustr)
-library(rbbt)
-library(rlang)
+library(kableExtra)
+library(rbbt) # citations
+library(rlang) # expr()'s used in plots
 ```
 
 ## Introduction
@@ -76,7 +83,6 @@ A formal rule for ending debate in the Senate finally came in 1917. At the end o
 Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in @fig-cloture-graph below, the cloture rule was used only on rare occasions for the first several decades after 1917 [@unitedstatessenateSenateActionCloture2024].
 
 ```{r cloture actions graph}
-#| echo: false
 #| label: fig-cloture-graph
 #| fig-cap: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
 
@@ -118,8 +124,6 @@ ggplot(cloture_data, aes(x = congress, y = n_actions)) +
 The Senate was generally able to pass legislation without resorting to the cloture rule &mdash; with the exception of civil rights bills, which were frequently and systematically filibustered. Southern Democratic senators successfully killed nine of the 12 civil rights bills considered in the Senate between 1901 and 1956 with filibusters [@kogerFilibusteringPoliticalHistory2010, p. 116]. The longest speech in Senate history, a continuous speech of over 24 hours by Sen. Strom Thurmond (D–SC), came in protest of the 1957 Civil Rights Act, which ultimately passed despite the filibuster. Then-Majority Leader Lyndon Johnson (D–TX) threatened the southern Democrats that he would impose a majority cloture rule if they didn't let the 1957 Civil Rights Act pass; otherwise, they likely would have gone all-out to kill this bill, too [@kogerFilibusteringPoliticalHistory2010, p. 121]. The landmark 1964 Civil Rights Act faced the longest filibuster in Senate history &mdash; 57 working days before the bill finally passed [@kogerFilibusteringPoliticalHistory2010, p. 170]. It is important to note that these filibusters required the obstructionists to continuously hold the floor to filibuster. The length of these filibusters was determined by the endurance of the obstructionists. If debate ended at any point, the bills were able to pass by majority vote.
 
 ```{r cloture stats}
-#| echo: false
-
 # first Congress with >= 70 cloture votes
 first_over_70_votes <- cloture_actions |> 
   filter(votes_on_cloture >= 70) |> 
@@ -246,8 +250,6 @@ $$
 Since $\pi$ is an increasing function in $\eta$, and $B$ is a decreasing function in $\eta$, there is an inherent tradeoff in forming an optimally sized coalition. @fig-ws below, reproduced from @wawroFilibusterObstructionLawmaking2006 [p. 216], illustrates how the expected benefits vary with $\eta$ for different values of $\alpha$. @wawroFilibusterObstructionLawmaking2006 [p. 217] found that an $\alpha$ around 0.25 best fit the Senate of the late-19th and early-20th centuries.
 
 ```{r WS helper functions}
-#| echo: false
-
 prob_pass <- function(x, alpha) ((x - 0.5) / 0.5) ^ alpha
 benefits <- function(x) (1 - x) / 0.5
 eb_pass <- function(x, alpha) prob_pass(x, alpha) * benefits(x)
@@ -293,7 +295,6 @@ plot_max_eb <- function(eb_fn, ...) {
 ```
 
 ```{r plot EB of passage under WS}
-#| echo: false
 #| label: fig-ws
 #| fig-cap: Expected benefits of passage under WS (maximum expected benefits marked)
 #| fig-asp: 1.1
@@ -339,8 +340,6 @@ $$
 
 @fig-wsk below, based on the figure from @wawroFilibusterObstructionLawmaking2006 [p. 218] shows the expected benefits curves under the WS~K~ model, with the current cloture threshold of $K = 0.60$.
 ```{r WS_K helper functions}
-#| echo: false
-
 prob_pass_k <- function(x, alpha, alpha_star, k) {
   ifelse(x < k,
          prob_pass(x, alpha),
@@ -353,7 +352,6 @@ eb_pass_k <- function(x, alpha, alpha_star, k) {
 ```
 
 ```{r plot EB of passage under WS_K}
-#| echo: false
 #| label: fig-wsk
 #| fig-cap: Expected benefits of passage under WS~K~ with a three-fifths cloture rule (maximum expected benefits marked)
 #| fig-asp: 1.1
@@ -454,7 +452,7 @@ This utility-based method to predict the winner of a legislative fight is possib
 At first glance, this rule to predict winners using expected utility may appear rigid, as if either the proponents or obstructionists are doomed from the start of a legislative fight. How does this rule explain the negotiation process that is so critical for proponents to grow the coalition to pass a bill, or for obstructionists to kill it? The answer is that the expected utility of these two factions constantly varies as the factions grow and shrink and they change their cost-benefit calculations.
 
 #### An Example Legislative Fight
-It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen. Tommy Tuberville's (R–AL) high-profile use of the hold (a form of filibuster) in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:
+It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen. Tommy Tuberville's (R–AL) high-profile use of the hold (a form of filibuster)^[Although a hold is not technically a filibuster, a senator's power to enforce their hold arises from an implicit threat to filibuster the measure at concern [@heitshusenFilibustersClotureSenate2017; @oleszekHoldsSenate2017].] in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:
 
 1. Sen. Tuberville began his hold on military nominations in February 2023 after the Department of Defense instituted their new policy covering servicemembers' travel expenses for reproductive healthcare and abortions [@swetlikTubervillePutsHold2023]. Tuberville represented a single obstructionist. He ostensibly evaluated significant benefits to this action (in terms of position-taking benefits at the very least, regardless of whether he expected to successfully reverse the Pentagon's policy). His costs were minimal, as he did not have to hold the floor or even be in attendance to sustain his obstruction.
 2. Senators from both parties criticized Sen. Tuberville's hold throughout 2023, but they were unable to break the hold. The proponents of the military promotions made up a supermajority of the Senate, but the process of holding cloture votes on every single nomination would have taken an immense amount of time [@jalonickWhySingleSenator2023]. At this stage, the costs of all those votes outweighed the benefits of confirming the nominees.
@@ -470,7 +468,6 @@ To analyze each of the proposed changes to the filibuster and cloture rule, we w
 Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits $EB_{prop}$ and decreasing their costs. The expected benefits increase because the probability of passage would increase from $\pi(\alpha)$ to $\pi(\alpha^*)$ for coalitions of less than 60 votes, as shown in @fig-abolish-filibuster below.
 
 ```{r abolishing the filibuster figure}
-#| echo: false
 #| label: fig-abolish-filibuster
 #| fig-cap: "Change in proponents' expected benefits after abolishing the filibuster"
 #| fig-asp: 0.57
@@ -511,6 +508,210 @@ The primary premise behind flipping the cloture vote is that it increases costs 
 A secondary goal of flipping the cloture vote is to make obstruction more visible to the American public. Currently, journalists seem to find cloture votes difficult to explain, merely referring to them using the obfuscatory term "procedural votes." If the cloture vote were flipped, it would be simple to explain that a group of senators voted to prolong their obstruction. This would make obstruction, a negative action, more visible to voters, possibly decreasing the position-taking benefits of obstruction $\beta_{block}$.
 
 On its own, flipping the cloture vote appears to have only minor effects on the legislative goods. It may slightly increase productivity by making it more politically painful for obstructionists to enforce gridlock. It is unclear what effects this rule would have on bipartisanship and policy stability. Flipping the cloture vote seems to be a more marginal reform than abolishing the filibuster or restoring the talking filibuster.
+
+## Quantitative Analysis: How Much Impact Would Rule Changes Have?
+
+I present two quantitative analyses measuring the potential impacts of changes to the filibuster and cloture rule. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of these failed cloture votes. Second, I test the effect of the most notable filibuster rule change in the past 50 years: the nuclear option on presidential nominations.
+
+### The Costs Necessary to Flip Cloture Votes
+One of the main goals of any of the above filibuster reforms would be to enable the passage of bills that would otherwise be killed by a filibuster under the current rules. With a new cloture rule, or new costs of filibustering, legislators would be less willing and/or able to obstruct bills that have majority support in the Senate. As a result, bills that originally failed at the cloture stage might pass under new rules. This is especially true for bills that had less intense opposition by obstructionist senators. Under new rules, mild obstructionists would be more likely to yield to the wishes of the majority.
+
+Using a framework inspired by pivotal politics, I estimate how many failed cloture votes would have instead passed under rules that make filibustering more costly. In this analysis, I measure costs by translating them to the DW-NOMINATE ideological scale. Under pivotal politics, a legislator's utility from a bill relates to how much it moves policy toward their ideal point [@krehbielPivotalPoliticsTheory1998]. Therefore, under more costly filibuster rules, a legislator might allow a bill they oppose to pass if the personal costs of filibustering outweigh the ideological costs of the bill becoming law.
+
+To estimate the costs necessary to flip a cloture vote, I first find the pivotal senator; that is, the senator who voted Nay but could have been the 60th vote in favor of a cloture vote.^[On presidential nominations since the nuclear option, the threshold is a simple majority. I assume the vice president supports their president's nominees and would therefore cast a tie-breaking vote to invoke cloture, so the majority threshold is 50 votes. This is supported by vice presidents' records on cloture votes. Through the end of 2023, Vice President Kamala Harris cast the tie-breaking vote to invoke cloture on 13 of Joe Biden's nominees. Former Vice President Mike Pence did the same for 3 of Donald Trump's nominees [@TiebreakingVotesCast2023].] Then, I find how far that senator was in policy space from Voteview's Yea-Nay cutting line on the cloture vote.
+
+```{r cloture costs data import, echo=FALSE}
+#| message: false
+
+# downloading from Voteview
+# s_votes_data <- get_voteview_rollcall_votes(chamber = "s", congress = 95:117)
+# s_mem_votes_data <- get_voteview_member_votes(chamber = "s", congress = 95:117)
+# s_mem_data <- get_voteview_members(chamber = "s", congress = 95:117)
+
+# use local files
+s_votes_data <- read_csv("data/s_votes_data.csv")
+s_mem_votes_data <- read_csv("data/s_mem_votes_data.csv")
+s_mem_data <- read_csv("data/s_mem_data.csv")
+```
+
+```{r find failed cloture votes}
+## failed cloture votes
+
+# calculate whether cloture threshold is 50 or 60
+# assumes you need 50 votes for a presidential nominee, as the VP likely supports the nominee and can therefore cast the tiebreaking vote.
+get_cloture_threshold <- function(df) {
+  # nuclear option dates
+  nuclear_2013 <- as.Date("2013-11-21")
+  nuclear_2017 <- as.Date("2017-04-06")
+  
+  df |> 
+    mutate(
+      nomination = str_starts(bill_number, "PN[:digit:]"),
+      scotus = str_detect(vote_desc, "(Associate|Chief) Justice"),
+      threshold = case_when(
+        # SCOTUS nominations
+        nomination & scotus
+        & (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) ~ 50,
+        # other nominations
+        nomination & !scotus 
+        & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)) ~ 50,
+        # 60 for everything else
+        .default = 60),
+      .after = nay_count
+    ) |> 
+    select(-nomination, -scotus)
+}
+
+s_failed_cvotes <- s_votes_data |> 
+  filter(vote_result == "Cloture Motion Rejected") |> 
+  get_cloture_threshold() |> 
+  mutate(
+    votes_needed = threshold - yea_count,
+    # use hypotenuse of spread to measure distances
+    nominate_spread_dist = sqrt(nominate_spread_1 ** 2 + nominate_spread_2 ** 2),
+    .after = threshold
+  )
+```
+
+For this analysis, I use the `r nrow(s_failed_cvotes)` failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.
+
+#### Analysis
+To find potential pivotal votes for cloture, I use Voteview's calculated probabilities of members' roll call votes. As shown below, Voteview uses members' DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote [@lewisVoteviewCongressionalRollcall2024]. 
+<!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  -->
+For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. @fig-ira shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and @fig-iija shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021.
+Senators' actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.
+
+<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
+
+![Voteview vote probabilities on the Inflation Reduction Act (2022)](images/voteview_ira.png){#fig-ira fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
+
+![Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)](images/voteview_iija.png){#fig-iija fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
+
+```{r find pivotal Nays on failed cloture votes}
+## finding pivotal votes
+
+s_mem_positions <- s_mem_data |> 
+  # remove presidents
+  filter(chamber == "Senate") |> 
+  # drop irrelevant columns
+  select(congress, chamber, icpsr, bioname, party_code, state_abbrev, 
+         nominate_dim1, nominate_dim2)
+
+# cast codes (source: https://voteview.com/articles/data_help_votes)
+# TODO: use `filibustr` version when that's available (and local data)
+voteview_cast_codes <- tibble(cast_code = 0:9,
+                              vote_cast = factor(
+                                c("Not a Member", 
+                                  "Yea", "Paired Yea", "Announced Yea", 
+                                  "Announced Nay", "Paired Nay", "Nay",
+                                  "Present", "Present", "Not Voting")
+                                ))
+
+# 50%-99.9% probability Nay votes on failed cloture votes
+s_mem_failed_cvotes <- s_mem_votes_data |> 
+  # filter: sen_mem_votes_data uses the `rollnumber` as a foreign key
+  semi_join(s_failed_cvotes, by = c("congress", "rollnumber")) |> 
+  # add cast_code descriptions for easier reading
+  left_join(voteview_cast_codes, by = "cast_code") |> 
+  # filter: Nay votes with 50-99.9% probability
+  filter(str_detect(vote_cast, "Nay"), prob >= 50, prob < 100) |> 
+  # add member ideologies
+  left_join(s_mem_positions, by = c("congress", "chamber", "icpsr")) |> 
+  arrange(rollnumber, prob)
+
+# find (60-yeas)'th member with lowest probability of Nay vote (pivotal members)
+pivotal_votes <- s_mem_failed_cvotes |> 
+  left_join(s_failed_cvotes |> 
+              select(congress, rollnumber, date, threshold, votes_needed,
+                     nominate_spread_dist, bill_number, vote_desc),
+            by = c("congress", "rollnumber")) |> 
+  group_by(congress, rollnumber, date, bill_number, vote_desc, threshold, votes_needed) |> 
+  # ensure there are enough flippable votes
+  filter(n() >= votes_needed) |> 
+  # find pivotal votes
+  mutate(rank = min_rank(prob)) |> 
+  filter(rank <= votes_needed) |> 
+  filter(rank == max(rank))
+```
+
+To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering.
+Then, I found the *pivotal vote* on each failed cloture vote. If a cloture motion fell $n$ votes short of passing, I found the $n$th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.
+
+```{r calculate vote costs}
+vote_costs <- pivotal_votes |> 
+  summarize(prob = first(prob),
+            prob_left = prob - 50,
+            nominate_spread_dist = first(nominate_spread_dist),
+            n_pivotal_votes = n(), 
+            .groups = "drop") |> 
+  # distance you have to move: (prob - 50) * spread
+  mutate(probXdist = prob_left * nominate_spread_dist / 100,
+         pd_rank = row_number(probXdist)) |> 
+  arrange(probXdist)
+```
+
+Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in @fig-ira and @fig-iija, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members' votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE.
+To account for these differences, I used the spread estimates included in the Voteview data downloads (columns `nominate_spread_1` and `nominate_spread_2` in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements.
+Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote's distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.
+
+#### Results
+
+@fig-cloture-costs shows the cumulative distribution of these distances. The plot answers the question: "If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?"
+
+```{r plot vote costs}
+#| label: fig-cloture-costs
+#| fig-cap: "Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)"
+
+rule_impact_ggplot <- ggplot(vote_costs, aes(x = probXdist, y = pd_rank)) +
+  geom_area(fill = "#77777733", color = "#777777", linewidth = 1) +
+  labs(x = "DW-NOMINATE equivalent of additional costs", 
+       y = "Cloture votes flipped",
+       title = "Potential impact of cloture rule changes on failed cloture votes",
+       subtitle = "95th through 117th Congresses (1977-2022)") +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank())
+
+rule_impact_ggplot
+```
+
+A useful decision-making question extending from this information is: "How much higher cost would it take to meaningfully change the Senate?" The slope of the plot can help answer that question. Low cost increases (0-0.07 units) would not be strong enough to flip a large number of cloture votes. The slope of the curve is highest between 0.1 and 0.2 units. Increasing costs by this amount would have large marginal impacts on filibusters relative to their absolute costs. Beyond 0.2 units, the slope begins to level off, meaning that increasing costs by the same amount would produce less real-life change in cloture outcomes.
+In short, rule changes that add costs equivalent to 0.1-0.2 units in policy space would produce the largest impact on filibustering relative to the size of the costs. In the modern Senate, this is about the space between each party's median and the beginning of their liberal and conservative wings. @tbl-distances shows the median members of each Senate caucus in the 118th Congress, and members who are 0.15 units in either direction of the party median.
+
+```{r table of 0.15 distances}
+#| label: tbl-distances
+#| tbl-cap: "Senators 0.15 units away from their party medians, 118th Congress"
+
+party_medians <- get_voteview_parties(chamber = "s", congress = 118) |> 
+  filter(party_name != "Independent") |> 
+  select(congress, chamber, party_code, party_name, nominate_dim1_median)
+
+dem_median <- party_medians |> filter(party_name == "Democrat") |> pull(nominate_dim1_median)
+gop_median <- party_medians |> filter(party_name == "Republican") |> pull(nominate_dim1_median)
+
+# members <- get_voteview_members(chamber = "s", congress = 118)
+
+dwnom_tbl <- tibble(Party = c("Democrat", "Republican"),
+                    `DW-NOMINATE Dim-1 median` = round(c(dem_median, gop_median), 2),
+                    `Liberal member` = c("Tammy Baldwin (-0.49)", 
+                                         "Pete Ricketts (0.39)"),
+                    `Median member` = c("Richard Durbin (-0.35)", 
+                                        "John Barrasso (0.54)"),
+                    `Conservative member` = c("Mark Warner (-0.21)", 
+                                              "Rick Scott (0.68)"))
+
+kbl(dwnom_tbl, booktabs = TRUE) |> 
+  kable_styling() |> 
+  # controlling column widths in PDF
+  column_spec(2, width = "3cm") |> 
+  column_spec(3:5, width = "2.8cm")
+```
+
+A filibuster rule change that imposes costs equivalent to 0.15-0.2 units in policy space would have directly flipped the outcomes of about 4 cloture votes a year, turning 4 more failed bills each year into law. This estimate is conservative, as the analysis doesn't consider bills that never came up for a cloture vote because proponents expected the vote to fail.
+
+This analysis answers important questions senators may have about the efficacy of potential filibuster reforms. Reform-minded senators can use this analysis to evaluate how significant they would like to make their reforms in order to achieve a desired effect on filibustering.
+Another source of data on the impact of filibuster reforms is the primary change to the filibuster in the past few decades: the nuclear option on presidential nominations. Next, I explore the impact that the nuclear option has had on these nominations.
+
+### The Results of the Nuclear Option on Presidential Nominations
 
 ## Conclusion
 By extending Wawro and Schickler's model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.

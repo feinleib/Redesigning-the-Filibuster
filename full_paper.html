@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Max H. Feinleib">
-<meta name="dcterms.date" content="2024-03-13">
+<meta name="dcterms.date" content="2024-04-30">
 <meta name="keywords" content="U.S. Senate, legislative obstruction, filibuster, cloture">
 
 <title>Redesigning the Filibuster for More Effective Lawmaking in a Polarized Senate</title>
@@ -56,6 +56,8 @@ div.csl-indent {
 <script src="full_paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="full_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="full_paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="full_paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="full_paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -127,9 +129,14 @@ window.Quarto = {
   <li><a href="#proposal-2-restoring-the-talking-filibuster-1" id="toc-proposal-2-restoring-the-talking-filibuster-1" class="nav-link" data-scroll-target="#proposal-2-restoring-the-talking-filibuster-1"><span class="header-section-number">6.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
   <li><a href="#proposal-3-flipping-the-cloture-vote" id="toc-proposal-3-flipping-the-cloture-vote" class="nav-link" data-scroll-target="#proposal-3-flipping-the-cloture-vote"><span class="header-section-number">6.3</span> Proposal 3: Flipping the Cloture Vote</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">7</span> Conclusion</a>
+  <li><a href="#quantitative-analysis-how-much-impact-would-rule-changes-have" id="toc-quantitative-analysis-how-much-impact-would-rule-changes-have" class="nav-link" data-scroll-target="#quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</a>
   <ul class="collapse">
-  <li><a href="#extensions-and-limitations" id="toc-extensions-and-limitations" class="nav-link" data-scroll-target="#extensions-and-limitations"><span class="header-section-number">7.1</span> Extensions and Limitations</a></li>
+  <li><a href="#the-costs-necessary-to-flip-cloture-votes" id="toc-the-costs-necessary-to-flip-cloture-votes" class="nav-link" data-scroll-target="#the-costs-necessary-to-flip-cloture-votes"><span class="header-section-number">7.1</span> The Costs Necessary to Flip Cloture Votes</a></li>
+  <li><a href="#the-results-of-the-nuclear-option-on-presidential-nominations" id="toc-the-results-of-the-nuclear-option-on-presidential-nominations" class="nav-link" data-scroll-target="#the-results-of-the-nuclear-option-on-presidential-nominations"><span class="header-section-number">7.2</span> The Results of the Nuclear Option on Presidential Nominations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#extensions-and-limitations" id="toc-extensions-and-limitations" class="nav-link" data-scroll-target="#extensions-and-limitations"><span class="header-section-number">8.1</span> Extensions and Limitations</a></li>
   </ul></li>
   
   
@@ -167,7 +174,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 13, 2024</p>
+      <p class="date">April 30, 2024</p>
     </div>
   </div>
   
@@ -429,7 +436,7 @@ EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 </section>
 <section id="an-example-legislative-fight" class="level4" data-number="5.2.5">
 <h4 data-number="5.2.5" class="anchored" data-anchor-id="an-example-legislative-fight"><span class="header-section-number">5.2.5</span> An Example Legislative Fight</h4>
-<p>It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen.&nbsp;Tommy Tuberville’s (R–AL) high-profile use of the hold (a form of filibuster) in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:</p>
+<p>It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen.&nbsp;Tommy Tuberville’s (R–AL) high-profile use of the hold (a form of filibuster)<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:</p>
 <ol type="1">
 <li>Sen.&nbsp;Tuberville began his hold on military nominations in February 2023 after the Department of Defense instituted their new policy covering servicemembers’ travel expenses for reproductive healthcare and abortions <span class="citation" data-cites="swetlikTubervillePutsHold2023">(<a href="#ref-swetlikTubervillePutsHold2023" role="doc-biblioref">Swetlik, 2023</a>)</span>. Tuberville represented a single obstructionist. He ostensibly evaluated significant benefits to this action (in terms of position-taking benefits at the very least, regardless of whether he expected to successfully reverse the Pentagon’s policy). His costs were minimal, as he did not have to hold the floor or even be in attendance to sustain his obstruction.</li>
 <li>Senators from both parties criticized Sen.&nbsp;Tuberville’s hold throughout 2023, but they were unable to break the hold. The proponents of the military promotions made up a supermajority of the Senate, but the process of holding cloture votes on every single nomination would have taken an immense amount of time <span class="citation" data-cites="jalonickWhySingleSenator2023">(<a href="#ref-jalonickWhySingleSenator2023" role="doc-biblioref">Jalonick &amp; Baldor, 2023</a>)</span>. At this stage, the costs of all those votes outweighed the benefits of confirming the nominees.</li>
@@ -460,7 +467,7 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 </div>
 </div>
 </div>
-<p>This change in expected benefits allows legislative entrepreneurs to pass bills with smaller proponent coalitions. Reducing the cloture threshold to a simple majority would also decrease costs to the proponents, especially the cost of consuming floor time <span class="math inline">\(C_{prop,t}\)</span> and the cost of debate and attendance <span class="math inline">\(C_{prop,d}\)</span>, because they would be able to end debate without having 60 votes. To be clear, the obstructionists do not fully disappear from the model after abolishing the filibuster. The obstructionists still have the ability to attempt a filibuster; it is just much easier for proponents to quickly defeat the filibuster with a simple majority.<a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> Therefore, the expected benefits to the obstructionists of filibustering <span class="math inline">\(EB_{obst}\)</span> largely vanish.</p>
+<p>This change in expected benefits allows legislative entrepreneurs to pass bills with smaller proponent coalitions. Reducing the cloture threshold to a simple majority would also decrease costs to the proponents, especially the cost of consuming floor time <span class="math inline">\(C_{prop,t}\)</span> and the cost of debate and attendance <span class="math inline">\(C_{prop,d}\)</span>, because they would be able to end debate without having 60 votes. To be clear, the obstructionists do not fully disappear from the model after abolishing the filibuster. The obstructionists still have the ability to attempt a filibuster; it is just much easier for proponents to quickly defeat the filibuster with a simple majority.<a href="#fn10" class="footnote-ref" id="fnref10" role="doc-noteref"><sup>10</sup></a> Therefore, the expected benefits to the obstructionists of filibustering <span class="math inline">\(EB_{obst}\)</span> largely vanish.</p>
 <p>Due to these effects on the proponent and obstructionist factions, it is very likely that abolishing the filibuster would increase productivity in the Senate because the expected utility of the proponents would outweigh that of the obstructionists far more often than it does today. However, abolishing the filibuster also decreases the incentives for majority-party senators to reach across the aisle and build bipartisan coalitions. Majority-party senators can pass policies closer to their ideal points because they no longer have to make compromises to reach 60 supporters. As a result, abolishing the filibuster would likely decrease bipartisanship and compromise. In addition, abolishing the filibuster would likely increase policy volatility in the Senate. Whenever the majority changes, they can pass a litany of policy priorities over all protest from the minority party. This is the current state of affairs in the House, in which new majorities often pass lengthy policy wish lists, such as the Democrats’ For the People Act of 2019 and the Republicans’ Secure the Border Act of 2023 <span class="citation" data-cites="sarbanesPeopleAct20192019 diaz-balartSecureBorderAct2023">(<a href="#ref-diaz-balartSecureBorderAct2023" role="doc-biblioref">H.R. 2, 2023</a>, <a href="#ref-sarbanesPeopleAct20192019" role="doc-biblioref">H.R. 1, 2019</a>)</span>. If the Senate was also able to end debate with a simple majority, these large policy packages would become law, introducing much more policy volatility.</p>
 <p>In summary, abolishing the filibuster would likely succeed at increasing productivity, but at the cost of decreasing bipartisanship and increasing policy volatility.</p>
 </section>
@@ -480,13 +487,117 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 <p>On its own, flipping the cloture vote appears to have only minor effects on the legislative goods. It may slightly increase productivity by making it more politically painful for obstructionists to enforce gridlock. It is unclear what effects this rule would have on bipartisanship and policy stability. Flipping the cloture vote seems to be a more marginal reform than abolishing the filibuster or restoring the talking filibuster.</p>
 </section>
 </section>
-<section id="conclusion" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">7</span> Conclusion</h2>
+<section id="quantitative-analysis-how-much-impact-would-rule-changes-have" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</h2>
+<p>I present two quantitative analyses measuring the potential impacts of changes to the filibuster and cloture rule. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of these failed cloture votes. Second, I test the effect of the most notable filibuster rule change in the past 50 years: the nuclear option on presidential nominations.</p>
+<section id="the-costs-necessary-to-flip-cloture-votes" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="the-costs-necessary-to-flip-cloture-votes"><span class="header-section-number">7.1</span> The Costs Necessary to Flip Cloture Votes</h3>
+<p>One of the main goals of any of the above filibuster reforms would be to enable the passage of bills that would otherwise be killed by a filibuster under the current rules. With a new cloture rule, or new costs of filibustering, legislators would be less willing and/or able to obstruct bills that have majority support in the Senate. As a result, bills that originally failed at the cloture stage might pass under new rules. This is especially true for bills that had less intense opposition by obstructionist senators. Under new rules, mild obstructionists would be more likely to yield to the wishes of the majority.</p>
+<p>Using a framework inspired by pivotal politics, I estimate how many failed cloture votes would have instead passed under rules that make filibustering more costly. In this analysis, I measure costs by translating them to the DW-NOMINATE ideological scale. Under pivotal politics, a legislator’s utility from a bill relates to how much it moves policy toward their ideal point <span class="citation" data-cites="krehbielPivotalPoliticsTheory1998">(<a href="#ref-krehbielPivotalPoliticsTheory1998" role="doc-biblioref">Krehbiel, 1998</a>)</span>. Therefore, under more costly filibuster rules, a legislator might allow a bill they oppose to pass if the personal costs of filibustering outweigh the ideological costs of the bill becoming law.</p>
+<p>To estimate the costs necessary to flip a cloture vote, I first find the pivotal senator; that is, the senator who voted Nay but could have been the 60th vote in favor of a cloture vote.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> Then, I find how far that senator was in policy space from Voteview’s Yea-Nay cutting line on the cloture vote.</p>
+<p>For this analysis, I use the 431 failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.</p>
+<section id="analysis" class="level4" data-number="7.1.1">
+<h4 data-number="7.1.1" class="anchored" data-anchor-id="analysis"><span class="header-section-number">7.1.1</span> Analysis</h4>
+<p>To find potential pivotal votes for cloture, I use Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. <!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  --> For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a> shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
+<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
+<div id="fig-ira" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/voteview_ira.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Voteview vote probabilities on the Inflation Reduction Act (2022)
+</figcaption>
+</figure>
+</div>
+<div id="fig-iija" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/voteview_iija.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)
+</figcaption>
+</figure>
+</div>
+<p>To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering. Then, I found the <em>pivotal vote</em> on each failed cloture vote. If a cloture motion fell <span class="math inline">\(n\)</span> votes short of passing, I found the <span class="math inline">\(n\)</span>th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.</p>
+<p>Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a>, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members’ votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE. To account for these differences, I used the spread estimates included in the Voteview data downloads (columns <code>nominate_spread_1</code> and <code>nominate_spread_2</code> in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements. Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote’s distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.</p>
+</section>
+<section id="results" class="level4" data-number="7.1.2">
+<h4 data-number="7.1.2" class="anchored" data-anchor-id="results"><span class="header-section-number">7.1.2</span> Results</h4>
+<p><a href="#fig-cloture-costs" class="quarto-xref">Figure&nbsp;7</a> shows the cumulative distribution of these distances. The plot answers the question: “If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?”</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-cloture-costs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="full_paper_files/figure-html/fig-cloture-costs-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A useful decision-making question extending from this information is: “How much higher cost would it take to meaningfully change the Senate?” The slope of the plot can help answer that question. Low cost increases (0-0.07 units) would not be strong enough to flip a large number of cloture votes. The slope of the curve is highest between 0.1 and 0.2 units. Increasing costs by this amount would have large marginal impacts on filibusters relative to their absolute costs. Beyond 0.2 units, the slope begins to level off, meaning that increasing costs by the same amount would produce less real-life change in cloture outcomes. In short, rule changes that add costs equivalent to 0.1-0.2 units in policy space would produce the largest impact on filibustering relative to the size of the costs. In the modern Senate, this is about the space between each party’s median and the beginning of their liberal and conservative wings. <a href="#tbl-distances" class="quarto-xref">Table&nbsp;1</a> shows the median members of each Senate caucus in the 118th Congress, and members who are 0.15 units in either direction of the party median.</p>
+<div class="cell">
+<div id="tbl-distances" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-distances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
+</figcaption>
+<div aria-describedby="tbl-distances-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Party</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">DW-NOMINATE Dim-1 median</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Liberal member</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Median member</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Conservative member</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Democrat</td>
+<td style="text-align: right; width: 3cm;">-0.35</td>
+<td style="text-align: left; width: 2.8cm;">Tammy Baldwin (-0.49)</td>
+<td style="text-align: left; width: 2.8cm;">Richard Durbin (-0.35)</td>
+<td style="text-align: left; width: 2.8cm;">Mark Warner (-0.21)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Republican</td>
+<td style="text-align: right; width: 3cm;">0.54</td>
+<td style="text-align: left; width: 2.8cm;">Pete Ricketts (0.39)</td>
+<td style="text-align: left; width: 2.8cm;">John Barrasso (0.54)</td>
+<td style="text-align: left; width: 2.8cm;">Rick Scott (0.68)</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>A filibuster rule change that imposes costs equivalent to 0.15-0.2 units in policy space would have directly flipped the outcomes of about 4 cloture votes a year, turning 4 more failed bills each year into law. This estimate is conservative, as the analysis doesn’t consider bills that never came up for a cloture vote because proponents expected the vote to fail.</p>
+<p>This analysis answers important questions senators may have about the efficacy of potential filibuster reforms. Reform-minded senators can use this analysis to evaluate how significant they would like to make their reforms in order to achieve a desired effect on filibustering. Another source of data on the impact of filibuster reforms is the primary change to the filibuster in the past few decades: the nuclear option on presidential nominations. Next, I explore the impact that the nuclear option has had on these nominations.</p>
+</section>
+</section>
+<section id="the-results-of-the-nuclear-option-on-presidential-nominations" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="the-results-of-the-nuclear-option-on-presidential-nominations"><span class="header-section-number">7.2</span> The Results of the Nuclear Option on Presidential Nominations</h3>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">8</span> Conclusion</h2>
 <p>By extending Wawro and Schickler’s model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.</p>
 <p>Abolishing the filibuster would have the biggest impact on productivity, at the cost of decreasing bipartisanship and policy stability. Flipping the cloture vote would have little impact on these legislative goods, likely making it an unsatisfactory choice for reform. Restoring the talking filibuster may produce a meaningful increase in productivity while limiting the potential negative effects on bipartisanship and policy volatility. This analysis supports the views of reformers such as Sen.&nbsp;Jeff Merkley, who promotes restoring the talking filibuster as the best option for filibuster reform.</p>
 <p>Performing formal analysis, such as the analysis in this paper, is an important step in choosing the best option for the Senate filibuster moving forward. Empirical analysis is still needed to validate these findings, but this is the first step on the way from guessing to proving the effects of redesigning the Senate filibuster.</p>
-<section id="extensions-and-limitations" class="level3" data-number="7.1">
-<h3 data-number="7.1" class="anchored" data-anchor-id="extensions-and-limitations"><span class="header-section-number">7.1</span> Extensions and Limitations</h3>
+<section id="extensions-and-limitations" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="extensions-and-limitations"><span class="header-section-number">8.1</span> Extensions and Limitations</h3>
 <p>The primary extension needed to corroborate my findings is empirical evidence for my predictions. I plan to use a mix of empirical approaches to back up my model. First, I plan to test how the nuclear option on presidential nominations changed the passing coalitions on executive branch and judicial confirmation votes. Second, I plan to measure how large of a cost filibustering would need to impose in order to change bill outcomes. For this component, I could either analyze a few bills as case studies, or do a large-N study to observe an overall “cost curve” for votes.</p>
 <p>A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically <span class="citation" data-cites="uslanerPartisanshipCoalitionFormation1975">(<a href="#ref-uslanerPartisanshipCoalitionFormation1975" role="doc-biblioref">Uslaner, 1975</a>)</span>. To explain this, <span class="citation" data-cites="grosecloseBuyingSupermajorities1996">Groseclose &amp; Snyder (<a href="#ref-grosecloseBuyingSupermajorities1996" role="doc-biblioref">1996</a>)</span> show how it may be “cheaper” for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. I plan to accommodate this finding into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model will help prevent it from overly predicting minimal majorities.</p>
 </section>
@@ -496,7 +607,7 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 
 
 
-<div id="quarto-appendix" class="default"><section id="the-filibustr-package" class="level2 appendix" data-number="8"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">8</span> The <code>filibustr</code> Package</h2><div class="quarto-appendix-contents">
+<div id="quarto-appendix" class="default"><section id="the-filibustr-package" class="level2 appendix" data-number="9"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">9</span> The <code>filibustr</code> Package</h2><div class="quarto-appendix-contents">
 
 <p>In addition to the primary findings of my research, I intend to benefit future political science researchers by providing publicly available solutions to the data challenges I face in my work. I am publishing these solutions in the form of an open-source R package, named <code>filibustr</code> <span class="citation" data-cites="feinleibFilibustrDataUtilities2024">(<a href="#ref-feinleibFilibustrDataUtilities2024" role="doc-biblioref">Feinleib, 2023/2024</a>)</span>. The <code>filibustr</code> package provides a set of utilities to improve the data-gathering process for research on Congress.</p>
 <p>The <code>filibustr</code> package is inspired by the <code>baseballr</code> package, which has long provided similar functionality for the baseball analytics community <span class="citation" data-cites="pettiBaseballrAcquiringAnalyzing2024">(<a href="#ref-pettiBaseballrAcquiringAnalyzing2024" role="doc-biblioref">Petti &amp; Gilani, 2016/2024</a>)</span>. Just as <code>baseballr</code> enables baseball researchers to access data from popular baseball statistics websites in R, <code>filibustr</code> enables political science researchers to access data from popular congressional data websites.</p>
@@ -511,16 +622,16 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 <p>Just as my research is motivated by a gap in the research on the filibuster, I am developing the <code>filibustr</code> package because it provides solutions I cannot find anywhere else. Voteview provides the <code>Rvoteview</code> package for querying their data, but I have needs not covered by that package <span class="citation" data-cites="sonnetRvoteviewVoteviewData2019">(<a href="#ref-sonnetRvoteviewVoteviewData2019" role="doc-biblioref">Sonnet &amp; Lewis, 2015/2019</a>)</span>. The <code>Rvoteview</code> package is primarily focused on querying specific parts of the Voteview database, while I am more interested in working with their datasets at large. Additionally, <code>Rvoteview</code> does not seem to be actively maintained, with no updates since 2019 and the notice “WARNING: This package is under construction” on GitHub <span class="citation" data-cites="sonnetRvoteviewVoteviewData2019">(<a href="#ref-sonnetRvoteviewVoteviewData2019" role="doc-biblioref">Sonnet &amp; Lewis, 2015/2019</a>)</span>.</p>
 <p>While I am continuing to develop <code>filibustr</code>, I have already published version 0.2.0 to CRAN, the primary R package repository. You can install the latest version of the package in R using <code>install.packages("filibustr")</code>.</p>
 <p>As the frontiers of quantitative political science research and the best practices in data science continue to advance, it is important that political scientists have access to up-to-date research tools. I am committed to maintaining <code>filibustr</code> as long as the package is demanded. By following the best practices for R package development, I will make <code>filibustr</code> a robust package from the initial release. Then, I plan to support <code>filibustr</code> long-term so it can become a valuable resource for many future political science researchers.</p>
-</div></section><section id="dedication-and-acknowledgements" class="level2 appendix" data-number="9"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">9</span> Dedication and Acknowledgements</h2><div class="quarto-appendix-contents">
+</div></section><section id="dedication-and-acknowledgements" class="level2 appendix" data-number="10"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">10</span> Dedication and Acknowledgements</h2><div class="quarto-appendix-contents">
 
 <p><em>In memory of Michael Berman. You’re the reason this all happened.</em></p>
 <p>I’d like to thank my advisors, Joe Ferrie and Daniel Galvin, and the Political Science Honors Program coordinator, Andrew Roberts. I received additional guidance from Sen.&nbsp;Patrick Leahy, Northwestern professors Laurel Harbridge-Yong, Brian Libgober, and Jorg Spenkuch, and Ryan DeTamble of American University.</p>
 <p>The study resulting in this thesis was assisted by a Conference Travel Grant from the Office of Undergraduate Research which is administered by Northwestern University’s Office of the Provost. However, the conclusions, opinions, and other statements in this thesis are the author’s and not necessarily those of the sponsoring institution.</p>
 <div style="page-break-after: always;"></div>
-</div></section><section id="references" class="level2 unnumbered appendix" data-number="10"><h2 class="quarto-appendix-heading"></h2><div class="quarto-appendix-contents">
+</div></section><section id="references" class="level2 unnumbered appendix" data-number="11"><h2 class="quarto-appendix-heading"></h2><div class="quarto-appendix-contents">
 
 
-</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">10 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">11 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-americanpoliticalscienceassociationMoreResponsibleTwoparty1950" class="csl-entry" role="listitem">
 American Political Science Association. (1950). Toward a more responsible two-party system. <em>The American Political Science Review</em>, <em>44</em>(3). <a href="https://www.jstor.org/stable/i333592">https://www.jstor.org/stable/i333592</a>
 </div>
@@ -590,6 +701,9 @@ Harbridge-Yong, L., Volden, C., &amp; Wiseman, A. E. (2023). The bipartisan path
 <div id="ref-harkinResolutionAmendingStanding2011" class="csl-entry" role="listitem">
 A resolution amending the Standing Rules of the Senate to provide for cloture to be invoked with less than a three-fifths majority after additional debate, S. Res. 8, 112th Cong. (2011). <a href="https://www.congress.gov/bill/112th-congress/senate-resolution/8">https://www.congress.gov/bill/112th-congress/senate-resolution/8</a>
 </div>
+<div id="ref-heitshusenFilibustersClotureSenate2017" class="csl-entry" role="listitem">
+Heitshusen, V. (2017). <em>Filibusters and cloture in the Senate</em> (RL30360). Congressional Research Service. <a href="https://crsreports.congress.gov/product/pdf/RL/RL30360">https://crsreports.congress.gov/product/pdf/RL/RL30360</a>
+</div>
 <div id="ref-jacobiFilibusterReconciliationFuture2013" class="csl-entry" role="listitem">
 Jacobi, T., &amp; VanDam, J. (2013). The filibuster and reconciliation: The future of majoritarian lawmaking in the U.S. Senate. <em>U.C. Davis Law Review</em>, <em>47</em>(1), 261–342. <a href="https://heinonline.org/HOL/P?h=hein.journals/davlr47&amp;i=267">https://heinonline.org/HOL/P?h=hein.journals/davlr47&amp;i=267</a>
 </div>
@@ -625,6 +739,9 @@ Merkley, J., &amp; Zamore, M. (2024). <em>Filibustered!: How to fix the broken S
 </div>
 <div id="ref-moultonAbolishFilibusterElectoral2019" class="csl-entry" role="listitem">
 Moulton, S. (2019, March 12). Abolish the filibuster and the electoral college. <em>The Washington Post</em>. <a href="https://www.washingtonpost.com/opinions/abolish-the-filibuster-and-the-electoral-college/2019/03/12/ac9bc0f2-44d9-11e9-90f0-0ccfeec87a61_story.html">https://www.washingtonpost.com/opinions/abolish-the-filibuster-and-the-electoral-college/2019/03/12/ac9bc0f2-44d9-11e9-90f0-0ccfeec87a61_story.html</a>
+</div>
+<div id="ref-oleszekHoldsSenate2017" class="csl-entry" role="listitem">
+Oleszek, M. J. (2017). <em><span>“Holds”</span> in the Senate</em> (R43563). Congressional Research Service. <a href="https://crsreports.congress.gov/product/pdf/R/R43563">https://crsreports.congress.gov/product/pdf/R/R43563</a>
 </div>
 <div id="ref-pettiBaseballrAcquiringAnalyzing2024" class="csl-entry" role="listitem">
 Petti, B., &amp; Gilani, S. (2024). <em>baseballr: Acquiring and analyzing baseball data</em> (Version 1.6.0) [R]. <a href="https://CRAN.R-project.org/package=baseballr">https://CRAN.R-project.org/package=baseballr</a> (Original work published 2016)
@@ -665,6 +782,9 @@ The Senate rules: The proposition to limit senatorial debate. (1925, March 28). 
 <div id="ref-thorpvSenateApprovesRemaining2023" class="csl-entry" role="listitem">
 Thorp V, F., Santaliz, K., &amp; Lebowitz, M. (2023, December 20). <em>Senate approves remaining military promotions held up by Sen. Tommy Tuberville</em>. NBC News. <a href="https://www.nbcnews.com/politics/congress/senate-approves-remaining-military-promotions-held-sen-tuberville-rcna130528">https://www.nbcnews.com/politics/congress/senate-approves-remaining-military-promotions-held-sen-tuberville-rcna130528</a>
 </div>
+<div id="ref-TiebreakingVotesCast2023" class="csl-entry" role="listitem">
+<em>Tie-breaking votes cast by vice presidents in the Senate</em>. (2023, December 5). Ballotpedia. <a href="https://ballotpedia.org/Tie-breaking_votes_cast_by_vice_presidents_in_the_Senate">https://ballotpedia.org/Tie-breaking_votes_cast_by_vice_presidents_in_the_Senate</a>
+</div>
 <div id="ref-udallResolutionImproveDebate2011" class="csl-entry" role="listitem">
 A resolution to improve the debate and consideration of legislative matters and nominations in the Senate, S. Res. 10, 112th Cong. (2011). <a href="https://www.congress.gov/bill/112th-congress/senate-resolution/10">https://www.congress.gov/bill/112th-congress/senate-resolution/10</a>
 </div>
@@ -697,7 +817,9 @@ Wawro, G. J., &amp; Schickler, E. (2006). <em>Filibuster: Obstruction and lawmak
 <li id="fn6"><p>That is, in every instance of “expected benefits” in <a href="#sec-wawro-schickler" class="quarto-xref">Section&nbsp;5.1</a>, <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006</a>)</span> would have used the phrase “expected utility.”<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>If a faction receives negative expected utility, then they would simply surrender the fight.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Some commenters have questioned this assumption that senators act rationally, arguing that senators often do a poor job of evaluating the costs and benefits of their actions. Accurately predicting one’s costs and benefits is not a requirement of rationality, however. Rationality merely requires that actors behave according to the costs and benefits they <em>believe</em> exist, regardless of whether those beliefs are accurate. Thus, even a “foolish” actor can be a rational actor.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9"><p>Perhaps “abolishing the filibuster” is not the most accurate term. The term has been around for likely well over a century, however <span class="citation" data-cites="SenateRulesProposition1925">(<a href="#ref-SenateRulesProposition1925" role="doc-biblioref"><span>“The Senate Rules,”</span> 1925, p. 399</a>)</span>, and I am in no position to rename it.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9"><p>Although a hold is not technically a filibuster, a senator’s power to enforce their hold arises from an implicit threat to filibuster the measure at concern <span class="citation" data-cites="heitshusenFilibustersClotureSenate2017 oleszekHoldsSenate2017">(<a href="#ref-heitshusenFilibustersClotureSenate2017" role="doc-biblioref">Heitshusen, 2017</a>; <a href="#ref-oleszekHoldsSenate2017" role="doc-biblioref">Oleszek, 2017</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn10"><p>Perhaps “abolishing the filibuster” is not the most accurate term. The term has been around for likely well over a century, however <span class="citation" data-cites="SenateRulesProposition1925">(<a href="#ref-SenateRulesProposition1925" role="doc-biblioref"><span>“The Senate Rules,”</span> 1925, p. 399</a>)</span>, and I am in no position to rename it.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn11"><p>On presidential nominations since the nuclear option, the threshold is a simple majority. I assume the vice president supports their president’s nominees and would therefore cast a tie-breaking vote to invoke cloture, so the majority threshold is 50 votes. This is supported by vice presidents’ records on cloture votes. Through the end of 2023, Vice President Kamala Harris cast the tie-breaking vote to invoke cloture on 13 of Joe Biden’s nominees. Former Vice President Mike Pence did the same for 3 of Donald Trump’s nominees <span class="citation" data-cites="TiebreakingVotesCast2023">(<a href="#ref-TiebreakingVotesCast2023" role="doc-biblioref"><em>Tie-Breaking Votes</em>, 2023</a>)</span>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
