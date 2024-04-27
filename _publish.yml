@@ -1,4 +1,4 @@
 - source: full_paper.qmd
   quarto-pub:
-    - id: 5101c232-d05f-4a42-9223-fdbb8a2f6cdf
-      url: 'https://feinleib.quarto.pub/redesigning-the-filibuster-2024'
+    - id: "5101c232-d05f-4a42-9223-fdbb8a2f6cdf"
+      url: 'https://feinleib.quarto.pub/redesigning-the-filibuster-2024/'
