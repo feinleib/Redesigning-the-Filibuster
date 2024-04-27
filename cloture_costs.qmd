@@ -92,11 +92,12 @@ Now, I find the pivotal member on these failed cloture votes. I filter the votes
 s_mem_positions <- s_mem_data |> 
   # remove presidents
   filter(chamber == "Senate") |> 
-  # relevant columns
-  select(congress, chamber, icpsr, bioname, party_code, state_abbrev, nominate_dim1, nominate_dim2)
+  # drop irrelevant columns
+  select(congress, chamber, icpsr, bioname, party_code, state_abbrev, 
+         nominate_dim1, nominate_dim2)
 
 # cast codes (source: https://voteview.com/articles/data_help_votes)
-# TODO: use `filibustr` version when that's available
+# TODO: use `filibustr` version when that's available (and local data)
 voteview_cast_codes <- tibble(cast_code = 0:9,
                               vote_cast = factor(
                                 c("Not a Member", 
@@ -105,6 +106,7 @@ voteview_cast_codes <- tibble(cast_code = 0:9,
                                   "Present", "Present", "Not Voting")
                                 ))
 
+# 50%-99.9% probability Nay votes on failed cloture votes
 s_mem_failed_cvotes <- s_mem_votes_data |> 
   # filter: sen_mem_votes_data uses the `rollnumber` as a foreign key
   semi_join(s_failed_cvotes, by = c("congress", "rollnumber")) |> 
@@ -116,10 +118,11 @@ s_mem_failed_cvotes <- s_mem_votes_data |>
   left_join(s_mem_positions, by = c("congress", "chamber", "icpsr")) |> 
   arrange(rollnumber, prob)
 
-# find (60-yeas)'th member with lowest probability of Nay vote
+# find (60-yeas)'th member with lowest probability of Nay vote (pivotal members)
 pivotal_votes <- s_mem_failed_cvotes |> 
   left_join(s_failed_cvotes |> 
-              select(congress, rollnumber, date, threshold, votes_needed, nominate_spread_dist, bill_number, vote_desc),
+              select(congress, rollnumber, date, threshold, votes_needed,
+                     nominate_spread_dist, bill_number, vote_desc),
             by = c("congress", "rollnumber")) |> 
   group_by(congress, rollnumber, date, bill_number, vote_desc, threshold, votes_needed) |> 
   # ensure there are enough flippable votes
@@ -130,7 +133,7 @@ pivotal_votes <- s_mem_failed_cvotes |>
   filter(rank == max(rank))
 ```
 
-I multiply the pivotal vote's probability by the DW-NOMINATE spread of the probabilities to estimate the distance equival.
+I multiply the pivotal vote's probability by the DW-NOMINATE spread of the probabilities to estimate the distance equivalent.
 ```{r calculate vote costs}
 vote_costs <- pivotal_votes |> 
   summarize(prob = first(prob),
@@ -159,6 +162,23 @@ rule_impact_ggplot <- ggplot(vote_costs, aes(x = probXdist, y = pd_rank)) +
        subtitle = "95th through 117th Congresses (1977-2022)") +
   theme_bw() +
   theme(panel.grid.minor.y = element_blank())
+
+# average of above graph (y = pd_rank / probXdist)
+# ggplot(vote_costs, aes(x = probXdist, y = pd_rank / probXdist)) +
+#   geom_area(fill = "#77777733", color = "#777777", linewidth = 1) +
+#   labs(x = "DW-NOMINATE equivalent of additional costs",
+#        y = "Cloture votes flipped",
+#        title = "Potential impact of cloture rule changes on failed cloture votes",
+#        subtitle = "95th through 117th Congresses (1977-2022)") +
+#   theme_bw() +
+#   theme(panel.grid.minor.y = element_blank()) +
+#   scale_x_continuous(limits = c(0.01, 0.68))
+
+# vote_costs |> 
+#   select(probXdist, pd_rank) |> 
+#   mutate(flips_over_dist = pd_rank / probXdist) |> 
+#   filter(probXdist > 0.03) |> 
+#   arrange(desc(flips_over_dist))
 
 rule_change_impact_plot
 rule_impact_ggplot
