@@ -582,15 +582,13 @@ s_failed_cvotes <- s_votes_data |>
   )
 ```
 
+#### Data
 For this analysis, I use the `r nrow(s_failed_cvotes)` failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.
 
 #### Analysis
 To find potential pivotal votes for cloture, I use Voteview's calculated probabilities of members' roll call votes. As shown below, Voteview uses members' DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote [@lewisVoteviewCongressionalRollcall2024]. 
-<!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  -->
 For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. @fig-ira shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and @fig-iija shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021.
 Senators' actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.
-
-<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
 
 ![Voteview vote probabilities on the Inflation Reduction Act (2022)](images/voteview_ira.png){#fig-ira fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
 
