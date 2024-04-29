@@ -730,6 +730,103 @@ This analysis answers important questions senators may have about the efficacy o
 Another source of data on the impact of filibuster reforms is the primary change to the filibuster in the past few decades: the nuclear option on presidential nominations. Next, I explore the impact that the nuclear option has had on these nominations.
 
 ### The Results of the Nuclear Option on Presidential Nominations
+Arguably one of the best ways to predict the impacts of future cloture reforms is to look at the results of past reforms. The largest rule change since the 1970s has been the nuclear option on presidential nominations. In 2013, Senate Democrats lowered the cloture threshold to a simple majority for all executive branch nominees and judicial nominees below the Supreme Court. Senate Republicans extended this reform to Supreme Court nominations in 2017.
+According to my model of legislative coalitions, the nuclear option would be expected to lead to smaller passing coalitions on these nominations. As discussed in @sec-abolishing-filibuster, the nuclear option increases the probability that a nominee is confirmed when there is less-than-supermajority support for a nominee. Thus, a president is more able to propose nominees who will receive smaller majorities in support of their confirmation.
+
+#### Data
+For this analysis, I examined votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in @fig-confirmation-vote-totals.
+This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.^[One potential confounding variable is senators' knowledge of whether their individual votes are required for confirmation. Before the nuclear option, senators from the opposite party of the president may have voted to confirm nominees they personally opposed because they knew nominations required 60 votes to overcome a filibuster. These "insincere" votes of support may have arisen from a respect for the president's authority to select their executive branch leadership and, to a slightly lesser extent, select federal judges who share their ideology. After the nuclear option, if the president's party enjoys a Senate majority, then senators from the other party know their votes do not impact the ultimate outcome of the confirmation vote, so they are now more free to express their personal views through their votes.]
+
+```{r nominations data import}
+#| message: false
+
+# downloading from Voteview
+# data starting in 1989, when `bill_number` data became complete
+# nominations_data <- get_voteview_rollcall_votes(chamber = "s", congress = 101:117) |> 
+#   filter(str_starts(bill_number, "PN"))
+# 
+# parties <- get_voteview_parties(chamber = "s", congress = 101:117)
+
+# using local files
+nominations_data <- read_csv("data/nominations_data.csv")
+noms_parties <- read_csv("data/noms_parties.csv")
+
+# `cloture_actions` from @fig-cloture-graph
+# cloture_actions <- get_senate_cloture_votes() |> 
+#   filter(congress < 118)
+
+nuclear_2013 <- as.Date("2013-11-21")
+nuclear_2017 <- as.Date("2017-04-06")
+```
+
+```{r nominations data transformation}
+party_sizes <- noms_parties |> 
+  filter(party_name != "Independent", 
+         # filter out Trump for 117th
+         !(congress == 117 & chamber == "President" & party_name == "Republican")) |> 
+  # find the President's party
+  mutate(pres_party = first(party_name), 
+         .by = congress, .after = congress) |> 
+  # now remove presidents
+  filter(chamber != "President") |> 
+  # normalize to 100 members
+  # TODO: use senate.gov party size data from `filibustr` when available
+  mutate(pct_members = n_members / sum(n_members) * 100, 
+         .by = congress, .after = n_members) |>
+  # just the President's party
+  filter(pres_party == party_name) |> 
+  select(congress, pres_party, pres_party_size = pct_members)
+
+# re-using `cloture_actions` df from @fig-cloture-graph (Sec. 2.1)
+cloture_actions <- cloture_actions |> 
+  filter(congress >= 101) |> 
+  select(congress, cloture_motions_filed = motions_filed)
+
+nominations <- nominations_data |> 
+  filter(vote_question == "On the Nomination") |> 
+  mutate(
+    # SCOTUS nominations
+    scotus = str_detect(vote_desc, "(Associate|Chief) Justice"),
+    # votes after the nuclear option
+    post_nuclear = (
+      (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) 
+      | (!scotus & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)))
+    ),
+    vote_pct = yea_count / (yea_count + nay_count) * 100,
+    yrs_since_89 = interval(as.Date("1989-01-01"), date) / years(1)
+  ) |> 
+  # join party size and cloture data
+  inner_join(party_sizes, by = "congress") |> 
+  inner_join(cloture_actions, by = "congress")
+```
+
+```{r plot confirmation vote totals}
+#| label: fig-confirmation-vote-totals
+#| fig-cap: "Senate confirmation votes on presidential nominations (1989-2022)"
+
+ggplot(nominations, aes(x = date, y = vote_pct)) +
+  geom_point(alpha = 0.15) + 
+  # mark every 10%
+  scale_y_continuous(breaks = seq(50, 100, 10)) +
+  labs(x = "Date", 
+       y = "Percent of votes in favor of confirmation",
+       title = "Senate confirmation votes on presidential nominations",
+       subtitle = "101st through 117th Congresses (1989-2022)") +
+  theme_bw() + 
+  theme(panel.grid.minor.y = element_blank())
+```
+
+I used the Voteview parties data to calculate the size of the president's party in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed.
+I also used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in @fig-cloture-graph). This data measures the prevalence of filibustering over time.
+
+#### Analysis
+
+* explain the four models
+* regression tables: in this section or the next one?
+* plot predicted probabilities?
+
+#### Results
+
 
 ## Conclusion
 By extending Wawro and Schickler's model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.
