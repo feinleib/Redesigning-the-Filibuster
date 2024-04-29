@@ -33,7 +33,7 @@ I use presidential nominations for executive-branch and judicial-branch position
 * November 21, 2013 for executive-branch and non-Supreme Court judicial-branch nominees
 * April 6, 2017 for Supreme Court nominees
 ```{r data import}
-# starting in 1989, when data became complete
+# starting in 1989, when `bill_number` data became complete
 nominations_data <- get_voteview_rollcall_votes(chamber = "s", congress = 101:117) |> 
   filter(str_starts(bill_number, "PN"))
 
@@ -43,6 +43,9 @@ presidents <- get_voteview_members(chamber = "s", congress = 101:117) |>
          !(congress == 117 & str_starts(bioname, "TRUMP")))
 
 parties <- get_voteview_parties(chamber = "s", congress = 101:117)
+
+# cloture_actions <- get_senate_cloture_votes() |> 
+#   filter(congress < 118)
 
 nuclear_2013 <- as.Date("2013-11-21")
 nuclear_2017 <- as.Date("2017-04-06")
@@ -56,13 +59,25 @@ party_sizes <- parties |>
   filter(party_name != "Independent", 
          # filter out Trump for 117th
          !(congress == 117 & chamber == "President" & party_name == "Republican")) |> 
-  mutate(pres_party = first(party_name), .by = congress, .after = congress) |> 
-  # just Senate parties
+  # find the President's party
+  mutate(pres_party = first(party_name), 
+         .by = congress, .after = congress) |> 
+  # now remove presidents
   filter(chamber != "President") |> 
-  mutate(pct_members = n_members / sum(n_members) * 100, .by = congress, .after = n_members) |>
+  # normalize to 100 members
+  # TODO: use senate.gov party size data from `filibustr` when available
+  mutate(pct_members = n_members / sum(n_members) * 100, 
+         .by = congress, .after = n_members) |>
   # just the President's party
   filter(pres_party == party_name) |> 
   select(congress, pres_party, pres_party_size = pct_members)
+
+# re-using `cloture_actions` df from @fig-cloture-graph (Sec. 2.1)
+cloture_actions <- cloture_actions |> 
+  filter(congress >= 101) |> 
+  select(congress, cloture_motions_filed = motions_filed)
+
+
 
 nominations <- nominations_data |> 
   filter(vote_question == "On the Nomination") |> 
@@ -77,7 +92,9 @@ nominations <- nominations_data |>
     vote_pct = yea_count / (yea_count + nay_count) * 100,
     yrs_since_89 = interval(as.Date("1989-01-01"), date) / years(1)
   ) |> 
-  inner_join(party_sizes)
+  # join party size and cloture data
+  inner_join(party_sizes, by = "congress") |> 
+  inner_join(cloture_actions, by = "congress")
 ```
 
 ```{r models}
@@ -88,6 +105,8 @@ plot(nominations$date, nominations$vote_pct)
 formula_congress <- reformulate(response = "vote_pct",
                                 termlabels = c("post_nuclear", "scotus", 
                                                "I(congress - 100)",
+                                               # "congress",
+                                               "I((congress - 100)^2)",
                                                "pres_party_size"))
 pred_vote <- lm(formula_congress,
                 data = nominations)
@@ -96,7 +115,7 @@ summary(pred_vote)
 
 
 # Model 2: by time since 1989
-pred_vote_dates <- lm(vote_pct ~ post_nuclear + scotus + yrs_since_89 + I(yrs_since_89 ^ 2) + I(yrs_since_89 ^ 3) + pres_party_size,
+pred_vote_dates <- lm(vote_pct ~ post_nuclear + scotus + yrs_since_89 + I(yrs_since_89 ^ 2) + pres_party_size,
    data = nominations)
 summary(pred_vote_dates)
 
