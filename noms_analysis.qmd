@@ -107,7 +107,8 @@ formula_congress <- reformulate(response = "vote_pct",
                                                "I(congress - 100)",
                                                # "congress",
                                                "I((congress - 100)^2)",
-                                               "pres_party_size"))
+                                               "pres_party_size",
+                                               "cloture_motions_filed"))
 pred_vote <- lm(formula_congress,
                 data = nominations)
 summary(pred_vote)
