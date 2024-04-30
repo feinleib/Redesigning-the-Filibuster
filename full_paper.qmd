@@ -882,12 +882,15 @@ model_time_4 <- lm(vote_pct ~ post_nuclear + scotus
                    data = nominations)
 ```
 
-@tbl-noms-regression shows the results of the regressions described above. The variable of interest is "Post-nuclear"
+[ONGOING]
+
+@tbl-noms-regression shows the results of the regressions described above. The variable of interest is "Post-nuclear".
 
 ```{r regression table}
 #| label: tbl-noms-regression
 #| tbl-cap: "Results of regressions predicting supporting coalitions on confirmation votes"
 #| message: false
+#| eval: false
 
 # TODO: figure out how to make PDF rendering work!
 # would prefer modelsummary
@@ -938,14 +941,12 @@ jtools::export_summs(
 # another alternative: finalfit
 ```
 
-
-
-* explain the four models
-* regression tables: in this section or the next one?
-* plot predicted probabilities?
-
+<!-- * fix regression table for PDF -->
+<!-- * plot predicted vote outcomes? -->
 
 ## Conclusion
+[ONGOING]
+
 By extending Wawro and Schickler's model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.
 
 Abolishing the filibuster would have the biggest impact on productivity, at the cost of decreasing bipartisanship and policy stability. Flipping the cloture vote would have little impact on these legislative goods, likely making it an unsatisfactory choice for reform. Restoring the talking filibuster may produce a meaningful increase in productivity while limiting the potential negative effects on bipartisanship and policy volatility. This analysis supports the views of reformers such as Sen. Jeff Merkley, who promotes restoring the talking filibuster as the best option for filibuster reform.
