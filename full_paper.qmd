@@ -42,7 +42,8 @@ execute:
 ```{r packages}
 #| message: false
 
-# packages used
+## packages used
+# tidyverse
 library(dplyr)
 library(ggplot2)
 library(lubridate) # in nominations analysis
@@ -50,8 +51,11 @@ library(readr)
 library(stringr)
 library(tidyr)
 
-library(filibustr)
+# other
+library(filibustr) # data
+library(jtools) # regression table
 library(kableExtra) # making tables
+library(modelsummary) # regression table (if it works)
 library(rbbt) # citations
 library(rlang) # expr()'s used in plots
 ```
@@ -734,30 +738,30 @@ Arguably one of the best ways to predict the impacts of future cloture reforms i
 According to my model of legislative coalitions, the nuclear option would be expected to lead to smaller passing coalitions on these nominations. As discussed in @sec-abolishing-filibuster, the nuclear option increases the probability that a nominee is confirmed when there is less-than-supermajority support for a nominee. Thus, a president is more able to propose nominees who will receive smaller majorities in support of their confirmation.
 
 #### Data
-For this analysis, I examined votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in @fig-confirmation-vote-totals.
-This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.^[One potential confounding variable is senators' knowledge of whether their individual votes are required for confirmation. Before the nuclear option, senators from the opposite party of the president may have voted to confirm nominees they personally opposed because they knew nominations required 60 votes to overcome a filibuster. These "insincere" votes of support may have arisen from a respect for the president's authority to select their executive branch leadership and, to a slightly lesser extent, select federal judges who share their ideology. After the nuclear option, if the president's party enjoys a Senate majority, then senators from the other party know their votes do not impact the ultimate outcome of the confirmation vote, so they are now more free to express their personal views through their votes.]
-
 ```{r nominations data import}
 #| message: false
 
 # downloading from Voteview
 # data starting in 1989, when `bill_number` data became complete
-# nominations_data <- get_voteview_rollcall_votes(chamber = "s", congress = 101:117) |> 
-#   filter(str_starts(bill_number, "PN"))
+# nominations_data <- get_voteview_rollcall_votes(chamber = "s", congress = 101:117) |>
+#   filter(str_starts(bill_number, "PN"), vote_question == "On the Nomination")
 # 
-# parties <- get_voteview_parties(chamber = "s", congress = 101:117)
+# noms_parties <- get_voteview_parties(chamber = "s", congress = 101:117)
 
 # using local files
 nominations_data <- read_csv("data/nominations_data.csv")
 noms_parties <- read_csv("data/noms_parties.csv")
 
 # `cloture_actions` from @fig-cloture-graph
-# cloture_actions <- get_senate_cloture_votes() |> 
+# cloture_actions <- get_senate_cloture_votes() |>
 #   filter(congress < 118)
 
 nuclear_2013 <- as.Date("2013-11-21")
 nuclear_2017 <- as.Date("2017-04-06")
 ```
+
+For this analysis, I examined the `r nrow(nominations_data)` votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in @fig-confirmation-vote-totals.
+This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.^[One potential confounding variable is senators' knowledge of whether their individual votes are required for confirmation. Before the nuclear option, senators from the opposite party of the president may have voted to confirm nominees they personally opposed because they knew nominations required 60 votes to overcome a filibuster. These "insincere" votes of support may have arisen from a respect for the president's authority to select their executive branch leadership and, to a slightly lesser extent, select federal judges who share their ideology. After the nuclear option, if the president's party enjoys a Senate majority, then senators from the other party know their votes do not impact the ultimate outcome of the confirmation vote, so they are now more free to express their personal views through their votes.]
 
 ```{r nominations data transformation}
 party_sizes <- noms_parties |> 
@@ -772,18 +776,18 @@ party_sizes <- noms_parties |>
   # normalize to 100 members
   # TODO: use senate.gov party size data from `filibustr` when available
   mutate(pct_members = n_members / sum(n_members) * 100, 
+         inter_party_dist = sum(abs(nominate_dim1_median)),
          .by = congress, .after = n_members) |>
   # just the President's party
   filter(pres_party == party_name) |> 
-  select(congress, pres_party, pres_party_size = pct_members)
+  select(congress, pres_party, pres_party_size = pct_members, inter_party_dist)
 
 # re-using `cloture_actions` df from @fig-cloture-graph (Sec. 2.1)
-cloture_actions <- cloture_actions |> 
+cloture_motions <- cloture_actions |> 
   filter(congress >= 101) |> 
   select(congress, cloture_motions_filed = motions_filed)
 
 nominations <- nominations_data |> 
-  filter(vote_question == "On the Nomination") |> 
   mutate(
     # SCOTUS nominations
     scotus = str_detect(vote_desc, "(Associate|Chief) Justice"),
@@ -797,7 +801,7 @@ nominations <- nominations_data |>
   ) |> 
   # join party size and cloture data
   inner_join(party_sizes, by = "congress") |> 
-  inner_join(cloture_actions, by = "congress")
+  inner_join(cloture_motions, by = "congress")
 ```
 
 ```{r plot confirmation vote totals}
@@ -816,16 +820,128 @@ ggplot(nominations, aes(x = date, y = vote_pct)) +
   theme(panel.grid.minor.y = element_blank())
 ```
 
-I used the Voteview parties data to calculate the size of the president's party in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed.
-I also used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in @fig-cloture-graph). This data measures the prevalence of filibustering over time.
+I used the Voteview parties data to calculate the size of the president's party's caucus in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the Voteview parties data to calculate the distance between the two party medians in the first dimension of DW-NOMINATE.
+I used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in @fig-cloture-graph) to measure the prevalence of filibustering over time.
 
 #### Analysis
+To measure the impact of the nuclear option on supporting coalitions, I ran ordinary least-squares regressions predicting the percent of votes in favor of confirmation on nominations over 1989-2022. The variable of interest here is whether a confirmation vote occurred before or after the nuclear option. In addition, I use the following control variables:
+
+* Whether the vote is on a Supreme Court nomination
+* The size of the president's party's caucus in the Senate (normalized as described above)
+* A time trend, expressed either as: 
+  * A count of Congresses (since the 100th Congress, so that the 101st Congress = 1 and the 117th Congress = 17), or
+  * Actual time since January 1st, 1989, in years
+* A squared term of the time trend
+* Inter-party distance, i.e., the distance between the two party medians in the first dimension of DW-NOMINATE
+* The number of cloture motions in a Congress
+
+I present four versions of this model using four different forms of the time trend: using a Congress counter and an actual time trend, and with and without a squared term for each of those. The difference between the two basic forms of the time trend is that a Congress counter is an integer that treats all votes in the same Congress identically, while the actual time since 1989 is a real-valued number that continuously increases in time. @tbl-noms-time-trends illustrates this distinction. I considered a squared time trend because the downward trend in supporting coalitions on confirmation votes could also be attributed to increased partisan competition over time (especially in the 2010s and 2020s), not just the nuclear option.
+
+```{r time trend table}
+#| label: tbl-noms-time-trends
+#| tbl-cap: "Time trend values for two selected nominations, 117th Congress"
+
+noms_time_table <- nominations |> 
+  # two nomination votes in the 117th Congress
+  filter(congress == 117, rollnumber %in% c(3, 774)) |> 
+  mutate(nomination = str_extract(vote_desc, "^.*(?=, of)"),
+         date = format(as.Date(date), "%b %d, %Y"),
+         congress_counter = congress - 100, 
+         yrs_since_89 = round(yrs_since_89, 2)) |> 
+  select(nomination, date, congress_counter, yrs_since_89)
+
+kbl(noms_time_table, 
+    booktabs = TRUE, align = "c",
+    col.names = c("Nomination", "Date", "Congress counter", "Years since 1989")) |> 
+  kable_styling()
+```
+
+#### Results
+
+```{r nominations regressions}
+# Models 1-2: Congress
+model_congress_1 <- lm(vote_pct ~ post_nuclear + scotus 
+                       + pres_party_size + inter_party_dist + cloture_motions_filed
+                       + I(congress - 100),
+                       data = nominations)
+
+model_congress_2 <- lm(vote_pct ~ post_nuclear + scotus 
+                       + pres_party_size + inter_party_dist + cloture_motions_filed 
+                       + I(congress - 100) + I((congress - 100)^2),
+                       data = nominations)
+
+# Models 3-4: by time since 1989
+model_time_3 <- lm(vote_pct ~ post_nuclear + scotus 
+                   + pres_party_size + inter_party_dist + cloture_motions_filed 
+                   + yrs_since_89,
+                   data = nominations)
+model_time_4 <- lm(vote_pct ~ post_nuclear + scotus 
+                   + pres_party_size + inter_party_dist + cloture_motions_filed 
+                   + yrs_since_89 + I(yrs_since_89 ^ 2),
+                   data = nominations)
+```
+
+@tbl-noms-regression shows the results of the regressions described above. The variable of interest is "Post-nuclear"
+
+```{r regression table}
+#| label: tbl-noms-regression
+#| tbl-cap: "Results of regressions predicting supporting coalitions on confirmation votes"
+#| message: false
+
+# TODO: figure out how to make PDF rendering work!
+# would prefer modelsummary
+modelsummary(list("Model 1" = model_congress_1,
+                  "Model 2" = model_congress_2,
+                  "Model 3" = model_time_3,
+                  "Model 4" = model_time_4),
+             stars = TRUE,
+coef_rename = c("post_nuclearTRUE" = "Post-nuclear",
+                "scotusTRUE" = "SCOTUS",
+                "pres_party_size" = "President's party's size",
+                "inter_party_dist" = "Inter-party distance",
+                "cloture_motions_filed" = "Cloture motions",
+                "I(congress - 100)" = "Congress counter",
+                "I((congress - 100)^2)" = "Congress counter ^ 2",
+                "yrs_since_89" = "Years since 1989",
+                "I(yrs_since_89^2)" = "Years since 1989 ^ 2"))
+
+# alternative: jtools
+# jtools::plot_summs(
+#   model_congress_1, model_congress_2, 
+#   model_time_3, model_time_4,
+#   # plot.distributions = TRUE,
+#   rescale.distributions = TRUE,
+#   coefs = c("Post-nuclear" = "post_nuclearTRUE",
+#             "SCOTUS" = "scotusTRUE",
+#             "President's party's size" = "pres_party_size", 
+#             # "Inter-party distance" = "inter_party_dist",
+#             "Cloture motions" = "cloture_motions_filed",
+#             "Congress counter" = "I(congress - 100)",
+#             "Congress counter ^ 2" = "I((congress - 100)^2)",
+#             "Years since 1989" = "yrs_since_89",
+#             "Years since 1989 ^ 2" = "I(yrs_since_89^2)"))
+
+jtools::export_summs(
+  model_congress_1, model_congress_2, 
+  model_time_3, model_time_4,
+  coefs = c("Post-nuclear" = "post_nuclearTRUE",
+            "SCOTUS" = "scotusTRUE",
+            "President's party's size" = "pres_party_size", 
+            "Inter-party distance" = "inter_party_dist",
+            "Cloture motions" = "cloture_motions_filed",
+            "Congress counter" = "I(congress - 100)",
+            "Congress counter ^ 2" = "I((congress - 100)^2)",
+            "Years since 1989" = "yrs_since_89",
+            "Years since 1989 ^ 2" = "I(yrs_since_89^2)"))
+
+# another alternative: finalfit
+```
+
+
 
 * explain the four models
 * regression tables: in this section or the next one?
 * plot predicted probabilities?
-
-#### Results
 
 
 ## Conclusion

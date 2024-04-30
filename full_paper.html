@@ -565,7 +565,7 @@ Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
 <p>Arguably one of the best ways to predict the impacts of future cloture reforms is to look at the results of past reforms. The largest rule change since the 1970s has been the nuclear option on presidential nominations. In 2013, Senate Democrats lowered the cloture threshold to a simple majority for all executive branch nominees and judicial nominees below the Supreme Court. Senate Republicans extended this reform to Supreme Court nominations in 2017. According to my model of legislative coalitions, the nuclear option would be expected to lead to smaller passing coalitions on these nominations. As discussed in <a href="#sec-abolishing-filibuster" class="quarto-xref">Section&nbsp;6.1</a>, the nuclear option increases the probability that a nominee is confirmed when there is less-than-supermajority support for a nominee. Thus, a president is more able to propose nominees who will receive smaller majorities in support of their confirmation.</p>
 <section id="data-1" class="level4" data-number="7.2.1">
 <h4 data-number="7.2.1" class="anchored" data-anchor-id="data-1"><span class="header-section-number">7.2.1</span> Data</h4>
-<p>For this analysis, I examined votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;8</a>. This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<p>For this analysis, I examined the 1479 votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;8</a>. This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-confirmation-vote-totals" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -580,18 +580,580 @@ Figure&nbsp;8: Senate confirmation votes on presidential nominations (1989-2022)
 </div>
 </div>
 </div>
-<p>I used the Voteview parties data to calculate the size of the president’s party in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a>). This data measures the prevalence of filibustering over time.</p>
+<p>I used the Voteview parties data to calculate the size of the president’s party’s caucus in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the Voteview parties data to calculate the distance between the two party medians in the first dimension of DW-NOMINATE. I used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a>) to measure the prevalence of filibustering over time.</p>
 </section>
 <section id="analysis-1" class="level4" data-number="7.2.2">
 <h4 data-number="7.2.2" class="anchored" data-anchor-id="analysis-1"><span class="header-section-number">7.2.2</span> Analysis</h4>
+<p>To measure the impact of the nuclear option on supporting coalitions, I ran ordinary least-squares regressions predicting the percent of votes in favor of confirmation on nominations over 1989-2022. The variable of interest here is whether a confirmation vote occurred before or after the nuclear option. In addition, I use the following control variables:</p>
+<ul>
+<li>Whether the vote is on a Supreme Court nomination</li>
+<li>The size of the president’s party’s caucus in the Senate (normalized as described above)</li>
+<li>A time trend, expressed either as:
+<ul>
+<li>A count of Congresses (since the 100th Congress, so that the 101st Congress = 1 and the 117th Congress = 17), or</li>
+<li>Actual time since January 1st, 1989, in years</li>
+</ul></li>
+<li>A squared term of the time trend</li>
+<li>Inter-party distance, i.e., the distance between the two party medians in the first dimension of DW-NOMINATE</li>
+<li>The number of cloture motions in a Congress</li>
+</ul>
+<p>I present four versions of this model using four different forms of the time trend: using a Congress counter and an actual time trend, and with and without a squared term for each of those. The difference between the two basic forms of the time trend is that a Congress counter is an integer that treats all votes in the same Congress identically, while the actual time since 1989 is a real-valued number that continuously increases in time. <a href="#tbl-noms-time-trends" class="quarto-xref">Table&nbsp;2</a> illustrates this distinction. I considered a squared time trend because the downward trend in supporting coalitions on confirmation votes could also be attributed to increased partisan competition over time (especially in the 2010s and 2020s), not just the nuclear option.</p>
+<div class="cell">
+<div id="tbl-noms-time-trends" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-noms-time-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Time trend values for two selected nominations, 117th Congress
+</figcaption>
+<div aria-describedby="tbl-noms-time-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Nomination</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Congress counter</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Years since 1989</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Avril Danica Haines</td>
+<td style="text-align: center;">Jan 20, 2021</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">32.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steven M. Dettelbach</td>
+<td style="text-align: center;">Jul 12, 2022</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">33.53</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="results-1" class="level4" data-number="7.2.3">
+<h4 data-number="7.2.3" class="anchored" data-anchor-id="results-1"><span class="header-section-number">7.2.3</span> Results</h4>
+<p><a href="#tbl-noms-regression" class="quarto-xref">Table&nbsp;3</a> shows the results of the regressions described above. The variable of interest is “Post-nuclear”</p>
+<div class="cell">
+<div id="tbl-noms-regression" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-noms-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Results of regressions predicting supporting coalitions on confirmation votes
+</figcaption>
+<div aria-describedby="tbl-noms-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+ 
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_tg8185qkuq6gylvuwbf5</title>
+    <style>
+.table td.tinytable_css_lwrlydey7q99lmadunz4, .table th.tinytable_css_lwrlydey7q99lmadunz4 {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_5q0w7bir28fhncaxeypg, .table th.tinytable_css_5q0w7bir28fhncaxeypg {    text-align: left; }
+.table td.tinytable_css_mh9t3xg3hk8sp3yd9civ, .table th.tinytable_css_mh9t3xg3hk8sp3yd9civ {    text-align: center; }
+.table td.tinytable_css_8m1mzgvrnwwlkd5ftk20, .table th.tinytable_css_8m1mzgvrnwwlkd5ftk20 {    text-align: center; }
+.table td.tinytable_css_l4em2vupsnchs2aag3y3, .table th.tinytable_css_l4em2vupsnchs2aag3y3 {    text-align: center; }
+.table td.tinytable_css_tom6seh68242hdajepw0, .table th.tinytable_css_tom6seh68242hdajepw0 {    text-align: center; }
+.table td.tinytable_css_rf54q8cqbi1qs8l6czt2, .table th.tinytable_css_rf54q8cqbi1qs8l6czt2 {    border-bottom: solid 0.05em black; }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_tg8185qkuq6gylvuwbf5" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Model 1</th>
+                <th scope="col">Model 2</th>
+                <th scope="col">Model 3</th>
+                <th scope="col">Model 4</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="5">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)             </td>
+                  <td>322.454*** </td>
+                  <td>247.950*** </td>
+                  <td>289.593*** </td>
+                  <td>211.149*** </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(26.915)   </td>
+                  <td>(31.256)   </td>
+                  <td>(26.717)   </td>
+                  <td>(29.249)   </td>
+                </tr>
+                <tr>
+                  <td>Post-nuclear            </td>
+                  <td>-3.628*    </td>
+                  <td>-2.263     </td>
+                  <td>-4.049*    </td>
+                  <td>-1.548     </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(1.688)    </td>
+                  <td>(1.703)    </td>
+                  <td>(1.706)    </td>
+                  <td>(1.732)    </td>
+                </tr>
+                <tr>
+                  <td>SCOTUS                  </td>
+                  <td>-15.747*** </td>
+                  <td>-13.903**  </td>
+                  <td>-16.752*** </td>
+                  <td>-14.196**  </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(4.591)    </td>
+                  <td>(4.577)    </td>
+                  <td>(4.613)    </td>
+                  <td>(4.574)    </td>
+                </tr>
+                <tr>
+                  <td>President's party's size</td>
+                  <td>-0.754***  </td>
+                  <td>-0.890***  </td>
+                  <td>-0.611***  </td>
+                  <td>-0.808***  </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(0.163)    </td>
+                  <td>(0.165)    </td>
+                  <td>(0.165)    </td>
+                  <td>(0.166)    </td>
+                </tr>
+                <tr>
+                  <td>Inter-party distance    </td>
+                  <td>-314.540***</td>
+                  <td>-203.302***</td>
+                  <td>-266.592***</td>
+                  <td>-146.277***</td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(34.957)   </td>
+                  <td>(42.311)   </td>
+                  <td>(34.104)   </td>
+                  <td>(38.849)   </td>
+                </tr>
+                <tr>
+                  <td>Cloture motions         </td>
+                  <td>-0.035***  </td>
+                  <td>-0.006     </td>
+                  <td>-0.035***  </td>
+                  <td>0.001      </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(0.009)    </td>
+                  <td>(0.011)    </td>
+                  <td>(0.010)    </td>
+                  <td>(0.011)    </td>
+                </tr>
+                <tr>
+                  <td>Congress counter        </td>
+                  <td>3.649***   </td>
+                  <td>5.818***   </td>
+                  <td>           </td>
+                  <td>           </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>(0.488)    </td>
+                  <td>(0.676)    </td>
+                  <td>           </td>
+                  <td>           </td>
+                </tr>
+                <tr>
+                  <td>Congress counter ^ 2    </td>
+                  <td>           </td>
+                  <td>-0.213***  </td>
+                  <td>           </td>
+                  <td>           </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>           </td>
+                  <td>(0.046)    </td>
+                  <td>           </td>
+                  <td>           </td>
+                </tr>
+                <tr>
+                  <td>Years since 1989        </td>
+                  <td>           </td>
+                  <td>           </td>
+                  <td>1.452***   </td>
+                  <td>2.705***   </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>           </td>
+                  <td>           </td>
+                  <td>(0.238)    </td>
+                  <td>(0.309)    </td>
+                </tr>
+                <tr>
+                  <td>Years since 1989 ^ 2    </td>
+                  <td>           </td>
+                  <td>           </td>
+                  <td>           </td>
+                  <td>-0.065***  </td>
+                </tr>
+                <tr>
+                  <td>                        </td>
+                  <td>           </td>
+                  <td>           </td>
+                  <td>           </td>
+                  <td>(0.010)    </td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.                </td>
+                  <td>1479       </td>
+                  <td>1479       </td>
+                  <td>1479       </td>
+                  <td>1479       </td>
+                </tr>
+                <tr>
+                  <td>R2                      </td>
+                  <td>0.336      </td>
+                  <td>0.345      </td>
+                  <td>0.327      </td>
+                  <td>0.345      </td>
+                </tr>
+                <tr>
+                  <td>R2 Adj.                 </td>
+                  <td>0.333      </td>
+                  <td>0.342      </td>
+                  <td>0.325      </td>
+                  <td>0.341      </td>
+                </tr>
+                <tr>
+                  <td>AIC                     </td>
+                  <td>12354.4    </td>
+                  <td>12335.3    </td>
+                  <td>12372.5    </td>
+                  <td>12336.2    </td>
+                </tr>
+                <tr>
+                  <td>BIC                     </td>
+                  <td>12396.8    </td>
+                  <td>12383.0    </td>
+                  <td>12414.9    </td>
+                  <td>12383.9    </td>
+                </tr>
+                <tr>
+                  <td>Log.Lik.                </td>
+                  <td>-6169.218  </td>
+                  <td>-6158.656  </td>
+                  <td>-6178.258  </td>
+                  <td>-6159.109  </td>
+                </tr>
+                <tr>
+                  <td>F                       </td>
+                  <td>123.886    </td>
+                  <td>110.665    </td>
+                  <td>119.400    </td>
+                  <td>110.469    </td>
+                </tr>
+                <tr>
+                  <td>RMSE                    </td>
+                  <td>15.68      </td>
+                  <td>15.57      </td>
+                  <td>15.77      </td>
+                  <td>15.57      </td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function styleCell_tinytable_e3pdfhe0vimeyzobdl13(i, j, css_id) {
+        var table = document.getElementById("tinytable_tg8185qkuq6gylvuwbf5");
+        table.rows[i].cells[j].classList.add(css_id);
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_tg8185qkuq6gylvuwbf5');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_tinytable_e3pdfhe0vimeyzobdl13(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_tg8185qkuq6gylvuwbf5");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 0, 'tinytable_css_lwrlydey7q99lmadunz4') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 1, 'tinytable_css_lwrlydey7q99lmadunz4') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 2, 'tinytable_css_lwrlydey7q99lmadunz4') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 3, 'tinytable_css_lwrlydey7q99lmadunz4') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 4, 'tinytable_css_lwrlydey7q99lmadunz4') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(1, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(2, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(3, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(4, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(5, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(6, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(7, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(8, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(9, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(10, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(11, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(12, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(13, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(14, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(15, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(16, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(17, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(18, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(19, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(21, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(22, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(23, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(24, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(25, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(26, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(27, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(28, 0, 'tinytable_css_5q0w7bir28fhncaxeypg') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(1, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(2, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(3, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(4, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(5, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(6, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(7, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(8, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(9, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(10, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(11, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(12, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(13, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(14, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(15, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(16, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(17, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(18, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(19, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(21, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(22, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(23, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(24, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(25, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(26, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(27, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(28, 1, 'tinytable_css_mh9t3xg3hk8sp3yd9civ') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(1, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(2, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(3, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(4, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(5, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(6, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(7, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(8, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(9, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(10, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(11, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(12, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(13, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(14, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(15, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(16, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(17, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(18, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(19, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(21, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(22, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(23, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(24, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(25, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(26, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(27, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(28, 2, 'tinytable_css_8m1mzgvrnwwlkd5ftk20') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(1, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(2, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(3, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(4, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(5, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(6, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(7, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(8, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(9, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(10, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(11, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(12, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(13, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(14, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(15, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(16, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(17, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(18, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(19, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(21, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(22, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(23, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(24, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(25, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(26, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(27, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(28, 3, 'tinytable_css_l4em2vupsnchs2aag3y3') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(0, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(1, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(2, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(3, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(4, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(5, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(6, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(7, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(8, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(9, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(10, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(11, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(12, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(13, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(14, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(15, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(16, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(17, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(18, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(19, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(21, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(22, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(23, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(24, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(25, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(26, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(27, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(28, 4, 'tinytable_css_tom6seh68242hdajepw0') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 0, 'tinytable_css_rf54q8cqbi1qs8l6czt2') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 1, 'tinytable_css_rf54q8cqbi1qs8l6czt2') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 2, 'tinytable_css_rf54q8cqbi1qs8l6czt2') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 3, 'tinytable_css_rf54q8cqbi1qs8l6czt2') })
+window.addEventListener('load', function () { styleCell_tinytable_e3pdfhe0vimeyzobdl13(20, 4, 'tinytable_css_rf54q8cqbi1qs8l6czt2') })
+    </script>
+
+  
+
+
+</div>
+<div class="cell-output-display">
+<table class="huxtable" data-quarto-disable-processing="true" style="border-collapse: collapse; border: 0px; margin-bottom: 2em; margin-top: 2em; ; margin-left: auto; margin-right: auto;  " id="tab:tbl-noms-regression">
+<colgroup><col><col><col><col><col></colgroup><tbody><tr>
+<th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Model 1</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Model 2</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Model 3</th><th style="vertical-align: top; text-align: center; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Model 4</th></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Post-nuclear</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-3.63 *&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-2.26&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-4.05 *&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-1.55&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1.69)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1.70)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1.71)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(1.73)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">SCOTUS</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-15.75 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-13.90 **&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-16.75 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-14.20 **&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(4.59)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(4.58)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(4.61)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(4.57)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">President's party's size</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.75 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.89 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.61 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.81 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.16)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.17)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.16)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.17)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Inter-party distance</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-314.54 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-203.30 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-266.59 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-146.28 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(34.96)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(42.31)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(34.10)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(38.85)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Cloture motions</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.04 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.01&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.04 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.00&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.01)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.01)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.01)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.01)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Congress counter</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">3.65 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">5.82 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.49)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.68)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Congress counter ^ 2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.21 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.05)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Years since 1989</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1.45 ***</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">2.70 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.24)&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.31)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">Years since 1989 ^ 2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">-0.06 ***</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"></th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.4pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">(0.01)&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">N</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1479&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1479&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1479&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0.4pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">1479&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">R2</th><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.34&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.34&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.33&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="vertical-align: top; text-align: right; white-space: normal; border-style: solid solid solid solid; border-width: 0pt 0pt 0.8pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;">0.34&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>
+<tr>
+<th colspan="5" style="vertical-align: top; text-align: left; white-space: normal; border-style: solid solid solid solid; border-width: 0.8pt 0pt 0pt 0pt;    padding: 6pt 6pt 6pt 6pt; font-weight: normal;"> *** p &lt; 0.001;  ** p &lt; 0.01;  * p &lt; 0.05.</th></tr>
+</tbody></table>
+
+</div>
+</div>
+</figure>
+</div>
+</div>
 <ul>
 <li>explain the four models</li>
 <li>regression tables: in this section or the next one?</li>
 <li>plot predicted probabilities?</li>
 </ul>
-</section>
-<section id="results-1" class="level4" data-number="7.2.3">
-<h4 data-number="7.2.3" class="anchored" data-anchor-id="results-1"><span class="header-section-number">7.2.3</span> Results</h4>
 </section>
 </section>
 </section>
