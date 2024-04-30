@@ -712,6 +712,7 @@ gop_median <- party_medians |> filter(party_name == "Republican") |> pull(nomina
 
 # members <- get_voteview_members(chamber = "s", congress = 118)
 
+# TODO: could computationally generate this table using `members` data
 dwnom_tbl <- tibble(Party = c("Democrat", "Republican"),
                     `DW-NOMINATE Dim-1 median` = round(c(dem_median, gop_median), 2),
                     `Liberal member` = c("Tammy Baldwin (-0.49)", 
@@ -721,7 +722,7 @@ dwnom_tbl <- tibble(Party = c("Democrat", "Republican"),
                     `Conservative member` = c("Mark Warner (-0.21)", 
                                               "Rick Scott (0.68)"))
 
-kbl(dwnom_tbl, booktabs = TRUE) |> 
+kbl(dwnom_tbl, booktabs = TRUE,  align = "c") |> 
   kable_styling() |> 
   # controlling column widths in PDF
   column_spec(2, width = "3cm") |> 
