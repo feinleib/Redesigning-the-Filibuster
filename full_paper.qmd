@@ -64,7 +64,9 @@ library(rlang) # expr()'s used in plots
 ```
 
 ## Introduction
-In today's hyper-partisan political environment, it is a common complaint that Congress is broken. Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased [@desilverPolarizationTodayCongress2022; @harbridge-yongBipartisanPathEffective2023, as shown in @fig-pew-polarization and @fig-hvw-pbca]. As a result, productivity has fallen to historic lows for the modern Congress [@solenderCapitolHillStunner2023, as shown in @fig-axios-productivity].
+In today's hyper-partisan political environment, it is a common complaint that Congress is broken.
+[Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased [@desilverPolarizationTodayCongress2022; @harbridge-yongBipartisanPathEffective2023, as shown in @fig-pew-polarization and @fig-hvw-pbca]. As a result, productivity has fallen to historic lows for the modern Congress [@solenderCapitolHillStunner2023, as shown in @fig-axios-productivity].]{.content-visible when-format="html"}
+[Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased [@desilverPolarizationTodayCongress2022; @harbridge-yongBipartisanPathEffective2023, as shown in @fig-pew-polarization-pdf and @fig-hvw-pbca-pdf]. As a result, productivity has fallen to historic lows for the modern Congress [@solenderCapitolHillStunner2023, as shown in @fig-axios-productivity-pdf].]{.content-visible when-format="pdf"}
 
 ```{r plot declining bipartisanship (from HVW 2023)}
 ## data import
@@ -122,12 +124,12 @@ hvw_pbca_plot <- ggplot(pbca_df, aes(x = year, y = pbca)) +
 Increasing polarization, decreasing bipartisanship and productivity in Congress
 :::
 
-::: {.content-visible when-format="pdf" #fig-intro-plots layout-nrow=3}
-![Growth in ideological polarization in Congress, 1971-2022 (reproduced from @desilverPolarizationTodayCongress2022)](images/desilver_polarization.png){#fig-pew-polarization fig-alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right." height=2.3in}
+::: {.content-visible when-format="pdf" #fig-intro-plots-pdf layout-nrow=3}
+![Growth in ideological polarization in Congress, 1971-2022 (reproduced from @desilverPolarizationTodayCongress2022)](images/desilver_polarization.png){#fig-pew-polarization-pdf fig-alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right." height=2.3in}
 
-![Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from @harbridge-yongBipartisanPathEffective2023)](images/hvw_pbca_plot.png){#fig-hvw-pbca fig-alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in \"The Bipartisan Path to Effective Lawmaking\" (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period." height=2.3in}
+![Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from @harbridge-yongBipartisanPathEffective2023)](images/hvw_pbca_plot.png){#fig-hvw-pbca-pdf fig-alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in \"The Bipartisan Path to Effective Lawmaking\" (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period." height=2.3in}
 
-![Decline in productivity in Congress, 1989-2023 (reproduced from @solenderCapitolHillStunner2023)](images/Axios_productivity_graph.png){#fig-axios-productivity fig-alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data." height=2.3in}
+![Decline in productivity in Congress, 1989-2023 (reproduced from @solenderCapitolHillStunner2023)](images/Axios_productivity_graph.png){#fig-axios-productivity-pdf fig-alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data." height=2.3in}
 
 Increasing polarization, decreasing bipartisanship, and productivity in Congress
 :::
