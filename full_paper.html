@@ -584,9 +584,10 @@ Figure&nbsp;8: Senate confirmation votes on presidential nominations (1989-2022)
 </section>
 <section id="analysis-1" class="level4" data-number="7.2.2">
 <h4 data-number="7.2.2" class="anchored" data-anchor-id="analysis-1"><span class="header-section-number">7.2.2</span> Analysis</h4>
-<p>To measure the impact of the nuclear option on supporting coalitions, I ran ordinary least-squares regressions predicting the percent of votes in favor of confirmation on nominations over 1989-2022. The variable of interest here is whether a confirmation vote occurred before or after the nuclear option. In addition, I use the following control variables:</p>
+<p>To measure the impact of the nuclear option on supporting coalitions, I ran ordinary least-squares regressions predicting the <em>percent of votes</em> in favor of confirmation on nominations over 1989-2022. When all senators are present and voting, this response variable is equivalent to the <em>number of votes</em> in favor of confirmation. For brevity, I will use both descriptions of the response variable interchangeably. The primary explanatory variable of interest is whether a confirmation vote occurred before or after the nuclear option. In addition, I use the following control variables:</p>
 <ul>
 <li>Whether the vote is on a Supreme Court nomination</li>
+<li>Whether the vote is on a nomination for a Cabinet secretary (i.e., one of the heads of the 15 executive departments). Other Cabinet-level positions are not included, as these vary by administration.</li>
 <li>The size of the president’s party’s caucus in the Senate (normalized as described above)</li>
 <li>A time trend, expressed either as:
 <ul>
@@ -597,7 +598,7 @@ Figure&nbsp;8: Senate confirmation votes on presidential nominations (1989-2022)
 <li>Inter-party distance, i.e., the distance between the two party medians in the first dimension of DW-NOMINATE</li>
 <li>The number of cloture motions in a Congress</li>
 </ul>
-<p>I present four versions of this model using four different forms of the time trend: using a Congress counter and an actual time trend, and with and without a squared term for each of those. The difference between the two basic forms of the time trend is that a Congress counter is an integer that treats all votes in the same Congress identically, while the actual time since 1989 is a real-valued number that continuously increases in time. <a href="#tbl-noms-time-trends" class="quarto-xref">Table&nbsp;2</a> illustrates this distinction. I considered a squared time trend because the downward trend in supporting coalitions on confirmation votes could also be attributed to increased partisan competition over time (especially in the 2010s and 2020s), not just the nuclear option.</p>
+<p>I present four versions of this model using four different forms of the time trend: using a Congress counter and an actual time trend, and with and without a squared term for each of those. The difference between the two basic forms of the time trend is that a Congress counter is an integer that treats all votes in the same Congress identically, while the actual time since 1989 is a real-valued number that continuously increases in time. <a href="#tbl-noms-time-trends" class="quarto-xref">Table&nbsp;2</a> illustrates this distinction. I considered a squared time trend because the downward trend in supporting coalitions on confirmation votes could also be attributed to the increased intensity of partisan competition over time (especially in the 2010s and 2020s), not just the nuclear option.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
 <div class="cell">
 <div id="tbl-noms-time-trends" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
@@ -640,20 +641,510 @@ Table&nbsp;2: Time trend values for two selected nominations, 117th Congress
 </section>
 <section id="results-1" class="level4" data-number="7.2.3">
 <h4 data-number="7.2.3" class="anchored" data-anchor-id="results-1"><span class="header-section-number">7.2.3</span> Results</h4>
-<p>[ONGOING]</p>
-<p><a href="#tbl-noms-regression" class="quarto-xref">Table&nbsp;3</a> shows the results of the regressions described above. The variable of interest is “Post-nuclear”.</p>
+<p><a href="#tbl-noms-regression" class="quarto-xref">Table&nbsp;3</a> shows the results of the regressions described above. The coefficients in <a href="#tbl-noms-regression" class="quarto-xref">Table&nbsp;3</a> give the effect of a one-unit change in each explanatory variable on the percentage of votes in favor of confirming a nominee. I will now proceed to review the results for each explanatory variable.</p>
+<div class="cell">
 <div id="tbl-noms-regression" class="cell quarto-float anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-noms-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Results of regressions predicting supporting coalitions on confirmation votes
 </figcaption>
 <div aria-describedby="tbl-noms-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+ 
 
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_zv3g3yox3st3o8off3w5</title>
+    <style>
+.table td.tinytable_css_exdadflzu97slebpc01o, .table th.tinytable_css_exdadflzu97slebpc01o {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_ra8hoar5wlyp7o8abdbr, .table th.tinytable_css_ra8hoar5wlyp7o8abdbr {    text-align: left; }
+.table td.tinytable_css_dbjibwymykudc3vwvenx, .table th.tinytable_css_dbjibwymykudc3vwvenx {    text-align: center; }
+.table td.tinytable_css_6kpxfzkbiwx8jxz7ocua, .table th.tinytable_css_6kpxfzkbiwx8jxz7ocua {    text-align: center; }
+.table td.tinytable_css_vfmlgum8ypulg8jot1gg, .table th.tinytable_css_vfmlgum8ypulg8jot1gg {    text-align: center; }
+.table td.tinytable_css_5cgcvkv4ffpti6rncbk5, .table th.tinytable_css_5cgcvkv4ffpti6rncbk5 {    text-align: center; }
+.table td.tinytable_css_d8gtmpcrxtrr8oaqwy9h, .table th.tinytable_css_d8gtmpcrxtrr8oaqwy9h {    border-bottom: solid 0.05em black; }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_zv3g3yox3st3o8off3w5" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Model 1</th>
+                <th scope="col">Model 2</th>
+                <th scope="col">Model 3</th>
+                <th scope="col">Model 4</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="5">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)                     </td>
+                  <td>323.258***</td>
+                  <td>247.986***</td>
+                  <td>292.799***</td>
+                  <td>214.564***</td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(26.986)  </td>
+                  <td>(31.257)  </td>
+                  <td>(27.003)  </td>
+                  <td>(29.474)  </td>
+                </tr>
+                <tr>
+                  <td>Post-nuclear option             </td>
+                  <td>-3.640*   </td>
+                  <td>-2.257    </td>
+                  <td>-4.095*   </td>
+                  <td>-1.594    </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(1.689)   </td>
+                  <td>(1.703)   </td>
+                  <td>(1.707)   </td>
+                  <td>(1.733)   </td>
+                </tr>
+                <tr>
+                  <td>SCOTUS                          </td>
+                  <td>-15.665***</td>
+                  <td>-13.679** </td>
+                  <td>-16.570***</td>
+                  <td>-13.983** </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(4.596)   </td>
+                  <td>(4.583)   </td>
+                  <td>(4.619)   </td>
+                  <td>(4.579)   </td>
+                </tr>
+                <tr>
+                  <td>Cabinet                         </td>
+                  <td>0.722     </td>
+                  <td>1.588     </td>
+                  <td>1.399     </td>
+                  <td>1.580     </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(1.664)   </td>
+                  <td>(1.663)   </td>
+                  <td>(1.701)   </td>
+                  <td>(1.680)   </td>
+                </tr>
+                <tr>
+                  <td>President's party's size        </td>
+                  <td>-0.756*** </td>
+                  <td>-0.897*** </td>
+                  <td>-0.623*** </td>
+                  <td>-0.823*** </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(0.164)   </td>
+                  <td>(0.165)   </td>
+                  <td>(0.166)   </td>
+                  <td>(0.167)   </td>
+                </tr>
+                <tr>
+                  <td>Inter-party distance (unit: 0.1)</td>
+                  <td>-31.597***</td>
+                  <td>-20.387***</td>
+                  <td>-27.145***</td>
+                  <td>-15.145***</td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(3.512)   </td>
+                  <td>(4.232)   </td>
+                  <td>(3.462)   </td>
+                  <td>(3.924)   </td>
+                </tr>
+                <tr>
+                  <td>Cloture motions                 </td>
+                  <td>-0.035*** </td>
+                  <td>-0.005    </td>
+                  <td>-0.035*** </td>
+                  <td>0.001     </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(0.009)   </td>
+                  <td>(0.011)   </td>
+                  <td>(0.010)   </td>
+                  <td>(0.011)   </td>
+                </tr>
+                <tr>
+                  <td>Congress counter                </td>
+                  <td>3.677***  </td>
+                  <td>5.930***  </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(0.492)   </td>
+                  <td>(0.686)   </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>Congress counter<sup>2</sup>    </td>
+                  <td>          </td>
+                  <td>-0.218*** </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>          </td>
+                  <td>(0.047)   </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>Years since 1989                </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>1.496***  </td>
+                  <td>2.758***  </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>(0.244)   </td>
+                  <td>(0.314)   </td>
+                </tr>
+                <tr>
+                  <td>Years since 1989<sup>2</sup>    </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>-0.065*** </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>(0.010)   </td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.                        </td>
+                  <td>1479      </td>
+                  <td>1479      </td>
+                  <td>1479      </td>
+                  <td>1479      </td>
+                </tr>
+                <tr>
+                  <td>R2                              </td>
+                  <td>0.336     </td>
+                  <td>0.345     </td>
+                  <td>0.328     </td>
+                  <td>0.345     </td>
+                </tr>
+                <tr>
+                  <td>R2 Adj.                         </td>
+                  <td>0.332     </td>
+                  <td>0.342     </td>
+                  <td>0.324     </td>
+                  <td>0.341     </td>
+                </tr>
+                <tr>
+                  <td>AIC                             </td>
+                  <td>12356.2   </td>
+                  <td>12336.4   </td>
+                  <td>12373.8   </td>
+                  <td>12337.3   </td>
+                </tr>
+                <tr>
+                  <td>BIC                             </td>
+                  <td>12403.9   </td>
+                  <td>12389.4   </td>
+                  <td>12421.5   </td>
+                  <td>12390.3   </td>
+                </tr>
+                <tr>
+                  <td>Log.Lik.                        </td>
+                  <td>-6169.124 </td>
+                  <td>-6158.197 </td>
+                  <td>-6177.918 </td>
+                  <td>-6158.664 </td>
+                </tr>
+                <tr>
+                  <td>F                               </td>
+                  <td>106.156   </td>
+                  <td>96.940    </td>
+                  <td>102.417   </td>
+                  <td>96.763    </td>
+                </tr>
+                <tr>
+                  <td>RMSE                            </td>
+                  <td>15.68     </td>
+                  <td>15.56     </td>
+                  <td>15.77     </td>
+                  <td>15.57     </td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function styleCell_tinytable_g6ukh8qwqks4xxvesixm(i, j, css_id) {
+        var table = document.getElementById("tinytable_zv3g3yox3st3o8off3w5");
+        table.rows[i].cells[j].classList.add(css_id);
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_zv3g3yox3st3o8off3w5');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_tinytable_g6ukh8qwqks4xxvesixm(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_zv3g3yox3st3o8off3w5");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 0, 'tinytable_css_exdadflzu97slebpc01o') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 1, 'tinytable_css_exdadflzu97slebpc01o') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 2, 'tinytable_css_exdadflzu97slebpc01o') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 3, 'tinytable_css_exdadflzu97slebpc01o') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 4, 'tinytable_css_exdadflzu97slebpc01o') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(1, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(2, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(3, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(4, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(5, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(6, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(7, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(8, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(9, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(10, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(11, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(12, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(13, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(14, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(15, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(16, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(17, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(18, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(19, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(20, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(21, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(23, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(24, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(25, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(26, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(27, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(28, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(29, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(30, 0, 'tinytable_css_ra8hoar5wlyp7o8abdbr') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(1, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(2, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(3, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(4, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(5, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(6, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(7, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(8, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(9, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(10, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(11, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(12, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(13, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(14, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(15, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(16, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(17, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(18, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(19, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(20, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(21, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(23, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(24, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(25, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(26, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(27, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(28, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(29, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(30, 1, 'tinytable_css_dbjibwymykudc3vwvenx') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(1, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(2, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(3, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(4, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(5, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(6, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(7, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(8, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(9, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(10, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(11, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(12, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(13, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(14, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(15, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(16, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(17, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(18, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(19, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(20, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(21, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(23, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(24, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(25, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(26, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(27, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(28, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(29, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(30, 2, 'tinytable_css_6kpxfzkbiwx8jxz7ocua') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(1, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(2, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(3, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(4, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(5, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(6, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(7, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(8, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(9, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(10, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(11, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(12, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(13, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(14, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(15, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(16, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(17, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(18, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(19, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(20, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(21, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(23, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(24, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(25, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(26, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(27, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(28, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(29, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(30, 3, 'tinytable_css_vfmlgum8ypulg8jot1gg') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(0, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(1, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(2, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(3, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(4, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(5, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(6, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(7, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(8, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(9, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(10, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(11, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(12, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(13, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(14, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(15, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(16, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(17, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(18, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(19, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(20, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(21, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(23, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(24, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(25, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(26, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(27, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(28, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(29, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(30, 4, 'tinytable_css_5cgcvkv4ffpti6rncbk5') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 0, 'tinytable_css_d8gtmpcrxtrr8oaqwy9h') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 1, 'tinytable_css_d8gtmpcrxtrr8oaqwy9h') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 2, 'tinytable_css_d8gtmpcrxtrr8oaqwy9h') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 3, 'tinytable_css_d8gtmpcrxtrr8oaqwy9h') })
+window.addEventListener('load', function () { styleCell_tinytable_g6ukh8qwqks4xxvesixm(22, 4, 'tinytable_css_d8gtmpcrxtrr8oaqwy9h') })
+    </script>
+
+  
+
+
+</div>
 </div>
 </figure>
 </div>
-<!-- * fix regression table for PDF -->
-<!-- * plot predicted vote outcomes? -->
+</div>
+<p>The primary variable of interest is <em>Post-nuclear option</em>. The effect of the nuclear option is downward in all models, as expected. In agreement with <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;4</a>, the size of this effect is just a couple votes. However, the coefficient is only statistically significant on the models that do not use a squared time trend. I interpret this result further below.</p>
+<p>Supreme Court nominees receive massively lower supporting coalitions on their confirmation votes. This is no surprise, as Supreme Court nominations are some of the most high-profile and contentious nominations of a president’s term. Cabinet secretaries actually gain an extra vote or so relative to other nominees on average, although this effect is not statistically significant. Cabinet secretaries may not suffer the same confirmation-vote penalty as Supreme Court nominees because of a belief by senators that the president should be allowed to select Cabinet secretaries who align with the administration’s policy goals.</p>
+<p>One surprising result is that a larger Senate caucus for the president’s party is associated with a slightly lower average vote for the president’s nominees. This may simply be an artifact of the small sample of Congresses (17) in the data. Inter-party distance, the primary measure of partisan polarization in this analysis, has a very strong negative correlation with confirmation vote totals. More polarization means that senators from the opposite party of the president will be farther apart ideologically from most of the president’s nominees, thus leading to more intense opposition. Like the nuclear option, the amount of filibustering in a Congress only shows a significant downward effect in the models without a squared time trend. A downward effect aligns with my model’s predictions.</p>
+<p>Finally, we get to the time trends. There is little difference between the two measurement schemes (Congress counter versus years since 1989).<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> The models using the Congress counter are slightly more accurate, suggesting that the higher granularity of the <em>years since 1989</em> variable does not provide additional predictive power. The coefficients on the linear time trends are all significant and positive, serving to dampen some of the negative effects of the above trends, most of which have correlated with time. The coefficients on the squared terms are strongly negative, giving the predicted supporting coalitions a downward curve over time.</p>
+<p><a href="#fig-predicted-confirmation-votes" class="quarto-xref">Figure&nbsp;9</a> shows the predictions generated by Model 2, which is the most accurate (by a slight amount) of the four models. This plot illustrates the sharp decline in supporting coalitions on confirmation votes that has occurred since the start of the Trump administration. Since most of the explanatory variables are measured on a whole-Congress level, the predictions are the same for almost all confirmation votes in each Congress (all except Supreme Court and Cabinet nominees). Even though the model treats all votes in a Congress identically, the model correlates rather well with the historical outcomes of confirmation votes (R<sup>2</sup> = 0.35).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-predicted-confirmation-votes" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-predicted-confirmation-votes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="full_paper_files/figure-html/fig-predicted-confirmation-votes-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-predicted-confirmation-votes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Predicted outcomes of Senate confirmation votes (1989-2022)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations really accelerated, as shown in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;8</a>), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.</p>
 </section>
 </section>
 </section>
@@ -901,6 +1392,8 @@ Yokley, E. (2021, June 1). <em>Voters largely believe Biden wants bipartisanship
 <li id="fn11"><p>On presidential nominations since the nuclear option, the threshold is a simple majority. I assume the vice president supports their president’s nominees and would therefore cast a tie-breaking vote to invoke cloture, so the majority threshold is 50 votes. This is supported by vice presidents’ records on cloture votes. Through the end of 2023, Vice President Kamala Harris cast the tie-breaking vote to invoke cloture on 13 of Joe Biden’s nominees. Former Vice President Mike Pence did the same for 3 of Donald Trump’s nominees <span class="citation" data-cites="TiebreakingVotesCast2023">(<a href="#ref-TiebreakingVotesCast2023" role="doc-biblioref"><em>Tie-Breaking Votes</em>, 2023</a>)</span>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn12"><p>These two votes are not failed cloture votes, so they are not part of the analysis. They are simply two high-profile votes that are useful for illustrating how DW-NOMINATE and Voteview’s vote probabilities work.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn13"><p>One potential confounding variable is senators’ knowledge of whether their individual votes are required for confirmation. Before the nuclear option, senators from the opposite party of the president may have voted to confirm nominees they personally opposed because they knew nominations required 60 votes to overcome a filibuster. These “insincere” votes of support may have arisen from a respect for the president’s authority to select their executive branch leadership and, to a slightly lesser extent, select federal judges who share their ideology. After the nuclear option, if the president’s party enjoys a Senate majority, then senators from the other party know their votes do not impact the ultimate outcome of the confirmation vote, so they are now more free to express their personal views through their votes.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>The intensity of partisan competition is a distinct factor from ideological polarization, although the two concepts are related. The increasing partisan competition over recent decades is the key observation of <em>Insecure Majorities</em> <span class="citation" data-cites="leeInsecureMajoritiesCongress2016">(<a href="#ref-leeInsecureMajoritiesCongress2016" role="doc-biblioref">Lee, 2016</a>)</span>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>The coefficients on the Congress counter appear larger because a single Congress lasts two years.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
