@@ -56,6 +56,9 @@ div.csl-indent {
 <script src="full_paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="full_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="full_paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="full_paper_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="full_paper_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="full_paper_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script src="full_paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="full_paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
@@ -115,7 +118,7 @@ window.Quarto = {
   <li><a href="#proposals-to-reform-the-filibuster-and-cloture-rule" id="toc-proposals-to-reform-the-filibuster-and-cloture-rule" class="nav-link" data-scroll-target="#proposals-to-reform-the-filibuster-and-cloture-rule"><span class="header-section-number">4</span> Proposals to Reform the Filibuster and Cloture Rule</a>
   <ul class="collapse">
   <li><a href="#proposal-1-abolishing-the-filibuster" id="toc-proposal-1-abolishing-the-filibuster" class="nav-link" data-scroll-target="#proposal-1-abolishing-the-filibuster"><span class="header-section-number">4.1</span> Proposal 1: Abolishing the Filibuster</a></li>
-  <li><a href="#proposal-2-restoring-the-talking-filibuster" id="toc-proposal-2-restoring-the-talking-filibuster" class="nav-link" data-scroll-target="#proposal-2-restoring-the-talking-filibuster"><span class="header-section-number">4.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
+  <li><a href="#sec-restore-talking-filibuster" id="toc-sec-restore-talking-filibuster" class="nav-link" data-scroll-target="#sec-restore-talking-filibuster"><span class="header-section-number">4.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
   <li><a href="#sec-flip-cloture-vote" id="toc-sec-flip-cloture-vote" class="nav-link" data-scroll-target="#sec-flip-cloture-vote"><span class="header-section-number">4.3</span> Proposal 3: Flipping the Cloture Vote</a></li>
   </ul></li>
   <li><a href="#sec-model" id="toc-sec-model" class="nav-link" data-scroll-target="#sec-model"><span class="header-section-number">5</span> Modeling the Senate Filibuster</a>
@@ -123,10 +126,10 @@ window.Quarto = {
   <li><a href="#sec-wawro-schickler" id="toc-sec-wawro-schickler" class="nav-link" data-scroll-target="#sec-wawro-schickler"><span class="header-section-number">5.1</span> Wawro and Schickler’s Model</a></li>
   <li><a href="#extending-the-ws-model" id="toc-extending-the-ws-model" class="nav-link" data-scroll-target="#extending-the-ws-model"><span class="header-section-number">5.2</span> Extending the WS Model</a></li>
   </ul></li>
-  <li><a href="#sec-analyzing-proposals" id="toc-sec-analyzing-proposals" class="nav-link" data-scroll-target="#sec-analyzing-proposals"><span class="header-section-number">6</span> Analyzing Filibuster Rule Proposals</a>
+  <li><a href="#sec-analyzing-proposals" id="toc-sec-analyzing-proposals" class="nav-link" data-scroll-target="#sec-analyzing-proposals"><span class="header-section-number">6</span> Predicting the Effects of Proposed Filibuster Reforms</a>
   <ul class="collapse">
-  <li><a href="#proposal-1-abolishing-the-filibuster-1" id="toc-proposal-1-abolishing-the-filibuster-1" class="nav-link" data-scroll-target="#proposal-1-abolishing-the-filibuster-1"><span class="header-section-number">6.1</span> Proposal 1: Abolishing the Filibuster</a></li>
-  <li><a href="#proposal-2-restoring-the-talking-filibuster-1" id="toc-proposal-2-restoring-the-talking-filibuster-1" class="nav-link" data-scroll-target="#proposal-2-restoring-the-talking-filibuster-1"><span class="header-section-number">6.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
+  <li><a href="#sec-abolishing-filibuster" id="toc-sec-abolishing-filibuster" class="nav-link" data-scroll-target="#sec-abolishing-filibuster"><span class="header-section-number">6.1</span> Proposal 1: Abolishing the Filibuster</a></li>
+  <li><a href="#proposal-2-restoring-the-talking-filibuster" id="toc-proposal-2-restoring-the-talking-filibuster" class="nav-link" data-scroll-target="#proposal-2-restoring-the-talking-filibuster"><span class="header-section-number">6.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
   <li><a href="#proposal-3-flipping-the-cloture-vote" id="toc-proposal-3-flipping-the-cloture-vote" class="nav-link" data-scroll-target="#proposal-3-flipping-the-cloture-vote"><span class="header-section-number">6.3</span> Proposal 3: Flipping the Cloture Vote</a></li>
   </ul></li>
   <li><a href="#quantitative-analysis-how-much-impact-would-rule-changes-have" id="toc-quantitative-analysis-how-much-impact-would-rule-changes-have" class="nav-link" data-scroll-target="#quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</a>
@@ -138,11 +141,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#extensions-and-limitations" id="toc-extensions-and-limitations" class="nav-link" data-scroll-target="#extensions-and-limitations"><span class="header-section-number">8.1</span> Extensions and Limitations</a></li>
   </ul></li>
-  
+  <li><a href="#the-filibustr-package" id="toc-the-filibustr-package" class="nav-link" data-scroll-target="#the-filibustr-package"><span class="header-section-number">9</span> The <code>filibustr</code> Package</a></li>
   
   
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="full_paper.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Feinleib_Redesigning_the_Filibuster_2024.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -185,7 +188,7 @@ window.Quarto = {
   <div class="abstract">
     <div class="block-title">Abstract</div>
     <p>In today’s hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.</p>
-    <p>In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of “legislative goods,” including productivity, bipartisanship, and policy stability. I test the effects of a series of filibuster rule proposals on these legislative goods, including proposals much more creative than the “nuclear option.”</p>
+    <p>In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of “legislative goods,” including productivity, bipartisanship, and policy stability. I test the effects of three different filibuster rule proposals on these legislative goods.</p>
     <p>To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. Using this model, which excels at explaining the evolution of past filibuster fights, I predict the outcomes of legislative battles under different filibuster rules. The results will inform activists and senators in future debates over filibuster reform — which will inevitably return the next time a popular bill is stymied by the Senate’s supermajoritarian rules.</p>
   </div>
 </div>
@@ -203,9 +206,60 @@ window.Quarto = {
 <div style="page-break-after: always;"></div>
 <section id="introduction" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
-<p>In today’s hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.</p>
+<p>In today’s hyper-partisan political environment, it is a common complaint that Congress is broken. <span>Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased <span class="citation" data-cites="desilverPolarizationTodayCongress2022 harbridge-yongBipartisanPathEffective2023">(<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">Desilver, 2022</a>; <a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">Harbridge-Yong et al., 2023</a>, as shown in <a href="#fig-pew-polarization" class="quarto-xref" role="doc-biblioref">Figure&nbsp;1 (a)</a> and <a href="#fig-hvw-pbca" class="quarto-xref" role="doc-biblioref">Figure&nbsp;1 (b)</a>)</span>. As a result, productivity has fallen to historic lows for the modern Congress <span class="citation" data-cites="solenderCapitolHillStunner2023">(<a href="#ref-solenderCapitolHillStunner2023" role="doc-biblioref">Solender, 2023</a>, as shown in <a href="#fig-axios-productivity" class="quarto-xref" role="doc-biblioref">Figure&nbsp;1 (c)</a>)</span>.</span> </p>
+<div id="fig-intro-plots" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-intro-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row quarto-layout-valign-bottom">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-intro-plots" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-pew-polarization" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-pew-polarization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/desilver_polarization.png" class="lightbox" data-gallery="fig-intro-plots" data-glightbox="description: .lightbox-desc-1"><img src="images/desilver_polarization.png" class="img-fluid figure-img" data-ref-parent="fig-intro-plots" alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-pew-polarization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Growth in ideological polarization in Congress, 1971-2022 (reproduced from <span class="citation" data-cites="desilverPolarizationTodayCongress2022">Desilver (<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">2022</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-intro-plots" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-hvw-pbca" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in &quot;The Bipartisan Path to Effective Lawmaking&quot; (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-hvw-pbca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/hvw_pbca_plot.png" class="lightbox" data-gallery="fig-intro-plots" data-glightbox="description: .lightbox-desc-2"><img src="images/hvw_pbca_plot.png" class="img-fluid figure-img" data-ref-parent="fig-intro-plots" alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in &quot;The Bipartisan Path to Effective Lawmaking&quot; (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-hvw-pbca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">Harbridge-Yong et al. (<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">2023</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-intro-plots" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-axios-productivity" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-axios-productivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Axios_productivity_graph.png" class="lightbox" data-gallery="fig-intro-plots" data-glightbox="description: .lightbox-desc-3"><img src="images/Axios_productivity_graph.png" class="img-fluid figure-img" data-ref-parent="fig-intro-plots" alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-axios-productivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Decline in productivity in Congress, 1989-2023 (reproduced from <span class="citation" data-cites="solenderCapitolHillStunner2023">Solender (<a href="#ref-solenderCapitolHillStunner2023" role="doc-biblioref">2023</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-intro-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Increasing polarization, decreasing bipartisanship and productivity in Congress
+</figcaption>
+</figure>
+</div>
+<p>The Senate filibuster and cloture rule have received a large portion of the blame for this gridlock. The current rules and practices around the filibuster have created a de facto requirement for a 60-vote supermajority to pass almost any legislation through the Senate <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010</a>)</span>. This state of a “60-vote Senate” has sparked widespread calls from activists and senators alike to reform or even abolish the filibuster.</p>
 <p>In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of “legislative goods,” including productivity, bipartisanship, and policy stability. I test the effects of three proposed filibuster rules: abolishing the filibuster, restoring the talking filibuster, and flipping the cloture vote.</p>
-<p>To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions. Via this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen.&nbsp;Jeff Merkley.</p>
+<p>To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the benefits of obstruction and the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions. Using this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen.&nbsp;Jeff Merkley. Abolishing the filibuster would likely sacrifice bipartisanship and policy stability in the name of productivity. Flipping the cloture vote, if instituted without more substantial reforms, would not have very large impacts on the legislative goods.</p>
+<p>I supplement that primary result with two separate quantitative analyses investigating specific aspects of the overall model. First, I estimate the impacts of higher-cost obstruction on the number of bills that pass the Senate. Through this analysis, I identify the size of the costs that would produce the greatest effects on obstruction relative to those costs. Next, I perform a regression analysis to measure the impact that the nuclear option has had on Senate confirmation votes for presidential nominations. The regressions support the predictions of my model, although more data from after the nuclear option is needed to strengthen these findings.</p>
+<p>This combination of a new, holistic framework for analyzing proposed filibuster rules and quantitative analyses to reinforce the findings of that model provides a comprehensive set of tools for senators and activists alike to make sound decisions about the future of the Senate filibuster.</p>
+<p>Finally, I introduce the <code>filibustr</code> R package, which provides utilities for gathering data for research on Congress. The functions in the <code>filibustr</code> package can improve data consistency in political science research through an easy-to-use interface. This package provides conveniences that are already standard in fields such as baseball analytics, but have thus far been missing for political science. Through the <code>filibustr</code> package, my research’s impact on political science can extend well beyond my findings on the filibuster.</p>
 </section>
 <section id="literature-review" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="literature-review"><span class="header-section-number">2</span> Literature Review</h2>
@@ -213,38 +267,47 @@ window.Quarto = {
 <section id="history-of-the-filibuster" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="history-of-the-filibuster"><span class="header-section-number">2.1</span> History of the Filibuster</h3>
 <p>The modern practice of the filibuster is the product of a long history of evolutions and changes to the Senate’s rules and norms. Understanding the modern filibuster, and how new filibuster rules could change the Senate, therefore requires some grounding in this history.</p>
+<section id="majority-rule-in-the-early-senate" class="level4" data-number="2.1.1">
+<h4 data-number="2.1.1" class="anchored" data-anchor-id="majority-rule-in-the-early-senate"><span class="header-section-number">2.1.1</span> Majority Rule in the Early Senate</h4>
 <p>The rules of the first Congress were naturally heavily influenced by the ideas of the Framers of the Constitution. There was a broad consensus among the Framers that majority rule was the best way for a legislature to operate. The Framers had seen firsthand how the supermajority voting rule of the Confederation Congress had debilitated the federal government under the Articles of Confederation <span class="citation" data-cites="coenenOriginalistCaseCongressional2012">(<a href="#ref-coenenOriginalistCaseCongressional2012" role="doc-biblioref">Coenen, 2012, p. 1140</a>)</span>. Roger Sherman remarked that “to require more than a majority to decide a question was always embarrassing” <span class="citation" data-cites="farrandRecordsFederalConvention1911">(<a href="#ref-farrandRecordsFederalConvention1911" role="doc-biblioref">Farrand, 1911, p. 450</a>)</span>. In Federalist 22, <span class="citation" data-cites="hamiltonFederalistNo221787">Hamilton (<a href="#ref-hamiltonFederalistNo221787" role="doc-biblioref">1787</a>)</span> wrote of requiring a supermajority for legislation:</p>
 <blockquote class="blockquote">
 <p>This is one of those refinements which, in practice, has an effect the reverse of what is expected from it in theory. The necessity of unanimity in public bodies, or of something approaching towards it, has been founded upon a supposition that it would contribute to security. But its real operation is to embarrass the administration, to destroy the energy of the government, and to substitute the pleasure, caprice, or artifices of an insignificant, turbulent, or corrupt junto, to the regular deliberations and decisions of a respectable majority.</p>
 </blockquote>
 <p>The Framers agreed that the Senate was intended to be a majority-rule institution for all except the most consequential matters, such as impeachment and Constitutional amendments <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022, p. 27</a>)</span>. Thus, the Senate indeed functioned as a majoritarian institution. Members of the minority could have their say in debate, but in the end, questions would be decided with a majority vote. In fact, the Senate rules originally included the previous question motion, which sets up a vote to end debate and immediately move to a final passage vote. The previous question motion is still part of the House rules, and is a regular step in passing legislation in the House. However, the principle of majority rule was mostly enforced by a set of norms (sometimes called the Senate Code), not written rules. The Senate was so dedicated to these norms that the body removed the previous question from the rules in 1806, believing that a formal rule was unnecessary in light of the Senate’s strong norms against superfluous debate <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022, p. 47</a>)</span>.</p>
 <p>The Senate operated as a majoritarian body according to the Senate Code with few exceptions in the 19th century. The event many histories mark as the first origins of the modern filibuster occurred in 1841. In opposition of a Whig bill to re-establish the Bank of the United States, Sen.&nbsp;John Calhoun (D–SC) organized a group of slave-state Democratic senators to make one floor speech after another and stall the bill. After weeks of this obstruction, Sen.&nbsp;Henry Clay (Whig–KY), the lead proponent of the bank bill, threatened to change the rules to restore the previous question motion. Calhoun erupted at the prospect of the Senate imposing limitations on debate, invoking the principle of minority rights to defend the right he claimed to unlimited debate <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022, p. 52</a>)</span>. These principles of minority rights and unlimited debate, first applied by Calhoun, have been central to defenses of the filibuster ever since.</p>
-<p>A formal rule for ending debate in the Senate finally came in 1917. At the end of the congressional session, a group of antiwar senators successfully killed a bill to arm American ships for protection during the First World War. President Woodrow Wilson condemned the actions of this “little group of willful men” and the rules of the Senate that allowed it <span class="citation" data-cites="TextPresidentStatement1917">(<a href="#ref-TextPresidentStatement1917" role="doc-biblioref"><span>“Text of the President’s Statement,”</span> 1917</a>)</span>. Wilson sparked massive public outcry, and the Senate came back into session to pass the armed ships bill and a cloture rule to prevent similar obstruction in the future. The senators settled on a rule by which a two-thirds vote of present and voting senators could end debate. This was the original version of Rule XXII, which governs the filibuster and cloture today. The two-thirds supermajority was a compromise by the rule’s supporters, who largely wanted a simple majority cloture rule, so that the cloture rule’s opponents would allow it to pass <span class="citation" data-cites="ExaminingFilibuster2010">(<a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010, p. 18</a>, testimony of Sarah A. Binder)</span>.</p>
-<p>Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a> below, the cloture rule was used only on rare occasions for the first several decades after 1917 <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>.</p>
+</section>
+<section id="the-original-cloture-rule" class="level4" data-number="2.1.2">
+<h4 data-number="2.1.2" class="anchored" data-anchor-id="the-original-cloture-rule"><span class="header-section-number">2.1.2</span> The Original Cloture Rule</h4>
+<p>The Senate finally instituted a formal rule for ending debate in 1917. At the end of the congressional session, a group of antiwar senators successfully killed a bill to arm American ships for protection during the First World War. President Woodrow Wilson condemned the actions of this “little group of willful men” and the rules of the Senate that allowed it <span class="citation" data-cites="TextPresidentStatement1917">(<a href="#ref-TextPresidentStatement1917" role="doc-biblioref"><span>“Text of the President’s Statement,”</span> 1917</a>)</span>. Wilson sparked massive public outcry, and the Senate came back into session to pass the armed ships bill and a cloture rule to prevent similar obstruction in the future. The senators settled on a rule by which a two-thirds vote of present and voting senators could end debate. This was the original version of Rule XXII, which governs the filibuster and cloture today. The two-thirds supermajority was a compromise by the rule’s supporters, who largely wanted a simple majority cloture rule, so that the cloture rule’s opponents would allow it to pass <span class="citation" data-cites="ExaminingFilibuster2010">(<a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010, p. 18</a>, testimony of Sarah A. Binder)</span>.</p>
+<p>Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;3</a> below, the cloture rule was used only on rare occasions for the first several decades after 1917 <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cloture-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cloture-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-cloture-graph-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-cloture-graph-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="full_paper_files/figure-html/fig-cloture-graph-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloture-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
+Figure&nbsp;3: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>The Senate was generally able to pass legislation without resorting to the cloture rule — with the exception of civil rights bills, which were frequently and systematically filibustered. Southern Democratic senators successfully killed nine of the 12 civil rights bills considered in the Senate between 1901 and 1956 with filibusters <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010, p. 116</a>)</span>. The longest speech in Senate history, a continuous speech of over 24 hours by Sen.&nbsp;Strom Thurmond (D–SC), came in protest of the 1957 Civil Rights Act, which ultimately passed despite the filibuster. Then-Majority Leader Lyndon Johnson (D–TX) threatened the southern Democrats that he would impose a majority cloture rule if they didn’t let the 1957 Civil Rights Act pass; otherwise, they likely would have gone all-out to kill this bill, too <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010, p. 121</a>)</span>. The landmark 1964 Civil Rights Act faced the longest filibuster in Senate history — 57 working days before the bill finally passed <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010, p. 170</a>)</span>. It is important to note that these filibusters required the obstructionists to continuously hold the floor to filibuster. The length of these filibusters was determined by the endurance of the obstructionists. If debate ended at any point, the bills were able to pass by majority vote.</p>
+</section>
+<section id="the-modern-filibuster-evolves" class="level4" data-number="2.1.3">
+<h4 data-number="2.1.3" class="anchored" data-anchor-id="the-modern-filibuster-evolves"><span class="header-section-number">2.1.3</span> The Modern Filibuster Evolves</h4>
 <p>The rule changes that created the filibuster as it is known today occurred in the 1970s. At the time, senators grew frustrated as talking filibusters, which totally shut down the Senate floor, prevented the Senate from accomplishing their growing workload. Majority Leader Mike Mansfield (D–MT) introduced a system of legislative “two-tracking,” under which the Senate would debate filibustered bills for a few hours a day, then move on to other legislative work for the rest of the day <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010, p. 137</a>)</span>. Two-tracking made it easier for the Senate to deal with a larger workload in the finite legislative session, but it also reduced the costs to obstructionists of having to continuously hold the floor to sustain a filibuster. Notably, talking filibusters remained the normal behavior for years after the introduction of two-tracking <span class="citation" data-cites="leahy2024">(<a href="#ref-leahy2024" role="doc-biblioref">P. J. Leahy, personal communication, January 9, 2024</a>)</span>. Filibusters remained relatively rare as a result.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>The other major filibuster rule change came in 1975, when the cloture threshold under Rule XXII was reduced from two-thirds to the present level of three-fifths of the Senate. Senators at the time felt that the Senate had “become paralyzed” under the two-thirds requirement, and saw three-fifths as “the line that would assure deliberation and prevent debilitation” <span class="citation" data-cites="ExaminingFilibuster2010">(<a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010, p. 146</a>, testimony of Walter F. Mondale)</span>. Subtly, the cloture threshold changed from two-thirds of <em>present and voting</em> senators to three-fifths of <em>all</em> senators. This change means that it now takes 60 votes to invoke cloture, regardless of the number of senators in attendance. Obstructionists no longer have to be present to filibuster, but proponents have to be present to end the filibuster.</p>
-<p>Finally, at the same time, senators created one of the techniques used today to sidestep the filibuster: budget reconciliation. The most significant feature of reconciliation bills is that they are not subject to the filibuster, as Senate debate on reconciliation bills is limited to 20 hours <span class="citation" data-cites="jacobiFilibusterReconciliationFuture2013">(<a href="#ref-jacobiFilibusterReconciliationFuture2013" role="doc-biblioref">Jacobi &amp; VanDam, 2013, p. 295</a>)</span>. As a result, the reconciliation process, which was originally intended to prevent budget deficits, has expanded to become a major avenue for passing legislation, including laws that actually grow the deficit by increasing spending or cutting taxes. Obama’s Health Care and Education Reconciliation Act of 2010 (which amended the Affordable Care Act), Trump’s Tax Cuts and Jobs Act of 2017, and Biden’s American Rescue Plan Act of 2021 and Inflation Reduction Act of 2022 were all passed using budget reconciliation. Just as two-tracking took decades to end the talking filibuster, it took decades for budget reconciliation to be used as a versatile tool for averting the filibuster.</p>
-<p>In the decades since the above reforms, the filibuster has strengthened so much that invoking cloture with a 60-vote supermajority is now a de facto requirement for legislating in the Senate. In response, there have been efforts from members of both parties to break the power of the filibuster. In 2010, the Senate held a series of hearings exploring options for reforming the filibuster. The Senate banned the use of the “secret hold,” mandating that Senators publicly attach their name to their filibusters, and reduced the number of executive branch positions requiring Senate confirmation <span class="citation" data-cites="hammModifyingFilibusterMeans2012">(<a href="#ref-hammModifyingFilibusterMeans2012" role="doc-biblioref">Hamm, 2012, p. 751</a>)</span>. However, the Senate rejected a set of more comprehensive filibuster reforms. These rejected filibuster reforms included Sen.&nbsp;Tom Harkin’s (D–IA) proposal to reduce the cloture threshold by three votes after every failed cloture vote (ultimately allowing for majority cloture) <span class="citation" data-cites="harkinResolutionAmendingStanding2011">(<a href="#ref-harkinResolutionAmendingStanding2011" role="doc-biblioref">S. Res. 8, 2011</a>)</span>, restoring the talking filibuster <span class="citation" data-cites="udallResolutionImproveDebate2011">(<a href="#ref-udallResolutionImproveDebate2011" role="doc-biblioref">S. Res. 10, 2011</a>)</span>, and an admittedly complex proposal by Sen.&nbsp;Michael Bennet to flip the cloture vote (as explained in <a href="#sec-flip-cloture-vote" class="quarto-xref">Section&nbsp;4.3</a>) and create a dynamic cloture threshold that shifts between requiring 41 and 45 obstructionists to sustain a filibuster <span class="citation" data-cites="bennetResolutionImprovingSenate2010">(<a href="#ref-bennetResolutionImprovingSenate2010" role="doc-biblioref">S. Res. 440, 2010</a>)</span>. While the Senate failed to meaningfully reform the filibuster at large in 2011, the filibuster has been totally removed from the confirmation process for presidential nominees. In 2013, Democrats abolished the filibuster on executive branch nominees (including Cabinet positions) and judicial nominees below the Supreme Court. Republicans subsequently abolished the filibuster on Supreme Court nominees in 2017. The abolition of the filibuster on presidential nominations has renewed calls to abolish the filibuster for all legislation <span class="citation" data-cites="becketTrumpCallsEnd2017 bresnahanTrumpGOPDump2018 moultonAbolishFilibusterElectoral2019 reidFilibusterSuffocatingWill2019">(e.g., <a href="#ref-becketTrumpCallsEnd2017" role="doc-biblioref">Becket, 2017</a>; <a href="#ref-bresnahanTrumpGOPDump2018" role="doc-biblioref">Bresnahan et al., 2018</a>; <a href="#ref-moultonAbolishFilibusterElectoral2019" role="doc-biblioref">Moulton, 2019</a>; <a href="#ref-reidFilibusterSuffocatingWill2019" role="doc-biblioref">Reid, 2019</a>)</span>. The most recent push for filibuster reform came in 2021–2022, during the debate on the John Lewis Freedom to Vote Act. During the debate, various Democratic activists and lawmakers advocated for a slew of filibuster reforms to pass the high-priority voting rights bill <span class="citation" data-cites="barnesFilibusterReformComing2021 riegerWhereDemocraticSenators2024 shawAbolishingFilibusterIsn2021">(<a href="#ref-barnesFilibusterReformComing2021" role="doc-biblioref">Barnes et al., 2021</a>; <a href="#ref-riegerWhereDemocraticSenators2024" role="doc-biblioref">Rieger &amp; Blanco, 2021/2024</a>; <a href="#ref-shawAbolishingFilibusterIsn2021" role="doc-biblioref">Shaw, 2021</a>)</span>. Sen.&nbsp;Jeff Merkley (D–OR) led a push to reinstate the talking filibuster for the John Lewis Act, but it ultimately failed by a 52–48 vote <span class="citation" data-cites="carneyManchinSinemaJoin2022">(<a href="#ref-carneyManchinSinemaJoin2022" role="doc-biblioref">Carney, 2022</a>)</span>.</p>
-<p>The evolution of the filibuster, especially in the 20th and 21st centuries, has mirrored the growth in partisan polarization, the strengthening of party discipline, and the weakening of Senate norms over the same time period. Thus, research on parties and polarization in Congress complements this history of the filibuster.</p>
+<p>Finally, at the same time, senators created one of the techniques used today to sidestep the filibuster: budget reconciliation. The most significant feature of reconciliation bills is that they are not subject to the filibuster, as Senate debate on reconciliation bills is limited to 20 hours <span class="citation" data-cites="jacobiFilibusterReconciliationFuture2013">(<a href="#ref-jacobiFilibusterReconciliationFuture2013" role="doc-biblioref">Jacobi &amp; VanDam, 2013, p. 295</a>)</span>. This reconciliation loophole was originally intended as a mechanism to help Congress balance the federal budget. However, the Senate Republican majority in 1996 was able to establish a new precedent removing the requirement for reconciliation bills to reduce budget deficits <span class="citation" data-cites="merkleyFilibusteredHowFix2024">(<a href="#ref-merkleyFilibusteredHowFix2024" role="doc-biblioref">Merkley &amp; Zamore, 2024</a>)</span>. This newfound flexibility, along with the increasing strength of the filibuster, turned the reconciliation process into a major avenue for passing legislation. Obama’s Health Care and Education Reconciliation Act of 2010 (which amended the Affordable Care Act), Trump’s Tax Cuts and Jobs Act of 2017, and Biden’s American Rescue Plan Act of 2021 and Inflation Reduction Act of 2022 were all passed using budget reconciliation. As the filibuster has grown increasingly more difficult to overcome, reconciliation has become a critical tool for Senate majorities to pass otherwise impossible policy priorities.</p>
+<p>In the decades since the above reforms, the filibuster has strengthened so much that invoking cloture with a 60-vote supermajority is now a de facto requirement for legislating in the Senate. In response, there have been efforts from members of both parties to break the power of the filibuster. In 2010, the Senate held a series of hearings exploring options for reforming the filibuster. The Senate banned the use of the “secret hold,” mandating that Senators publicly attach their name to their filibusters, and reduced the number of executive branch positions requiring Senate confirmation <span class="citation" data-cites="hammModifyingFilibusterMeans2012">(<a href="#ref-hammModifyingFilibusterMeans2012" role="doc-biblioref">Hamm, 2012, p. 751</a>)</span>. However, the Senate rejected a set of more comprehensive filibuster reforms. These rejected filibuster reforms included Sen.&nbsp;Tom Harkin’s (D–IA) proposal to reduce the cloture threshold by three votes after every failed cloture vote (ultimately allowing for majority cloture) <span class="citation" data-cites="harkinResolutionAmendingStanding2011">(<a href="#ref-harkinResolutionAmendingStanding2011" role="doc-biblioref">S. Res. 8, 2011</a>)</span>, restoring the talking filibuster <span class="citation" data-cites="udallResolutionImproveDebate2011">(<a href="#ref-udallResolutionImproveDebate2011" role="doc-biblioref">S. Res. 10, 2011</a>, as explained in <a href="#sec-restore-talking-filibuster" class="quarto-xref" role="doc-biblioref">Section&nbsp;4.2</a>)</span>, and an admittedly complex proposal by Sen.&nbsp;Michael Bennet to flip the cloture vote (as explained in <a href="#sec-flip-cloture-vote" class="quarto-xref">Section&nbsp;4.3</a>) and create a dynamic cloture threshold that shifts between requiring 41 and 45 obstructionists to sustain a filibuster <span class="citation" data-cites="bennetResolutionImprovingSenate2010">(<a href="#ref-bennetResolutionImprovingSenate2010" role="doc-biblioref">S. Res. 440, 2010</a>)</span>. While the Senate failed to meaningfully reform the filibuster at large in 2011, the filibuster has been totally removed from the confirmation process for presidential nominees. In 2013, Democrats abolished the filibuster on executive branch nominees (including Cabinet positions) and judicial nominees below the Supreme Court. Republicans subsequently abolished the filibuster on Supreme Court nominees in 2017. The abolition of the filibuster on presidential nominations has renewed calls to abolish the filibuster for all legislation <span class="citation" data-cites="becketTrumpCallsEnd2017 bresnahanTrumpGOPDump2018 moultonAbolishFilibusterElectoral2019 reidFilibusterSuffocatingWill2019">(e.g., <a href="#ref-becketTrumpCallsEnd2017" role="doc-biblioref">Becket, 2017</a>; <a href="#ref-bresnahanTrumpGOPDump2018" role="doc-biblioref">Bresnahan et al., 2018</a>; <a href="#ref-moultonAbolishFilibusterElectoral2019" role="doc-biblioref">Moulton, 2019</a>; <a href="#ref-reidFilibusterSuffocatingWill2019" role="doc-biblioref">Reid, 2019</a>)</span>. The most recent push for filibuster reform happened in 2021–2022, during the debate on the John Lewis Freedom to Vote Act. During the debate, various Democratic activists and lawmakers advocated for a slew of filibuster reforms to pass the high-priority voting rights bill <span class="citation" data-cites="barnesFilibusterReformComing2021 riegerWhereDemocraticSenators2024 shawAbolishingFilibusterIsn2021">(<a href="#ref-barnesFilibusterReformComing2021" role="doc-biblioref">Barnes et al., 2021</a>; <a href="#ref-riegerWhereDemocraticSenators2024" role="doc-biblioref">Rieger &amp; Blanco, 2021/2024</a>; <a href="#ref-shawAbolishingFilibusterIsn2021" role="doc-biblioref">Shaw, 2021</a>)</span>. Sen.&nbsp;Jeff Merkley (D–OR) led a push to reinstate the talking filibuster for the John Lewis Act, but it ultimately failed by a 52–48 vote <span class="citation" data-cites="carneyManchinSinemaJoin2022">(<a href="#ref-carneyManchinSinemaJoin2022" role="doc-biblioref">Carney, 2022</a>)</span>.</p>
+<p>The evolution of the filibuster, especially in the 20th and 21st centuries, has tracked with the growth in partisan polarization, the strengthening of party discipline, and the weakening of Senate norms over the same time period. Thus, research on parties and polarization in Congress complements this history of the filibuster.</p>
+</section>
 </section>
 <section id="parties-partisanship-and-polarization-in-congress" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="parties-partisanship-and-polarization-in-congress"><span class="header-section-number">2.2</span> Parties, Partisanship, and Polarization in Congress</h3>
-<p>The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes <span class="citation" data-cites="krehbielPivotalPoliticsTheory1998">(<a href="#ref-krehbielPivotalPoliticsTheory1998" role="doc-biblioref">Krehbiel, 1998</a>)</span>. According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the <em>filibuster pivot</em> — that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the <em>veto pivot</em> as well (the senator whose vote puts the majority over the veto override threshold). Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s <span class="citation" data-cites="grayUnpackingPivotalPolitics2017">(<a href="#ref-grayUnpackingPivotalPolitics2017" role="doc-biblioref">Gray &amp; Jenkins, 2017</a>)</span>, when the use of the cloture rule skyrocketed, as shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a> above <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>. Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.</p>
+<p>The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes <span class="citation" data-cites="krehbielPivotalPoliticsTheory1998">(<a href="#ref-krehbielPivotalPoliticsTheory1998" role="doc-biblioref">Krehbiel, 1998</a>)</span>. According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the <em>filibuster pivot</em>—that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the <em>veto pivot</em> as well (the senator whose vote puts the majority over the veto override threshold). Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s <span class="citation" data-cites="grayUnpackingPivotalPolitics2017">(<a href="#ref-grayUnpackingPivotalPolitics2017" role="doc-biblioref">Gray &amp; Jenkins, 2017</a>)</span>, when the use of the cloture rule skyrocketed, as shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;3</a> above <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>. Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.</p>
 <p>Another key factor in the effects of the filibuster is the interaction between the filibuster and the high levels of polarization and partisanship in Congress today. Since the early 1970s, when the current filibuster rules were formed, ideological polarization in the Senate — defined as the gap between the average ideology of the two parties — has grown by 0.34 points, according to DW-NOMINATE <span class="citation" data-cites="desilverPolarizationTodayCongress2022">(<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">Desilver, 2022</a>)</span>. Despite the growing polarization in the Senate, bipartisanship remains an important step in passing laws. On a whole-Congress level, the “enacting coalitions” for major laws were as bipartisan in the 2010s as they were in the 1970s <span class="citation" data-cites="curryNonpartyGovernmentBipartisan2019">(<a href="#ref-curryNonpartyGovernmentBipartisan2019" role="doc-biblioref">Curry &amp; Lee, 2019</a>)</span>. Even with the parties farther apart than they have been in generations, successful lawmaking still requires the support of legislators from both parties. The durability and benefits of bipartisanship also apply on an individual legislator level. Bipartisan behavior makes legislators more successful at enacting their policy goals, regardless of party polarization and whether the legislator is in the majority or minority party <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">(<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">Harbridge-Yong et al., 2023</a>)</span>. Together, these studies show that bipartisanship helps legislative productivity, both for individual legislators and for Congress as a whole.</p>
 </section>
 <section id="research-on-the-filibuster" class="level3" data-number="2.3">
@@ -271,9 +334,9 @@ Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–202
 </section>
 <section id="bipartisanship-dealmaking-and-compromise" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="bipartisanship-dealmaking-and-compromise"><span class="header-section-number">3.2</span> Bipartisanship, Dealmaking, and Compromise</h3>
-<p>These concepts can be defined distinctly, but are highly correlated, so it is reasonable to consider them together. Bipartisanship refers to the willingness and ability of senators to work with members of the other party to pass laws. Dealmaking and compromise refer to the frequency of agreements between senators that help to pass laws. Senators are independent actors within the body, so passing meaningful legislation often requires proponents to make deals with skeptical senators to convince them to support a proposal. This often means working out a compromise that is acceptable to multiple factions in the Senate. Bipartisanship is a special case of dealmaking and compromise, in which senators from opposite parties make these types of agreements.</p>
-<p>The converse of bipartisanship, dealmaking, and compromise is individualistic or partisan position-taking. When legislators prioritize standing firm on their positions over working to compromise, it is harder for Congress to pass bills, even those that a majority of members clearly support over the status quo. Individualistic position-taking can also hurt the ability of majorities to enact their agendas. This has occured on numerous occasions in the current 118th Congress, as members of the House Freedom Caucus have voted down bills supported by the Republican leadership and ousted the Republican Speaker of the House, Kevin McCarthy (R–CA), due to various policy demands <span class="citation" data-cites="brooksMcCarthyFreedomCaucus2024 glassmanGameTheoryRepublican2023 wangHouseHeadsHome2023">(<a href="#ref-brooksMcCarthyFreedomCaucus2024" role="doc-biblioref">Brooks, 2024</a>; <a href="#ref-glassmanGameTheoryRepublican2023" role="doc-biblioref">Glassman, 2023</a>; <a href="#ref-wangHouseHeadsHome2023" role="doc-biblioref">Wang et al., 2023</a>)</span>.</p>
-<p>In an era of high polarization and closely contested control of the Senate, bipartisanship is often necessary to increase a bill’s likelihood of passage <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">(<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">Harbridge-Yong et al., 2023</a>)</span>. Even under the high levels of polarization of the modern Congress, securing bipartisan support for a bill has remained an important step in passing laws <span class="citation" data-cites="curryNonpartyGovernmentBipartisan2019">(<a href="#ref-curryNonpartyGovernmentBipartisan2019" role="doc-biblioref">Curry &amp; Lee, 2019</a>)</span>. It is important for a new filibuster rule to promote bipartisanship, which has been declining in the Senate in recent years. A filibuster rule that damages bipartisanship and promotes partisan position-taking will likely further diminish the Senate’s ability to pass meaningful laws.</p>
+<p>These concepts can be defined distinctly, but are highly correlated, so it is reasonable to consider them together. Bipartisanship refers to the willingness and ability of senators to work with members of the other party to pass laws. Dealmaking and compromise refer to the frequency of agreements between senators that help to pass laws. Thus, bipartisanship is an important special case of dealmaking and compromise, referring to deals between senators across parties. Senators are independent actors within the body, so passing meaningful legislation often requires proponents to make deals with skeptical senators to convince them to support a proposal. This often means working out a compromise that is acceptable to multiple factions in the Senate.</p>
+<p>The converse of bipartisanship, dealmaking, and compromise is individualistic or partisan position-taking. When legislators prioritize standing firm on their positions or uniting with their parties instead of working to compromise, it is harder for Congress to pass bills, even bills that a majority of members clearly support over the status quo. Position-taking for partisan purposes, in which members of the same party promote or block a bill for partisan messaging purposes, is the primary form of position-taking <span class="citation" data-cites="leeInsecureMajoritiesCongress2016">(<a href="#ref-leeInsecureMajoritiesCongress2016" role="doc-biblioref">Lee, 2016</a>)</span>. However, individualistic position-taking can also hurt the ability of majorities to enact their agendas. This has occurred on numerous occasions in the current 118th Congress, as members of the House Freedom Caucus have voted down bills supported by the Republican leadership and ousted the Republican Speaker of the House, Kevin McCarthy (R–CA), due to various policy demands <span class="citation" data-cites="brooksMcCarthyFreedomCaucus2024 glassmanGameTheoryRepublican2023 wangHouseHeadsHome2023">(<a href="#ref-brooksMcCarthyFreedomCaucus2024" role="doc-biblioref">Brooks, 2024</a>; <a href="#ref-glassmanGameTheoryRepublican2023" role="doc-biblioref">Glassman, 2023</a>; <a href="#ref-wangHouseHeadsHome2023" role="doc-biblioref">Wang et al., 2023</a>)</span>.</p>
+<p>Bipartisanship has two primary benefits in the Senate. First, strong levels of bipartisanship enhance the lawmaking abilities of the Senate. Second, bipartisanship in itself is a desired outcome by the public. In an era of high polarization and closely contested control of the Senate, bipartisanship is often necessary to increase a bill’s likelihood of passage <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">(<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">Harbridge-Yong et al., 2023</a>)</span>. This is why lower bipartisanship leads to lower productivity. Even under the high partisan polarization of the modern Congress, securing bipartisan support for a bill remains a critical step in passing laws <span class="citation" data-cites="curryNonpartyGovernmentBipartisan2019">(<a href="#ref-curryNonpartyGovernmentBipartisan2019" role="doc-biblioref">Curry &amp; Lee, 2019</a>)</span>. Even beyond its legislative benefits, bipartisanship is a legislative good that the public wants from Congress. Polls consistently show strong public support for bipartisanship in Congress. In recent polls on the topic, 85% of voters have said it is “very or somewhat important for legislation to have bipartisan support” <span class="citation" data-cites="skelleyHowMuchAmericans2021 yokleyVotersLargelyBelieve2021">(<a href="#ref-skelleyHowMuchAmericans2021" role="doc-biblioref">Skelley, 2021</a>; <a href="#ref-yokleyVotersLargelyBelieve2021" role="doc-biblioref">Yokley, 2021</a>)</span>, and 87% “see attempts at bipartisanship … as a good thing” <span class="citation" data-cites="agiestaCNNPollAmericans2021">(<a href="#ref-agiestaCNNPollAmericans2021" role="doc-biblioref">Agiesta, 2021</a>)</span>. It is important for a new filibuster rule to promote bipartisanship, which has been declining in the Senate in recent years. A filibuster rule that damages bipartisanship and promotes partisan position-taking will likely further diminish the Senate’s ability to pass meaningful laws.</p>
 </section>
 <section id="policy-stability-and-volatility" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="policy-stability-and-volatility"><span class="header-section-number">3.3</span> Policy Stability and Volatility</h3>
@@ -293,9 +356,9 @@ Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–202
 <h3 data-number="4.1" class="anchored" data-anchor-id="proposal-1-abolishing-the-filibuster"><span class="header-section-number">4.1</span> Proposal 1: Abolishing the Filibuster</h3>
 <p>Abolishing the filibuster, also commonly nicknamed the “nuclear option,” refers to reducing the cloture threshold to a simple majority for all measures. “Abolish the filibuster” has become a popular activist rallying cry, especially among progressives who see the Senate as a roadblock to sweeping new laws on issues such as voting rights and gun control <span class="citation" data-cites="moultonAbolishFilibusterElectoral2019 reidFilibusterSuffocatingWill2019 smithSenateRepublicanRadicalism2022">(see, e.g., <a href="#ref-moultonAbolishFilibusterElectoral2019" role="doc-biblioref">Moulton, 2019</a>; <a href="#ref-reidFilibusterSuffocatingWill2019" role="doc-biblioref">Reid, 2019</a>; <a href="#ref-smithSenateRepublicanRadicalism2022" role="doc-biblioref">Smith, 2022</a>)</span>.</p>
 </section>
-<section id="proposal-2-restoring-the-talking-filibuster" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="proposal-2-restoring-the-talking-filibuster"><span class="header-section-number">4.2</span> Proposal 2: Restoring the Talking Filibuster</h3>
-<p>One of two significant 1970s filibuster reforms (along with the lowering of the cloture threshold from 67 to 60) was the introduction of two-tracking: the current system under which the Senate can set aside a filibustered bill to move on to other legislation. Two-tracking prevented a filibuster from stopping all business of the Senate, but it also removed the physical costs of sustaining a lengthy talking filibuster <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022</a>)</span>. Thus, it is easy for minority-party senators to filibuster virtually every bill they oppose, helping contribute to the 60-vote Senate of today. Sen.&nbsp;Jeff Merkley, one of the most prominent senators pushing for filibuster reform today, has advocated a return to the talking filibuster. Under Merkley’s proposal, if a majority of the Senate votes in favor of cloture, but not the three-fifths necessary to invoke cloture, then senators must continuously debate on the floor to delay a final vote <span class="citation" data-cites="merkleyResolutionModifyingExtended2018">(<a href="#ref-merkleyResolutionModifyingExtended2018" role="doc-biblioref">S. Res. 725, 2018</a>)</span>. This filibuster reform failed by a 52-48 vote in 2022 during debate over the John Lewis Voting Rights Act <span class="citation" data-cites="carneyManchinSinemaJoin2022">(<a href="#ref-carneyManchinSinemaJoin2022" role="doc-biblioref">Carney, 2022</a>)</span>.</p>
+<section id="sec-restore-talking-filibuster" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="sec-restore-talking-filibuster"><span class="header-section-number">4.2</span> Proposal 2: Restoring the Talking Filibuster</h3>
+<p>One of two significant 1970s filibuster reforms (along with the lowering of the cloture threshold from 67 to 60) was the introduction of two-tracking: the current system under which the Senate can set aside a filibustered bill to move on to other legislation. Two-tracking prevented a filibuster from stopping all business of the Senate, but it also removed the physical costs of sustaining a lengthy talking filibuster <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022</a>)</span>. Thus, it is easy for minority-party senators to filibuster virtually every bill they oppose, helping contribute to the 60-vote Senate of today. Sen.&nbsp;Jeff Merkley, one of the most prominent senators pushing for filibuster reform today, has advocated a return to the talking filibuster. Under Merkley’s proposal, if a majority of the Senate votes in favor of cloture, but not the three-fifths necessary to invoke cloture, then senators must continuously debate on the floor to delay a final vote <span class="citation" data-cites="merkleyResolutionModifyingExtended2018">(<a href="#ref-merkleyResolutionModifyingExtended2018" role="doc-biblioref">S. Res. 725, 2018</a>)</span>. When a talking filibuster occurs, the Senate would, in effect, return temporarily to a single-tracked system on the floor. Supporters of the John Lewis Voting Rights Act aimed to implement a one-time restoration of the talking filibuster to pass that bill in 2022. However, this attempt failed by a 52-48 vote <span class="citation" data-cites="carneyManchinSinemaJoin2022">(<a href="#ref-carneyManchinSinemaJoin2022" role="doc-biblioref">Carney, 2022</a>)</span>.</p>
 </section>
 <section id="sec-flip-cloture-vote" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="sec-flip-cloture-vote"><span class="header-section-number">4.3</span> Proposal 3: Flipping the Cloture Vote</h3>
@@ -320,7 +383,7 @@ Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–202
 \pi(\alpha) = \left( \frac{\eta - .5}{.5} \right) ^ \alpha
 \]</span></p>
 <ul>
-<li><span class="math inline">\(\alpha\)</span> is a parameter indicating how much each additional coalition member contributes to the probability of passage. In effect, this parameter controls the steepness of the <span class="math inline">\(\pi\)</span> curve. As shown in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;2</a>, a higher value of <span class="math inline">\(\alpha\)</span> means that it takes more legislators in the supporting coalition to reach the same probability of passing a bill.
+<li><span class="math inline">\(\alpha\)</span> is a parameter indicating how much each additional coalition member contributes to the probability of passage. In effect, this parameter controls the steepness of the <span class="math inline">\(\pi\)</span> curve. As shown in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;4</a>, a higher value of <span class="math inline">\(\alpha\)</span> means that it takes more legislators in the supporting coalition to reach the same probability of passing a bill.
 <ul>
 <li><span class="math inline">\(\alpha \in (0, 1]\)</span>, so that as <span class="math inline">\(\alpha\)</span> increases toward 1, each additional legislator in the supporting coalition has a larger impact on the probability of passage.</li>
 </ul></li>
@@ -337,26 +400,26 @@ B = \frac{1 - \eta}{.5}
 EB = \pi B
 \]</span></p></li>
 </ul>
-<p>Since <span class="math inline">\(\pi\)</span> is an increasing function in <span class="math inline">\(\eta\)</span>, and <span class="math inline">\(B\)</span> is a decreasing function in <span class="math inline">\(\eta\)</span>, there is an inherent tradeoff in forming an optimally sized coalition. <a href="#fig-ws" class="quarto-xref">Figure&nbsp;2</a> below, reproduced from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 216</a>)</span>, illustrates how the expected benefits vary with <span class="math inline">\(\eta\)</span> for different values of <span class="math inline">\(\alpha\)</span>. <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 217</a>)</span> found that an <span class="math inline">\(\alpha\)</span> around 0.25 best fit the Senate of the late-19th and early-20th centuries.</p>
+<p>Since <span class="math inline">\(\pi\)</span> is an increasing function in <span class="math inline">\(\eta\)</span>, and <span class="math inline">\(B\)</span> is a decreasing function in <span class="math inline">\(\eta\)</span>, there is an inherent tradeoff in forming an optimally sized coalition. <a href="#fig-ws" class="quarto-xref">Figure&nbsp;4</a> below, reproduced from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 216</a>)</span>, illustrates how the expected benefits vary with <span class="math inline">\(\eta\)</span> for different values of <span class="math inline">\(\alpha\)</span>. <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 217</a>)</span> found that an <span class="math inline">\(\alpha\)</span> around 0.25 best fit the Senate of the late-19th and early-20th centuries.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ws" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-ws-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-ws-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5"><img src="full_paper_files/figure-html/fig-ws-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Expected benefits of passage under WS (maximum expected benefits marked)
+Figure&nbsp;4: Expected benefits of passage under WS (maximum expected benefits marked)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As demonstrated in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;2</a>, legislative entrepreneurs benefit from growing their supporting coalitions above the minimum majority, as additional bill proponents increase the probability of bill passage. Moreover, the expected benefits curve rises and falls gradually, so there are many near-optimally sized coalitions with a coalition size that approximates the optimal coalition size.</p>
+<p>As demonstrated in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;4</a>, legislative entrepreneurs benefit from growing their supporting coalitions above the minimum majority, as additional bill proponents increase the probability of bill passage. Moreover, the expected benefits curve rises and falls gradually, so there are many near-optimally sized coalitions with a coalition size that approximates the optimal coalition size.</p>
 </section>
 <section id="sec-wsk" class="level4" data-number="5.1.2">
 <h4 data-number="5.1.2" class="anchored" data-anchor-id="sec-wsk"><span class="header-section-number">5.1.2</span> The WS<sub>K</sub> Model</h4>
-<p>The WS<sub>K</sub> model modifies the probability curve <span class="math inline">\(\pi\)</span> to represent the Senate’s cloture rule. With the Senate cloture rule, the probability of passage jumps up when the coalition size passes the Senate’s cloture threshold, denoted as <span class="math inline">\(K\)</span> (which is 0.60 under the Senate’s current rules).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> When <span class="math inline">\(\eta\)</span> crosses <span class="math inline">\(K\)</span>, the probability function switches from <span class="math inline">\(\pi(\alpha)\)</span> to <span class="math inline">\(\pi(\alpha^*)\)</span>, with <span class="math inline">\(\alpha^* &lt; \alpha\)</span>, which scales up the probability.</p>
+<p>The second model from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006</a>)</span>, which I label WS<sub>K</sub>, modifies the probability curve <span class="math inline">\(\pi\)</span> to represent the Senate’s cloture rule. With the Senate cloture rule, the probability of passage jumps up when the coalition size passes the Senate’s cloture threshold, denoted as <span class="math inline">\(K\)</span> (which is 0.60 under the Senate’s current rules).<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> When <span class="math inline">\(\eta\)</span> crosses <span class="math inline">\(K\)</span>, the probability function switches from <span class="math inline">\(\pi(\alpha)\)</span> to <span class="math inline">\(\pi(\alpha^*)\)</span>, with <span class="math inline">\(\alpha^* &lt; \alpha\)</span>, which scales up the probability.</p>
 <p>Under WS<sub>K</sub>, the expected benefits are:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> <span class="math display">\[
 EB_K =
 \begin{cases}
@@ -364,16 +427,16 @@ EB_K =
 \pi(\alpha^*)B &amp; \text{if } \eta ≥ K
 \end{cases}
 \]</span></p>
-<p><a href="#fig-wsk" class="quarto-xref">Figure&nbsp;3</a> below, based on the figure from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 218</a>)</span> shows the expected benefits curves under the WS<sub>K</sub> model, with the current cloture threshold of <span class="math inline">\(K = 0.60\)</span>.</p>
+<p><a href="#fig-wsk" class="quarto-xref">Figure&nbsp;5</a> below, based on the figure from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 218</a>)</span> shows the expected benefits curves under the WS<sub>K</sub> model, with the current cloture threshold of <span class="math inline">\(K = 0.60\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-wsk" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-wsk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-wsk-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-wsk-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-glightbox="description: .lightbox-desc-6"><img src="full_paper_files/figure-html/fig-wsk-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wsk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Expected benefits of passage under WS<sub>K</sub> with a three-fifths cloture rule (maximum expected benefits marked)
+Figure&nbsp;5: Expected benefits of passage under WS<sub>K</sub> with a three-fifths cloture rule (maximum expected benefits marked)
 </figcaption>
 </figure>
 </div>
@@ -418,7 +481,7 @@ EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 <li>All senators support a bill (<span class="math inline">\(\eta = 1\)</span>). The proponents can pass the bill by unanimous consent and spend no floor time, resulting in <span class="math inline">\(C = 0\)</span> for all factions.</li>
 <li>A non-unanimous majority of senators supports a bill, but none of the opponents are willing to actively obstruct it (<span class="math inline">\(\eta \in (0.5, 1), \ \omega = 0\)</span>). In order to pass the bill, the proponents must spend some floor time for debate and a single passage vote. Since there are no obstructionists, the opponents are submitting to a passage vote without forcing a cloture vote. This results in a small <span class="math inline">\(C\)</span> for the proponents.</li>
 <li>A filibuster-proof majority of senators supports a bill, and at least one senator obstructs a bill (<span class="math inline">\(\eta \in [0.6, 1), \ \omega &gt; 0\)</span>). In this case, proponents may either spend floor time on holding a cloture vote, or wait for the obstructionist to debate until they submit to a final passage vote. The second option is rare in the modern Senate because of the high cost in floor time, but it is still an available strategy <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010</a>)</span>. For the obstructionists, debate would be even more costly, although they face no additional costs in the case of a cloture vote.</li>
-<li>The supporting coalition is smaller than the cloture threshold, and at least one senator obstructs a bill (<span class="math inline">\(\eta \in (0.5, 0.6), \ \omega &gt; 0\)</span>). Proponents would fail a cloture vote, so their only option for passing a bill is waiting out the obstructionists. Again, this is extremely costly in floor time (<span class="math inline">\(C_{prop, t}\)</span>). Accordingly, senators rarely employ this strategy in the modern Senate. This is why it is nearly impossible to pass a bill with fewer than 60 supporters nowadays.</li>
+<li>The supporting coalition is smaller than the cloture threshold, and at least one senator obstructs a bill (<span class="math inline">\(\eta \in (0.5, 0.6), \ \omega &gt; 0\)</span>). Proponents would fail a cloture vote, so their only option for passing a bill is waiting out the obstructionists. Again, this is extremely costly in floor time (<span class="math inline">\(C_{prop, t}\)</span>). Accordingly, senators rarely employ this strategy in the modern Senate. This is why it is nearly impossible to pass a bill with fewer than 60 supporters in today’s climate.</li>
 </ol>
 <p>New rules environments would allow for different strategies and different costs. These differences and their likely effects will be examined later in <a href="#sec-analyzing-proposals" class="quarto-xref">Section&nbsp;6</a>. Before then, it is necessary to demonstrate how to combine the benefits and costs for the different factions into expected utility to predict the outcome of a legislative fight.</p>
 </section>
@@ -430,7 +493,8 @@ EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 \sum EU_{prop} &amp;= \eta   \cdot (EB_{prop} - C_{prop}) \\
 \sum EU_{obst} &amp;= \omega \cdot (EB_{obst} - C_{obst})
 \end{aligned}
-\]</span> It is important to sum the benefits and costs among the members of each faction because those benefits and costs are shared. As a faction grows, even though an individual senator’s benefits and costs decrease, the total benefits and costs increase with the size of a faction.</p>
+\]</span></p>
+<p>It is important to sum the benefits and costs among the members of each faction because those benefits and costs are shared. As a faction grows, even though an individual senator’s benefits and costs decrease, the total benefits and costs increase with the size of a faction.</p>
 <p>If each faction receives expected utility <span class="math inline">\(\sum EU_i\)</span> from playing their respective strategy (that is, by representing a proponent or obstructionist faction), then the side with the greater (positive) expected utility will be more willing to engage in the legislative fight.<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> This utility-based method to predict the winner of a legislative fight is possible because senators have the ability to ensure a win at great cost (proponents by changing the rules or forcing the obstructionists to continuously debate, and obstructionists by being willing to continuously debate) if they evaluate that winning the fight produces enough benefits.<a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a></p>
 <p>At first glance, this rule to predict winners using expected utility may appear rigid, as if either the proponents or obstructionists are doomed from the start of a legislative fight. How does this rule explain the negotiation process that is so critical for proponents to grow the coalition to pass a bill, or for obstructionists to kill it? The answer is that the expected utility of these two factions constantly varies as the factions grow and shrink and they change their cost-benefit calculations.</p>
 </section>
@@ -448,20 +512,20 @@ EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 </section>
 </section>
 <section id="sec-analyzing-proposals" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="sec-analyzing-proposals"><span class="header-section-number">6</span> Analyzing Filibuster Rule Proposals</h2>
+<h2 data-number="6" class="anchored" data-anchor-id="sec-analyzing-proposals"><span class="header-section-number">6</span> Predicting the Effects of Proposed Filibuster Reforms</h2>
 <p>To analyze each of the proposed changes to the filibuster and cloture rule, we will predict how it affects the benefits and/or costs for the proponent and obstructionist factions. These impacts on the benefits and costs for each faction translate into probable impacts on the legislative goods of productivity, bipartisanship, and policy stability.</p>
-<section id="proposal-1-abolishing-the-filibuster-1" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="proposal-1-abolishing-the-filibuster-1"><span class="header-section-number">6.1</span> Proposal 1: Abolishing the Filibuster</h3>
-<p>Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits <span class="math inline">\(EB_{prop}\)</span> and decreasing their costs. The expected benefits increase because the probability of passage would increase from <span class="math inline">\(\pi(\alpha)\)</span> to <span class="math inline">\(\pi(\alpha^*)\)</span> for coalitions of less than 60 votes, as shown in <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;4</a> below.</p>
+<section id="sec-abolishing-filibuster" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="sec-abolishing-filibuster"><span class="header-section-number">6.1</span> Proposal 1: Abolishing the Filibuster</h3>
+<p>Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits <span class="math inline">\(EB_{prop}\)</span> and decreasing their costs. The expected benefits increase because the probability of passage would increase from <span class="math inline">\(\pi(\alpha)\)</span> to <span class="math inline">\(\pi(\alpha^*)\)</span> for coalitions of less than 60 votes, as shown in <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;6</a> below.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-abolish-filibuster" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-abolish-filibuster-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-abolish-filibuster-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-abolish-filibuster-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-glightbox="description: .lightbox-desc-7"><img src="full_paper_files/figure-html/fig-abolish-filibuster-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abolish-filibuster-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the filibuster
+Figure&nbsp;6: Change in proponents’ expected benefits before (left) and after (right) abolishing the filibuster
 </figcaption>
 </figure>
 </div>
@@ -471,12 +535,12 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 <p>Due to these effects on the proponent and obstructionist factions, it is very likely that abolishing the filibuster would increase productivity in the Senate because the expected utility of the proponents would outweigh that of the obstructionists far more often than it does today. However, abolishing the filibuster also decreases the incentives for majority-party senators to reach across the aisle and build bipartisan coalitions. Majority-party senators can pass policies closer to their ideal points because they no longer have to make compromises to reach 60 supporters. As a result, abolishing the filibuster would likely decrease bipartisanship and compromise. In addition, abolishing the filibuster would likely increase policy volatility in the Senate. Whenever the majority changes, they can pass a litany of policy priorities over all protest from the minority party. This is the current state of affairs in the House, in which new majorities often pass lengthy policy wish lists, such as the Democrats’ For the People Act of 2019 and the Republicans’ Secure the Border Act of 2023 <span class="citation" data-cites="sarbanesPeopleAct20192019 diaz-balartSecureBorderAct2023">(<a href="#ref-diaz-balartSecureBorderAct2023" role="doc-biblioref">H.R. 2, 2023</a>, <a href="#ref-sarbanesPeopleAct20192019" role="doc-biblioref">H.R. 1, 2019</a>)</span>. If the Senate was also able to end debate with a simple majority, these large policy packages would become law, introducing much more policy volatility.</p>
 <p>In summary, abolishing the filibuster would likely succeed at increasing productivity, but at the cost of decreasing bipartisanship and increasing policy volatility.</p>
 </section>
-<section id="proposal-2-restoring-the-talking-filibuster-1" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="proposal-2-restoring-the-talking-filibuster-1"><span class="header-section-number">6.2</span> Proposal 2: Restoring the Talking Filibuster</h3>
+<section id="proposal-2-restoring-the-talking-filibuster" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="proposal-2-restoring-the-talking-filibuster"><span class="header-section-number">6.2</span> Proposal 2: Restoring the Talking Filibuster</h3>
 <p>Restoring the talking filibuster would modestly increase expected benefits for the proponents, but the primary effects would occur on the cost side for each faction.</p>
 <p>Similar to abolishing the filibuster, restoring the talking filibuster would increase the probability of passage for coalitions between 51 and 60 votes. The probability would not increase up to <span class="math inline">\(\pi(\alpha^*)\)</span> because invoking cloture would still require 60 votes, but it would be easier for proponents to get those 60 cloture votes if the alternative is a costly talking filibuster.</p>
 <p>Under this rule, the cost of filibustering would increase massively for obstructionists. Currently, obstructionists merely have to <em>threaten</em> a filibuster to force a supermajority cloture vote. With the talking filibuster, obstructionists would actually have to continuously hold the floor and debate to prevent a simple majority vote on passage. It would be physically difficult for small groups of obstructionists to continue their debate long enough to defeat a determined majority. In the terms of the model, restoring the talking filibuster would produce a huge increase in <span class="math inline">\(C_{obst,d}\)</span>.</p>
-<p>The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. This increases costs on both sides (<span class="math inline">\(C_{prop,t}\)</span> and <span class="math inline">\(C_{obst,t}\)</span> in the model). The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time <span class="citation" data-cites="ExaminingFilibuster2010">(Mondale, in <a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010</a>)</span>. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns <span class="citation" data-cites="hammModifyingFilibusterMeans2012">(<a href="#ref-hammModifyingFilibusterMeans2012" role="doc-biblioref">Hamm, 2012</a>)</span>. Supporters of restoring the talking filibuster, including Sen.&nbsp;Jeff Merkley <span class="citation" data-cites="merkleyFilibusteredHowFix2024">(<a href="#ref-merkleyFilibusteredHowFix2024" role="doc-biblioref">Merkley &amp; Zamore, 2024</a>)</span> and former Sen.&nbsp;Patrick Leahy (D–VT) <span class="citation" data-cites="leahy2024">(<a href="#ref-leahy2024" role="doc-biblioref">personal communication, January 9, 2024</a>)</span>, believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen.&nbsp;Leahy, “you might see one or two [filibusters] a year” after this reform. Sen.&nbsp;Leahy’s prediction is well-founded in the history of the filibuster. Before the introduction of legislative two-tracking, which began the elimination of the talking filibuster, there had never been more than seven cloture motions in a full two-year Congress <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>, as shown in <a href="#fig-cloture-graph" class="quarto-xref" role="doc-biblioref">Figure&nbsp;1</a> above)</span>. However, with partisan polarization much stronger and the Senate norms much weaker today than in the 1970s, it is no certainty that filibusters would go back to those historical levels.</p>
+<p>The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. This increases costs on both sides (<span class="math inline">\(C_{prop,t}\)</span> and <span class="math inline">\(C_{obst,t}\)</span> in the model). The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time <span class="citation" data-cites="ExaminingFilibuster2010">(Mondale, in <a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010</a>)</span>. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns <span class="citation" data-cites="hammModifyingFilibusterMeans2012">(<a href="#ref-hammModifyingFilibusterMeans2012" role="doc-biblioref">Hamm, 2012</a>)</span>. Supporters of restoring the talking filibuster, including Sen.&nbsp;Jeff Merkley <span class="citation" data-cites="merkleyFilibusteredHowFix2024">(<a href="#ref-merkleyFilibusteredHowFix2024" role="doc-biblioref">Merkley &amp; Zamore, 2024</a>)</span> and former Sen.&nbsp;Patrick Leahy (D–VT) <span class="citation" data-cites="leahy2024">(<a href="#ref-leahy2024" role="doc-biblioref">personal communication, January 9, 2024</a>)</span>, believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen.&nbsp;Leahy, “you might see one or two [filibusters] a year” after this reform. Sen.&nbsp;Leahy’s prediction is well-founded in the history of the filibuster. Before the introduction of legislative two-tracking, which began the elimination of the talking filibuster, there had never been more than seven cloture motions in a full two-year Congress <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>, as shown in <a href="#fig-cloture-graph" class="quarto-xref" role="doc-biblioref">Figure&nbsp;3</a> above)</span>. However, with partisan polarization much stronger and the Senate norms much weaker today than in the 1970s, it is no certainty that filibusters would go back to those historical levels.</p>
 <p>The effects of restoring the talking filibuster would be more uncertain than the effects of abolishing the filibuster. It seems more likely than not that the productivity increase from the decreased number of filibusters would outweigh the longer time spent on each filibuster. The effects on bipartisanship and policy stability would also be smaller than under a Senate with an abolished filibuster. The ability of minority party senators to filibuster particularly objectionable bills would preserve incentives for bipartisanship and prevent the most extreme policy proposals from passing.</p>
 <p>Restoring the talking filibuster might have a smaller impact than abolishing the filibuster on productivity. On the other hand, this reform would do much less damage to bipartisanship and policy stability than abolishing the filibuster. Restoring the talking filibuster does a better job of balancing these three legislative goods.</p>
 </section>
@@ -489,52 +553,55 @@ Figure&nbsp;4: Change in proponents’ expected benefits after abolishing the fi
 </section>
 <section id="quantitative-analysis-how-much-impact-would-rule-changes-have" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</h2>
-<p>I present two quantitative analyses measuring the potential impacts of changes to the filibuster and cloture rule. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of these failed cloture votes. Second, I test the effect of the most notable filibuster rule change in the past 50 years: the nuclear option on presidential nominations.</p>
+<p>The theory I present here is very broad, and involves many factors that are hard to measure, that correlate strongly over time with other powerful political forces such as political polarization, or that have remained relatively constant over the history of the Senate. Thus, it is difficult to directly empirically evaluate how well my overall model describes the historical Senate. It would be even more difficult to empirically predict the effects of changes to the filibuster, as such models would necessarily involve creating beliefs about how a counterfactual Senate would operate.</p>
+<p>Thus, I present multiple smaller analyses which deal with specific facets of the overall theory. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of bills that fail at the cloture stage. Second, I test the effect of the most notable filibuster rule change in the past 50 years—the nuclear option on presidential nominations—and evaluate how well it fits my predictions about the effects of that reform.</p>
 <section id="the-costs-necessary-to-flip-cloture-votes" class="level3" data-number="7.1">
 <h3 data-number="7.1" class="anchored" data-anchor-id="the-costs-necessary-to-flip-cloture-votes"><span class="header-section-number">7.1</span> The Costs Necessary to Flip Cloture Votes</h3>
 <p>One of the main goals of any of the above filibuster reforms would be to enable the passage of bills that would otherwise be killed by a filibuster under the current rules. With a new cloture rule, or new costs of filibustering, legislators would be less willing and/or able to obstruct bills that have majority support in the Senate. As a result, bills that originally failed at the cloture stage might pass under new rules. This is especially true for bills that had less intense opposition by obstructionist senators. Under new rules, mild obstructionists would be more likely to yield to the wishes of the majority.</p>
 <p>Using a framework inspired by pivotal politics, I estimate how many failed cloture votes would have instead passed under rules that make filibustering more costly. In this analysis, I measure costs by translating them to the DW-NOMINATE ideological scale. Under pivotal politics, a legislator’s utility from a bill relates to how much it moves policy toward their ideal point <span class="citation" data-cites="krehbielPivotalPoliticsTheory1998">(<a href="#ref-krehbielPivotalPoliticsTheory1998" role="doc-biblioref">Krehbiel, 1998</a>)</span>. Therefore, under more costly filibuster rules, a legislator might allow a bill they oppose to pass if the personal costs of filibustering outweigh the ideological costs of the bill becoming law.</p>
 <p>To estimate the costs necessary to flip a cloture vote, I first find the pivotal senator; that is, the senator who voted Nay but could have been the 60th vote in favor of a cloture vote.<a href="#fn11" class="footnote-ref" id="fnref11" role="doc-noteref"><sup>11</sup></a> Then, I find how far that senator was in policy space from Voteview’s Yea-Nay cutting line on the cloture vote.</p>
-<p>For this analysis, I use the 431 failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.</p>
-<section id="analysis" class="level4" data-number="7.1.1">
-<h4 data-number="7.1.1" class="anchored" data-anchor-id="analysis"><span class="header-section-number">7.1.1</span> Analysis</h4>
-<p>To find potential pivotal votes for cloture, I use Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. <!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  --> For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a> shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
-<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
+<section id="data" class="level4" data-number="7.1.1">
+<h4 data-number="7.1.1" class="anchored" data-anchor-id="data"><span class="header-section-number">7.1.1</span> Data</h4>
+<p>For this analysis, I used the 431 failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.</p>
+<p>To find potential pivotal votes for cloture, I used Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> <a href="#fig-ira" class="quarto-xref">Figure&nbsp;7</a> shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;8</a> shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
 <div id="fig-ira" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/voteview_ira.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<a href="images/voteview_ira.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-glightbox="description: .lightbox-desc-8"><img src="images/voteview_ira.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Voteview vote probabilities on the Inflation Reduction Act (2022)
+Figure&nbsp;7: Voteview vote probabilities on the Inflation Reduction Act (2022)
 </figcaption>
 </figure>
 </div>
 <div id="fig-iija" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/voteview_iija.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<a href="images/voteview_iija.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9"><img src="images/voteview_iija.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)
+Figure&nbsp;8: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)
 </figcaption>
 </figure>
 </div>
-<p>To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering. Then, I found the <em>pivotal vote</em> on each failed cloture vote. If a cloture motion fell <span class="math inline">\(n\)</span> votes short of passing, I found the <span class="math inline">\(n\)</span>th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.</p>
-<p>Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a>, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members’ votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE. To account for these differences, I used the spread estimates included in the Voteview data downloads (columns <code>nominate_spread_1</code> and <code>nominate_spread_2</code> in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements. Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote’s distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.</p>
 </section>
-<section id="results" class="level4" data-number="7.1.2">
-<h4 data-number="7.1.2" class="anchored" data-anchor-id="results"><span class="header-section-number">7.1.2</span> Results</h4>
-<p><a href="#fig-cloture-costs" class="quarto-xref">Figure&nbsp;7</a> shows the cumulative distribution of these distances. The plot answers the question: “If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?”</p>
+<section id="analysis" class="level4" data-number="7.1.2">
+<h4 data-number="7.1.2" class="anchored" data-anchor-id="analysis"><span class="header-section-number">7.1.2</span> Analysis</h4>
+<p>The key data point for a failed cloture vote in this analysis is the pivotal vote that could have flipped the cloture vote to success. To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering. Then, I found the <em>pivotal vote</em> on each failed cloture vote. If a cloture motion fell <span class="math inline">\(n\)</span> votes short of passing, I found the <span class="math inline">\(n\)</span>th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.</p>
+<p>Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in <a href="#fig-ira" class="quarto-xref">Figure&nbsp;7</a> and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;8</a>, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members’ votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE. To account for these differences, I used the spread estimates included in the Voteview data downloads (columns <code>nominate_spread_1</code> and <code>nominate_spread_2</code> in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements. Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote’s distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.</p>
+</section>
+<section id="results" class="level4" data-number="7.1.3">
+<h4 data-number="7.1.3" class="anchored" data-anchor-id="results"><span class="header-section-number">7.1.3</span> Results</h4>
+<p><a href="#fig-cloture-costs" class="quarto-xref">Figure&nbsp;9</a> shows the cumulative distribution of these distances. The plot answers the question: “If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?”</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cloture-costs" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-cloture-costs-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-cloture-costs-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-glightbox="description: .lightbox-desc-10"><img src="full_paper_files/figure-html/fig-cloture-costs-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)
+Figure&nbsp;9: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)
 </figcaption>
 </figure>
 </div>
@@ -552,27 +619,27 @@ Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
 <table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Party</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">DW-NOMINATE Dim-1 median</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Liberal member</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Median member</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">Conservative member</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Party</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">DW-NOMINATE Dim-1 median</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Liberal member</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Median member</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Conservative member</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Democrat</td>
-<td style="text-align: right; width: 3cm;">-0.35</td>
-<td style="text-align: left; width: 2.8cm;">Tammy Baldwin (-0.49)</td>
-<td style="text-align: left; width: 2.8cm;">Richard Durbin (-0.35)</td>
-<td style="text-align: left; width: 2.8cm;">Mark Warner (-0.21)</td>
+<td style="text-align: center;">Democrat</td>
+<td style="text-align: center; width: 3cm;">-0.35</td>
+<td style="text-align: center; width: 2.8cm;">Tammy Baldwin (-0.49)</td>
+<td style="text-align: center; width: 2.8cm;">Richard Durbin (-0.35)</td>
+<td style="text-align: center; width: 2.8cm;">Mark Warner (-0.21)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Republican</td>
-<td style="text-align: right; width: 3cm;">0.54</td>
-<td style="text-align: left; width: 2.8cm;">Pete Ricketts (0.39)</td>
-<td style="text-align: left; width: 2.8cm;">John Barrasso (0.54)</td>
-<td style="text-align: left; width: 2.8cm;">Rick Scott (0.68)</td>
+<td style="text-align: center;">Republican</td>
+<td style="text-align: center; width: 3cm;">0.54</td>
+<td style="text-align: center; width: 2.8cm;">Pete Ricketts (0.39)</td>
+<td style="text-align: center; width: 2.8cm;">John Barrasso (0.54)</td>
+<td style="text-align: center; width: 2.8cm;">Rick Scott (0.68)</td>
 </tr>
 </tbody>
 </table>
@@ -589,26 +656,606 @@ Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
 </section>
 <section id="the-results-of-the-nuclear-option-on-presidential-nominations" class="level3" data-number="7.2">
 <h3 data-number="7.2" class="anchored" data-anchor-id="the-results-of-the-nuclear-option-on-presidential-nominations"><span class="header-section-number">7.2</span> The Results of the Nuclear Option on Presidential Nominations</h3>
+<p>Arguably one of the best ways to predict the impacts of future cloture reforms is to look at the results of past reforms. The largest rule change since the 1970s has been the nuclear option on presidential nominations. In 2013, Senate Democrats lowered the cloture threshold to a simple majority for all executive branch nominees and judicial nominees below the Supreme Court. Senate Republicans extended this reform to Supreme Court nominations in 2017. According to my model of legislative coalitions, the nuclear option would be expected to lead to smaller passing coalitions on these nominations. As discussed in <a href="#sec-abolishing-filibuster" class="quarto-xref">Section&nbsp;6.1</a>, the nuclear option increases the probability that a nominee is confirmed when there is less-than-supermajority support for a nominee. Thus, a president is more able to propose nominees who will receive smaller majorities in support of their confirmation.</p>
+<section id="data-1" class="level4" data-number="7.2.1">
+<h4 data-number="7.2.1" class="anchored" data-anchor-id="data-1"><span class="header-section-number">7.2.1</span> Data</h4>
+<p>For this analysis, I examined the 1479 votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;10</a>. This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-confirmation-vote-totals" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-confirmation-vote-totals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="full_paper_files/figure-html/fig-confirmation-vote-totals-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-glightbox="description: .lightbox-desc-11"><img src="full_paper_files/figure-html/fig-confirmation-vote-totals-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-confirmation-vote-totals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Senate confirmation votes on presidential nominations (1989-2022)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>I used the Voteview parties data to calculate the size of the president’s party’s caucus in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the Voteview parties data to calculate the distance between the two party medians in the first dimension of DW-NOMINATE. I used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;3</a>) to measure the prevalence of filibustering over time.</p>
+</section>
+<section id="analysis-1" class="level4" data-number="7.2.2">
+<h4 data-number="7.2.2" class="anchored" data-anchor-id="analysis-1"><span class="header-section-number">7.2.2</span> Analysis</h4>
+<p>To measure the impact of the nuclear option on supporting coalitions, I ran ordinary least-squares regressions predicting the <em>percent of votes</em> in favor of confirmation on nominations over 1989-2022. When all senators are present and voting, this response variable is equivalent to the <em>number of votes</em> in favor of confirmation. For brevity, I will use both descriptions of the response variable interchangeably. The primary explanatory variable of interest is whether a confirmation vote occurred before or after the nuclear option. In addition, I use the following control variables:</p>
+<ul>
+<li>Whether the vote is on a Supreme Court nomination</li>
+<li>Whether the vote is on a nomination for a Cabinet secretary (i.e., one of the heads of the 15 executive departments). Other Cabinet-level positions are not included, as these vary by administration.</li>
+<li>The size of the president’s party’s caucus in the Senate (normalized as described above)</li>
+<li>A time trend, expressed either as:
+<ul>
+<li>A count of Congresses (since the 100th Congress, so that the 101st Congress = 1 and the 117th Congress = 17), or</li>
+<li>Actual time since January 1st, 1989, in years</li>
+</ul></li>
+<li>A squared term of the time trend</li>
+<li>Inter-party distance, i.e., the distance between the two party medians in the first dimension of DW-NOMINATE</li>
+<li>The number of cloture motions in a Congress</li>
+</ul>
+<p>I present four versions of this model using four different forms of the time trend: using a Congress counter and an actual time trend, and with and without a squared term for each of those. The difference between the two basic forms of the time trend is that a Congress counter is an integer that treats all votes in the same Congress identically, while the actual time since 1989 is a real-valued number that continuously increases in time. <a href="#tbl-noms-time-trends" class="quarto-xref">Table&nbsp;2</a> illustrates this distinction. I considered a squared time trend because the downward trend in supporting coalitions on confirmation votes could also be attributed to the increased intensity of partisan competition over time (especially in the 2010s and 2020s), not just the nuclear option.<a href="#fn14" class="footnote-ref" id="fnref14" role="doc-noteref"><sup>14</sup></a></p>
+<div class="cell">
+<div id="tbl-noms-time-trends" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-noms-time-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Time trend values for two selected nominations, 117th Congress
+</figcaption>
+<div aria-describedby="tbl-noms-time-trends-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table do-not-create-environment cell table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: center;" data-quarto-table-cell-role="th">Nomination</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Date</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Congress counter</th>
+<th style="text-align: center;" data-quarto-table-cell-role="th">Years since 1989</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Avril Danica Haines</td>
+<td style="text-align: center;">Jan 20, 2021</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">32.05</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Steven M. Dettelbach</td>
+<td style="text-align: center;">Jul 12, 2022</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;">33.53</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="results-1" class="level4" data-number="7.2.3">
+<h4 data-number="7.2.3" class="anchored" data-anchor-id="results-1"><span class="header-section-number">7.2.3</span> Results</h4>
+<p><a href="#tbl-noms-regression" class="quarto-xref">Table&nbsp;3</a> shows the results of the regressions described above. The coefficients in <a href="#tbl-noms-regression" class="quarto-xref">Table&nbsp;3</a> give the effect of a one-unit change in each explanatory variable on the percentage of votes in favor of confirming a nominee. I will now proceed to review the results for each explanatory variable.</p>
+<div class="cell">
+<div id="tbl-noms-regression" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-noms-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Results of regressions predicting supporting coalitions on confirmation votes
+</figcaption>
+<div aria-describedby="tbl-noms-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+ 
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_7ad5aruv601yn0l4o7vz</title>
+    <style>
+.table td.tinytable_css_fcwfdrodfovsejs0wf4u, .table th.tinytable_css_fcwfdrodfovsejs0wf4u {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_8u8ngcpn2id8kr8iml7m, .table th.tinytable_css_8u8ngcpn2id8kr8iml7m {    text-align: left; }
+.table td.tinytable_css_8fbp1gua1dp5y5133jj7, .table th.tinytable_css_8fbp1gua1dp5y5133jj7 {    text-align: center; }
+.table td.tinytable_css_ga5ltl14wyzx15eojf71, .table th.tinytable_css_ga5ltl14wyzx15eojf71 {    text-align: center; }
+.table td.tinytable_css_qvzp7lh1det43p48gey5, .table th.tinytable_css_qvzp7lh1det43p48gey5 {    text-align: center; }
+.table td.tinytable_css_htgs8gl4emiwyqrvseei, .table th.tinytable_css_htgs8gl4emiwyqrvseei {    text-align: center; }
+.table td.tinytable_css_enm2ed81w2mtphqgope2, .table th.tinytable_css_enm2ed81w2mtphqgope2 {    border-bottom: solid 0.05em black; }
+    </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_7ad5aruv601yn0l4o7vz" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Model 1</th>
+                <th scope="col">Model 2</th>
+                <th scope="col">Model 3</th>
+                <th scope="col">Model 4</th>
+              </tr>
+        </thead>
+        <tfoot><tr><td colspan="5">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        <tbody>
+                <tr>
+                  <td>(Intercept)                     </td>
+                  <td>323.258***</td>
+                  <td>247.986***</td>
+                  <td>292.799***</td>
+                  <td>214.564***</td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(26.986)  </td>
+                  <td>(31.257)  </td>
+                  <td>(27.003)  </td>
+                  <td>(29.474)  </td>
+                </tr>
+                <tr>
+                  <td>Post-nuclear option             </td>
+                  <td>-3.640*   </td>
+                  <td>-2.257    </td>
+                  <td>-4.095*   </td>
+                  <td>-1.594    </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(1.689)   </td>
+                  <td>(1.703)   </td>
+                  <td>(1.707)   </td>
+                  <td>(1.733)   </td>
+                </tr>
+                <tr>
+                  <td>SCOTUS                          </td>
+                  <td>-15.665***</td>
+                  <td>-13.679** </td>
+                  <td>-16.570***</td>
+                  <td>-13.983** </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(4.596)   </td>
+                  <td>(4.583)   </td>
+                  <td>(4.619)   </td>
+                  <td>(4.579)   </td>
+                </tr>
+                <tr>
+                  <td>Cabinet                         </td>
+                  <td>0.722     </td>
+                  <td>1.588     </td>
+                  <td>1.399     </td>
+                  <td>1.580     </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(1.664)   </td>
+                  <td>(1.663)   </td>
+                  <td>(1.701)   </td>
+                  <td>(1.680)   </td>
+                </tr>
+                <tr>
+                  <td>President's party's size        </td>
+                  <td>-0.756*** </td>
+                  <td>-0.897*** </td>
+                  <td>-0.623*** </td>
+                  <td>-0.823*** </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(0.164)   </td>
+                  <td>(0.165)   </td>
+                  <td>(0.166)   </td>
+                  <td>(0.167)   </td>
+                </tr>
+                <tr>
+                  <td>Inter-party distance (unit: 0.1)</td>
+                  <td>-31.597***</td>
+                  <td>-20.387***</td>
+                  <td>-27.145***</td>
+                  <td>-15.145***</td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(3.512)   </td>
+                  <td>(4.232)   </td>
+                  <td>(3.462)   </td>
+                  <td>(3.924)   </td>
+                </tr>
+                <tr>
+                  <td>Cloture motions                 </td>
+                  <td>-0.035*** </td>
+                  <td>-0.005    </td>
+                  <td>-0.035*** </td>
+                  <td>0.001     </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(0.009)   </td>
+                  <td>(0.011)   </td>
+                  <td>(0.010)   </td>
+                  <td>(0.011)   </td>
+                </tr>
+                <tr>
+                  <td>Congress counter                </td>
+                  <td>3.677***  </td>
+                  <td>5.930***  </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>(0.492)   </td>
+                  <td>(0.686)   </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>Congress counter<sup>2</sup>    </td>
+                  <td>          </td>
+                  <td>-0.218*** </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>          </td>
+                  <td>(0.047)   </td>
+                  <td>          </td>
+                  <td>          </td>
+                </tr>
+                <tr>
+                  <td>Years since 1989                </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>1.496***  </td>
+                  <td>2.758***  </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>(0.244)   </td>
+                  <td>(0.314)   </td>
+                </tr>
+                <tr>
+                  <td>Years since 1989<sup>2</sup>    </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>-0.065*** </td>
+                </tr>
+                <tr>
+                  <td>                                </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>          </td>
+                  <td>(0.010)   </td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.                        </td>
+                  <td>1479      </td>
+                  <td>1479      </td>
+                  <td>1479      </td>
+                  <td>1479      </td>
+                </tr>
+                <tr>
+                  <td>R2                              </td>
+                  <td>0.336     </td>
+                  <td>0.345     </td>
+                  <td>0.328     </td>
+                  <td>0.345     </td>
+                </tr>
+                <tr>
+                  <td>R2 Adj.                         </td>
+                  <td>0.332     </td>
+                  <td>0.342     </td>
+                  <td>0.324     </td>
+                  <td>0.341     </td>
+                </tr>
+                <tr>
+                  <td>AIC                             </td>
+                  <td>12356.2   </td>
+                  <td>12336.4   </td>
+                  <td>12373.8   </td>
+                  <td>12337.3   </td>
+                </tr>
+                <tr>
+                  <td>BIC                             </td>
+                  <td>12403.9   </td>
+                  <td>12389.4   </td>
+                  <td>12421.5   </td>
+                  <td>12390.3   </td>
+                </tr>
+                <tr>
+                  <td>Log.Lik.                        </td>
+                  <td>-6169.124 </td>
+                  <td>-6158.197 </td>
+                  <td>-6177.918 </td>
+                  <td>-6158.664 </td>
+                </tr>
+                <tr>
+                  <td>F                               </td>
+                  <td>106.156   </td>
+                  <td>96.940    </td>
+                  <td>102.417   </td>
+                  <td>96.763    </td>
+                </tr>
+                <tr>
+                  <td>RMSE                            </td>
+                  <td>15.68     </td>
+                  <td>15.56     </td>
+                  <td>15.77     </td>
+                  <td>15.57     </td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      function styleCell_tinytable_mqny1cih1tzc13tzerpu(i, j, css_id) {
+        var table = document.getElementById("tinytable_7ad5aruv601yn0l4o7vz");
+        table.rows[i].cells[j].classList.add(css_id);
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_7ad5aruv601yn0l4o7vz');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_tinytable_mqny1cih1tzc13tzerpu(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_7ad5aruv601yn0l4o7vz");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 0, 'tinytable_css_fcwfdrodfovsejs0wf4u') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 1, 'tinytable_css_fcwfdrodfovsejs0wf4u') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 2, 'tinytable_css_fcwfdrodfovsejs0wf4u') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 3, 'tinytable_css_fcwfdrodfovsejs0wf4u') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 4, 'tinytable_css_fcwfdrodfovsejs0wf4u') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(1, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(2, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(3, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(4, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(5, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(6, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(7, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(8, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(9, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(10, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(11, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(12, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(13, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(14, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(15, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(16, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(17, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(18, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(19, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(20, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(21, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(23, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(24, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(25, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(26, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(27, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(28, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(29, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(30, 0, 'tinytable_css_8u8ngcpn2id8kr8iml7m') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(1, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(2, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(3, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(4, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(5, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(6, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(7, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(8, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(9, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(10, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(11, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(12, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(13, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(14, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(15, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(16, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(17, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(18, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(19, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(20, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(21, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(23, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(24, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(25, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(26, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(27, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(28, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(29, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(30, 1, 'tinytable_css_8fbp1gua1dp5y5133jj7') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(1, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(2, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(3, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(4, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(5, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(6, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(7, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(8, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(9, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(10, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(11, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(12, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(13, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(14, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(15, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(16, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(17, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(18, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(19, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(20, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(21, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(23, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(24, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(25, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(26, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(27, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(28, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(29, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(30, 2, 'tinytable_css_ga5ltl14wyzx15eojf71') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(1, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(2, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(3, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(4, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(5, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(6, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(7, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(8, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(9, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(10, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(11, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(12, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(13, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(14, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(15, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(16, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(17, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(18, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(19, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(20, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(21, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(23, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(24, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(25, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(26, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(27, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(28, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(29, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(30, 3, 'tinytable_css_qvzp7lh1det43p48gey5') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(0, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(1, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(2, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(3, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(4, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(5, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(6, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(7, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(8, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(9, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(10, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(11, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(12, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(13, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(14, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(15, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(16, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(17, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(18, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(19, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(20, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(21, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(23, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(24, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(25, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(26, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(27, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(28, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(29, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(30, 4, 'tinytable_css_htgs8gl4emiwyqrvseei') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 0, 'tinytable_css_enm2ed81w2mtphqgope2') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 1, 'tinytable_css_enm2ed81w2mtphqgope2') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 2, 'tinytable_css_enm2ed81w2mtphqgope2') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 3, 'tinytable_css_enm2ed81w2mtphqgope2') })
+window.addEventListener('load', function () { styleCell_tinytable_mqny1cih1tzc13tzerpu(22, 4, 'tinytable_css_enm2ed81w2mtphqgope2') })
+    </script>
+
+  
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The primary variable of interest is <em>Post-nuclear option</em>. The effect of the nuclear option is downward in all models, as expected. In agreement with <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;6</a>, the size of this effect is just a couple votes. However, the coefficient is only statistically significant on the models that do not use a squared time trend. I interpret this result further below.</p>
+<p>Supreme Court nominees receive massively lower supporting coalitions on their confirmation votes. This is no surprise, as Supreme Court nominations are some of the most high-profile and contentious nominations of a president’s term. Cabinet secretaries actually gain an extra vote or so relative to other nominees on average, although this effect is not statistically significant. Cabinet secretaries may not suffer the same confirmation-vote penalty as Supreme Court nominees because of a belief by senators that the president should be allowed to select Cabinet secretaries who align with the administration’s policy goals.</p>
+<p>One surprising result is that a larger Senate caucus for the president’s party is associated with a slightly lower average vote for the president’s nominees. This may simply be an artifact of the small sample of Congresses (17) in the data. Inter-party distance, the primary measure of partisan polarization in this analysis, has a very strong negative correlation with confirmation vote totals. More polarization means that senators from the opposite party of the president will be farther apart ideologically from most of the president’s nominees, thus leading to more intense opposition. Like the nuclear option, the amount of filibustering in a Congress only shows a significant downward effect in the models without a squared time trend. A downward effect aligns with my model’s predictions.</p>
+<p>Finally, we get to the time trends. There is little difference between the two measurement schemes (Congress counter versus years since 1989).<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> The models using the Congress counter are slightly more accurate, suggesting that the higher granularity of the <em>years since 1989</em> variable does not provide additional predictive power. The coefficients on the linear time trends are all significant and positive, serving to dampen some of the negative effects of the above trends, most of which have correlated with time. The coefficients on the squared terms are strongly negative, giving the predicted supporting coalitions a downward curve over time.</p>
+<p><a href="#fig-predicted-confirmation-votes" class="quarto-xref">Figure&nbsp;11</a> shows the predictions generated by Model 2, which is the most accurate (by a slight amount) of the four models. This plot illustrates the sharp decline in supporting coalitions on confirmation votes that has occurred since the start of the Trump administration. Since most of the explanatory variables are measured on a whole-Congress level, the predictions are the same for almost all confirmation votes in each Congress (all except Supreme Court and Cabinet nominees). Even though the model treats all votes in a Congress identically, the model correlates rather well with the historical outcomes of confirmation votes (R<sup>2</sup> = 0.35).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-predicted-confirmation-votes" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-predicted-confirmation-votes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="full_paper_files/figure-html/fig-predicted-confirmation-votes-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-glightbox="description: .lightbox-desc-12"><img src="full_paper_files/figure-html/fig-predicted-confirmation-votes-1.png" class="img-fluid figure-img" width="672"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-predicted-confirmation-votes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Predicted outcomes of Senate confirmation votes (1989-2022)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations truly accelerated, as shown in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;10</a>), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.</p>
+</section>
 </section>
 </section>
 <section id="conclusion" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">8</span> Conclusion</h2>
 <p>By extending Wawro and Schickler’s model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.</p>
 <p>Abolishing the filibuster would have the biggest impact on productivity, at the cost of decreasing bipartisanship and policy stability. Flipping the cloture vote would have little impact on these legislative goods, likely making it an unsatisfactory choice for reform. Restoring the talking filibuster may produce a meaningful increase in productivity while limiting the potential negative effects on bipartisanship and policy volatility. This analysis supports the views of reformers such as Sen.&nbsp;Jeff Merkley, who promotes restoring the talking filibuster as the best option for filibuster reform.</p>
-<p>Performing formal analysis, such as the analysis in this paper, is an important step in choosing the best option for the Senate filibuster moving forward. Empirical analysis is still needed to validate these findings, but this is the first step on the way from guessing to proving the effects of redesigning the Senate filibuster.</p>
+<p>The two quantitative analyses in this paper reinforce specific aspects of the larger model. First, I found that increasing the costs of obstruction by an amount equivalent to 0.1 to 0.2 units in DW-NOMINATE policy space would produce the largest change in cloture outcomes relative to the size of the costs. Second, I found that the nuclear options on presidential nominations in the 2010s indeed decreased the average size of supporting coalitions on confirmation votes, validating a prediction of the model. These two analyses are not sufficient to validate the entire model, but they provide some necessary empirical evidence for portions of the model.</p>
+<p>My game theory-based model of legislative coalitions provides a holistic framework for reformers to evaluate how potential new filibuster rules may impact the operation of the Senate. The legislative goods of productivity versus gridlock, bipartisanship versus position-taking, and policy stability versus policy volatility provide clear attributes for evaluating new rules. With these tools, senators and activists alike can make more sound decisions about the future of the Senate filibuster.</p>
 <section id="extensions-and-limitations" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="extensions-and-limitations"><span class="header-section-number">8.1</span> Extensions and Limitations</h3>
-<p>The primary extension needed to corroborate my findings is empirical evidence for my predictions. I plan to use a mix of empirical approaches to back up my model. First, I plan to test how the nuclear option on presidential nominations changed the passing coalitions on executive branch and judicial confirmation votes. Second, I plan to measure how large of a cost filibustering would need to impose in order to change bill outcomes. For this component, I could either analyze a few bills as case studies, or do a large-N study to observe an overall “cost curve” for votes.</p>
-<p>A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically <span class="citation" data-cites="uslanerPartisanshipCoalitionFormation1975">(<a href="#ref-uslanerPartisanshipCoalitionFormation1975" role="doc-biblioref">Uslaner, 1975</a>)</span>. To explain this, <span class="citation" data-cites="grosecloseBuyingSupermajorities1996">Groseclose &amp; Snyder (<a href="#ref-grosecloseBuyingSupermajorities1996" role="doc-biblioref">1996</a>)</span> show how it may be “cheaper” for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. I plan to accommodate this finding into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model will help prevent it from overly predicting minimal majorities.</p>
+<p>A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically <span class="citation" data-cites="uslanerPartisanshipCoalitionFormation1975">(<a href="#ref-uslanerPartisanshipCoalitionFormation1975" role="doc-biblioref">Uslaner, 1975</a>)</span>. To explain this, <span class="citation" data-cites="grosecloseBuyingSupermajorities1996">Groseclose &amp; Snyder (<a href="#ref-grosecloseBuyingSupermajorities1996" role="doc-biblioref">1996</a>)</span> show how it may be “cheaper” for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. This finding could be accommodated into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model would help prevent it from overly predicting minimal majorities.</p>
+<p>Additionally, a more comprehensive empirical analysis would improve the strength of my predictions. The quantitative analyses I performed in this paper support two specific facets of my model, but most of the model would benefit from additional empirical evidence. Simulating the outcomes of different filibuster rules using agent-based modeling represents one potential approach to reinforce the overall model <span class="citation" data-cites="laverPartyCompetitionAgentbased2012">(<a href="#ref-laverPartyCompetitionAgentbased2012" role="doc-biblioref">Laver &amp; Sergenti, 2012</a>)</span>.</p>
 </section>
 </section>
-
-
-
-
-
-<div id="quarto-appendix" class="default"><section id="the-filibustr-package" class="level2 appendix" data-number="9"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">9</span> The <code>filibustr</code> Package</h2><div class="quarto-appendix-contents">
-
+<section id="the-filibustr-package" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="the-filibustr-package"><span class="header-section-number">9</span> The <code>filibustr</code> Package</h2>
 <p>In addition to the primary findings of my research, I intend to benefit future political science researchers by providing publicly available solutions to the data challenges I face in my work. I am publishing these solutions in the form of an open-source R package, named <code>filibustr</code> <span class="citation" data-cites="feinleibFilibustrDataUtilities2024">(<a href="#ref-feinleibFilibustrDataUtilities2024" role="doc-biblioref">Feinleib, 2023/2024</a>)</span>. The <code>filibustr</code> package provides a set of utilities to improve the data-gathering process for research on Congress.</p>
 <p>The <code>filibustr</code> package is inspired by the <code>baseballr</code> package, which has long provided similar functionality for the baseball analytics community <span class="citation" data-cites="pettiBaseballrAcquiringAnalyzing2024">(<a href="#ref-pettiBaseballrAcquiringAnalyzing2024" role="doc-biblioref">Petti &amp; Gilani, 2016/2024</a>)</span>. Just as <code>baseballr</code> enables baseball researchers to access data from popular baseball statistics websites in R, <code>filibustr</code> enables political science researchers to access data from popular congressional data websites.</p>
 <p>The <code>filibustr</code> package provides two primary benefits: data consistency and an easy-to-use interface. The functions in <code>filibustr</code> automate the process of importing data, which reduces the risk of inconsistencies introduced by user errors and allows researchers to always work with the most current data. <code>filibustr</code> also makes it easy to work with data on Congress. First, I am following the best practices for R package development, making the <code>filibustr</code> interface clean, intuitive, and fast. Second, using <code>filibustr</code> removes the need for researchers to download data files to their computers, getting the data straight into an R environment. In addition to the primary research audience, this benefits students who are learning how to perform data analysis in R. <code>filibustr</code> removes some of the setup steps involved with working with congressional data, so students can get straight into their analysis.</p>
@@ -622,16 +1269,38 @@ Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
 <p>Just as my research is motivated by a gap in the research on the filibuster, I am developing the <code>filibustr</code> package because it provides solutions I cannot find anywhere else. Voteview provides the <code>Rvoteview</code> package for querying their data, but I have needs not covered by that package <span class="citation" data-cites="sonnetRvoteviewVoteviewData2019">(<a href="#ref-sonnetRvoteviewVoteviewData2019" role="doc-biblioref">Sonnet &amp; Lewis, 2015/2019</a>)</span>. The <code>Rvoteview</code> package is primarily focused on querying specific parts of the Voteview database, while I am more interested in working with their datasets at large. Additionally, <code>Rvoteview</code> does not seem to be actively maintained, with no updates since 2019 and the notice “WARNING: This package is under construction” on GitHub <span class="citation" data-cites="sonnetRvoteviewVoteviewData2019">(<a href="#ref-sonnetRvoteviewVoteviewData2019" role="doc-biblioref">Sonnet &amp; Lewis, 2015/2019</a>)</span>.</p>
 <p>While I am continuing to develop <code>filibustr</code>, I have already published version 0.2.0 to CRAN, the primary R package repository. You can install the latest version of the package in R using <code>install.packages("filibustr")</code>.</p>
 <p>As the frontiers of quantitative political science research and the best practices in data science continue to advance, it is important that political scientists have access to up-to-date research tools. I am committed to maintaining <code>filibustr</code> as long as the package is demanded. By following the best practices for R package development, I will make <code>filibustr</code> a robust package from the initial release. Then, I plan to support <code>filibustr</code> long-term so it can become a valuable resource for many future political science researchers.</p>
-</div></section><section id="dedication-and-acknowledgements" class="level2 appendix" data-number="10"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">10</span> Dedication and Acknowledgements</h2><div class="quarto-appendix-contents">
+</section>
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="dedication-and-acknowledgements" class="level2 appendix" data-number="10"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">10</span> Dedication and Acknowledgements</h2><div class="quarto-appendix-contents">
 
 <p><em>In memory of Michael Berman. You’re the reason this all happened.</em></p>
 <p>I’d like to thank my advisors, Joe Ferrie and Daniel Galvin, and the Political Science Honors Program coordinator, Andrew Roberts. I received additional guidance from Sen.&nbsp;Patrick Leahy, Northwestern professors Laurel Harbridge-Yong, Brian Libgober, and Jorg Spenkuch, and Ryan DeTamble of American University.</p>
 <p>The study resulting in this thesis was assisted by a Conference Travel Grant from the Office of Undergraduate Research which is administered by Northwestern University’s Office of the Provost. However, the conclusions, opinions, and other statements in this thesis are the author’s and not necessarily those of the sponsoring institution.</p>
 <div style="page-break-after: always;"></div>
-</div></section><section id="references" class="level2 unnumbered appendix" data-number="11"><h2 class="quarto-appendix-heading"></h2><div class="quarto-appendix-contents">
+</div></section><section id="references" class="level2 appendix" data-number="11"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">11</span> References</h2><div class="quarto-appendix-contents">
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;1&nbsp;(a): Growth in ideological polarization in Congress, 1971-2022 (reproduced from <span class="citation" data-cites="desilverPolarizationTodayCongress2022">Desilver (<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">2022</a>)</span>)</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;1&nbsp;(b): Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">Harbridge-Yong et al. (<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">2023</a>)</span>)</span>
+<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;1&nbsp;(c): Decline in productivity in Congress, 1989-2023 (reproduced from <span class="citation" data-cites="solenderCapitolHillStunner2023">Solender (<a href="#ref-solenderCapitolHillStunner2023" role="doc-biblioref">2023</a>)</span>)</span>
+<span class="glightbox-desc lightbox-desc-4">Figure&nbsp;3: Frequency of cloture actions, 65th–117th Congresses (1917–2022)</span>
+<span class="glightbox-desc lightbox-desc-5">Figure&nbsp;4: Expected benefits of passage under WS (maximum expected benefits marked)</span>
+<span class="glightbox-desc lightbox-desc-6">Figure&nbsp;5: Expected benefits of passage under WS<sub>K</sub> with a three-fifths cloture rule (maximum expected benefits marked)</span>
+<span class="glightbox-desc lightbox-desc-7">Figure&nbsp;6: Change in proponents’ expected benefits before (left) and after (right) abolishing the filibuster</span>
+<span class="glightbox-desc lightbox-desc-8">Figure&nbsp;7: Voteview vote probabilities on the Inflation Reduction Act (2022)</span>
+<span class="glightbox-desc lightbox-desc-9">Figure&nbsp;8: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)</span>
+<span class="glightbox-desc lightbox-desc-10">Figure&nbsp;9: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)</span>
+<span class="glightbox-desc lightbox-desc-11">Figure&nbsp;10: Senate confirmation votes on presidential nominations (1989-2022)</span>
+<span class="glightbox-desc lightbox-desc-12">Figure&nbsp;11: Predicted outcomes of Senate confirmation votes (1989-2022)</span>
+</div>
 
-</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">11 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-agiestaCNNPollAmericans2021" class="csl-entry" role="listitem">
+Agiesta, J. (2021, April 29). <em>CNN Poll: Americans want bipartisanship, but most don’t think it will happen</em>. CNN. <a href="https://www.cnn.com/2021/04/29/politics/cnn-poll-bipartisanship/index.html">https://www.cnn.com/2021/04/29/politics/cnn-poll-bipartisanship/index.html</a>
+</div>
 <div id="ref-americanpoliticalscienceassociationMoreResponsibleTwoparty1950" class="csl-entry" role="listitem">
 American Political Science Association. (1950). Toward a more responsible two-party system. <em>The American Political Science Review</em>, <em>44</em>(3). <a href="https://www.jstor.org/stable/i333592">https://www.jstor.org/stable/i333592</a>
 </div>
@@ -722,8 +1391,14 @@ Krasno, J., &amp; Robinson, G. (2013, December 16). If the filibuster does survi
 <div id="ref-krehbielPivotalPoliticsTheory1998" class="csl-entry" role="listitem">
 Krehbiel, K. (1998). <em>Pivotal politics: A theory of U.S. lawmaking</em>. University of Chicago Press.
 </div>
+<div id="ref-laverPartyCompetitionAgentbased2012" class="csl-entry" role="listitem">
+Laver, M., &amp; Sergenti, E. (2012). <em>Party competition: An agent-based model</em>. Princeton University Press.
+</div>
 <div id="ref-leahy2024" class="csl-entry" role="listitem">
 Leahy, P. J. (2024, January 9). [Interview by M. Feinleib; Telephone].
+</div>
+<div id="ref-leeInsecureMajoritiesCongress2016" class="csl-entry" role="listitem">
+Lee, F. E. (2016). <em>Insecure majorities: Congress and the perpetual campaign</em>. University of Chicago Press.
 </div>
 <div id="ref-lewisVoteviewCongressionalRollcall2024" class="csl-entry" role="listitem">
 Lewis, J. B., Poole, K., Rosenthal, H., Boche, A., Rudkin, A., &amp; Sonnet, L. (2024). <em>Voteview: Congressional roll-call votes database</em>. <a href="https://voteview.com/">https://voteview.com/</a>
@@ -760,6 +1435,9 @@ For the People Act of 2019, H.R. 1, 116th Cong. (2019). <a href="https://www.con
 </div>
 <div id="ref-shawAbolishingFilibusterIsn2021" class="csl-entry" role="listitem">
 Shaw, K. (2021, November 5). <em>Abolishing the filibuster isn’t the only way to protect voting rights</em>. Time. <a href="https://time.com/6113965/filibuster-voting-rights/">https://time.com/6113965/filibuster-voting-rights/</a>
+</div>
+<div id="ref-skelleyHowMuchAmericans2021" class="csl-entry" role="listitem">
+Skelley, G. (2021, June 4). <em>How much do Americans really care about bipartisanship?</em> FiveThirtyEight. <a href="https://fivethirtyeight.com/features/how-much-do-americans-really-care-about-bipartisanship/">https://fivethirtyeight.com/features/how-much-do-americans-really-care-about-bipartisanship/</a>
 </div>
 <div id="ref-smithSenateRepublicanRadicalism2022" class="csl-entry" role="listitem">
 Smith, S. S. (2022). Senate Republican radicalism and the need for filibuster reform. <em>The Forum</em>, <em>19</em>(4), 585–602. <a href="https://doi.org/10.1515/for-2021-2032">https://doi.org/10.1515/for-2021-2032</a>
@@ -806,6 +1484,9 @@ Wang, A. B., Sotomayor, M., Caldwell, L. A., &amp; Kane, P. (2023, June 8). Hous
 <div id="ref-wawroFilibusterObstructionLawmaking2006" class="csl-entry" role="listitem">
 Wawro, G. J., &amp; Schickler, E. (2006). <em>Filibuster: Obstruction and lawmaking in the U.S. Senate</em>. Princeton University Press.
 </div>
+<div id="ref-yokleyVotersLargelyBelieve2021" class="csl-entry" role="listitem">
+Yokley, E. (2021, June 1). <em>Voters largely believe Biden wants bipartisanship, but they don’t agree with White House’s new definition of the term</em>. Morning Consult Pro. <a href="https://pro.morningconsult.com/articles/bipartisanship-gop-democrats-biden-polling">https://pro.morningconsult.com/articles/bipartisanship-gop-democrats-biden-polling</a>
+</div>
 </div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
@@ -813,13 +1494,17 @@ Wawro, G. J., &amp; Schickler, E. (2006). <em>Filibuster: Obstruction and lawmak
 <li id="fn2"><p>As explained in <a href="#sec-costs" class="quarto-xref">Section&nbsp;5.2.3</a>, it is more accurate to use the term “expected benefits” over “expected utility” in this model. From now on, I use “expected benefits” when describing this variable in Wawro and Schickler’s model.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>For simplicity, WS ignores the case of a tie. One could handle ties by setting <span class="math inline">\(\eta\)</span> to <span class="math inline">\(\frac{50}{101}\)</span> or <span class="math inline">\(\frac{51}{101}\)</span> depending on the vice president’s support of a bill, but this is a minor addition.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Wawro and Schickler do not use the <span class="math inline">\(K\)</span> variable, instead fixing the threshold at 0.67. This was the value of <span class="math inline">\(K\)</span> for the 1917 cloture rule, their primary subject of analysis. Introducing the <span class="math inline">\(K\)</span> variable allows generalization to other cloture thresholds.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>Wawro and Schickler express this function using an indicator function. This equivalent piecewise expression is easier to understand.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Wawro and Schickler express this function using an indicator function. I find this equivalent piecewise expression easier to understand.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6"><p>That is, in every instance of “expected benefits” in <a href="#sec-wawro-schickler" class="quarto-xref">Section&nbsp;5.1</a>, <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006</a>)</span> would have used the phrase “expected utility.”<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7"><p>If a faction receives negative expected utility, then they would simply surrender the fight.<a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn8"><p>Some commenters have questioned this assumption that senators act rationally, arguing that senators often do a poor job of evaluating the costs and benefits of their actions. Accurately predicting one’s costs and benefits is not a requirement of rationality, however. Rationality merely requires that actors behave according to the costs and benefits they <em>believe</em> exist, regardless of whether those beliefs are accurate. Thus, even a “foolish” actor can be a rational actor.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>Although a hold is not technically a filibuster, a senator’s power to enforce their hold arises from an implicit threat to filibuster the measure at concern <span class="citation" data-cites="heitshusenFilibustersClotureSenate2017 oleszekHoldsSenate2017">(<a href="#ref-heitshusenFilibustersClotureSenate2017" role="doc-biblioref">Heitshusen, 2017</a>; <a href="#ref-oleszekHoldsSenate2017" role="doc-biblioref">Oleszek, 2017</a>)</span>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn10"><p>Perhaps “abolishing the filibuster” is not the most accurate term. The term has been around for likely well over a century, however <span class="citation" data-cites="SenateRulesProposition1925">(<a href="#ref-SenateRulesProposition1925" role="doc-biblioref"><span>“The Senate Rules,”</span> 1925, p. 399</a>)</span>, and I am in no position to rename it.<a href="#fnref10" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn11"><p>On presidential nominations since the nuclear option, the threshold is a simple majority. I assume the vice president supports their president’s nominees and would therefore cast a tie-breaking vote to invoke cloture, so the majority threshold is 50 votes. This is supported by vice presidents’ records on cloture votes. Through the end of 2023, Vice President Kamala Harris cast the tie-breaking vote to invoke cloture on 13 of Joe Biden’s nominees. Former Vice President Mike Pence did the same for 3 of Donald Trump’s nominees <span class="citation" data-cites="TiebreakingVotesCast2023">(<a href="#ref-TiebreakingVotesCast2023" role="doc-biblioref"><em>Tie-Breaking Votes</em>, 2023</a>)</span>.<a href="#fnref11" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn12"><p>These two votes are not failed cloture votes, so they are not part of the analysis. They are simply two high-profile votes that are useful for illustrating how DW-NOMINATE and Voteview’s vote probabilities work.<a href="#fnref12" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn13"><p>One potential confounding variable is senators’ knowledge of whether their individual votes are required for confirmation. Before the nuclear option, senators from the opposite party of the president may have voted to confirm nominees they personally opposed because they knew nominations required 60 votes to overcome a filibuster. These “insincere” votes of support may have arisen from a respect for the president’s authority to select their executive branch leadership and, to a slightly lesser extent, select federal judges who share their ideology. After the nuclear option, if the president’s party enjoys a Senate majority, then senators from the other party know their votes do not impact the ultimate outcome of the confirmation vote, so they are now more free to express their personal views through their votes.<a href="#fnref13" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn14"><p>The intensity of partisan competition is a distinct factor from ideological polarization, although the two concepts are related. The increasing partisan competition over recent decades is the key observation of <em>Insecure Majorities</em> <span class="citation" data-cites="leeInsecureMajoritiesCongress2016">(<a href="#ref-leeInsecureMajoritiesCongress2016" role="doc-biblioref">Lee, 2016</a>)</span>.<a href="#fnref14" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn15"><p>The coefficients on the Congress counter appear larger because a single Congress lasts two years.<a href="#fnref15" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main>
 <!-- /main column -->
@@ -1211,6 +1896,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 

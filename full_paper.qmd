@@ -14,7 +14,7 @@ date-format: long
 abstract: |
   In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
 
-  In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of "legislative goods," including productivity, bipartisanship, and policy stability. I test the effects of a series of filibuster rule proposals on these legislative goods, including proposals much more creative than the "nuclear option."
+  In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of "legislative goods," including productivity, bipartisanship, and policy stability. I test the effects of three different filibuster rule proposals on these legislative goods.
 
   To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. Using this model, which excels at explaining the evolution of past filibuster fights, I predict the outcomes of legislative battles under different filibuster rules. The results will inform activists and senators in future debates over filibuster reform — which will inevitably return the next time a popular bill is stymied by the Senate’s supermajoritarian rules.
 keywords: 
@@ -24,14 +24,18 @@ keywords:
   - cloture
 format:
   pdf:
+    toc-depth: 2
     shift-heading-level-by: -1
-  html: default
+    output-file: "Feinleib_Redesigning_the_Filibuster_2024.pdf"
+  html:
+    toc-depth: 3
 bibliography: full_bib.json
 csl: apa.csl
 toc: true
 number-sections: true
 lof: true
 lot: true
+lightbox: true
 execute:
   echo: false
 ---
@@ -41,25 +45,109 @@ execute:
 ```{r packages}
 #| message: false
 
-# packages used
+## packages used
+# tidyverse
 library(dplyr)
 library(ggplot2)
+library(lubridate) # in nominations analysis
 library(readr)
 library(stringr)
 library(tidyr)
 
-library(filibustr)
-library(kableExtra)
+# other
+library(filibustr) # data
+library(jtools) # regression table
+library(kableExtra) # tables
+library(knitr) # customizing content for PDF vs. HTML format
+library(modelsummary) # regression table (if it works)
 library(rbbt) # citations
 library(rlang) # expr()'s used in plots
 ```
 
 ## Introduction
-In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
+In today's hyper-partisan political environment, it is a common complaint that Congress is broken.
+[Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased [@desilverPolarizationTodayCongress2022; @harbridge-yongBipartisanPathEffective2023, as shown in @fig-pew-polarization and @fig-hvw-pbca]. As a result, productivity has fallen to historic lows for the modern Congress [@solenderCapitolHillStunner2023, as shown in @fig-axios-productivity].]{.content-visible when-format="html"}
+[Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased [@desilverPolarizationTodayCongress2022; @harbridge-yongBipartisanPathEffective2023, as shown in @fig-pew-polarization-pdf and @fig-hvw-pbca-pdf]. As a result, productivity has fallen to historic lows for the modern Congress [@solenderCapitolHillStunner2023, as shown in @fig-axios-productivity-pdf].]{.content-visible when-format="pdf"}
+
+```{r plot declining bipartisanship (from HVW 2023)}
+## data import
+# using online download
+# hvw_s_data <- get_hvw_data("s")
+# hvw_hr_data <- get_hvw_data("hr")
+
+# local files
+hvw_s_data <- read_csv("data/hvw_s_data.csv", show_col_types = FALSE)
+hvw_hr_data <- read_csv("data/hvw_hr_data.csv", show_col_types = FALSE)
+
+## data manipulation
+# get mean PBCA by Congress for each chamber
+hvw_s <- hvw_s_data |> 
+  group_by(congress) |> 
+  # senate data uses election year, not Congress year
+  summarize(year = first(year) + 1,
+            pbca_s = mean(mean_prop_cospon_opp_spon_SN, na.rm = TRUE))
+
+hvw_hr <- hvw_hr_data |> 
+  group_by(congress) |> 
+  summarize(year = first(year),
+            pbca_hr = mean(mean_prop_cospon_opp_spon_HR, na.rm = TRUE))
+
+# PBCA in both chambers by Congress
+pbca_df <- inner_join(hvw_s, hvw_hr, by = c("congress", "year")) |> 
+  pivot_longer(cols = c(pbca_s, pbca_hr),
+               names_to = "chamber",
+               names_prefix = "pbca_",
+               values_to = "pbca") |> 
+  mutate(chamber = case_match(chamber,
+                              "s" ~ "Senate",
+                              "hr" ~ "House"))
+
+## plot figure
+# plot reproduced from HVW (2023)
+hvw_pbca_plot <- ggplot(pbca_df, aes(x = year, y = pbca)) + 
+  geom_line(aes(lty = chamber)) +
+  scale_y_continuous(limits = c(0, 0.6)) +
+  labs(x = "Year Congress Began",
+       y = "Proportion Bipartisan\nCosponsors Attracted",
+       lty = "Chamber")
+
+# ggsave("images/hvw_pbca_plot.png", hvw_pbca_plot,
+#        width = 2400, height = 1800, units = "px")
+```
+
+::: {.content-visible when-format="html" #fig-intro-plots layout-ncol=3 layout-valign="bottom"}
+![Growth in ideological polarization in Congress, 1971-2022 (reproduced from @desilverPolarizationTodayCongress2022)](images/desilver_polarization.png){#fig-pew-polarization fig-alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right."}
+
+![Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from @harbridge-yongBipartisanPathEffective2023)](images/hvw_pbca_plot.png){#fig-hvw-pbca fig-alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in \"The Bipartisan Path to Effective Lawmaking\" (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period."}
+
+![Decline in productivity in Congress, 1989-2023 (reproduced from @solenderCapitolHillStunner2023)](images/Axios_productivity_graph.png){#fig-axios-productivity fig-alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data."}
+
+Increasing polarization, decreasing bipartisanship and productivity in Congress
+:::
+
+::: {.content-visible when-format="pdf" #fig-intro-plots-pdf layout-nrow=3}
+![Growth in ideological polarization in Congress, 1971-2022 (reproduced from @desilverPolarizationTodayCongress2022)](images/desilver_polarization.png){#fig-pew-polarization-pdf fig-alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right." height=2.3in}
+
+![Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from @harbridge-yongBipartisanPathEffective2023)](images/hvw_pbca_plot.png){#fig-hvw-pbca-pdf fig-alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in \"The Bipartisan Path to Effective Lawmaking\" (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period." height=2.3in}
+
+![Decline in productivity in Congress, 1989-2023 (reproduced from @solenderCapitolHillStunner2023)](images/Axios_productivity_graph.png){#fig-axios-productivity-pdf fig-alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data." height=2.3in}
+
+Increasing polarization, decreasing bipartisanship, and productivity in Congress
+:::
+
+The Senate filibuster and cloture rule have received a large portion of the blame for this gridlock. The current rules and practices around the filibuster have created a de facto requirement for a 60-vote supermajority to pass almost any legislation through the Senate [@kogerFilibusteringPoliticalHistory2010]. This state of a "60-vote Senate" has sparked widespread calls from activists and senators alike to reform or even abolish the filibuster.
 
 In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of "legislative goods," including productivity, bipartisanship, and policy stability. I test the effects of three proposed filibuster rules: abolishing the filibuster, restoring the talking filibuster, and flipping the cloture vote.
 
-To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions. Via this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen. Jeff Merkley.
+To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the benefits of obstruction and the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions.
+Using this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen. Jeff Merkley. Abolishing the filibuster would likely sacrifice bipartisanship and policy stability in the name of productivity. Flipping the cloture vote, if instituted without more substantial reforms, would not have very large impacts on the legislative goods.
+
+I supplement that primary result with two separate quantitative analyses investigating specific aspects of the overall model. First, I estimate the impacts of higher-cost obstruction on the number of bills that pass the Senate. Through this analysis, I identify the size of the costs that would produce the greatest effects on obstruction relative to those costs.
+Next, I perform a regression analysis to measure the impact that the nuclear option has had on Senate confirmation votes for presidential nominations. The regressions support the predictions of my model, although more data from after the nuclear option is needed to strengthen these findings.
+
+This combination of a new, holistic framework for analyzing proposed filibuster rules and quantitative analyses to reinforce the findings of that model provides a comprehensive set of tools for senators and activists alike to make sound decisions about the future of the Senate filibuster.
+
+Finally, I introduce the `filibustr` R package, which provides utilities for gathering data for research on Congress. The functions in the `filibustr` package can improve data consistency in political science research through an easy-to-use interface. This package provides conveniences that are already standard in fields such as baseball analytics, but have thus far been missing for political science. Through the `filibustr` package, my research's impact on political science can extend well beyond my findings on the filibuster.
 
 ## Literature Review
 Research on the filibuster falls under the broader research area of parties, partisanship, and polarization in Congress. Much of the existing research on the filibuster aims to explain the evolution of the tactic and model the effect of the current and previous filibuster and cloture rules on legislative conflicts. I extend this research by applying formal modeling techniques to predict the effects of proposed new Senate rules around the filibuster and identify the best rule proposal for improving the functioning of the Senate.
@@ -67,6 +155,7 @@ Research on the filibuster falls under the broader research area of parties, par
 ### History of the Filibuster
 The modern practice of the filibuster is the product of a long history of evolutions and changes to the Senate's rules and norms. Understanding the modern filibuster, and how new filibuster rules could change the Senate, therefore requires some grounding in this history.
 
+#### Majority Rule in the Early Senate
 The rules of the first Congress were naturally heavily influenced by the ideas of the Framers of the Constitution. There was a broad consensus among the Framers that majority rule was the best way for a legislature to operate. The Framers had seen firsthand how the supermajority voting rule of the Confederation Congress had debilitated the federal government under the Articles of Confederation [@coenenOriginalistCaseCongressional2012, p. 1140]. Roger Sherman remarked that "to require more than a majority to decide a question was always embarrassing" [@farrandRecordsFederalConvention1911, p. 450]. In Federalist 22,  @hamiltonFederalistNo221787 wrote of requiring a supermajority for legislation:
 
 > This is one of those refinements which, in practice, has an effect the reverse of what is expected from it in theory. The necessity of unanimity in public bodies, or of something approaching towards it, has been founded upon a supposition that it would contribute to security. But its real operation is to embarrass the administration, to destroy the energy of the government, and to substitute the pleasure, caprice, or artifices of an insignificant, turbulent, or corrupt junto, to the regular deliberations and decisions of a respectable majority.
@@ -76,15 +165,17 @@ Thus, the Senate indeed functioned as a majoritarian institution. Members of the
 In fact, the Senate rules originally included the previous question motion, which sets up a vote to end debate and immediately move to a final passage vote. The previous question motion is still part of the House rules, and is a regular step in passing legislation in the House. 
 However, the principle of majority rule was mostly enforced by a set of norms (sometimes called the Senate Code), not written rules. The Senate was so dedicated to these norms that the body removed the previous question from the rules in 1806, believing that a formal rule was unnecessary in light of the Senate's strong norms against superfluous debate [@jentlesonKillSwitchRise2022, p. 47].
 
-The Senate operated as a majoritarian body according to the Senate Code with few exceptions in the 19th century. The event many histories mark as the first origins of the modern filibuster occurred in 1841. In opposition of a Whig bill to re-establish the Bank of the United States, Sen. John Calhoun (D–SC) organized a group of slave-state Democratic senators to make one floor speech after another and stall the bill. After weeks of this obstruction, Sen. Henry Clay (Whig–KY), the lead proponent of the bank bill, threatened to change the rules to restore the previous question motion. Calhoun erupted at the prospect of the Senate imposing limitations on debate, invoking the principle of minority rights to defend the right he claimed to unlimited debate [@jentlesonKillSwitchRise2022, p. 52]. These principles of minority rights and unlimited debate, first applied by Calhoun, have been central to defenses of the filibuster ever since.
+The Senate operated as a majoritarian body according to the Senate Code with few exceptions in the 19th century. The event many histories mark as the first origins of the modern filibuster occurred in 1841. In opposition of a Whig bill to re-establish the Bank of the United States, Sen. John Calhoun (D--SC) organized a group of slave-state Democratic senators to make one floor speech after another and stall the bill. After weeks of this obstruction, Sen. Henry Clay (Whig--KY), the lead proponent of the bank bill, threatened to change the rules to restore the previous question motion. Calhoun erupted at the prospect of the Senate imposing limitations on debate, invoking the principle of minority rights to defend the right he claimed to unlimited debate [@jentlesonKillSwitchRise2022, p. 52]. These principles of minority rights and unlimited debate, first applied by Calhoun, have been central to defenses of the filibuster ever since.
 
-A formal rule for ending debate in the Senate finally came in 1917. At the end of the congressional session, a group of antiwar senators successfully killed a bill to arm American ships for protection during the First World War. President Woodrow Wilson condemned the actions of this "little group of willful men" and the rules of the Senate that allowed it [@TextPresidentStatement1917]. Wilson sparked massive public outcry, and the Senate came back into session to pass the armed ships bill and a cloture rule to prevent similar obstruction in the future. The senators settled on a rule by which a two-thirds vote of present and voting senators could end debate. This was the original version of Rule XXII, which governs the filibuster and cloture today. The two-thirds supermajority was a compromise by the rule's supporters, who largely wanted a simple majority cloture rule, so that the cloture rule's opponents would allow it to pass [@ExaminingFilibuster2010, p. 18, testimony of Sarah A. Binder].
+#### The Original Cloture Rule
+The Senate finally instituted a formal rule for ending debate in 1917. At the end of the congressional session, a group of antiwar senators successfully killed a bill to arm American ships for protection during the First World War. President Woodrow Wilson condemned the actions of this "little group of willful men" and the rules of the Senate that allowed it [@TextPresidentStatement1917]. Wilson sparked massive public outcry, and the Senate came back into session to pass the armed ships bill and a cloture rule to prevent similar obstruction in the future.
+The senators settled on a rule by which a two-thirds vote of present and voting senators could end debate. This was the original version of Rule XXII, which governs the filibuster and cloture today. The two-thirds supermajority was a compromise by the rule's supporters, who largely wanted a simple majority cloture rule, so that the cloture rule's opponents would allow it to pass [@ExaminingFilibuster2010, p. 18, testimony of Sarah A. Binder].
 
 Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in @fig-cloture-graph below, the cloture rule was used only on rare occasions for the first several decades after 1917 [@unitedstatessenateSenateActionCloture2024].
 
 ```{r cloture actions graph}
 #| label: fig-cloture-graph
-#| fig-cap: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
+#| fig-cap: Frequency of cloture actions, 65th--117th Congresses (1917--2022)
 
 cloture_actions <- get_senate_cloture_votes() |> 
   filter(congress < 118)
@@ -121,7 +212,11 @@ ggplot(cloture_data, aes(x = congress, y = n_actions)) +
         panel.grid.major.x = element_blank())
 ```
 
-The Senate was generally able to pass legislation without resorting to the cloture rule &mdash; with the exception of civil rights bills, which were frequently and systematically filibustered. Southern Democratic senators successfully killed nine of the 12 civil rights bills considered in the Senate between 1901 and 1956 with filibusters [@kogerFilibusteringPoliticalHistory2010, p. 116]. The longest speech in Senate history, a continuous speech of over 24 hours by Sen. Strom Thurmond (D–SC), came in protest of the 1957 Civil Rights Act, which ultimately passed despite the filibuster. Then-Majority Leader Lyndon Johnson (D–TX) threatened the southern Democrats that he would impose a majority cloture rule if they didn't let the 1957 Civil Rights Act pass; otherwise, they likely would have gone all-out to kill this bill, too [@kogerFilibusteringPoliticalHistory2010, p. 121]. The landmark 1964 Civil Rights Act faced the longest filibuster in Senate history &mdash; 57 working days before the bill finally passed [@kogerFilibusteringPoliticalHistory2010, p. 170]. It is important to note that these filibusters required the obstructionists to continuously hold the floor to filibuster. The length of these filibusters was determined by the endurance of the obstructionists. If debate ended at any point, the bills were able to pass by majority vote.
+The Senate was generally able to pass legislation without resorting to the cloture rule --- with the exception of civil rights bills, which were frequently and systematically filibustered. Southern Democratic senators successfully killed nine of the 12 civil rights bills considered in the Senate between 1901 and 1956 with filibusters [@kogerFilibusteringPoliticalHistory2010, p. 116].
+The longest speech in Senate history, a continuous speech of over 24 hours by Sen. Strom Thurmond (D--SC), came in protest of the 1957 Civil Rights Act, which ultimately passed despite the filibuster. Then-Majority Leader Lyndon Johnson (D--TX) threatened the southern Democrats that he would impose a majority cloture rule if they didn't let the 1957 Civil Rights Act pass; otherwise, they likely would have gone all-out to kill this bill, too [@kogerFilibusteringPoliticalHistory2010, p. 121].
+The landmark 1964 Civil Rights Act faced the longest filibuster in Senate history --- 57 working days before the bill finally passed [@kogerFilibusteringPoliticalHistory2010, p. 170]. It is important to note that these filibusters required the obstructionists to continuously hold the floor to filibuster. The length of these filibusters was determined by the endurance of the obstructionists. If debate ended at any point, the bills were able to pass by majority vote.
+
+#### The Modern Filibuster Evolves
 
 ```{r cloture stats}
 # first Congress with >= 70 cloture votes
@@ -137,30 +232,35 @@ votes_in_116th_117th <- cloture_actions |>
   pull(votes_on_cloture)
 ```
 
-The rule changes that created the filibuster as it is known today occurred in the 1970s. At the time, senators grew frustrated as talking filibusters, which totally shut down the Senate floor, prevented the Senate from accomplishing their growing workload. Majority Leader Mike Mansfield (D–MT) introduced a system of legislative "two-tracking," under which the Senate would debate filibustered bills for a few hours a day, then move on to other legislative work for the rest of the day [@kogerFilibusteringPoliticalHistory2010, p. 137]. Two-tracking made it easier for the Senate to deal with a larger workload in the finite legislative session, but it also reduced the costs to obstructionists of having to continuously hold the floor to sustain a filibuster. Notably, talking filibusters remained the normal behavior for years after the introduction of two-tracking [@leahy2024]. Filibusters remained relatively rare as a result.^[The first Congress with over 70 cloture votes was not until `r first_over_70_votes`. For reference, there were `r paste(votes_in_116th_117th, collapse = " and ")` cloture votes during the last two Congresses [@unitedstatessenateSenateActionCloture2024].]
+The rule changes that created the filibuster as it is known today occurred in the 1970s. At the time, senators grew frustrated as talking filibusters, which totally shut down the Senate floor, prevented the Senate from accomplishing their growing workload. Majority Leader Mike Mansfield (D--MT) introduced a system of legislative "two-tracking," under which the Senate would debate filibustered bills for a few hours a day, then move on to other legislative work for the rest of the day [@kogerFilibusteringPoliticalHistory2010, p. 137]. Two-tracking made it easier for the Senate to deal with a larger workload in the finite legislative session, but it also reduced the costs to obstructionists of having to continuously hold the floor to sustain a filibuster. Notably, talking filibusters remained the normal behavior for years after the introduction of two-tracking [@leahy2024]. Filibusters remained relatively rare as a result.^[The first Congress with over 70 cloture votes was not until `r first_over_70_votes`. For reference, there were `r paste(votes_in_116th_117th, collapse = " and ")` cloture votes during the last two Congresses [@unitedstatessenateSenateActionCloture2024].]
 
 The other major filibuster rule change came in 1975, when the cloture threshold under Rule XXII was reduced from two-thirds to the present level of three-fifths of the Senate. Senators at the time felt that the Senate had "become paralyzed" under the two-thirds requirement, and saw three-fifths as "the line that would assure deliberation and prevent debilitation" [@ExaminingFilibuster2010, p. 146, testimony of Walter F. Mondale]. Subtly, the cloture threshold changed from two-thirds of *present and voting* senators to three-fifths of *all* senators. This change means that it now takes 60 votes to invoke cloture, regardless of the number of senators in attendance. Obstructionists no longer have to be present to filibuster, but proponents have to be present to end the filibuster.
 
-Finally, at the same time, senators created one of the techniques used today to sidestep the filibuster: budget reconciliation. The most significant feature of reconciliation bills is that they are not subject to the filibuster, as Senate debate on reconciliation bills is limited to 20 hours [@jacobiFilibusterReconciliationFuture2013, p. 295]. As a result, the reconciliation process, which was originally intended to prevent budget deficits, has expanded to become a major avenue for passing legislation, including laws that actually grow the deficit by increasing spending or cutting taxes. Obama's Health Care and Education Reconciliation Act of 2010 (which amended the Affordable Care Act), Trump's Tax Cuts and Jobs Act of 2017, and Biden's American Rescue Plan Act of 2021 and Inflation Reduction Act of 2022 were all passed using budget reconciliation. Just as two-tracking took decades to end the talking filibuster, it took decades for budget reconciliation to be used as a versatile tool for averting the filibuster.
+Finally, at the same time, senators created one of the techniques used today to sidestep the filibuster: budget reconciliation. The most significant feature of reconciliation bills is that they are not subject to the filibuster, as Senate debate on reconciliation bills is limited to 20 hours [@jacobiFilibusterReconciliationFuture2013, p. 295]. 
+This reconciliation loophole was originally intended as a mechanism to help Congress balance the federal budget. However, the Senate Republican majority in 1996 was able to establish a new precedent removing the requirement for reconciliation bills to reduce budget deficits [@merkleyFilibusteredHowFix2024]. This newfound flexibility, along with the increasing strength of the filibuster, turned the reconciliation process into a major avenue for passing legislation. Obama's Health Care and Education Reconciliation Act of 2010 (which amended the Affordable Care Act), Trump's Tax Cuts and Jobs Act of 2017, and Biden's American Rescue Plan Act of 2021 and Inflation Reduction Act of 2022 were all passed using budget reconciliation. As the filibuster has grown increasingly more difficult to overcome, reconciliation has become a critical tool for Senate majorities to pass otherwise impossible policy priorities.
 
-In the decades since the above reforms, the filibuster has strengthened so much that invoking cloture with a 60-vote supermajority is now a de facto requirement for legislating in the Senate. In response, there have been efforts from members of both parties to break the power of the filibuster. In 2010, the Senate held a series of hearings exploring options for reforming the filibuster. The Senate banned the use of the "secret hold," mandating that Senators publicly attach their name to their filibusters, and reduced the number of executive branch positions requiring Senate confirmation [@hammModifyingFilibusterMeans2012, p. 751]. However, the Senate rejected a set of more comprehensive filibuster reforms. These rejected filibuster reforms included Sen. Tom Harkin's (D–IA) proposal to reduce the cloture threshold by three votes after every failed cloture vote (ultimately allowing for majority cloture) [@harkinResolutionAmendingStanding2011], restoring the talking filibuster [@udallResolutionImproveDebate2011], and an admittedly complex proposal by Sen. Michael Bennet to flip the cloture vote (as explained in @sec-flip-cloture-vote) and create a dynamic cloture threshold that shifts between requiring 41 and 45 obstructionists to sustain a filibuster [@bennetResolutionImprovingSenate2010].
+In the decades since the above reforms, the filibuster has strengthened so much that invoking cloture with a 60-vote supermajority is now a de facto requirement for legislating in the Senate. In response, there have been efforts from members of both parties to break the power of the filibuster. In 2010, the Senate held a series of hearings exploring options for reforming the filibuster. The Senate banned the use of the "secret hold," mandating that Senators publicly attach their name to their filibusters, and reduced the number of executive branch positions requiring Senate confirmation [@hammModifyingFilibusterMeans2012, p. 751].
+However, the Senate rejected a set of more comprehensive filibuster reforms. These rejected filibuster reforms included Sen. Tom Harkin's (D--IA) proposal to reduce the cloture threshold by three votes after every failed cloture vote (ultimately allowing for majority cloture) [@harkinResolutionAmendingStanding2011], restoring the talking filibuster [@udallResolutionImproveDebate2011, as explained in @sec-restore-talking-filibuster], and an admittedly complex proposal by Sen. Michael Bennet to flip the cloture vote (as explained in @sec-flip-cloture-vote) and create a dynamic cloture threshold that shifts between requiring 41 and 45 obstructionists to sustain a filibuster [@bennetResolutionImprovingSenate2010].
 While the Senate failed to meaningfully reform the filibuster at large in 2011, the filibuster has been totally removed from the confirmation process for presidential nominees. In 2013, Democrats abolished the filibuster on executive branch nominees (including Cabinet positions) and judicial nominees below the Supreme Court. Republicans subsequently abolished the filibuster on Supreme Court nominees in 2017. The abolition of the filibuster on presidential nominations has renewed calls to abolish the filibuster for all legislation [e.g., @becketTrumpCallsEnd2017; @bresnahanTrumpGOPDump2018; @moultonAbolishFilibusterElectoral2019; @reidFilibusterSuffocatingWill2019].
-The most recent push for filibuster reform came in 2021–2022, during the debate on the John Lewis Freedom to Vote Act. During the debate, various Democratic activists and lawmakers advocated for a slew of filibuster reforms to pass the high-priority voting rights bill [@barnesFilibusterReformComing2021; @riegerWhereDemocraticSenators2024; @shawAbolishingFilibusterIsn2021]. Sen. Jeff Merkley (D–OR) led a push to reinstate the talking filibuster for the John Lewis Act, but it ultimately failed by a 52–48 vote [@carneyManchinSinemaJoin2022].
+The most recent push for filibuster reform happened in 2021--2022, during the debate on the John Lewis Freedom to Vote Act. During the debate, various Democratic activists and lawmakers advocated for a slew of filibuster reforms to pass the high-priority voting rights bill [@barnesFilibusterReformComing2021; @riegerWhereDemocraticSenators2024; @shawAbolishingFilibusterIsn2021]. Sen. Jeff Merkley (D--OR) led a push to reinstate the talking filibuster for the John Lewis Act, but it ultimately failed by a 52--48 vote [@carneyManchinSinemaJoin2022].
 
-The evolution of the filibuster, especially in the 20th and 21st centuries, has mirrored the growth in partisan polarization, the strengthening of party discipline, and the weakening of Senate norms over the same time period. Thus, research on parties and polarization in Congress complements this history of the filibuster.
+The evolution of the filibuster, especially in the 20th and 21st centuries, has tracked with the growth in partisan polarization, the strengthening of party discipline, and the weakening of Senate norms over the same time period. Thus, research on parties and polarization in Congress complements this history of the filibuster.
 
 ### Parties, Partisanship, and Polarization in Congress
-The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes [@krehbielPivotalPoliticsTheory1998]. According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the *filibuster pivot* — that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the *veto pivot* as well (the senator whose vote puts the majority over the veto override threshold).
+The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes [@krehbielPivotalPoliticsTheory1998].
+According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the *filibuster pivot*—that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the *veto pivot* as well (the senator whose vote puts the majority over the veto override threshold).
 Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s [@grayUnpackingPivotalPolitics2017], when the use of the cloture rule skyrocketed, as shown in @fig-cloture-graph above [@unitedstatessenateSenateActionCloture2024].
 Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.
 
-Another key factor in the effects of the filibuster is the interaction between the filibuster and the high levels of polarization and partisanship in Congress today. Since the early 1970s, when the current filibuster rules were formed, ideological polarization in the Senate — defined as the gap between the average ideology of the two parties — has grown by 0.34 points, according to DW-NOMINATE [@desilverPolarizationTodayCongress2022]. Despite the growing polarization in the Senate, bipartisanship remains an important step in passing laws. On a whole-Congress level, the “enacting coalitions” for major laws were as bipartisan in the 2010s as they were in the 1970s [@curryNonpartyGovernmentBipartisan2019]. Even with the parties farther apart than they have been in generations, successful lawmaking still requires the support of legislators from both parties. The durability and benefits of bipartisanship also apply on an individual legislator level. Bipartisan behavior makes legislators more successful at enacting their policy goals, regardless of party polarization and whether the legislator is in the majority or minority party [@harbridge-yongBipartisanPathEffective2023]. Together, these studies show that bipartisanship helps legislative productivity, both for individual legislators and for Congress as a whole.
+Another key factor in the effects of the filibuster is the interaction between the filibuster and the high levels of polarization and partisanship in Congress today. Since the early 1970s, when the current filibuster rules were formed, ideological polarization in the Senate — defined as the gap between the average ideology of the two parties — has grown by 0.34 points, according to DW-NOMINATE [@desilverPolarizationTodayCongress2022].
+Despite the growing polarization in the Senate, bipartisanship remains an important step in passing laws. On a whole-Congress level, the “enacting coalitions” for major laws were as bipartisan in the 2010s as they were in the 1970s [@curryNonpartyGovernmentBipartisan2019]. Even with the parties farther apart than they have been in generations, successful lawmaking still requires the support of legislators from both parties.
+The durability and benefits of bipartisanship also apply on an individual legislator level. Bipartisan behavior makes legislators more successful at enacting their policy goals, regardless of party polarization and whether the legislator is in the majority or minority party [@harbridge-yongBipartisanPathEffective2023]. Together, these studies show that bipartisanship helps legislative productivity, both for individual legislators and for Congress as a whole.
 
 ### Research on the Filibuster
 Two prominent books on the filibuster have most directly inspired my research. The first of these is @wawroFilibusterObstructionLawmaking2006, which explained the impact of the Senate's original 1917 cloture rule by modeling the incentives of legislative entrepreneurs before and after the introduction of the rule.
 @kogerFilibusteringPoliticalHistory2010 responded to Wawro and Schickler by focusing more heavily on the costs of legislative obstruction (and the costs to the majority of withstanding it). Koger also presented a different model of the filibuster that is more explicitly based on game theory. My model incorporates Koger's focus on costs into Wawro and Schickler's original model.
 
-The filibuster is also the subject of plenty of normative research, especially in search of reforms to the practice. The filibuster is a visible feature of the Senate that often works to delay or kill popular legislation, making it one of the most frequently targeted institutions in Congress for reformers. The late Senate Majority Leader Harry Reid (D–NV), who eliminated the filibuster for executive branch and judicial nominations besides the Supreme Court, continued to advocate for abolishing the filibuster for the rest of his life [-@reidFilibusterSuffocatingWill2019]. Reid’s Senate chief of staff, Adam Jentleson (now chief of staff for Sen. John Fetterman (D–PA)), finds that the filibuster was not intended by the Framers and disputes the Senate’s concept of the right to unlimited debate, which undergirds the filibuster [-@jentlesonKillSwitchRise2022]. Since Sen. Reid left the Senate, Sen. Jeff Merkley has become the new leading advocate for filibuster reform. Merkley, however, points to restoring the talking filibuster as the best rule change [@merkleyFilibusteredHowFix2024].
+The filibuster is also the subject of plenty of normative research, especially in search of reforms to the practice. The filibuster is a visible feature of the Senate that often works to delay or kill popular legislation, making it one of the most frequently targeted institutions in Congress for reformers. The late Senate Majority Leader Harry Reid (D--NV), who eliminated the filibuster for executive branch and judicial nominations besides the Supreme Court, continued to advocate for abolishing the filibuster for the rest of his life [-@reidFilibusterSuffocatingWill2019]. Reid’s Senate chief of staff, Adam Jentleson (now chief of staff for Sen. John Fetterman (D--PA)), finds that the filibuster was not intended by the Framers and disputes the Senate’s concept of the right to unlimited debate, which undergirds the filibuster [-@jentlesonKillSwitchRise2022]. Since Sen. Reid left the Senate, Sen. Jeff Merkley has become the new leading advocate for filibuster reform. Merkley, however, points to restoring the talking filibuster as the best rule change [@merkleyFilibusteredHowFix2024].
 
 I combine the above findings on the impact of partisanship and polarization in Congress with specific research on the filibuster to predict the effects of filibuster rule changes on a set of objectives for the Senate to pursue. These characteristics, which I call legislative goods, must be clearly defined in order to evaluate the costs and benefits of a new filibuster rule. I now proceed to explain these legislative goods.
 
@@ -185,14 +285,20 @@ Gridlock refers to this inability to pass policies that are supported by a major
 Thus, there is a spectrum between absolute gridlock and absolute productivity. There is a broad consensus that the Senate is currently too far on the side of gridlock. A good filibuster rule will move the Senate toward greater productivity.
 
 ### Bipartisanship, Dealmaking, and Compromise
-These concepts can be defined distinctly, but are highly correlated, so it is reasonable to consider them together. Bipartisanship refers to the willingness and ability of senators to work with members of the other party to pass laws. Dealmaking and compromise refer to the frequency of agreements between senators that help to pass laws. Senators are independent actors within the body, so passing meaningful legislation often requires proponents to make deals with skeptical senators to convince them to support a proposal. This often means working out a compromise that is acceptable to multiple factions in the Senate. Bipartisanship is a special case of dealmaking and compromise, in which senators from opposite parties make these types of agreements.
+These concepts can be defined distinctly, but are highly correlated, so it is reasonable to consider them together. Bipartisanship refers to the willingness and ability of senators to work with members of the other party to pass laws. Dealmaking and compromise refer to the frequency of agreements between senators that help to pass laws. Thus, bipartisanship is an important special case of dealmaking and compromise, referring to deals between senators across parties.
+Senators are independent actors within the body, so passing meaningful legislation often requires proponents to make deals with skeptical senators to convince them to support a proposal. This often means working out a compromise that is acceptable to multiple factions in the Senate.
 
-The converse of bipartisanship, dealmaking, and compromise is individualistic or partisan position-taking. When legislators prioritize standing firm on their positions over working to compromise, it is harder for Congress to pass bills, even those that a majority of members clearly support over the status quo. Individualistic position-taking can also hurt the ability of majorities to enact their agendas. This has occured on numerous occasions in the current 118th Congress, as members of the House Freedom Caucus have voted down bills supported by the Republican leadership and ousted the Republican Speaker of the House, Kevin McCarthy (R–CA), due to various policy demands [@brooksMcCarthyFreedomCaucus2024; @glassmanGameTheoryRepublican2023; @wangHouseHeadsHome2023].
+The converse of bipartisanship, dealmaking, and compromise is individualistic or partisan position-taking. When legislators prioritize standing firm on their positions or uniting with their parties instead of working to compromise, it is harder for Congress to pass bills, even bills that a majority of members clearly support over the status quo. Position-taking for partisan purposes, in which members of the same party promote or block a bill for partisan messaging purposes, is the primary form of position-taking [@leeInsecureMajoritiesCongress2016].
+However, individualistic position-taking can also hurt the ability of majorities to enact their agendas. This has occurred on numerous occasions in the current 118th Congress, as members of the House Freedom Caucus have voted down bills supported by the Republican leadership and ousted the Republican Speaker of the House, Kevin McCarthy (R--CA), due to various policy demands [@brooksMcCarthyFreedomCaucus2024; @glassmanGameTheoryRepublican2023; @wangHouseHeadsHome2023].
 
-In an era of high polarization and closely contested control of the Senate, bipartisanship is often necessary to increase a bill’s likelihood of passage [@harbridge-yongBipartisanPathEffective2023]. Even under the high levels of polarization of the modern Congress, securing bipartisan support for a bill has remained an important step in passing laws [@curryNonpartyGovernmentBipartisan2019]. It is important for a new filibuster rule to promote bipartisanship, which has been declining in the Senate in recent years. A filibuster rule that damages bipartisanship and promotes partisan position-taking will likely further diminish the Senate's ability to pass meaningful laws.
+Bipartisanship has two primary benefits in the Senate. First, strong levels of bipartisanship enhance the lawmaking abilities of the Senate. Second, bipartisanship in itself is a desired outcome by the public.
+In an era of high polarization and closely contested control of the Senate, bipartisanship is often necessary to increase a bill’s likelihood of passage [@harbridge-yongBipartisanPathEffective2023]. This is why lower bipartisanship leads to lower productivity. Even under the high partisan polarization of the modern Congress, securing bipartisan support for a bill remains a critical step in passing laws [@curryNonpartyGovernmentBipartisan2019].
+Even beyond its legislative benefits, bipartisanship is a legislative good that the public wants from Congress. Polls consistently show strong public support for bipartisanship in Congress. In recent polls on the topic, 85% of voters have said it is "very or somewhat important for legislation to have bipartisan support" [@skelleyHowMuchAmericans2021; @yokleyVotersLargelyBelieve2021], and 87% "see attempts at bipartisanship ... as a good thing" [@agiestaCNNPollAmericans2021].
+It is important for a new filibuster rule to promote bipartisanship, which has been declining in the Senate in recent years. A filibuster rule that damages bipartisanship and promotes partisan position-taking will likely further diminish the Senate's ability to pass meaningful laws.
 
 ### Policy Stability and Volatility
-Policy volatility refers to a system in which a change in the majority party leads to a drastic change in policies. Under high levels of policy volatility, the federal laws swing wildly between left and right, and a law passed under one Congress is likely to be repealed when the other party takes power. Policy volatility destabilizes the government, undermining domestic institutions and international alliances that rely on a base level of trust in the American government. On the other side is policy stability, in which a change in the majority party does not substantially impact the left-right direction of national policy, and laws passed under one Congress are expected to survive a change in majorities. Too much policy stability also undermines American democracy, as elections fail to result in policy consequences [@americanpoliticalscienceassociationMoreResponsibleTwoparty1950].
+Policy volatility refers to a system in which a change in the majority party leads to a drastic change in policies. Under high levels of policy volatility, the federal laws swing wildly between left and right, and a law passed under one Congress is likely to be repealed when the other party takes power. Policy volatility destabilizes the government, undermining domestic institutions and international alliances that rely on a base level of trust in the American government.
+On the other side is policy stability, in which a change in the majority party does not substantially impact the left-right direction of national policy, and laws passed under one Congress are expected to survive a change in majorities. Too much policy stability also undermines American democracy, as elections fail to result in policy consequences [@americanpoliticalscienceassociationMoreResponsibleTwoparty1950].
 Like productivity and gridlock, there is a balance between policy stability and volatility. A good filibuster rule will maintain this balance.
 
 ## Proposals to Reform the Filibuster and Cloture Rule
@@ -207,8 +313,10 @@ I discuss each of these proposals in turn.
 ### Proposal 1: Abolishing the Filibuster
 Abolishing the filibuster, also commonly nicknamed the "nuclear option," refers to reducing the cloture threshold to a simple majority for all measures. "Abolish the filibuster" has become a popular activist rallying cry, especially among progressives who see the Senate as a roadblock to sweeping new laws on issues such as voting rights and gun control [see, e.g., @moultonAbolishFilibusterElectoral2019; @reidFilibusterSuffocatingWill2019; @smithSenateRepublicanRadicalism2022].
 
-### Proposal 2: Restoring the Talking Filibuster
-One of two significant 1970s filibuster reforms (along with the lowering of the cloture threshold from 67 to 60) was the introduction of two-tracking: the current system under which the Senate can set aside a filibustered bill to move on to other legislation. Two-tracking prevented a filibuster from stopping all business of the Senate, but it also removed the physical costs of sustaining a lengthy talking filibuster [@jentlesonKillSwitchRise2022]. Thus, it is easy for minority-party senators to filibuster virtually every bill they oppose, helping contribute to the 60-vote Senate of today. Sen. Jeff Merkley, one of the most prominent senators pushing for filibuster reform today, has advocated a return to the talking filibuster. Under Merkley’s proposal, if a majority of the Senate votes in favor of cloture, but not the three-fifths necessary to invoke cloture, then senators must continuously debate on the floor to delay a final vote [@merkleyResolutionModifyingExtended2018]. This filibuster reform failed by a 52-48 vote in 2022 during debate over the John Lewis Voting Rights Act [@carneyManchinSinemaJoin2022].
+### Proposal 2: Restoring the Talking Filibuster {#sec-restore-talking-filibuster}
+One of two significant 1970s filibuster reforms (along with the lowering of the cloture threshold from 67 to 60) was the introduction of two-tracking: the current system under which the Senate can set aside a filibustered bill to move on to other legislation. Two-tracking prevented a filibuster from stopping all business of the Senate, but it also removed the physical costs of sustaining a lengthy talking filibuster [@jentlesonKillSwitchRise2022]. Thus, it is easy for minority-party senators to filibuster virtually every bill they oppose, helping contribute to the 60-vote Senate of today.
+Sen. Jeff Merkley, one of the most prominent senators pushing for filibuster reform today, has advocated a return to the talking filibuster. Under Merkley’s proposal, if a majority of the Senate votes in favor of cloture, but not the three-fifths necessary to invoke cloture, then senators must continuously debate on the floor to delay a final vote [@merkleyResolutionModifyingExtended2018]. When a talking filibuster occurs, the Senate would, in effect, return temporarily to a single-tracked system on the floor.
+Supporters of the John Lewis Voting Rights Act aimed to implement a one-time restoration of the talking filibuster to pass that bill in 2022. However, this attempt failed by a 52-48 vote [@carneyManchinSinemaJoin2022].
 
 ### Proposal 3: Flipping the Cloture Vote {#sec-flip-cloture-vote}
 Currently, it takes a vote of 60 senators to invoke cloture and *end* debate on a measure. An alternative formulation of the cloture threshold would be to require a vote of 41 senators to *continue* debate on a measure. This reform makes no change to the basic math of the cloture vote, but it is plausible that this alternative formulation of the vote would change the political psychology of the vote. A flipped cloture vote makes it more obvious that obstructionists are positively voting to continue their obstruction. In addition, this reform would require obstructionists to maintain attendance in order to sustain a filibuster, which is not necessary under the current rule. The goal of this reform would be to put the onus of a filibuster back on the minority party and make minority party obstruction more publicly visible [@krasnoIfFilibusterDoes2013].
@@ -217,7 +325,8 @@ Currently, it takes a vote of 60 senators to invoke cloture and *end* debate on 
 As emphasized by Koger [-@kogerFilibusteringPoliticalHistory2010], the key factors in senators' decision-making during legislative fights are the relative costs and benefits of the different strategies available to them in such fights. Thus, to predict the effects of the three rule changes proposed above, I extend Wawro and Schickler’s [-@wawroFilibusterObstructionLawmaking2006] expected utility model of legislative entrepreneurship under cloture by considering the benefits of obstruction and the costs faced by bill proponents and obstructionists alike. This full picture of the costs and benefits involved in legislative fights enables us to make informed comparisons of the effects of the different rule proposals.
 
 ### Wawro and Schickler's Model {#sec-wawro-schickler}
-@wawroFilibusterObstructionLawmaking2006 [p. 214] model "a legislative entrepreneur’s expected utility from passing legislation with and without cloture."^[As explained in @sec-costs, it is more accurate to use the term "expected benefits" over "expected utility" in this model. From now on, I use "expected benefits" when describing this variable in Wawro and Schickler's model.] In this model, which I refer to as WS, the legislative entrepreneur (LE) receives benefits for passing their bills. The LE may add legislators to a coalition supporting their bill, which increases the probability that their proposal passes. However, growing the coalition decreases the benefits of passing the bill, as the LE may have to make compromises or share credit to gain additional support. I explain the WS model below, naturally borrowing liberally from the original explanation of the model.
+@wawroFilibusterObstructionLawmaking2006 [p. 214] model "a legislative entrepreneur’s expected utility from passing legislation with and without cloture."^[As explained in @sec-costs, it is more accurate to use the term "expected benefits" over "expected utility" in this model. From now on, I use "expected benefits" when describing this variable in Wawro and Schickler's model.]
+In this model, which I refer to as WS, the legislative entrepreneur (LE) receives benefits for passing their bills. The LE may add legislators to a coalition supporting their bill, which increases the probability that their proposal passes. However, growing the coalition decreases the benefits of passing the bill, as the LE may have to make compromises or share credit to gain additional support. I explain the WS model below, naturally borrowing liberally from the original explanation of the model.
 
 #### The WS Model
 Wawro and Schickler present two forms of the WS model. The first is a basic model of legislative decision-making representing the pre-cloture rule Senate. The second (which I denote WS~K~) considers a legislature with the Senate's cloture rule. Both models share the following fundamentals:
@@ -256,21 +365,33 @@ eb_pass <- function(x, alpha) prob_pass(x, alpha) * benefits(x)
 
 ## plotting helpers
 # linetypes legend
-plot_legend <- function(x, y, linetypes) {
-  legend(x = x, y = y, 
-         legend = c(expr(pi), "B", 
-                    # EB or EB_K
-                    expr(!!parse_expr(gsub("_K", "[K]", names(linetypes)[3])))), 
-         lty = c(linetypes$pi, linetypes$B, linetypes$EB),
-         box.col = "white")
+plot_legend <- function(x, y, linetypes, cex = 1) {
+  legend(
+    x = x, y = y, 
+    legend = c(expr(pi), "B", 
+               # EB or EB_K
+               expr(!!parse_expr(gsub("_K", "[K]", names(linetypes)[3])))),
+    lty = c(linetypes$pi, linetypes$B, linetypes$EB),
+    box.col = "white",
+    cex = cex
+  )
 }
 
-# plot frame
-plot_frame <- function(main) {
+# plot frame (empty plot)
+plot_frame <- function(main,
+                       label_cex = 1) {
   plot(NULL, xlim = c(0.51, 1), ylim = c(0,1),
        xlab = "Coalition size", 
        ylab = "Probability of passage/expected benefits",
-       main = main)
+       main = main,
+       # control size of labels
+       cex.axis = label_cex,
+       cex.lab = label_cex,
+       cex.main = label_cex)
+  
+  # control size of axis tick labels
+  axis(1, cex.axis = label_cex)
+  axis(2, cex.axis = label_cex)
 }
 
 # plot curves
@@ -284,13 +405,14 @@ plot_curves <- function(pi_fn, b_fn, eb_fn, linetypes, ...) {
 }
 
 # plot max EB
-plot_max_eb <- function(eb_fn, ...) {
+plot_max_eb <- function(eb_fn, label_cex = 1, ...) {
   max_eb <- which.max(vapply(X = seq(0.51, 1, 0.01), 
                              FUN = \(x) eb_fn(x, ...),
                              FUN.VALUE = numeric(1))) * 0.01 + 0.5
   points(max_eb, eb_fn(max_eb, ...), 
          # diamond shape
-         pch = 18, cex = 2)
+         pch = 18, 
+         cex = 2 * label_cex)
 }
 ```
 
@@ -299,20 +421,33 @@ plot_max_eb <- function(eb_fn, ...) {
 #| fig-cap: Expected benefits of passage under WS (maximum expected benefits marked)
 #| fig-asp: 1.1
 
-plot_eb <- function(alpha) {
+plot_eb <- function(alpha,
+                    leg_x = 0.85, leg_y = 0.75, 
+                    pdf_cex = 0.7, html_cex = 1,
+                    pdf_label_cex = 0.8, html_label_cex = 1) {
   linetypes <- list(pi = "dashed",
                     B = "dotted",
                     EB = "solid")
   
+  label_cex <- ifelse(knitr::is_latex_output(),
+                      pdf_label_cex,
+                      html_label_cex)
+  legend_cex <- ifelse(knitr::is_latex_output(),
+                       pdf_cex,
+                       html_cex)
+  
   # plot frame
-  plot_frame(main = expr(paste(alpha, " = ", !!alpha)))
+  plot_frame(main = expr(paste(alpha, " = ", !!alpha)),
+             label_cex = label_cex)
   # plot curves (pi, B, EB)
   plot_curves(pi_fn = prob_pass, b_fn = benefits, eb_fn = eb_pass, 
               linetypes = linetypes, alpha = alpha)
   # plot linetype legend
-  plot_legend(x = 0.85, y = 0.75, linetypes = linetypes)
+  plot_legend(x = leg_x, y = leg_y, linetypes = linetypes,
+              # control legend size depending on output format
+              cex = legend_cex)
   # plot max EB
-  plot_max_eb(eb_pass, alpha = alpha)
+  plot_max_eb(eb_pass, alpha = alpha, label_cex = label_cex)
 }
 
 par(mfrow = c(2,2))
@@ -325,11 +460,11 @@ plot_eb(0.75)
 As demonstrated in @fig-ws, legislative entrepreneurs benefit from growing their supporting coalitions above the minimum majority, as additional bill proponents increase the probability of bill passage. Moreover, the expected benefits curve rises and falls gradually, so there are many near-optimally sized coalitions with a coalition size that approximates the optimal coalition size.
 
 #### The WS~K~ Model {#sec-wsk}
-The WS~K~ model modifies the probability curve $\pi$ to represent the Senate's cloture rule.
+The second model from @wawroFilibusterObstructionLawmaking2006, which I label WS~K~, modifies the probability curve $\pi$ to represent the Senate's cloture rule.
 With the Senate cloture rule, the probability of passage jumps up when the coalition size passes the Senate's cloture threshold, denoted as $K$ (which is 0.60 under the Senate's current rules).^[Wawro and Schickler do not use the $K$ variable, instead fixing the threshold at 0.67. This was the value of $K$ for the 1917 cloture rule, their primary subject of analysis. Introducing the $K$ variable allows generalization to other cloture thresholds.]
 When $\eta$ crosses $K$, the probability function switches from $\pi(\alpha)$ to $\pi(\alpha^*)$, with $\alpha^* < \alpha$, which scales up the probability.
 
-Under WS~K~, the expected benefits are:^[Wawro and Schickler express this function using an indicator function. This equivalent piecewise expression is easier to understand.]
+Under WS~K~, the expected benefits are:^[Wawro and Schickler express this function using an indicator function. I find this equivalent piecewise expression easier to understand.]
 $$
 EB_K = 
 \begin{cases}
@@ -356,22 +491,37 @@ eb_pass_k <- function(x, alpha, alpha_star, k) {
 #| fig-cap: Expected benefits of passage under WS~K~ with a three-fifths cloture rule (maximum expected benefits marked)
 #| fig-asp: 1.1
 
-plot_eb_k <- function(alpha, alpha_star, k) {
+plot_eb_k <- function(alpha, alpha_star, k,
+                      leg_x = 0.8, leg_y = 0.75, 
+                      pdf_cex = 0.7, html_cex = 1,
+                      pdf_label_cex = 0.8, html_label_cex = 1) {
   linetypes <- list(pi = "dashed",
                     B = "dotted",
                     EB_K = "solid")
   
+  label_cex <- ifelse(knitr::is_latex_output(),
+                      pdf_label_cex,
+                      html_label_cex)
+  legend_cex <- ifelse(knitr::is_latex_output(),
+                       pdf_cex,
+                       html_cex)
+  
   # plot frame
   plot_frame(main = expr(paste(alpha, " = ", !!alpha, ", ",
-                               alpha, "*", " = ", !!alpha_star)))
+                               alpha, "*", " = ", !!alpha_star)),
+             label_cex = label_cex)
   # plot curves (pi, B, EB_K)
   plot_curves(pi_fn = prob_pass_k, b_fn = benefits, eb_fn = eb_pass_k, 
               linetypes = linetypes, alpha = alpha, 
               k = k, alpha_star = alpha_star)
   # plot linetype legend
-  plot_legend(x = 0.8, y = 0.75, linetypes = linetypes)
+  plot_legend(x = leg_x, y = leg_y, linetypes = linetypes,
+              # control legend size depending on output format
+              cex = legend_cex)
   # plot max EB
-  plot_max_eb(eb_pass_k, alpha = alpha, alpha_star = alpha_star, k = k)
+  plot_max_eb(eb_pass_k, 
+              alpha = alpha, alpha_star = alpha_star, k = k,
+              label_cex = label_cex)
 }
 
 par(mfrow = c(2,2))
@@ -431,7 +581,7 @@ For demonstration, consider the costs of considering bills under the current rul
 1. All senators support a bill ($\eta = 1$). The proponents can pass the bill by unanimous consent and spend no floor time, resulting in $C = 0$ for all factions.
 2. A non-unanimous majority of senators supports a bill, but none of the opponents are willing to actively obstruct it ($\eta \in (0.5, 1), \ \omega = 0$). In order to pass the bill, the proponents must spend some floor time for debate and a single passage vote. Since there are no obstructionists, the opponents are submitting to a passage vote without forcing a cloture vote. This results in a small $C$ for the proponents.
 3. A filibuster-proof majority of senators supports a bill, and at least one senator obstructs a bill ($\eta \in [0.6, 1), \ \omega > 0$). In this case, proponents may either spend floor time on holding a cloture vote, or wait for the obstructionist to debate until they submit to a final passage vote. The second option is rare in the modern Senate because of the high cost in floor time, but it is still an available strategy [@kogerFilibusteringPoliticalHistory2010]. For the obstructionists, debate would be even more costly, although they face no additional costs in the case of a cloture vote.
-4. The supporting coalition is smaller than the cloture threshold, and at least one senator obstructs a bill ($\eta \in (0.5, 0.6), \ \omega > 0$). Proponents would fail a cloture vote, so their only option for passing a bill is waiting out the obstructionists. Again, this is extremely costly in floor time ($C_{prop, t}$). Accordingly, senators rarely employ this strategy in the modern Senate. This is why it is nearly impossible to pass a bill with fewer than 60 supporters nowadays.
+4. The supporting coalition is smaller than the cloture threshold, and at least one senator obstructs a bill ($\eta \in (0.5, 0.6), \ \omega > 0$). Proponents would fail a cloture vote, so their only option for passing a bill is waiting out the obstructionists. Again, this is extremely costly in floor time ($C_{prop, t}$). Accordingly, senators rarely employ this strategy in the modern Senate. This is why it is nearly impossible to pass a bill with fewer than 60 supporters in today's climate.
 
 New rules environments would allow for different strategies and different costs. These differences and their likely effects will be examined later in @sec-analyzing-proposals. Before then, it is necessary to demonstrate how to combine the benefits and costs for the different factions into expected utility to predict the outcome of a legislative fight.
 
@@ -444,6 +594,7 @@ $$
 \sum EU_{obst} &= \omega \cdot (EB_{obst} - C_{obst})
 \end{aligned}
 $$
+
 It is important to sum the benefits and costs among the members of each faction because those benefits and costs are shared. As a faction grows, even though an individual senator's benefits and costs decrease, the total benefits and costs increase with the size of a faction.
 
 If each faction receives expected utility $\sum EU_i$ from playing their respective strategy (that is, by representing a proponent or obstructionist faction), then the side with the greater (positive) expected utility will be more willing to engage in the legislative fight.^[If a faction receives negative expected utility, then they would simply surrender the fight.]
@@ -452,31 +603,39 @@ This utility-based method to predict the winner of a legislative fight is possib
 At first glance, this rule to predict winners using expected utility may appear rigid, as if either the proponents or obstructionists are doomed from the start of a legislative fight. How does this rule explain the negotiation process that is so critical for proponents to grow the coalition to pass a bill, or for obstructionists to kill it? The answer is that the expected utility of these two factions constantly varies as the factions grow and shrink and they change their cost-benefit calculations.
 
 #### An Example Legislative Fight
-It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen. Tommy Tuberville's (R–AL) high-profile use of the hold (a form of filibuster)^[Although a hold is not technically a filibuster, a senator's power to enforce their hold arises from an implicit threat to filibuster the measure at concern [@heitshusenFilibustersClotureSenate2017; @oleszekHoldsSenate2017].] in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:
+It is useful to demonstrate how the model works using a real-life case. A perfect example for showing the dynamics of the model is Sen. Tommy Tuberville's (R--AL) high-profile use of the hold (a form of filibuster)^[Although a hold is not technically a filibuster, a senator's power to enforce their hold arises from an implicit threat to filibuster the measure at concern [@heitshusenFilibustersClotureSenate2017; @oleszekHoldsSenate2017].] in 2023 to block hundreds of military promotions in protest of a Department of Defense abortion policy. We can analyze this episode as it evolved in a series of stages:
 
 1. Sen. Tuberville began his hold on military nominations in February 2023 after the Department of Defense instituted their new policy covering servicemembers' travel expenses for reproductive healthcare and abortions [@swetlikTubervillePutsHold2023]. Tuberville represented a single obstructionist. He ostensibly evaluated significant benefits to this action (in terms of position-taking benefits at the very least, regardless of whether he expected to successfully reverse the Pentagon's policy). His costs were minimal, as he did not have to hold the floor or even be in attendance to sustain his obstruction.
 2. Senators from both parties criticized Sen. Tuberville's hold throughout 2023, but they were unable to break the hold. The proponents of the military promotions made up a supermajority of the Senate, but the process of holding cloture votes on every single nomination would have taken an immense amount of time [@jalonickWhySingleSenator2023]. At this stage, the costs of all those votes outweighed the benefits of confirming the nominees.
-3. In November 2023, a group of Senate Republicans, led by military veterans Sens. Joni Ernst (R–IA) and Dan Sullivan (R–AK), began to increase public pressure on Tuberville to drop the hold [@griffithsRepublicansClashHours2023]. This came after Gen. Eric Smith, who was holding both of the top two positions in the Marine Corps, was hospitalized after a heart attack, highlighting the hold's impact on military readiness. During this stage, proponents saw growing benefits to confirming the nominations (relative to the status quo, in which they were concerned about the risks of leaving so many military posts unfilled). As the proponents ramped up their attacks on Sen. Tuberville, both the blocking benefits and the position-taking benefits of his obstruction decreased, as success seemed less likely and his position became more unpopular.
+3. In November 2023, a group of Senate Republicans, led by military veterans Sens. Joni Ernst (R--IA) and Dan Sullivan (R--AK), began to increase public pressure on Tuberville to drop the hold [@griffithsRepublicansClashHours2023]. This came after Gen. Eric Smith, who was holding both of the top two positions in the Marine Corps, was hospitalized after a heart attack, highlighting the hold's impact on military readiness. During this stage, proponents saw growing benefits to confirming the nominations (relative to the status quo, in which they were concerned about the risks of leaving so many military posts unfilled). As the proponents ramped up their attacks on Sen. Tuberville, both the blocking benefits and the position-taking benefits of his obstruction decreased, as success seemed less likely and his position became more unpopular.
 4. Sen. Tuberville finally dropped his hold in December 2023, and the Senate confirmed all the nominees by unanimous consent [@santalizSenateConfirms4252023; @thorpvSenateApprovesRemaining2023]. The reputational costs of obstruction (equivalent to negative position-taking benefits) had become too great for Tuberville, and once he relented, the proponents were able to use unanimous consent to pass all the nominations with low costs.
 
 The example of Sen. Tuberville's military holds shows how the expected utility for the proponents and obstructionists can change over time to produce a winner in a legislative fight. In the next section, we see how different filibuster rules impact the expected utility calculations and change how legislative fights like this one might play out.
 
-## Analyzing Filibuster Rule Proposals  {#sec-analyzing-proposals}
+## Predicting the Effects of Proposed Filibuster Reforms  {#sec-analyzing-proposals}
 To analyze each of the proposed changes to the filibuster and cloture rule, we will predict how it affects the benefits and/or costs for the proponent and obstructionist factions. These impacts on the benefits and costs for each faction translate into probable impacts on the legislative goods of productivity, bipartisanship, and policy stability.
 
-### Proposal 1: Abolishing the Filibuster
+### Proposal 1: Abolishing the Filibuster {#sec-abolishing-filibuster}
 Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits $EB_{prop}$ and decreasing their costs. The expected benefits increase because the probability of passage would increase from $\pi(\alpha)$ to $\pi(\alpha^*)$ for coalitions of less than 60 votes, as shown in @fig-abolish-filibuster below.
 
-```{r abolishing the filibuster figure}
+```{r plot abolishing the filibuster effects}
 #| label: fig-abolish-filibuster
-#| fig-cap: "Change in proponents' expected benefits after abolishing the filibuster"
-#| fig-asp: 0.57
+#| fig-cap: "Change in proponents' expected benefits before (left) and after (right) abolishing the filibuster"
+#| fig-asp: 0.58
 
 par(mfrow = c(1, 2))
-plot_eb_k(alpha = 0.25, alpha_star = 0.1, k = 0.60)
-plot_eb(0.1)
-```
 
+# lots of elements need to be shrunk in this plot, especially for PDF output
+plot_eb_k(alpha = 0.25, alpha_star = 0.1, k = 0.60, 
+          pdf_cex = 0.58, html_cex = 0.88,
+          leg_x = 0.8, leg_y = 0.8,
+          pdf_label_cex = 0.7, html_label_cex = 0.95)
+
+plot_eb(alpha = 0.1, 
+        pdf_cex = 0.58, html_cex = 0.88,
+        leg_x = 0.8, leg_y = 0.8,
+        pdf_label_cex = 0.7, html_label_cex = 0.95)
+```
 
 This change in expected benefits allows legislative entrepreneurs to pass bills with smaller proponent coalitions. Reducing the cloture threshold to a simple majority would also decrease costs to the proponents, especially the cost of consuming floor time $C_{prop,t}$ and the cost of debate and attendance $C_{prop,d}$, because they would be able to end debate without having 60 votes. To be clear, the obstructionists do not fully disappear from the model after abolishing the filibuster. The obstructionists still have the ability to attempt a filibuster; it is just much easier for proponents to quickly defeat the filibuster with a simple majority.^[Perhaps "abolishing the filibuster" is not the most accurate term. The term has been around for likely well over a century, however [@SenateRulesProposition1925, p. 399], and I am in no position to rename it.] Therefore, the expected benefits to the obstructionists of filibustering $EB_{obst}$ largely vanish.
 
@@ -494,7 +653,7 @@ Similar to abolishing the filibuster, restoring the talking filibuster would inc
 Under this rule, the cost of filibustering would increase massively for obstructionists. Currently, obstructionists merely have to *threaten* a filibuster to force a supermajority cloture vote. With the talking filibuster, obstructionists would actually have to continuously hold the floor and debate to prevent a simple majority vote on passage. It would be physically difficult for small groups of obstructionists to continue their debate long enough to defeat a determined majority. In the terms of the model, restoring the talking filibuster would produce a huge increase in $C_{obst,d}$.
 
 The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. This increases costs on both sides ($C_{prop,t}$ and $C_{obst,t}$ in the model). The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time [Mondale, in @ExaminingFilibuster2010]. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns [@hammModifyingFilibusterMeans2012].
-Supporters of restoring the talking filibuster, including Sen. Jeff Merkley [@merkleyFilibusteredHowFix2024] and former Sen. Patrick Leahy (D–VT) [-@leahy2024], believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen. Leahy, "you might see one or two [filibusters] a year" after this reform.
+Supporters of restoring the talking filibuster, including Sen. Jeff Merkley [@merkleyFilibusteredHowFix2024] and former Sen. Patrick Leahy (D--VT) [-@leahy2024], believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen. Leahy, "you might see one or two [filibusters] a year" after this reform.
 Sen. Leahy's prediction is well-founded in the history of the filibuster. Before the introduction of legislative two-tracking, which began the elimination of the talking filibuster, there had never been more than seven cloture motions in a full two-year Congress [@unitedstatessenateSenateActionCloture2024, as shown in @fig-cloture-graph above]. However, with partisan polarization much stronger and the Senate norms much weaker today than in the 1970s, it is no certainty that filibusters would go back to those historical levels.
 
 The effects of restoring the talking filibuster would be more uncertain than the effects of abolishing the filibuster. It seems more likely than not that the productivity increase from the decreased number of filibusters would outweigh the longer time spent on each filibuster. The effects on bipartisanship and policy stability would also be smaller than under a Senate with an abolished filibuster. The ability of minority party senators to filibuster particularly objectionable bills would preserve incentives for bipartisanship and prevent the most extreme policy proposals from passing.
@@ -510,8 +669,9 @@ A secondary goal of flipping the cloture vote is to make obstruction more visibl
 On its own, flipping the cloture vote appears to have only minor effects on the legislative goods. It may slightly increase productivity by making it more politically painful for obstructionists to enforce gridlock. It is unclear what effects this rule would have on bipartisanship and policy stability. Flipping the cloture vote seems to be a more marginal reform than abolishing the filibuster or restoring the talking filibuster.
 
 ## Quantitative Analysis: How Much Impact Would Rule Changes Have?
+The theory I present here is very broad, and involves many factors that are hard to measure, that correlate strongly over time with other powerful political forces such as political polarization, or that have remained relatively constant over the history of the Senate. Thus, it is difficult to directly empirically evaluate how well my overall model describes the historical Senate. It would be even more difficult to empirically predict the effects of changes to the filibuster, as such models would necessarily involve creating beliefs about how a counterfactual Senate would operate.
 
-I present two quantitative analyses measuring the potential impacts of changes to the filibuster and cloture rule. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of these failed cloture votes. Second, I test the effect of the most notable filibuster rule change in the past 50 years: the nuclear option on presidential nominations.
+Thus, I present multiple smaller analyses which deal with specific facets of the overall theory. First, I examine failed cloture votes between 1977 and 2022 to measure how much cost a filibuster reform would need to impose to change the outcome of bills that fail at the cloture stage. Second, I test the effect of the most notable filibuster rule change in the past 50 years---the nuclear option on presidential nominations---and evaluate how well it fits my predictions about the effects of that reform.
 
 ### The Costs Necessary to Flip Cloture Votes
 One of the main goals of any of the above filibuster reforms would be to enable the passage of bills that would otherwise be killed by a filibuster under the current rules. With a new cloture rule, or new costs of filibustering, legislators would be less willing and/or able to obstruct bills that have majority support in the Senate. As a result, bills that originally failed at the cloture stage might pass under new rules. This is especially true for bills that had less intense opposition by obstructionist senators. Under new rules, mild obstructionists would be more likely to yield to the wishes of the majority.
@@ -520,7 +680,7 @@ Using a framework inspired by pivotal politics, I estimate how many failed clotu
 
 To estimate the costs necessary to flip a cloture vote, I first find the pivotal senator; that is, the senator who voted Nay but could have been the 60th vote in favor of a cloture vote.^[On presidential nominations since the nuclear option, the threshold is a simple majority. I assume the vice president supports their president's nominees and would therefore cast a tie-breaking vote to invoke cloture, so the majority threshold is 50 votes. This is supported by vice presidents' records on cloture votes. Through the end of 2023, Vice President Kamala Harris cast the tie-breaking vote to invoke cloture on 13 of Joe Biden's nominees. Former Vice President Mike Pence did the same for 3 of Donald Trump's nominees [@TiebreakingVotesCast2023].] Then, I find how far that senator was in policy space from Voteview's Yea-Nay cutting line on the cloture vote.
 
-```{r cloture costs data import, echo=FALSE}
+```{r cloture costs data import}
 #| message: false
 
 # downloading from Voteview
@@ -573,19 +733,18 @@ s_failed_cvotes <- s_votes_data |>
   )
 ```
 
-For this analysis, I use the `r nrow(s_failed_cvotes)` failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.
+#### Data
+For this analysis, I used the `r nrow(s_failed_cvotes)` failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.
 
-#### Analysis
-To find potential pivotal votes for cloture, I use Voteview's calculated probabilities of members' roll call votes. As shown below, Voteview uses members' DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote [@lewisVoteviewCongressionalRollcall2024]. 
-<!-- @fig-chips-act shows how senators voted on the CHIPS and Science Act, and @fig-ira shows the votes for the Inflation Reduction Act of 2022.  -->
-For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration. @fig-ira shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and @fig-iija shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021.
+To find potential pivotal votes for cloture, I used Voteview's calculated probabilities of members' roll call votes. As shown below, Voteview uses members' DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote [@lewisVoteviewCongressionalRollcall2024]. 
+For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration.^[These two votes are not failed cloture votes, so they are not part of the analysis. They are simply two high-profile votes that are useful for illustrating how DW-NOMINATE and Voteview's vote probabilities work.] @fig-ira shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and @fig-iija shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021.
 Senators' actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.
-
-<!-- ![Voteview vote probabilities on the CHIPS and Science Act (2022)](images/voteview_chips_act.png){#fig-chips-act fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the CHIPS and Science Act. The plot is shaded by the estimated probability that a senator with a given ideology would vote Yea on this vote."} -->
 
 ![Voteview vote probabilities on the Inflation Reduction Act (2022)](images/voteview_ira.png){#fig-ira fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
 
 ![Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)](images/voteview_iija.png){#fig-iija fig-alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."}
+
+#### Analysis
 
 ```{r find pivotal Nays on failed cloture votes}
 ## finding pivotal votes
@@ -634,7 +793,7 @@ pivotal_votes <- s_mem_failed_cvotes |>
   filter(rank == max(rank))
 ```
 
-To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering.
+The key data point for a failed cloture vote in this analysis is the pivotal vote that could have flipped the cloture vote to success. To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering.
 Then, I found the *pivotal vote* on each failed cloture vote. If a cloture motion fell $n$ votes short of passing, I found the $n$th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.
 
 ```{r calculate vote costs}
@@ -655,7 +814,6 @@ To account for these differences, I used the spread estimates included in the Vo
 Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote's distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.
 
 #### Results
-
 @fig-cloture-costs shows the cumulative distribution of these distances. The plot answers the question: "If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?"
 
 ```{r plot vote costs}
@@ -690,6 +848,7 @@ gop_median <- party_medians |> filter(party_name == "Republican") |> pull(nomina
 
 # members <- get_voteview_members(chamber = "s", congress = 118)
 
+# TODO: could computationally generate this table using `members` data
 dwnom_tbl <- tibble(Party = c("Democrat", "Republican"),
                     `DW-NOMINATE Dim-1 median` = round(c(dem_median, gop_median), 2),
                     `Liberal member` = c("Tammy Baldwin (-0.49)", 
@@ -699,7 +858,7 @@ dwnom_tbl <- tibble(Party = c("Democrat", "Republican"),
                     `Conservative member` = c("Mark Warner (-0.21)", 
                                               "Rick Scott (0.68)"))
 
-kbl(dwnom_tbl, booktabs = TRUE) |> 
+kbl(dwnom_tbl, booktabs = TRUE,  align = "c") |> 
   kable_styling() |> 
   # controlling column widths in PDF
   column_spec(2, width = "3cm") |> 
@@ -712,20 +871,267 @@ This analysis answers important questions senators may have about the efficacy o
 Another source of data on the impact of filibuster reforms is the primary change to the filibuster in the past few decades: the nuclear option on presidential nominations. Next, I explore the impact that the nuclear option has had on these nominations.
 
 ### The Results of the Nuclear Option on Presidential Nominations
+Arguably one of the best ways to predict the impacts of future cloture reforms is to look at the results of past reforms. The largest rule change since the 1970s has been the nuclear option on presidential nominations. In 2013, Senate Democrats lowered the cloture threshold to a simple majority for all executive branch nominees and judicial nominees below the Supreme Court. Senate Republicans extended this reform to Supreme Court nominations in 2017.
+According to my model of legislative coalitions, the nuclear option would be expected to lead to smaller passing coalitions on these nominations. As discussed in @sec-abolishing-filibuster, the nuclear option increases the probability that a nominee is confirmed when there is less-than-supermajority support for a nominee. Thus, a president is more able to propose nominees who will receive smaller majorities in support of their confirmation.
+
+#### Data
+```{r nominations data import}
+#| message: false
+
+# downloading from Voteview
+# data starting in 1989, when `bill_number` data became complete
+# nominations_data <- get_voteview_rollcall_votes(chamber = "s", congress = 101:117) |>
+#   filter(str_starts(bill_number, "PN"), vote_question == "On the Nomination")
+# 
+# noms_parties <- get_voteview_parties(chamber = "s", congress = 101:117)
+
+# using local files
+nominations_data <- read_csv("data/nominations_data.csv")
+noms_parties <- read_csv("data/noms_parties.csv")
+
+# `cloture_actions` from @fig-cloture-graph
+# cloture_actions <- get_senate_cloture_votes() |>
+#   filter(congress < 118)
+
+nuclear_2013 <- as.Date("2013-11-21")
+nuclear_2017 <- as.Date("2017-04-06")
+```
+
+For this analysis, I examined the `r nrow(nominations_data)` votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in @fig-confirmation-vote-totals.
+This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.^[One potential confounding variable is senators' knowledge of whether their individual votes are required for confirmation. Before the nuclear option, senators from the opposite party of the president may have voted to confirm nominees they personally opposed because they knew nominations required 60 votes to overcome a filibuster. These "insincere" votes of support may have arisen from a respect for the president's authority to select their executive branch leadership and, to a slightly lesser extent, select federal judges who share their ideology. After the nuclear option, if the president's party enjoys a Senate majority, then senators from the other party know their votes do not impact the ultimate outcome of the confirmation vote, so they are now more free to express their personal views through their votes.]
+
+```{r nominations data transformation}
+party_sizes <- noms_parties |> 
+  filter(party_name != "Independent", 
+         # filter out Trump for 117th
+         !(congress == 117 & chamber == "President" & party_name == "Republican")) |> 
+  # find the President's party
+  mutate(pres_party = first(party_name), 
+         .by = congress, .after = congress) |> 
+  # now remove presidents
+  filter(chamber != "President") |> 
+  # normalize to 100 members
+  # TODO: use senate.gov party size data from `filibustr` when available
+  mutate(pct_members = n_members / sum(n_members) * 100, 
+         inter_party_dist = sum(abs(nominate_dim1_median)),
+         .by = congress, .after = n_members) |>
+  # just the President's party
+  filter(pres_party == party_name) |> 
+  select(congress, pres_party, pres_party_size = pct_members, inter_party_dist)
+
+# re-using `cloture_actions` df from @fig-cloture-graph (Sec. 2.1)
+cloture_motions <- cloture_actions |> 
+  filter(congress >= 101) |> 
+  select(congress, cloture_motions_filed = motions_filed)
+
+# permanent Cabinet secretaries (heads of executive depts),
+# not the other Cabinet-rank officials that vary by admin.
+cabinet_secys <- c(
+  "Secretary of State", "Secretary of the Treasury", "Secretary of Defense",
+  "Attorney General", "Secretary of the Interior", "Secretary of Agriculture",
+  "Secretary of Commerce", "Secretary of Labor", 
+  "Secretary of Health and Human Services",
+  "Secretary of Housing and Urban Development",
+  "Secretary of Transportation", "Secretary of Energy", "Secretary of Education",
+  "Secretary of Veterans Affairs", "Secretary of Homeland Security"
+)
+
+nominations <- nominations_data |> 
+  mutate(
+    # SCOTUS nominations
+    scotus = str_detect(vote_desc, "(Associate|Chief) Justice"),
+    # Cabinet secretary nominations
+    cabinet = str_remove(vote_desc, "^.*, to be ") %in% cabinet_secys,
+    # votes after the nuclear option
+    post_nuclear = (
+      (date > nuclear_2017 | (congress == 115 & rollnumber == 110)) 
+      | (!scotus & (date > nuclear_2013 | (congress == 113 & rollnumber == 244)))
+    ),
+    vote_pct = yea_count / (yea_count + nay_count) * 100,
+    congress_ctr = congress - 100,
+    yrs_since_89 = interval(as.Date("1989-01-01"), date) / years(1)
+  ) |> 
+  # join party size and cloture data
+  inner_join(party_sizes, by = "congress") |> 
+  inner_join(cloture_motions, by = "congress")
+```
+
+```{r plot confirmation vote totals}
+#| label: fig-confirmation-vote-totals
+#| fig-cap: "Senate confirmation votes on presidential nominations (1989-2022)"
+
+ggplot(nominations, aes(x = date, y = vote_pct)) +
+  geom_point(alpha = 0.15) + 
+  # mark every 10%
+  scale_y_continuous(breaks = seq(50, 100, 10)) +
+  labs(x = "Date", 
+       y = "Percent of votes in favor of confirmation",
+       title = "Senate confirmation votes on presidential nominations",
+       subtitle = "101st through 117th Congresses (1989-2022)") +
+  theme_bw() + 
+  theme(panel.grid.minor.y = element_blank())
+```
+
+I used the Voteview parties data to calculate the size of the president's party's caucus in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the Voteview parties data to calculate the distance between the two party medians in the first dimension of DW-NOMINATE.
+I used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in @fig-cloture-graph) to measure the prevalence of filibustering over time.
+
+#### Analysis
+To measure the impact of the nuclear option on supporting coalitions, I ran ordinary least-squares regressions predicting the *percent of votes* in favor of confirmation on nominations over 1989-2022. When all senators are present and voting, this response variable is equivalent to the *number of votes* in favor of confirmation. For brevity, I will use both descriptions of the response variable interchangeably. The primary explanatory variable of interest is whether a confirmation vote occurred before or after the nuclear option. In addition, I use the following control variables:
+
+* Whether the vote is on a Supreme Court nomination
+* Whether the vote is on a nomination for a Cabinet secretary (i.e., one of the heads of the 15 executive departments). Other Cabinet-level positions are not included, as these vary by administration.
+* The size of the president's party's caucus in the Senate (normalized as described above)
+* A time trend, expressed either as: 
+  * A count of Congresses (since the 100th Congress, so that the 101st Congress = 1 and the 117th Congress = 17), or
+  * Actual time since January 1st, 1989, in years
+* A squared term of the time trend
+* Inter-party distance, i.e., the distance between the two party medians in the first dimension of DW-NOMINATE
+* The number of cloture motions in a Congress
+
+I present four versions of this model using four different forms of the time trend: using a Congress counter and an actual time trend, and with and without a squared term for each of those. The difference between the two basic forms of the time trend is that a Congress counter is an integer that treats all votes in the same Congress identically, while the actual time since 1989 is a real-valued number that continuously increases in time. @tbl-noms-time-trends illustrates this distinction. I considered a squared time trend because the downward trend in supporting coalitions on confirmation votes could also be attributed to the increased intensity of partisan competition over time (especially in the 2010s and 2020s), not just the nuclear option.^[The intensity of partisan competition is a distinct factor from ideological polarization, although the two concepts are related. The increasing partisan competition over recent decades is the key observation of *Insecure Majorities* [@leeInsecureMajoritiesCongress2016].]
+
+```{r time trend table}
+#| label: tbl-noms-time-trends
+#| tbl-cap: "Time trend values for two selected nominations, 117th Congress"
+
+noms_time_table <- nominations |> 
+  # two nomination votes in the 117th Congress
+  filter(congress == 117, rollnumber %in% c(3, 774)) |> 
+  mutate(nomination = str_extract(vote_desc, "^.*(?=, of)"),
+         date = format(as.Date(date), "%b %d, %Y"),
+         congress_counter = congress - 100, 
+         yrs_since_89 = round(yrs_since_89, 2)) |> 
+  select(nomination, date, congress_counter, yrs_since_89)
+
+kbl(noms_time_table, 
+    booktabs = TRUE, align = "c",
+    col.names = c("Nomination", "Date", "Congress counter", "Years since 1989")) |> 
+  kable_styling()
+```
+
+#### Results
+
+```{r nominations regressions}
+# Models 1-2: Congress
+model_congress_1 <- lm(vote_pct ~ post_nuclear + scotus + cabinet
+                       + pres_party_size
+                       + I(inter_party_dist*10) + cloture_motions_filed
+                       + congress_ctr,
+                       data = nominations)
+
+model_congress_2 <- lm(vote_pct ~ post_nuclear + scotus + cabinet
+                       + pres_party_size
+                       + I(inter_party_dist*10) + cloture_motions_filed 
+                       + congress_ctr + I(congress_ctr ^ 2),
+                       data = nominations)
+
+# Models 3-4: by time since 1989
+model_time_3 <- lm(vote_pct ~ post_nuclear + scotus + cabinet
+                   + pres_party_size
+                   + I(inter_party_dist*10) + cloture_motions_filed 
+                   + yrs_since_89,
+                   data = nominations)
+model_time_4 <- lm(vote_pct ~ post_nuclear + scotus + cabinet
+                   + pres_party_size
+                   + I(inter_party_dist*10) + cloture_motions_filed 
+                   + yrs_since_89 + I(yrs_since_89 ^ 2),
+                   data = nominations)
+```
+
+@tbl-noms-regression shows the results of the regressions described above. The coefficients in @tbl-noms-regression give the effect of a one-unit change in each explanatory variable on the percentage of votes in favor of confirming a nominee. I will now proceed to review the results for each explanatory variable.
+
+```{r regression table}
+#| label: tbl-noms-regression
+#| tbl-cap: "Results of regressions predicting supporting coalitions on confirmation votes"
+#| message: false
+
+# TODO: how to get superscript 2 in PDF format?
+superscript_2 <- ifelse(knitr::is_latex_output(),
+                        " ^ 2", "<sup>2</sup>")
+
+# regression table using modelsummary
+modelsummary(
+  models = list("Model 1" = model_congress_1,
+                "Model 2" = model_congress_2,
+                "Model 3" = model_time_3,
+                "Model 4" = model_time_4),
+  stars = TRUE,
+  coef_rename = c("post_nuclearTRUE" = "Post-nuclear option",
+                  "scotusTRUE" = "SCOTUS",
+                  "cabinetTRUE" = "Cabinet",
+                  "pres_party_size" = "President's party's size",
+                  "I(inter_party_dist * 10)" = "Inter-party distance (unit: 0.1)",
+                  "cloture_motions_filed" = "Cloture motions",
+                  "congress_ctr" = "Congress counter",
+                  "I(congress_ctr^2)" = paste0("Congress counter",
+                                               superscript_2),
+                  "yrs_since_89" = "Years since 1989",
+                  "I(yrs_since_89^2)" = paste0("Years since 1989",
+                                               superscript_2)),
+  # to execute the superscripts
+  inline_override = TRUE
+)
+```
+
+The primary variable of interest is *Post-nuclear option*. The effect of the nuclear option is downward in all models, as expected. In agreement with @fig-abolish-filibuster, the size of this effect is just a couple votes. However, the coefficient is only statistically significant on the models that do not use a squared time trend. I interpret this result further below.
+
+Supreme Court nominees receive massively lower supporting coalitions on their confirmation votes. This is no surprise, as Supreme Court nominations are some of the most high-profile and contentious nominations of a president's term. Cabinet secretaries actually gain an extra vote or so relative to other nominees on average, although this effect is not statistically significant. Cabinet secretaries may not suffer the same confirmation-vote penalty as Supreme Court nominees because of a belief by senators that the president should be allowed to select Cabinet secretaries who align with the administration's policy goals.
+
+One surprising result is that a larger Senate caucus for the president's party is associated with a slightly lower average vote for the president's nominees. This may simply be an artifact of the small sample of Congresses (`r n_distinct(nominations$congress)`) in the data.
+Inter-party distance, the primary measure of partisan polarization in this analysis, has a very strong negative correlation with confirmation vote totals. More polarization means that senators from the opposite party of the president will be farther apart ideologically from most of the president's nominees, thus leading to more intense opposition.
+Like the nuclear option, the amount of filibustering in a Congress only shows a significant downward effect in the models without a squared time trend. A downward effect aligns with my model's predictions.
+
+Finally, we get to the time trends. There is little difference between the two measurement schemes (Congress counter versus years since 1989).^[The coefficients on the Congress counter appear larger because a single Congress lasts two years.] The models using the Congress counter are slightly more accurate, suggesting that the higher granularity of the *years since 1989* variable does not provide additional predictive power. The coefficients on the linear time trends are all significant and positive, serving to dampen some of the negative effects of the above trends, most of which have correlated with time. The coefficients on the squared terms are strongly negative, giving the predicted supporting coalitions a downward curve over time.
+
+@fig-predicted-confirmation-votes shows the predictions generated by Model 2, which is the most accurate (by a slight amount) of the four models. This plot illustrates the sharp decline in supporting coalitions on confirmation votes that has occurred since the start of the Trump administration. Since most of the explanatory variables are measured on a whole-Congress level, the predictions are the same for almost all confirmation votes in each Congress (all except Supreme Court and Cabinet nominees). Even though the model treats all votes in a Congress identically, the model correlates rather well with the historical outcomes of confirmation votes (R^2^ = `r round(summary(model_congress_2)$r.squared, 2)`).
+
+```{r plot predicted confirmation vote outcomes}
+#| label: fig-predicted-confirmation-votes
+#| fig-cap: "Predicted outcomes of Senate confirmation votes (1989-2022)"
+
+# predictions from Model 2
+noms_preds <- nominations |> 
+  mutate(pred_vote_pct = model_congress_2$fitted.values)
+
+plot_noms_preds <- ggplot(noms_preds, aes(x = date, y = pred_vote_pct)) +
+  geom_point(alpha = 0.1) + 
+  # mark every 10%
+  scale_y_continuous(breaks = seq(50, 100, 10)) +
+  labs(x = "Date", 
+       y = "Percent of votes in favor of confirmation",
+       title = "Predicted outcomes of Senate confirmation votes (using Model 2)",
+       subtitle = "101st through 117th Congresses (1989-2022)") +
+  theme_bw() + 
+  theme(panel.grid.minor.y = element_blank())
+
+# shrink title size to fit on PDF
+if (knitr::is_latex_output()) {
+  plot_noms_preds <- plot_noms_preds +
+    theme(plot.title = element_text(size = 12),
+          # shrink subtitle to look right relative to smaller title
+          plot.subtitle = element_text(size = 11))
+}
+
+plot_noms_preds
+```
+
+Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations truly accelerated, as shown in @fig-confirmation-vote-totals), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.
 
 ## Conclusion
 By extending Wawro and Schickler's model of legislative entrepreneurship under cloture, we are able to compare different proposed filibuster rules on how they affect the expected benefits and costs of proponents and obstructionists in a legislative fight. This cost-benefit analysis helps predict the effects of different proposals on the legislative goods.
 
 Abolishing the filibuster would have the biggest impact on productivity, at the cost of decreasing bipartisanship and policy stability. Flipping the cloture vote would have little impact on these legislative goods, likely making it an unsatisfactory choice for reform. Restoring the talking filibuster may produce a meaningful increase in productivity while limiting the potential negative effects on bipartisanship and policy volatility. This analysis supports the views of reformers such as Sen. Jeff Merkley, who promotes restoring the talking filibuster as the best option for filibuster reform.
 
-Performing formal analysis, such as the analysis in this paper, is an important step in choosing the best option for the Senate filibuster moving forward. Empirical analysis is still needed to validate these findings, but this is the first step on the way from guessing to proving the effects of redesigning the Senate filibuster.
+The two quantitative analyses in this paper reinforce specific aspects of the larger model. First, I found that increasing the costs of obstruction by an amount equivalent to 0.1 to 0.2 units in DW-NOMINATE policy space would produce the largest change in cloture outcomes relative to the size of the costs. Second, I found that the nuclear options on presidential nominations in the 2010s indeed decreased the average size of supporting coalitions on confirmation votes, validating a prediction of the model. These two analyses are not sufficient to validate the entire model, but they provide some necessary empirical evidence for portions of the model.
+
+My game theory-based model of legislative coalitions provides a holistic framework for reformers to evaluate how potential new filibuster rules may impact the operation of the Senate. The legislative goods of productivity versus gridlock, bipartisanship versus position-taking, and policy stability versus policy volatility provide clear attributes for evaluating new rules. With these tools, senators and activists alike can make more sound decisions about the future of the Senate filibuster.
 
 ### Extensions and Limitations
-The primary extension needed to corroborate my findings is empirical evidence for my predictions. I plan to use a mix of empirical approaches to back up my model. First, I plan to test how the nuclear option on presidential nominations changed the passing coalitions on executive branch and judicial confirmation votes. Second, I plan to measure how large of a cost filibustering would need to impose in order to change bill outcomes. For this component, I could either analyze a few bills as case studies, or do a large-N study to observe an overall "cost curve" for votes.
+A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically [@uslanerPartisanshipCoalitionFormation1975]. To explain this, @grosecloseBuyingSupermajorities1996 show how it may be "cheaper" for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. This finding could be accommodated into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model would help prevent it from overly predicting minimal majorities.
 
-A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically [@uslanerPartisanshipCoalitionFormation1975]. To explain this, @grosecloseBuyingSupermajorities1996 show how it may be "cheaper" for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. I plan to accommodate this finding into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model will help prevent it from overly predicting minimal majorities.
+Additionally, a more comprehensive empirical analysis would improve the strength of my predictions. The quantitative analyses I performed in this paper support two specific facets of my model, but most of the model would benefit from additional empirical evidence. Simulating the outcomes of different filibuster rules using agent-based modeling represents one potential approach to reinforce the overall model [@laverPartyCompetitionAgentbased2012].
 
-## The `filibustr` Package {.appendix}
+## The `filibustr` Package
 In addition to the primary findings of my research, I intend to benefit future political science researchers by providing publicly available solutions to the data challenges I face in my work. I am publishing these solutions in the form of an open-source R package, named `filibustr` [@feinleibFilibustrDataUtilities2024]. The `filibustr` package provides a set of utilities to improve the data-gathering process for research on Congress.
 
 The `filibustr` package is inspired by the `baseballr` package, which has long provided similar functionality for the baseball analytics community [@pettiBaseballrAcquiringAnalyzing2024]. Just as `baseballr` enables baseball researchers to access data from popular baseball statistics websites in R, `filibustr` enables political science researchers to access data from popular congressional data websites.
