@@ -14,7 +14,7 @@ date-format: long
 abstract: |
   In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
 
-  In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of "legislative goods," including productivity, bipartisanship, and policy stability. I test the effects of a series of filibuster rule proposals on these legislative goods, including proposals much more creative than the "nuclear option."
+  In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of "legislative goods," including productivity, bipartisanship, and policy stability. I test the effects of three different filibuster rule proposals on these legislative goods.
 
   To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. Using this model, which excels at explaining the evolution of past filibuster fights, I predict the outcomes of legislative battles under different filibuster rules. The results will inform activists and senators in future debates over filibuster reform — which will inevitably return the next time a popular bill is stymied by the Senate’s supermajoritarian rules.
 keywords: 
@@ -24,15 +24,17 @@ keywords:
   - cloture
 format:
   pdf:
+    toc-depth: 2
     shift-heading-level-by: -1
-  html: default
+  html:
+    toc-depth: 3
 bibliography: full_bib.json
 csl: apa.csl
 toc: true
-toc-depth: 2
 number-sections: true
 lof: true
 lot: true
+lightbox: true
 execute:
   echo: false
 ---
@@ -62,11 +64,87 @@ library(rlang) # expr()'s used in plots
 ```
 
 ## Introduction
-In today's hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.
+In today's hyper-partisan political environment, it is a common complaint that Congress is broken. Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased [@desilverPolarizationTodayCongress2022; @harbridge-yongBipartisanPathEffective2023, as shown in @fig-pew-polarization and @fig-hvw-pbca]. As a result, productivity has fallen to historic lows for the modern Congress [@solenderCapitolHillStunner2023, as shown in @fig-axios-productivity].
+
+```{r plot declining bipartisanship (from HVW 2023)}
+## data import
+# using online download
+# hvw_s_data <- get_hvw_data("s")
+# hvw_hr_data <- get_hvw_data("hr")
+
+# local files
+hvw_s_data <- read_csv("data/hvw_s_data.csv", show_col_types = FALSE)
+hvw_hr_data <- read_csv("data/hvw_hr_data.csv", show_col_types = FALSE)
+
+## data manipulation
+# get mean PBCA by Congress for each chamber
+hvw_s <- hvw_s_data |> 
+  group_by(congress) |> 
+  # senate data uses election year, not Congress year
+  summarize(year = first(year) + 1,
+            pbca_s = mean(mean_prop_cospon_opp_spon_SN, na.rm = TRUE))
+
+hvw_hr <- hvw_hr_data |> 
+  group_by(congress) |> 
+  summarize(year = first(year),
+            pbca_hr = mean(mean_prop_cospon_opp_spon_HR, na.rm = TRUE))
+
+# PBCA in both chambers by Congress
+pbca_df <- inner_join(hvw_s, hvw_hr, by = c("congress", "year")) |> 
+  pivot_longer(cols = c(pbca_s, pbca_hr),
+               names_to = "chamber",
+               names_prefix = "pbca_",
+               values_to = "pbca") |> 
+  mutate(chamber = case_match(chamber,
+                              "s" ~ "Senate",
+                              "hr" ~ "House"))
+
+## plot figure
+# plot reproduced from HVW (2023)
+hvw_pbca_plot <- ggplot(pbca_df, aes(x = year, y = pbca)) + 
+  geom_line(aes(lty = chamber)) +
+  scale_y_continuous(limits = c(0, 0.6)) +
+  labs(x = "Year Congress Began",
+       y = "Proportion Bipartisan\nCosponsors Attracted",
+       lty = "Chamber")
+
+# ggsave("images/hvw_pbca_plot.png", hvw_pbca_plot,
+#        width = 2400, height = 1800, units = "px")
+```
+
+::: {.content-visible when-format="html" #fig-intro-plots layout-ncol=3 layout-valign="bottom"}
+![Growth in ideological polarization in Congress, 1971-2022 (reproduced from @desilverPolarizationTodayCongress2022)](images/desilver_polarization.png){#fig-pew-polarization fig-alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right."}
+
+![Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from @harbridge-yongBipartisanPathEffective2023)](images/hvw_pbca_plot.png){#fig-hvw-pbca fig-alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in \"The Bipartisan Path to Effective Lawmaking\" (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period."}
+
+![Decline in productivity in Congress, 1989-2023 (reproduced from @solenderCapitolHillStunner2023)](images/Axios_productivity_graph.png){#fig-axios-productivity fig-alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data."}
+
+Increasing polarization, decreasing bipartisanship and productivity in Congress
+:::
+
+::: {.content-visible when-format="pdf" #fig-intro-plots layout-nrow=3}
+![Growth in ideological polarization in Congress, 1971-2022 (reproduced from @desilverPolarizationTodayCongress2022)](images/desilver_polarization.png){#fig-pew-polarization fig-alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right." height=2.3in}
+
+![Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from @harbridge-yongBipartisanPathEffective2023)](images/hvw_pbca_plot.png){#fig-hvw-pbca fig-alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in \"The Bipartisan Path to Effective Lawmaking\" (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period." height=2.3in}
+
+![Decline in productivity in Congress, 1989-2023 (reproduced from @solenderCapitolHillStunner2023)](images/Axios_productivity_graph.png){#fig-axios-productivity fig-alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data." height=2.3in}
+
+Increasing polarization, decreasing bipartisanship, and productivity in Congress
+:::
+
+The Senate filibuster and cloture rule have received a large portion of the blame for this gridlock. The current rules and practices around the filibuster have created a de facto requirement for a 60-vote supermajority to pass almost any legislation through the Senate [@kogerFilibusteringPoliticalHistory2010]. This state of a "60-vote Senate" has sparked widespread calls from activists and senators alike to reform or even abolish the filibuster.
 
 In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of "legislative goods," including productivity, bipartisanship, and policy stability. I test the effects of three proposed filibuster rules: abolishing the filibuster, restoring the talking filibuster, and flipping the cloture vote.
 
-To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions. Via this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen. Jeff Merkley.
+To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the benefits of obstruction and the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions.
+Using this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen. Jeff Merkley. Abolishing the filibuster would likely sacrifice bipartisanship and policy stability in the name of productivity. Flipping the cloture vote, if instituted without more substantial reforms, would not have very large impacts on the legislative goods.
+
+I supplement that primary result with two separate quantitative analyses investigating specific aspects of the overall model. First, I estimate the impacts of higher-cost obstruction on the number of bills that pass the Senate. Through this analysis, I identify the size of the costs that would produce the greatest effects on obstruction relative to those costs.
+Next, I perform a regression analysis to measure the impact that the nuclear option has had on Senate confirmation votes for presidential nominations. The regressions support the predictions of my model, although more data from after the nuclear option is needed to strengthen these findings.
+
+This combination of a new, holistic framework for analyzing proposed filibuster rules and quantitative analyses to reinforce the findings of that model provides a comprehensive set of tools for senators and activists alike to make sound decisions about the future of the Senate filibuster.
+
+Finally, I introduce the `filibustr` R package, which provides utilities for gathering data for research on Congress. The functions in the `filibustr` package can improve data consistency in political science research through an easy-to-use interface. This package provides conveniences that are already standard in fields such as baseball analytics, but have thus far been missing for political science. Through the `filibustr` package, my research's impact on political science can extend well beyond my findings on the filibuster.
 
 ## Literature Review
 Research on the filibuster falls under the broader research area of parties, partisanship, and polarization in Congress. Much of the existing research on the filibuster aims to explain the evolution of the tactic and model the effect of the current and previous filibuster and cloture rules on legislative conflicts. I extend this research by applying formal modeling techniques to predict the effects of proposed new Senate rules around the filibuster and identify the best rule proposal for improving the functioning of the Senate.
@@ -1030,7 +1108,7 @@ if (knitr::is_latex_output()) {
 plot_noms_preds
 ```
 
-Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations really accelerated, as shown in @fig-confirmation-vote-totals), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.
+Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations truly accelerated, as shown in @fig-confirmation-vote-totals), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.
 
 ## Conclusion
 [ONGOING]
@@ -1046,7 +1124,7 @@ The primary extension needed to corroborate my findings is empirical evidence fo
 
 A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically [@uslanerPartisanshipCoalitionFormation1975]. To explain this, @grosecloseBuyingSupermajorities1996 show how it may be "cheaper" for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. I plan to accommodate this finding into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model will help prevent it from overly predicting minimal majorities.
 
-## The `filibustr` Package {.appendix}
+## The `filibustr` Package
 In addition to the primary findings of my research, I intend to benefit future political science researchers by providing publicly available solutions to the data challenges I face in my work. I am publishing these solutions in the form of an open-source R package, named `filibustr` [@feinleibFilibustrDataUtilities2024]. The `filibustr` package provides a set of utilities to improve the data-gathering process for research on Congress.
 
 The `filibustr` package is inspired by the `baseballr` package, which has long provided similar functionality for the baseball analytics community [@pettiBaseballrAcquiringAnalyzing2024]. Just as `baseballr` enables baseball researchers to access data from popular baseball statistics websites in R, `filibustr` enables political science researchers to access data from popular congressional data websites.

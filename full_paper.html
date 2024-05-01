@@ -56,6 +56,9 @@ div.csl-indent {
 <script src="full_paper_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="full_paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="full_paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="full_paper_files/libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="full_paper_files/libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="full_paper_files/libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script src="full_paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="full_paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
@@ -98,16 +101,47 @@ window.Quarto = {
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#literature-review" id="toc-literature-review" class="nav-link" data-scroll-target="#literature-review"><span class="header-section-number">2</span> Literature Review</a></li>
-  <li><a href="#the-legislative-goods" id="toc-the-legislative-goods" class="nav-link" data-scroll-target="#the-legislative-goods"><span class="header-section-number">3</span> The Legislative Goods</a></li>
-  <li><a href="#proposals-to-reform-the-filibuster-and-cloture-rule" id="toc-proposals-to-reform-the-filibuster-and-cloture-rule" class="nav-link" data-scroll-target="#proposals-to-reform-the-filibuster-and-cloture-rule"><span class="header-section-number">4</span> Proposals to Reform the Filibuster and Cloture Rule</a></li>
-  <li><a href="#sec-model" id="toc-sec-model" class="nav-link" data-scroll-target="#sec-model"><span class="header-section-number">5</span> Modeling the Senate Filibuster</a></li>
-  <li><a href="#sec-analyzing-proposals" id="toc-sec-analyzing-proposals" class="nav-link" data-scroll-target="#sec-analyzing-proposals"><span class="header-section-number">6</span> Predicting the Effects of Proposed Filibuster Reforms</a></li>
-  <li><a href="#quantitative-analysis-how-much-impact-would-rule-changes-have" id="toc-quantitative-analysis-how-much-impact-would-rule-changes-have" class="nav-link" data-scroll-target="#quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a></li>
-  
+  <li><a href="#literature-review" id="toc-literature-review" class="nav-link" data-scroll-target="#literature-review"><span class="header-section-number">2</span> Literature Review</a>
+  <ul class="collapse">
+  <li><a href="#history-of-the-filibuster" id="toc-history-of-the-filibuster" class="nav-link" data-scroll-target="#history-of-the-filibuster"><span class="header-section-number">2.1</span> History of the Filibuster</a></li>
+  <li><a href="#parties-partisanship-and-polarization-in-congress" id="toc-parties-partisanship-and-polarization-in-congress" class="nav-link" data-scroll-target="#parties-partisanship-and-polarization-in-congress"><span class="header-section-number">2.2</span> Parties, Partisanship, and Polarization in Congress</a></li>
+  <li><a href="#research-on-the-filibuster" id="toc-research-on-the-filibuster" class="nav-link" data-scroll-target="#research-on-the-filibuster"><span class="header-section-number">2.3</span> Research on the Filibuster</a></li>
+  </ul></li>
+  <li><a href="#the-legislative-goods" id="toc-the-legislative-goods" class="nav-link" data-scroll-target="#the-legislative-goods"><span class="header-section-number">3</span> The Legislative Goods</a>
+  <ul class="collapse">
+  <li><a href="#productivity-and-gridlock" id="toc-productivity-and-gridlock" class="nav-link" data-scroll-target="#productivity-and-gridlock"><span class="header-section-number">3.1</span> Productivity and Gridlock</a></li>
+  <li><a href="#bipartisanship-dealmaking-and-compromise" id="toc-bipartisanship-dealmaking-and-compromise" class="nav-link" data-scroll-target="#bipartisanship-dealmaking-and-compromise"><span class="header-section-number">3.2</span> Bipartisanship, Dealmaking, and Compromise</a></li>
+  <li><a href="#policy-stability-and-volatility" id="toc-policy-stability-and-volatility" class="nav-link" data-scroll-target="#policy-stability-and-volatility"><span class="header-section-number">3.3</span> Policy Stability and Volatility</a></li>
+  </ul></li>
+  <li><a href="#proposals-to-reform-the-filibuster-and-cloture-rule" id="toc-proposals-to-reform-the-filibuster-and-cloture-rule" class="nav-link" data-scroll-target="#proposals-to-reform-the-filibuster-and-cloture-rule"><span class="header-section-number">4</span> Proposals to Reform the Filibuster and Cloture Rule</a>
+  <ul class="collapse">
+  <li><a href="#proposal-1-abolishing-the-filibuster" id="toc-proposal-1-abolishing-the-filibuster" class="nav-link" data-scroll-target="#proposal-1-abolishing-the-filibuster"><span class="header-section-number">4.1</span> Proposal 1: Abolishing the Filibuster</a></li>
+  <li><a href="#proposal-2-restoring-the-talking-filibuster" id="toc-proposal-2-restoring-the-talking-filibuster" class="nav-link" data-scroll-target="#proposal-2-restoring-the-talking-filibuster"><span class="header-section-number">4.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
+  <li><a href="#sec-flip-cloture-vote" id="toc-sec-flip-cloture-vote" class="nav-link" data-scroll-target="#sec-flip-cloture-vote"><span class="header-section-number">4.3</span> Proposal 3: Flipping the Cloture Vote</a></li>
+  </ul></li>
+  <li><a href="#sec-model" id="toc-sec-model" class="nav-link" data-scroll-target="#sec-model"><span class="header-section-number">5</span> Modeling the Senate Filibuster</a>
+  <ul class="collapse">
+  <li><a href="#sec-wawro-schickler" id="toc-sec-wawro-schickler" class="nav-link" data-scroll-target="#sec-wawro-schickler"><span class="header-section-number">5.1</span> Wawro and Schickler’s Model</a></li>
+  <li><a href="#extending-the-ws-model" id="toc-extending-the-ws-model" class="nav-link" data-scroll-target="#extending-the-ws-model"><span class="header-section-number">5.2</span> Extending the WS Model</a></li>
+  </ul></li>
+  <li><a href="#sec-analyzing-proposals" id="toc-sec-analyzing-proposals" class="nav-link" data-scroll-target="#sec-analyzing-proposals"><span class="header-section-number">6</span> Predicting the Effects of Proposed Filibuster Reforms</a>
+  <ul class="collapse">
+  <li><a href="#sec-abolishing-filibuster" id="toc-sec-abolishing-filibuster" class="nav-link" data-scroll-target="#sec-abolishing-filibuster"><span class="header-section-number">6.1</span> Proposal 1: Abolishing the Filibuster</a></li>
+  <li><a href="#proposal-2-restoring-the-talking-filibuster-1" id="toc-proposal-2-restoring-the-talking-filibuster-1" class="nav-link" data-scroll-target="#proposal-2-restoring-the-talking-filibuster-1"><span class="header-section-number">6.2</span> Proposal 2: Restoring the Talking Filibuster</a></li>
+  <li><a href="#proposal-3-flipping-the-cloture-vote" id="toc-proposal-3-flipping-the-cloture-vote" class="nav-link" data-scroll-target="#proposal-3-flipping-the-cloture-vote"><span class="header-section-number">6.3</span> Proposal 3: Flipping the Cloture Vote</a></li>
+  </ul></li>
+  <li><a href="#quantitative-analysis-how-much-impact-would-rule-changes-have" id="toc-quantitative-analysis-how-much-impact-would-rule-changes-have" class="nav-link" data-scroll-target="#quantitative-analysis-how-much-impact-would-rule-changes-have"><span class="header-section-number">7</span> Quantitative Analysis: How Much Impact Would Rule Changes Have?</a>
+  <ul class="collapse">
+  <li><a href="#the-costs-necessary-to-flip-cloture-votes" id="toc-the-costs-necessary-to-flip-cloture-votes" class="nav-link" data-scroll-target="#the-costs-necessary-to-flip-cloture-votes"><span class="header-section-number">7.1</span> The Costs Necessary to Flip Cloture Votes</a></li>
+  <li><a href="#the-results-of-the-nuclear-option-on-presidential-nominations" id="toc-the-results-of-the-nuclear-option-on-presidential-nominations" class="nav-link" data-scroll-target="#the-results-of-the-nuclear-option-on-presidential-nominations"><span class="header-section-number">7.2</span> The Results of the Nuclear Option on Presidential Nominations</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">8</span> Conclusion</a>
+  <ul class="collapse">
+  <li><a href="#extensions-and-limitations" id="toc-extensions-and-limitations" class="nav-link" data-scroll-target="#extensions-and-limitations"><span class="header-section-number">8.1</span> Extensions and Limitations</a></li>
+  </ul></li>
+  <li><a href="#the-filibustr-package" id="toc-the-filibustr-package" class="nav-link" data-scroll-target="#the-filibustr-package"><span class="header-section-number">9</span> The <code>filibustr</code> Package</a></li>
   
   
   </ul>
@@ -154,7 +188,7 @@ window.Quarto = {
   <div class="abstract">
     <div class="block-title">Abstract</div>
     <p>In today’s hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.</p>
-    <p>In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of “legislative goods,” including productivity, bipartisanship, and policy stability. I test the effects of a series of filibuster rule proposals on these legislative goods, including proposals much more creative than the “nuclear option.”</p>
+    <p>In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of “legislative goods,” including productivity, bipartisanship, and policy stability. I test the effects of three different filibuster rule proposals on these legislative goods.</p>
     <p>To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. Using this model, which excels at explaining the evolution of past filibuster fights, I predict the outcomes of legislative battles under different filibuster rules. The results will inform activists and senators in future debates over filibuster reform — which will inevitably return the next time a popular bill is stymied by the Senate’s supermajoritarian rules.</p>
   </div>
 </div>
@@ -172,9 +206,60 @@ window.Quarto = {
 <div style="page-break-after: always;"></div>
 <section id="introduction" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
-<p>In today’s hyper-partisan political environment, it is a common complaint that Congress is broken. This is especially true for the Senate, where the filibuster and cloture rule have created a de facto requirement for a 60-vote supermajority to pass almost any legislation, sparking widespread calls from activists and senators alike to reform or even abolish the filibuster.</p>
+<p>In today’s hyper-partisan political environment, it is a common complaint that Congress is broken. Over the past fifty years, ideological polarization between the two parties in Congress has increased, and bipartisanship has decreased <span class="citation" data-cites="desilverPolarizationTodayCongress2022 harbridge-yongBipartisanPathEffective2023">(<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">Desilver, 2022</a>; <a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">Harbridge-Yong et al., 2023</a>, as shown in <a href="#fig-pew-polarization" class="quarto-xref" role="doc-biblioref">Figure&nbsp;2 (a)</a> and <a href="#fig-hvw-pbca" class="quarto-xref" role="doc-biblioref">Figure&nbsp;2 (b)</a>)</span>. As a result, productivity has fallen to historic lows for the modern Congress <span class="citation" data-cites="solenderCapitolHillStunner2023">(<a href="#ref-solenderCapitolHillStunner2023" role="doc-biblioref">Solender, 2023</a>, as shown in <a href="#fig-axios-productivity" class="quarto-xref" role="doc-biblioref">Figure&nbsp;2 (c)</a>)</span>.</p>
+<div id="fig-intro-plots" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-intro-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row quarto-layout-valign-bottom">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-intro-plots" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-pew-polarization" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-pew-polarization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/desilver_polarization.png" class="lightbox" data-gallery="fig-intro-plots" data-glightbox="description: .lightbox-desc-1"><img src="images/desilver_polarization.png" class="img-fluid figure-img" data-ref-parent="fig-intro-plots" alt="A plot showing the growth in ideological polarization in Congress between 1971 and 2022. Since 1971, Democrats have moved 0.06 units to the left, and Republicans have moved 0.28 units to the right in the Senate. In the House, Democrats have moved 0.07 units to the left, and Republicans have moved 0.25 units to the right."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-pew-polarization-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Growth in ideological polarization in Congress, 1971-2022 (reproduced from <span class="citation" data-cites="desilverPolarizationTodayCongress2022">Desilver (<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">2022</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-intro-plots" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-hvw-pbca" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in &quot;The Bipartisan Path to Effective Lawmaking&quot; (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-hvw-pbca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/hvw_pbca_plot.png" class="lightbox" data-gallery="fig-intro-plots" data-glightbox="description: .lightbox-desc-2"><img src="images/hvw_pbca_plot.png" class="img-fluid figure-img" data-ref-parent="fig-intro-plots" alt="A line plot showing the decline in bipartisanship in Congress from 1973 to 2016, as measured by Harbridge-Yong, Volden, and Wiseman in &quot;The Bipartisan Path to Effective Lawmaking&quot; (2023). In the Senate, the average Proportion Bipartisan Cosponsors Attracted (PBCA) fell from around 0.40 for most of the 1970s and 1980s to around 0.30 in the 2010s. In the House, the average PBCA fell from around 0.33 to around 0.25 over the same time period."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-hvw-pbca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">Harbridge-Yong et al. (<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">2023</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-intro-plots" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div id="fig-axios-productivity" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-axios-productivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="images/Axios_productivity_graph.png" class="lightbox" data-gallery="fig-intro-plots" data-glightbox="description: .lightbox-desc-3"><img src="images/Axios_productivity_graph.png" class="img-fluid figure-img" data-ref-parent="fig-intro-plots" alt="A bar plot showing the number of laws passed in each 2-year Congress since 1989. There has been a general decline since 1989, and 2023 saw by far the fewest laws passed of any year in the data."></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-axios-productivity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) Decline in productivity in Congress, 1989-2023 (reproduced from <span class="citation" data-cites="solenderCapitolHillStunner2023">Solender (<a href="#ref-solenderCapitolHillStunner2023" role="doc-biblioref">2023</a>)</span>)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-intro-plots-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Increasing polarization, decreasing bipartisanship and productivity in Congress
+</figcaption>
+</figure>
+</div>
+<p>The Senate filibuster and cloture rule have received a large portion of the blame for this gridlock. The current rules and practices around the filibuster have created a de facto requirement for a 60-vote supermajority to pass almost any legislation through the Senate <span class="citation" data-cites="kogerFilibusteringPoliticalHistory2010">(<a href="#ref-kogerFilibusteringPoliticalHistory2010" role="doc-biblioref">Koger, 2010</a>)</span>. This state of a “60-vote Senate” has sparked widespread calls from activists and senators alike to reform or even abolish the filibuster.</p>
 <p>In this paper, I predict the effects of different proposals for the filibuster and cloture rule on a set of “legislative goods,” including productivity, bipartisanship, and policy stability. I test the effects of three proposed filibuster rules: abolishing the filibuster, restoring the talking filibuster, and flipping the cloture vote.</p>
-<p>To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions. Via this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen.&nbsp;Jeff Merkley.</p>
+<p>To predict the effects of these rule changes, I extend Wawro and Schickler’s expected-utility model of legislative entrepreneurship under cloture by considering the benefits of obstruction and the costs faced by bill proponents and obstructionists alike. These extensions unlock the ability to predict the winner of legislative fights by comparing the expected utility of the proponent and obstructionist factions. Using this expected utility analysis, I find that restoring the talking filibuster does the best job of balancing the three legislative goods, supporting the ideas of leading advocates of filibuster reform such as Sen.&nbsp;Jeff Merkley. Abolishing the filibuster would likely sacrifice bipartisanship and policy stability in the name of productivity. Flipping the cloture vote, if instituted without more substantial reforms, would not have very large impacts on the legislative goods.</p>
+<p>I supplement that primary result with two separate quantitative analyses investigating specific aspects of the overall model. First, I estimate the impacts of higher-cost obstruction on the number of bills that pass the Senate. Through this analysis, I identify the size of the costs that would produce the greatest effects on obstruction relative to those costs. Next, I perform a regression analysis to measure the impact that the nuclear option has had on Senate confirmation votes for presidential nominations. The regressions support the predictions of my model, although more data from after the nuclear option is needed to strengthen these findings.</p>
+<p>This combination of a new, holistic framework for analyzing proposed filibuster rules and quantitative analyses to reinforce the findings of that model provides a comprehensive set of tools for senators and activists alike to make sound decisions about the future of the Senate filibuster.</p>
+<p>Finally, I introduce the <code>filibustr</code> R package, which provides utilities for gathering data for research on Congress. The functions in the <code>filibustr</code> package can improve data consistency in political science research through an easy-to-use interface. This package provides conveniences that are already standard in fields such as baseball analytics, but have thus far been missing for political science. Through the <code>filibustr</code> package, my research’s impact on political science can extend well beyond my findings on the filibuster.</p>
 </section>
 <section id="literature-review" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="literature-review"><span class="header-section-number">2</span> Literature Review</h2>
@@ -189,16 +274,16 @@ window.Quarto = {
 <p>The Framers agreed that the Senate was intended to be a majority-rule institution for all except the most consequential matters, such as impeachment and Constitutional amendments <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022, p. 27</a>)</span>. Thus, the Senate indeed functioned as a majoritarian institution. Members of the minority could have their say in debate, but in the end, questions would be decided with a majority vote. In fact, the Senate rules originally included the previous question motion, which sets up a vote to end debate and immediately move to a final passage vote. The previous question motion is still part of the House rules, and is a regular step in passing legislation in the House. However, the principle of majority rule was mostly enforced by a set of norms (sometimes called the Senate Code), not written rules. The Senate was so dedicated to these norms that the body removed the previous question from the rules in 1806, believing that a formal rule was unnecessary in light of the Senate’s strong norms against superfluous debate <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022, p. 47</a>)</span>.</p>
 <p>The Senate operated as a majoritarian body according to the Senate Code with few exceptions in the 19th century. The event many histories mark as the first origins of the modern filibuster occurred in 1841. In opposition of a Whig bill to re-establish the Bank of the United States, Sen.&nbsp;John Calhoun (D–SC) organized a group of slave-state Democratic senators to make one floor speech after another and stall the bill. After weeks of this obstruction, Sen.&nbsp;Henry Clay (Whig–KY), the lead proponent of the bank bill, threatened to change the rules to restore the previous question motion. Calhoun erupted at the prospect of the Senate imposing limitations on debate, invoking the principle of minority rights to defend the right he claimed to unlimited debate <span class="citation" data-cites="jentlesonKillSwitchRise2022">(<a href="#ref-jentlesonKillSwitchRise2022" role="doc-biblioref">Jentleson, 2022, p. 52</a>)</span>. These principles of minority rights and unlimited debate, first applied by Calhoun, have been central to defenses of the filibuster ever since.</p>
 <p>A formal rule for ending debate in the Senate finally came in 1917. At the end of the congressional session, a group of antiwar senators successfully killed a bill to arm American ships for protection during the First World War. President Woodrow Wilson condemned the actions of this “little group of willful men” and the rules of the Senate that allowed it <span class="citation" data-cites="TextPresidentStatement1917">(<a href="#ref-TextPresidentStatement1917" role="doc-biblioref"><span>“Text of the President’s Statement,”</span> 1917</a>)</span>. Wilson sparked massive public outcry, and the Senate came back into session to pass the armed ships bill and a cloture rule to prevent similar obstruction in the future. The senators settled on a rule by which a two-thirds vote of present and voting senators could end debate. This was the original version of Rule XXII, which governs the filibuster and cloture today. The two-thirds supermajority was a compromise by the rule’s supporters, who largely wanted a simple majority cloture rule, so that the cloture rule’s opponents would allow it to pass <span class="citation" data-cites="ExaminingFilibuster2010">(<a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010, p. 18</a>, testimony of Sarah A. Binder)</span>.</p>
-<p>Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a> below, the cloture rule was used only on rare occasions for the first several decades after 1917 <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>.</p>
+<p>Even after the introduction of a cloture rule, the Senate still operated mainly on the norm of restraint in debate. As shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;3</a> below, the cloture rule was used only on rare occasions for the first several decades after 1917 <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cloture-graph" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cloture-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-cloture-graph-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-cloture-graph-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" data-glightbox="description: .lightbox-desc-4"><img src="full_paper_files/figure-html/fig-cloture-graph-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloture-graph-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
+Figure&nbsp;3: Frequency of cloture actions, 65th–117th Congresses (1917–2022)
 </figcaption>
 </figure>
 </div>
@@ -213,7 +298,7 @@ Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–202
 </section>
 <section id="parties-partisanship-and-polarization-in-congress" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="parties-partisanship-and-polarization-in-congress"><span class="header-section-number">2.2</span> Parties, Partisanship, and Polarization in Congress</h3>
-<p>The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes <span class="citation" data-cites="krehbielPivotalPoliticsTheory1998">(<a href="#ref-krehbielPivotalPoliticsTheory1998" role="doc-biblioref">Krehbiel, 1998</a>)</span>. According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the <em>filibuster pivot</em>—that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the <em>veto pivot</em> as well (the senator whose vote puts the majority over the veto override threshold). Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s <span class="citation" data-cites="grayUnpackingPivotalPolitics2017">(<a href="#ref-grayUnpackingPivotalPolitics2017" role="doc-biblioref">Gray &amp; Jenkins, 2017</a>)</span>, when the use of the cloture rule skyrocketed, as shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a> above <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>. Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.</p>
+<p>The modern filibuster is a tactic used by parties as a united group, and the gridlock caused by the filibuster only adds to the gridlock in Congress caused by partisan polarization. Therefore, research on partisanship and polarization in Congress is vital to understanding the effects of the filibuster rule. Pivotal politics theory is a crucial tool to use in analyzing potential filibuster rule changes <span class="citation" data-cites="krehbielPivotalPoliticsTheory1998">(<a href="#ref-krehbielPivotalPoliticsTheory1998" role="doc-biblioref">Krehbiel, 1998</a>)</span>. According to pivotal politics theory, a bill will pass the Senate only if the bill is closer to the ideal point policy preference of the median senator and the <em>filibuster pivot</em>—that is, the senator whose vote puts the majority over the cloture threshold — than the policy status quo. If a bill is not supported by the president, then senators have to consider the <em>veto pivot</em> as well (the senator whose vote puts the majority over the veto override threshold). Pivotal politics theory underscores the increased impact of the filibuster on the Senate over the past 50 years. Among the filibuster pivot and the veto pivot, the filibuster pivot has grown in relative importance since the 1970s <span class="citation" data-cites="grayUnpackingPivotalPolitics2017">(<a href="#ref-grayUnpackingPivotalPolitics2017" role="doc-biblioref">Gray &amp; Jenkins, 2017</a>)</span>, when the use of the cloture rule skyrocketed, as shown in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;3</a> above <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>)</span>. Therefore, a natural avenue for reforming the filibuster is to change which senator is the filibuster pivot or the incentives facing the filibuster pivot. Indeed, many of the proposed filibuster rule changes I analyze work in this way.</p>
 <p>Another key factor in the effects of the filibuster is the interaction between the filibuster and the high levels of polarization and partisanship in Congress today. Since the early 1970s, when the current filibuster rules were formed, ideological polarization in the Senate — defined as the gap between the average ideology of the two parties — has grown by 0.34 points, according to DW-NOMINATE <span class="citation" data-cites="desilverPolarizationTodayCongress2022">(<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">Desilver, 2022</a>)</span>. Despite the growing polarization in the Senate, bipartisanship remains an important step in passing laws. On a whole-Congress level, the “enacting coalitions” for major laws were as bipartisan in the 2010s as they were in the 1970s <span class="citation" data-cites="curryNonpartyGovernmentBipartisan2019">(<a href="#ref-curryNonpartyGovernmentBipartisan2019" role="doc-biblioref">Curry &amp; Lee, 2019</a>)</span>. Even with the parties farther apart than they have been in generations, successful lawmaking still requires the support of legislators from both parties. The durability and benefits of bipartisanship also apply on an individual legislator level. Bipartisan behavior makes legislators more successful at enacting their policy goals, regardless of party polarization and whether the legislator is in the majority or minority party <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">(<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">Harbridge-Yong et al., 2023</a>)</span>. Together, these studies show that bipartisanship helps legislative productivity, both for individual legislators and for Congress as a whole.</p>
 </section>
 <section id="research-on-the-filibuster" class="level3" data-number="2.3">
@@ -289,7 +374,7 @@ Figure&nbsp;1: Frequency of cloture actions, 65th–117th Congresses (1917–202
 \pi(\alpha) = \left( \frac{\eta - .5}{.5} \right) ^ \alpha
 \]</span></p>
 <ul>
-<li><span class="math inline">\(\alpha\)</span> is a parameter indicating how much each additional coalition member contributes to the probability of passage. In effect, this parameter controls the steepness of the <span class="math inline">\(\pi\)</span> curve. As shown in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;2</a>, a higher value of <span class="math inline">\(\alpha\)</span> means that it takes more legislators in the supporting coalition to reach the same probability of passing a bill.
+<li><span class="math inline">\(\alpha\)</span> is a parameter indicating how much each additional coalition member contributes to the probability of passage. In effect, this parameter controls the steepness of the <span class="math inline">\(\pi\)</span> curve. As shown in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;4</a>, a higher value of <span class="math inline">\(\alpha\)</span> means that it takes more legislators in the supporting coalition to reach the same probability of passing a bill.
 <ul>
 <li><span class="math inline">\(\alpha \in (0, 1]\)</span>, so that as <span class="math inline">\(\alpha\)</span> increases toward 1, each additional legislator in the supporting coalition has a larger impact on the probability of passage.</li>
 </ul></li>
@@ -306,22 +391,22 @@ B = \frac{1 - \eta}{.5}
 EB = \pi B
 \]</span></p></li>
 </ul>
-<p>Since <span class="math inline">\(\pi\)</span> is an increasing function in <span class="math inline">\(\eta\)</span>, and <span class="math inline">\(B\)</span> is a decreasing function in <span class="math inline">\(\eta\)</span>, there is an inherent tradeoff in forming an optimally sized coalition. <a href="#fig-ws" class="quarto-xref">Figure&nbsp;2</a> below, reproduced from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 216</a>)</span>, illustrates how the expected benefits vary with <span class="math inline">\(\eta\)</span> for different values of <span class="math inline">\(\alpha\)</span>. <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 217</a>)</span> found that an <span class="math inline">\(\alpha\)</span> around 0.25 best fit the Senate of the late-19th and early-20th centuries.</p>
+<p>Since <span class="math inline">\(\pi\)</span> is an increasing function in <span class="math inline">\(\eta\)</span>, and <span class="math inline">\(B\)</span> is a decreasing function in <span class="math inline">\(\eta\)</span>, there is an inherent tradeoff in forming an optimally sized coalition. <a href="#fig-ws" class="quarto-xref">Figure&nbsp;4</a> below, reproduced from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 216</a>)</span>, illustrates how the expected benefits vary with <span class="math inline">\(\eta\)</span> for different values of <span class="math inline">\(\alpha\)</span>. <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 217</a>)</span> found that an <span class="math inline">\(\alpha\)</span> around 0.25 best fit the Senate of the late-19th and early-20th centuries.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ws" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-ws-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-ws-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" data-glightbox="description: .lightbox-desc-5"><img src="full_paper_files/figure-html/fig-ws-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ws-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: Expected benefits of passage under WS (maximum expected benefits marked)
+Figure&nbsp;4: Expected benefits of passage under WS (maximum expected benefits marked)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>As demonstrated in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;2</a>, legislative entrepreneurs benefit from growing their supporting coalitions above the minimum majority, as additional bill proponents increase the probability of bill passage. Moreover, the expected benefits curve rises and falls gradually, so there are many near-optimally sized coalitions with a coalition size that approximates the optimal coalition size.</p>
+<p>As demonstrated in <a href="#fig-ws" class="quarto-xref">Figure&nbsp;4</a>, legislative entrepreneurs benefit from growing their supporting coalitions above the minimum majority, as additional bill proponents increase the probability of bill passage. Moreover, the expected benefits curve rises and falls gradually, so there are many near-optimally sized coalitions with a coalition size that approximates the optimal coalition size.</p>
 </section>
 <section id="sec-wsk" class="level4" data-number="5.1.2">
 <h4 data-number="5.1.2" class="anchored" data-anchor-id="sec-wsk"><span class="header-section-number">5.1.2</span> The WS<sub>K</sub> Model</h4>
@@ -333,16 +418,16 @@ EB_K =
 \pi(\alpha^*)B &amp; \text{if } \eta ≥ K
 \end{cases}
 \]</span></p>
-<p><a href="#fig-wsk" class="quarto-xref">Figure&nbsp;3</a> below, based on the figure from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 218</a>)</span> shows the expected benefits curves under the WS<sub>K</sub> model, with the current cloture threshold of <span class="math inline">\(K = 0.60\)</span>.</p>
+<p><a href="#fig-wsk" class="quarto-xref">Figure&nbsp;5</a> below, based on the figure from <span class="citation" data-cites="wawroFilibusterObstructionLawmaking2006">Wawro &amp; Schickler (<a href="#ref-wawroFilibusterObstructionLawmaking2006" role="doc-biblioref">2006, p. 218</a>)</span> shows the expected benefits curves under the WS<sub>K</sub> model, with the current cloture threshold of <span class="math inline">\(K = 0.60\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-wsk" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-wsk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-wsk-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-wsk-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" data-glightbox="description: .lightbox-desc-6"><img src="full_paper_files/figure-html/fig-wsk-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wsk-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;3: Expected benefits of passage under WS<sub>K</sub> with a three-fifths cloture rule (maximum expected benefits marked)
+Figure&nbsp;5: Expected benefits of passage under WS<sub>K</sub> with a three-fifths cloture rule (maximum expected benefits marked)
 </figcaption>
 </figure>
 </div>
@@ -422,16 +507,16 @@ EB_{obst} = (1 - \pi)\beta_{block} + \beta_{position}
 <p>To analyze each of the proposed changes to the filibuster and cloture rule, we will predict how it affects the benefits and/or costs for the proponent and obstructionist factions. These impacts on the benefits and costs for each faction translate into probable impacts on the legislative goods of productivity, bipartisanship, and policy stability.</p>
 <section id="sec-abolishing-filibuster" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="sec-abolishing-filibuster"><span class="header-section-number">6.1</span> Proposal 1: Abolishing the Filibuster</h3>
-<p>Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits <span class="math inline">\(EB_{prop}\)</span> and decreasing their costs. The expected benefits increase because the probability of passage would increase from <span class="math inline">\(\pi(\alpha)\)</span> to <span class="math inline">\(\pi(\alpha^*)\)</span> for coalitions of less than 60 votes, as shown in <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;4</a> below.</p>
+<p>Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits <span class="math inline">\(EB_{prop}\)</span> and decreasing their costs. The expected benefits increase because the probability of passage would increase from <span class="math inline">\(\pi(\alpha)\)</span> to <span class="math inline">\(\pi(\alpha^*)\)</span> for coalitions of less than 60 votes, as shown in <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;6</a> below.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-abolish-filibuster" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-abolish-filibuster-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-abolish-filibuster-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-abolish-filibuster-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" data-glightbox="description: .lightbox-desc-7"><img src="full_paper_files/figure-html/fig-abolish-filibuster-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-abolish-filibuster-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;4: Change in proponents’ expected benefits before (left) and after (right) abolishing the filibuster
+Figure&nbsp;6: Change in proponents’ expected benefits before (left) and after (right) abolishing the filibuster
 </figcaption>
 </figure>
 </div>
@@ -446,7 +531,7 @@ Figure&nbsp;4: Change in proponents’ expected benefits before (left) and after
 <p>Restoring the talking filibuster would modestly increase expected benefits for the proponents, but the primary effects would occur on the cost side for each faction.</p>
 <p>Similar to abolishing the filibuster, restoring the talking filibuster would increase the probability of passage for coalitions between 51 and 60 votes. The probability would not increase up to <span class="math inline">\(\pi(\alpha^*)\)</span> because invoking cloture would still require 60 votes, but it would be easier for proponents to get those 60 cloture votes if the alternative is a costly talking filibuster.</p>
 <p>Under this rule, the cost of filibustering would increase massively for obstructionists. Currently, obstructionists merely have to <em>threaten</em> a filibuster to force a supermajority cloture vote. With the talking filibuster, obstructionists would actually have to continuously hold the floor and debate to prevent a simple majority vote on passage. It would be physically difficult for small groups of obstructionists to continue their debate long enough to defeat a determined majority. In the terms of the model, restoring the talking filibuster would produce a huge increase in <span class="math inline">\(C_{obst,d}\)</span>.</p>
-<p>The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. This increases costs on both sides (<span class="math inline">\(C_{prop,t}\)</span> and <span class="math inline">\(C_{obst,t}\)</span> in the model). The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time <span class="citation" data-cites="ExaminingFilibuster2010">(Mondale, in <a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010</a>)</span>. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns <span class="citation" data-cites="hammModifyingFilibusterMeans2012">(<a href="#ref-hammModifyingFilibusterMeans2012" role="doc-biblioref">Hamm, 2012</a>)</span>. Supporters of restoring the talking filibuster, including Sen.&nbsp;Jeff Merkley <span class="citation" data-cites="merkleyFilibusteredHowFix2024">(<a href="#ref-merkleyFilibusteredHowFix2024" role="doc-biblioref">Merkley &amp; Zamore, 2024</a>)</span> and former Sen.&nbsp;Patrick Leahy (D–VT) <span class="citation" data-cites="leahy2024">(<a href="#ref-leahy2024" role="doc-biblioref">personal communication, January 9, 2024</a>)</span>, believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen.&nbsp;Leahy, “you might see one or two [filibusters] a year” after this reform. Sen.&nbsp;Leahy’s prediction is well-founded in the history of the filibuster. Before the introduction of legislative two-tracking, which began the elimination of the talking filibuster, there had never been more than seven cloture motions in a full two-year Congress <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>, as shown in <a href="#fig-cloture-graph" class="quarto-xref" role="doc-biblioref">Figure&nbsp;1</a> above)</span>. However, with partisan polarization much stronger and the Senate norms much weaker today than in the 1970s, it is no certainty that filibusters would go back to those historical levels.</p>
+<p>The talking filibuster may have a major drawback for bill proponents, though. Forcing obstructionists to hold the floor would use up valuable floor time. This increases costs on both sides (<span class="math inline">\(C_{prop,t}\)</span> and <span class="math inline">\(C_{obst,t}\)</span> in the model). The introduction of two-tracking in the 1970s was intended to reduce the cost of this extended debate time <span class="citation" data-cites="ExaminingFilibuster2010">(Mondale, in <a href="#ref-ExaminingFilibuster2010" role="doc-biblioref"><em>Examining the Filibuster</em>, 2010</a>)</span>. Senators at the time saw good reason to reduce the use of the talking filibuster, and there is some risk of further gridlock if the talking filibuster returns <span class="citation" data-cites="hammModifyingFilibusterMeans2012">(<a href="#ref-hammModifyingFilibusterMeans2012" role="doc-biblioref">Hamm, 2012</a>)</span>. Supporters of restoring the talking filibuster, including Sen.&nbsp;Jeff Merkley <span class="citation" data-cites="merkleyFilibusteredHowFix2024">(<a href="#ref-merkleyFilibusteredHowFix2024" role="doc-biblioref">Merkley &amp; Zamore, 2024</a>)</span> and former Sen.&nbsp;Patrick Leahy (D–VT) <span class="citation" data-cites="leahy2024">(<a href="#ref-leahy2024" role="doc-biblioref">personal communication, January 9, 2024</a>)</span>, believe that this reform would so sharply reduce the frequency of filibusters that the net effect would be to increase productivity. According to Sen.&nbsp;Leahy, “you might see one or two [filibusters] a year” after this reform. Sen.&nbsp;Leahy’s prediction is well-founded in the history of the filibuster. Before the introduction of legislative two-tracking, which began the elimination of the talking filibuster, there had never been more than seven cloture motions in a full two-year Congress <span class="citation" data-cites="unitedstatessenateSenateActionCloture2024">(<a href="#ref-unitedstatessenateSenateActionCloture2024" role="doc-biblioref">United States Senate, 2024</a>, as shown in <a href="#fig-cloture-graph" class="quarto-xref" role="doc-biblioref">Figure&nbsp;3</a> above)</span>. However, with partisan polarization much stronger and the Senate norms much weaker today than in the 1970s, it is no certainty that filibusters would go back to those historical levels.</p>
 <p>The effects of restoring the talking filibuster would be more uncertain than the effects of abolishing the filibuster. It seems more likely than not that the productivity increase from the decreased number of filibusters would outweigh the longer time spent on each filibuster. The effects on bipartisanship and policy stability would also be smaller than under a Senate with an abolished filibuster. The ability of minority party senators to filibuster particularly objectionable bills would preserve incentives for bipartisanship and prevent the most extreme policy proposals from passing.</p>
 <p>Restoring the talking filibuster might have a smaller impact than abolishing the filibuster on productivity. On the other hand, this reform would do much less damage to bipartisanship and policy stability than abolishing the filibuster. Restoring the talking filibuster does a better job of balancing these three legislative goods.</p>
 </section>
@@ -469,24 +554,24 @@ Figure&nbsp;4: Change in proponents’ expected benefits before (left) and after
 <section id="data" class="level4" data-number="7.1.1">
 <h4 data-number="7.1.1" class="anchored" data-anchor-id="data"><span class="header-section-number">7.1.1</span> Data</h4>
 <p>For this analysis, I used the 431 failed cloture votes between the 77th and 117th Congresses (1977-2022). These votes all took place under the current 60-vote cloture rule.</p>
-<p>To find potential pivotal votes for cloture, I used Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a> shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
+<p>To find potential pivotal votes for cloture, I used Voteview’s calculated probabilities of members’ roll call votes. As shown below, Voteview uses members’ DW-NOMINATE ideal points to assign them a probability of voting Yea or Nay on a certain roll call vote <span class="citation" data-cites="lewisVoteviewCongressionalRollcall2024">(<a href="#ref-lewisVoteviewCongressionalRollcall2024" role="doc-biblioref">Lewis et al., 2024</a>)</span>. For demonstration, the figures below show how the Senate voted on two of the major legislative packages of the Biden administration.<a href="#fn12" class="footnote-ref" id="fnref12" role="doc-noteref"><sup>12</sup></a> <a href="#fig-ira" class="quarto-xref">Figure&nbsp;7</a> shows how senators voted on the Inflation Reduction Act (IRA) in August 2022, and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;8</a> shows the votes for the Infrastructure Investment and Jobs Act (IIJA) in August 2021. Senators’ actual votes are indicated by the shapes at their ideal points: dark, upward-pointing triangles for Yea votes; pale, downward-pointing triangles for Nay votes; and pale circles for senators who did not vote. The predicted vote probabilities are shown by the yellow shading: dark yellow indicated a high probability of a Yea vote, and white for a high probability of a Nay vote. The black cutting line shows the points where a member would have a 50-50 chance of either vote.</p>
 <div id="fig-ira" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/voteview_ira.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<a href="images/voteview_ira.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" data-glightbox="description: .lightbox-desc-8"><img src="images/voteview_ira.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Inflation Reduction Act of 2022. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ira-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;5: Voteview vote probabilities on the Inflation Reduction Act (2022)
+Figure&nbsp;7: Voteview vote probabilities on the Inflation Reduction Act (2022)
 </figcaption>
 </figure>
 </div>
 <div id="fig-iija" class="quarto-figure quarto-figure-center quarto-float anchored" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="images/voteview_iija.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote.">
+<a href="images/voteview_iija.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" data-glightbox="description: .lightbox-desc-9"><img src="images/voteview_iija.png" class="img-fluid figure-img" alt="A plot showing senators' ideogical ideal points according to DW-NOMINATE and how they voted on the Infrastructure Investment and Jobs Act. The plot is shaded by the estimated probability that a senator with a certain ideology would vote Yea on this vote."></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iija-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)
+Figure&nbsp;8: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)
 </figcaption>
 </figure>
 </div>
@@ -494,20 +579,20 @@ Figure&nbsp;6: Voteview vote probabilities on the Infrastructure Investment and 
 <section id="analysis" class="level4" data-number="7.1.2">
 <h4 data-number="7.1.2" class="anchored" data-anchor-id="analysis"><span class="header-section-number">7.1.2</span> Analysis</h4>
 <p>The key data point for a failed cloture vote in this analysis is the pivotal vote that could have flipped the cloture vote to success. To find potentially flippable votes on failed cloture vote, I gathered Nay votes where the senator was estimated to have between a 50.0% and 99.9% chance of voting Nay. Nay votes with less than 50% probability are on the Yea side of the predicted cutting line, so these votes are not explained by pivotal models. Nay votes with 100% probability are likely based on strong beliefs by a senator, and are unlikely to change just because of higher-cost filibustering. Then, I found the <em>pivotal vote</em> on each failed cloture vote. If a cloture motion fell <span class="math inline">\(n\)</span> votes short of passing, I found the <span class="math inline">\(n\)</span>th-lowest-probability Nay vote. For a small set of bills, there was no possible pivotal vote, because more than 40 senators had 100% probabilities of voting Nay, and thus there were not enough flippable votes.</p>
-<p>Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in <a href="#fig-ira" class="quarto-xref">Figure&nbsp;5</a> and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;6</a>, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members’ votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE. To account for these differences, I used the spread estimates included in the Voteview data downloads (columns <code>nominate_spread_1</code> and <code>nominate_spread_2</code> in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements. Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote’s distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.</p>
+<p>Once the pivotal vote according to vote probability is identified, it is necessary to translate that probability into a distance in ideological space that is consistent across votes. As shown in <a href="#fig-ira" class="quarto-xref">Figure&nbsp;7</a> and <a href="#fig-iija" class="quarto-xref">Figure&nbsp;8</a>, across different votes, the probabilities may approach a 100% probability of a Yea or Nay at different distances from the cutting line. The IRA vote was very polarizing, so there is not a lot of space where members’ votes are uncertain. By contrast, the IIJA vote saw more variation, especially within the Republican party, so the vote probabilities go more gradually from the cutting line to the extremes. In addition, the orientation of the probability surface may change: the IRA cutting line is much more diagonal in policy space than the IIJA cutting line, which is almost fully based on the first dimension of DW-NOMINATE. To account for these differences, I used the spread estimates included in the Voteview data downloads (columns <code>nominate_spread_1</code> and <code>nominate_spread_2</code> in the data). These two columns give estimates of the spread of the probability surface in the two dimensions of DW-NOMINATE. To get one measure of spread for each vote, I calculated the hypotenuse of these perpendicular measurements. Then, I multiplied the pivotal vote probability minus 50% (that is, the pivotal vote’s distance from the cutting line in probability space) by that spread estimate to convert probabilities into distances. These are the distances that are analogous to the costs of flipping votes we are trying to measure.</p>
 </section>
 <section id="results" class="level4" data-number="7.1.3">
 <h4 data-number="7.1.3" class="anchored" data-anchor-id="results"><span class="header-section-number">7.1.3</span> Results</h4>
-<p><a href="#fig-cloture-costs" class="quarto-xref">Figure&nbsp;7</a> shows the cumulative distribution of these distances. The plot answers the question: “If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?”</p>
+<p><a href="#fig-cloture-costs" class="quarto-xref">Figure&nbsp;9</a> shows the cumulative distribution of these distances. The plot answers the question: “If filibusters were X units more costly to obstructionists, how many failed cloture votes since 1977 would have instead passed?”</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-cloture-costs" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-cloture-costs-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-cloture-costs-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" data-glightbox="description: .lightbox-desc-10"><img src="full_paper_files/figure-html/fig-cloture-costs-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cloture-costs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;7: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)
+Figure&nbsp;9: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)
 </figcaption>
 </figure>
 </div>
@@ -565,22 +650,22 @@ Table&nbsp;1: Senators 0.15 units away from their party medians, 118th Congress
 <p>Arguably one of the best ways to predict the impacts of future cloture reforms is to look at the results of past reforms. The largest rule change since the 1970s has been the nuclear option on presidential nominations. In 2013, Senate Democrats lowered the cloture threshold to a simple majority for all executive branch nominees and judicial nominees below the Supreme Court. Senate Republicans extended this reform to Supreme Court nominations in 2017. According to my model of legislative coalitions, the nuclear option would be expected to lead to smaller passing coalitions on these nominations. As discussed in <a href="#sec-abolishing-filibuster" class="quarto-xref">Section&nbsp;6.1</a>, the nuclear option increases the probability that a nominee is confirmed when there is less-than-supermajority support for a nominee. Thus, a president is more able to propose nominees who will receive smaller majorities in support of their confirmation.</p>
 <section id="data-1" class="level4" data-number="7.2.1">
 <h4 data-number="7.2.1" class="anchored" data-anchor-id="data-1"><span class="header-section-number">7.2.1</span> Data</h4>
-<p>For this analysis, I examined the 1479 votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;8</a>. This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
+<p>For this analysis, I examined the 1479 votes on confirmation of executive and judicial branch nominees since 1989 (the 101st Congress). Before the 101st Congress, bill numbers, which I used to identify votes on nominations, are incomplete in the Voteview data. The results of these confirmation votes are displayed in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;10</a>. This figure shows that unanimous confirmations were the norm for most of the time period, and nominees rarely received less than 60% of votes in favor of confirmation. Since 2013, and especially since 2017, there has been an increasing number of nominees confirmed with majorities below 60%. The frequency of less-than-supermajority confirmations rises sharply after the two nuclear options, lending some initial credence to my predictions.<a href="#fn13" class="footnote-ref" id="fnref13" role="doc-noteref"><sup>13</sup></a></p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-confirmation-vote-totals" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-confirmation-vote-totals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-confirmation-vote-totals-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-confirmation-vote-totals-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11" data-glightbox="description: .lightbox-desc-11"><img src="full_paper_files/figure-html/fig-confirmation-vote-totals-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-confirmation-vote-totals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;8: Senate confirmation votes on presidential nominations (1989-2022)
+Figure&nbsp;10: Senate confirmation votes on presidential nominations (1989-2022)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>I used the Voteview parties data to calculate the size of the president’s party’s caucus in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the Voteview parties data to calculate the distance between the two party medians in the first dimension of DW-NOMINATE. I used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;1</a>) to measure the prevalence of filibustering over time.</p>
+<p>I used the Voteview parties data to calculate the size of the president’s party’s caucus in the Senate, which serves as one tool for predicting votes on nominations. In the case of senators who were replaced in the middle of a Congress, the Voteview parties data counts both the outgoing Senator and their replacement. To account for this, I normalized the sizes of the Democratic and Republican caucuses to total 100 senators. I did not count independents toward either party due to the differing relationships various Senate independents have had with party caucuses over the time period analyzed. I also used the Voteview parties data to calculate the distance between the two party medians in the first dimension of DW-NOMINATE. I used the data from the Senate website on the frequency of cloture motions (the same data displayed in the yellow line in <a href="#fig-cloture-graph" class="quarto-xref">Figure&nbsp;3</a>) to measure the prevalence of filibustering over time.</p>
 </section>
 <section id="analysis-1" class="level4" data-number="7.2.2">
 <h4 data-number="7.2.2" class="anchored" data-anchor-id="analysis-1"><span class="header-section-number">7.2.2</span> Analysis</h4>
@@ -655,15 +740,15 @@ Table&nbsp;3: Results of regressions predicting supporting coalitions on confirm
   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tinytable_evsvagq0899fs5ctdrnv</title>
+    <title>tinytable_eg9m3ewiakfk5r3lrqux</title>
     <style>
-.table td.tinytable_css_xggxm0k1b3c4mez72h2l, .table th.tinytable_css_xggxm0k1b3c4mez72h2l {    border-bottom: solid 0.1em #d3d8dc; }
-.table td.tinytable_css_4j22zqims2dhy51ajuzi, .table th.tinytable_css_4j22zqims2dhy51ajuzi {    text-align: left; }
-.table td.tinytable_css_s2j7ofbakjifk8l2npde, .table th.tinytable_css_s2j7ofbakjifk8l2npde {    text-align: center; }
-.table td.tinytable_css_fi41nqffotri83fh63c9, .table th.tinytable_css_fi41nqffotri83fh63c9 {    text-align: center; }
-.table td.tinytable_css_kd84t14ifirst8lumnw8, .table th.tinytable_css_kd84t14ifirst8lumnw8 {    text-align: center; }
-.table td.tinytable_css_6fcxcwu8q9mdphzqk7mh, .table th.tinytable_css_6fcxcwu8q9mdphzqk7mh {    text-align: center; }
-.table td.tinytable_css_pm4r9hlfmfzpgjui9moh, .table th.tinytable_css_pm4r9hlfmfzpgjui9moh {    border-bottom: solid 0.05em black; }
+.table td.tinytable_css_jwe88q5mhfdj6y6g0m6j, .table th.tinytable_css_jwe88q5mhfdj6y6g0m6j {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_pm64dcyihv9kaen8qdhy, .table th.tinytable_css_pm64dcyihv9kaen8qdhy {    text-align: left; }
+.table td.tinytable_css_rh9r2x6ys7b62jjubxfe, .table th.tinytable_css_rh9r2x6ys7b62jjubxfe {    text-align: center; }
+.table td.tinytable_css_9ycmi33jcxem6wn4pclz, .table th.tinytable_css_9ycmi33jcxem6wn4pclz {    text-align: center; }
+.table td.tinytable_css_78r0p1aict6e4dwqlhoz, .table th.tinytable_css_78r0p1aict6e4dwqlhoz {    text-align: center; }
+.table td.tinytable_css_zk56lqriyfe37iu1roqx, .table th.tinytable_css_zk56lqriyfe37iu1roqx {    text-align: center; }
+.table td.tinytable_css_dh3srlgowt1x8yd4lzhh, .table th.tinytable_css_dh3srlgowt1x8yd4lzhh {    border-bottom: solid 0.05em black; }
     </style>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -681,7 +766,7 @@ Table&nbsp;3: Results of regressions predicting supporting coalitions on confirm
 
   
     <div class="container">
-      <table class="table table-borderless" id="tinytable_evsvagq0899fs5ctdrnv" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_eg9m3ewiakfk5r3lrqux" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         
               <tr>
@@ -909,12 +994,12 @@ Table&nbsp;3: Results of regressions predicting supporting coalitions on confirm
     </div>
 
     <script>
-      function styleCell_tinytable_60xr4hqmcvmmc56vptbf(i, j, css_id) {
-        var table = document.getElementById("tinytable_evsvagq0899fs5ctdrnv");
+      function styleCell_tinytable_rmd0s7957h721bfq7jw4(i, j, css_id) {
+        var table = document.getElementById("tinytable_eg9m3ewiakfk5r3lrqux");
         table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_evsvagq0899fs5ctdrnv');
+        var table = document.getElementById('tinytable_eg9m3ewiakfk5r3lrqux');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -922,8 +1007,8 @@ Table&nbsp;3: Results of regressions predicting supporting coalitions on confirm
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tinytable_60xr4hqmcvmmc56vptbf(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_evsvagq0899fs5ctdrnv");
+      function spanCell_tinytable_rmd0s7957h721bfq7jw4(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_eg9m3ewiakfk5r3lrqux");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -950,171 +1035,171 @@ Table&nbsp;3: Results of regressions predicting supporting coalitions on confirm
         targetCell.colSpan = colspan;
       }
 
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 0, 'tinytable_css_xggxm0k1b3c4mez72h2l') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 1, 'tinytable_css_xggxm0k1b3c4mez72h2l') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 2, 'tinytable_css_xggxm0k1b3c4mez72h2l') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 3, 'tinytable_css_xggxm0k1b3c4mez72h2l') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 4, 'tinytable_css_xggxm0k1b3c4mez72h2l') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(1, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(2, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(3, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(4, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(5, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(6, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(7, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(8, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(9, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(10, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(11, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(12, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(13, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(14, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(15, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(16, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(17, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(18, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(19, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(20, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(21, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(23, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(24, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(25, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(26, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(27, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(28, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(29, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(30, 0, 'tinytable_css_4j22zqims2dhy51ajuzi') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(1, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(2, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(3, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(4, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(5, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(6, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(7, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(8, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(9, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(10, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(11, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(12, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(13, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(14, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(15, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(16, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(17, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(18, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(19, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(20, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(21, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(23, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(24, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(25, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(26, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(27, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(28, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(29, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(30, 1, 'tinytable_css_s2j7ofbakjifk8l2npde') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(1, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(2, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(3, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(4, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(5, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(6, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(7, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(8, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(9, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(10, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(11, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(12, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(13, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(14, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(15, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(16, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(17, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(18, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(19, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(20, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(21, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(23, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(24, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(25, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(26, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(27, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(28, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(29, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(30, 2, 'tinytable_css_fi41nqffotri83fh63c9') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(1, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(2, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(3, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(4, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(5, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(6, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(7, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(8, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(9, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(10, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(11, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(12, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(13, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(14, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(15, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(16, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(17, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(18, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(19, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(20, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(21, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(23, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(24, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(25, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(26, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(27, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(28, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(29, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(30, 3, 'tinytable_css_kd84t14ifirst8lumnw8') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(0, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(1, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(2, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(3, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(4, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(5, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(6, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(7, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(8, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(9, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(10, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(11, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(12, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(13, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(14, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(15, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(16, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(17, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(18, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(19, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(20, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(21, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(23, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(24, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(25, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(26, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(27, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(28, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(29, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(30, 4, 'tinytable_css_6fcxcwu8q9mdphzqk7mh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 0, 'tinytable_css_pm4r9hlfmfzpgjui9moh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 1, 'tinytable_css_pm4r9hlfmfzpgjui9moh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 2, 'tinytable_css_pm4r9hlfmfzpgjui9moh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 3, 'tinytable_css_pm4r9hlfmfzpgjui9moh') })
-window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc56vptbf(22, 4, 'tinytable_css_pm4r9hlfmfzpgjui9moh') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 0, 'tinytable_css_jwe88q5mhfdj6y6g0m6j') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 1, 'tinytable_css_jwe88q5mhfdj6y6g0m6j') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 2, 'tinytable_css_jwe88q5mhfdj6y6g0m6j') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 3, 'tinytable_css_jwe88q5mhfdj6y6g0m6j') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 4, 'tinytable_css_jwe88q5mhfdj6y6g0m6j') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(1, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(2, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(3, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(4, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(5, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(6, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(7, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(8, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(9, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(10, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(11, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(12, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(13, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(14, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(15, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(16, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(17, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(18, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(19, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(20, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(21, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(23, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(24, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(25, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(26, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(27, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(28, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(29, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(30, 0, 'tinytable_css_pm64dcyihv9kaen8qdhy') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(1, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(2, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(3, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(4, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(5, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(6, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(7, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(8, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(9, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(10, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(11, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(12, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(13, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(14, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(15, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(16, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(17, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(18, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(19, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(20, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(21, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(23, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(24, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(25, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(26, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(27, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(28, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(29, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(30, 1, 'tinytable_css_rh9r2x6ys7b62jjubxfe') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(1, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(2, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(3, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(4, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(5, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(6, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(7, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(8, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(9, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(10, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(11, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(12, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(13, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(14, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(15, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(16, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(17, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(18, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(19, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(20, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(21, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(23, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(24, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(25, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(26, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(27, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(28, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(29, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(30, 2, 'tinytable_css_9ycmi33jcxem6wn4pclz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(1, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(2, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(3, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(4, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(5, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(6, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(7, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(8, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(9, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(10, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(11, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(12, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(13, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(14, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(15, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(16, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(17, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(18, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(19, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(20, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(21, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(23, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(24, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(25, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(26, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(27, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(28, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(29, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(30, 3, 'tinytable_css_78r0p1aict6e4dwqlhoz') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(0, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(1, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(2, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(3, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(4, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(5, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(6, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(7, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(8, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(9, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(10, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(11, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(12, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(13, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(14, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(15, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(16, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(17, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(18, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(19, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(20, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(21, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(23, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(24, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(25, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(26, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(27, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(28, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(29, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(30, 4, 'tinytable_css_zk56lqriyfe37iu1roqx') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 0, 'tinytable_css_dh3srlgowt1x8yd4lzhh') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 1, 'tinytable_css_dh3srlgowt1x8yd4lzhh') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 2, 'tinytable_css_dh3srlgowt1x8yd4lzhh') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 3, 'tinytable_css_dh3srlgowt1x8yd4lzhh') })
+window.addEventListener('load', function () { styleCell_tinytable_rmd0s7957h721bfq7jw4(22, 4, 'tinytable_css_dh3srlgowt1x8yd4lzhh') })
     </script>
 
   
@@ -1125,26 +1210,26 @@ window.addEventListener('load', function () { styleCell_tinytable_60xr4hqmcvmmc5
 </figure>
 </div>
 </div>
-<p>The primary variable of interest is <em>Post-nuclear option</em>. The effect of the nuclear option is downward in all models, as expected. In agreement with <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;4</a>, the size of this effect is just a couple votes. However, the coefficient is only statistically significant on the models that do not use a squared time trend. I interpret this result further below.</p>
+<p>The primary variable of interest is <em>Post-nuclear option</em>. The effect of the nuclear option is downward in all models, as expected. In agreement with <a href="#fig-abolish-filibuster" class="quarto-xref">Figure&nbsp;6</a>, the size of this effect is just a couple votes. However, the coefficient is only statistically significant on the models that do not use a squared time trend. I interpret this result further below.</p>
 <p>Supreme Court nominees receive massively lower supporting coalitions on their confirmation votes. This is no surprise, as Supreme Court nominations are some of the most high-profile and contentious nominations of a president’s term. Cabinet secretaries actually gain an extra vote or so relative to other nominees on average, although this effect is not statistically significant. Cabinet secretaries may not suffer the same confirmation-vote penalty as Supreme Court nominees because of a belief by senators that the president should be allowed to select Cabinet secretaries who align with the administration’s policy goals.</p>
 <p>One surprising result is that a larger Senate caucus for the president’s party is associated with a slightly lower average vote for the president’s nominees. This may simply be an artifact of the small sample of Congresses (17) in the data. Inter-party distance, the primary measure of partisan polarization in this analysis, has a very strong negative correlation with confirmation vote totals. More polarization means that senators from the opposite party of the president will be farther apart ideologically from most of the president’s nominees, thus leading to more intense opposition. Like the nuclear option, the amount of filibustering in a Congress only shows a significant downward effect in the models without a squared time trend. A downward effect aligns with my model’s predictions.</p>
 <p>Finally, we get to the time trends. There is little difference between the two measurement schemes (Congress counter versus years since 1989).<a href="#fn15" class="footnote-ref" id="fnref15" role="doc-noteref"><sup>15</sup></a> The models using the Congress counter are slightly more accurate, suggesting that the higher granularity of the <em>years since 1989</em> variable does not provide additional predictive power. The coefficients on the linear time trends are all significant and positive, serving to dampen some of the negative effects of the above trends, most of which have correlated with time. The coefficients on the squared terms are strongly negative, giving the predicted supporting coalitions a downward curve over time.</p>
-<p><a href="#fig-predicted-confirmation-votes" class="quarto-xref">Figure&nbsp;9</a> shows the predictions generated by Model 2, which is the most accurate (by a slight amount) of the four models. This plot illustrates the sharp decline in supporting coalitions on confirmation votes that has occurred since the start of the Trump administration. Since most of the explanatory variables are measured on a whole-Congress level, the predictions are the same for almost all confirmation votes in each Congress (all except Supreme Court and Cabinet nominees). Even though the model treats all votes in a Congress identically, the model correlates rather well with the historical outcomes of confirmation votes (R<sup>2</sup> = 0.35).</p>
+<p><a href="#fig-predicted-confirmation-votes" class="quarto-xref">Figure&nbsp;11</a> shows the predictions generated by Model 2, which is the most accurate (by a slight amount) of the four models. This plot illustrates the sharp decline in supporting coalitions on confirmation votes that has occurred since the start of the Trump administration. Since most of the explanatory variables are measured on a whole-Congress level, the predictions are the same for almost all confirmation votes in each Congress (all except Supreme Court and Cabinet nominees). Even though the model treats all votes in a Congress identically, the model correlates rather well with the historical outcomes of confirmation votes (R<sup>2</sup> = 0.35).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-predicted-confirmation-votes" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-predicted-confirmation-votes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="full_paper_files/figure-html/fig-predicted-confirmation-votes-1.png" class="img-fluid figure-img" width="672">
+<a href="full_paper_files/figure-html/fig-predicted-confirmation-votes-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" data-glightbox="description: .lightbox-desc-12"><img src="full_paper_files/figure-html/fig-predicted-confirmation-votes-1.png" class="img-fluid figure-img" width="672"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-predicted-confirmation-votes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;9: Predicted outcomes of Senate confirmation votes (1989-2022)
+Figure&nbsp;11: Predicted outcomes of Senate confirmation votes (1989-2022)
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations really accelerated, as shown in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;8</a>), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.</p>
+<p>Finally, why is the effect of the nuclear option negated by a squared time trend? One possibility is that the accelerating decline in the size of supporting coalitions simply fits a downward-facing parabola well over the time period studied. With just over 5 years of data and one new presidential administration since the 2017 nuclear option (when sub-60-vote confirmations truly accelerated, as shown in <a href="#fig-confirmation-vote-totals" class="quarto-xref">Figure&nbsp;10</a>), it may simply be too early to truly tell the effect of the nuclear option. The effect of the nuclear option has the direction and approximate size that my model would predict, but additional data is needed to strengthen these findings. This analysis provides moderately, but not overwhelmingly, strong evidence to support my model.</p>
 </section>
 </section>
 </section>
@@ -1160,13 +1245,8 @@ Figure&nbsp;9: Predicted outcomes of Senate confirmation votes (1989-2022)
 <p>A limitation of my model, as well as many other models of legislative coalitions, is that it predicts that legislative entrepreneurs will seek to pass their bills with as few supporters as necessary (a minimal majority). However, minimal majorities are not very common empirically <span class="citation" data-cites="uslanerPartisanshipCoalitionFormation1975">(<a href="#ref-uslanerPartisanshipCoalitionFormation1975" role="doc-biblioref">Uslaner, 1975</a>)</span>. To explain this, <span class="citation" data-cites="grosecloseBuyingSupermajorities1996">Groseclose &amp; Snyder (<a href="#ref-grosecloseBuyingSupermajorities1996" role="doc-biblioref">1996</a>)</span> show how it may be “cheaper” for legislative entrepreneurs to create coalitions above the minimal majority, as no one member of the coalition can hold the bill hostage for their own benefit. I plan to accommodate this finding into my model by increasing the expected benefits gradually up to their predicted level for the first few votes after a minimal majority. Incorporating this minor addition into my model will help prevent it from overly predicting minimal majorities.</p>
 </section>
 </section>
-
-
-
-
-
-<div id="quarto-appendix" class="default"><section id="the-filibustr-package" class="level2 appendix" data-number="9"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">9</span> The <code>filibustr</code> Package</h2><div class="quarto-appendix-contents">
-
+<section id="the-filibustr-package" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="the-filibustr-package"><span class="header-section-number">9</span> The <code>filibustr</code> Package</h2>
 <p>In addition to the primary findings of my research, I intend to benefit future political science researchers by providing publicly available solutions to the data challenges I face in my work. I am publishing these solutions in the form of an open-source R package, named <code>filibustr</code> <span class="citation" data-cites="feinleibFilibustrDataUtilities2024">(<a href="#ref-feinleibFilibustrDataUtilities2024" role="doc-biblioref">Feinleib, 2023/2024</a>)</span>. The <code>filibustr</code> package provides a set of utilities to improve the data-gathering process for research on Congress.</p>
 <p>The <code>filibustr</code> package is inspired by the <code>baseballr</code> package, which has long provided similar functionality for the baseball analytics community <span class="citation" data-cites="pettiBaseballrAcquiringAnalyzing2024">(<a href="#ref-pettiBaseballrAcquiringAnalyzing2024" role="doc-biblioref">Petti &amp; Gilani, 2016/2024</a>)</span>. Just as <code>baseballr</code> enables baseball researchers to access data from popular baseball statistics websites in R, <code>filibustr</code> enables political science researchers to access data from popular congressional data websites.</p>
 <p>The <code>filibustr</code> package provides two primary benefits: data consistency and an easy-to-use interface. The functions in <code>filibustr</code> automate the process of importing data, which reduces the risk of inconsistencies introduced by user errors and allows researchers to always work with the most current data. <code>filibustr</code> also makes it easy to work with data on Congress. First, I am following the best practices for R package development, making the <code>filibustr</code> interface clean, intuitive, and fast. Second, using <code>filibustr</code> removes the need for researchers to download data files to their computers, getting the data straight into an R environment. In addition to the primary research audience, this benefits students who are learning how to perform data analysis in R. <code>filibustr</code> removes some of the setup steps involved with working with congressional data, so students can get straight into their analysis.</p>
@@ -1180,16 +1260,35 @@ Figure&nbsp;9: Predicted outcomes of Senate confirmation votes (1989-2022)
 <p>Just as my research is motivated by a gap in the research on the filibuster, I am developing the <code>filibustr</code> package because it provides solutions I cannot find anywhere else. Voteview provides the <code>Rvoteview</code> package for querying their data, but I have needs not covered by that package <span class="citation" data-cites="sonnetRvoteviewVoteviewData2019">(<a href="#ref-sonnetRvoteviewVoteviewData2019" role="doc-biblioref">Sonnet &amp; Lewis, 2015/2019</a>)</span>. The <code>Rvoteview</code> package is primarily focused on querying specific parts of the Voteview database, while I am more interested in working with their datasets at large. Additionally, <code>Rvoteview</code> does not seem to be actively maintained, with no updates since 2019 and the notice “WARNING: This package is under construction” on GitHub <span class="citation" data-cites="sonnetRvoteviewVoteviewData2019">(<a href="#ref-sonnetRvoteviewVoteviewData2019" role="doc-biblioref">Sonnet &amp; Lewis, 2015/2019</a>)</span>.</p>
 <p>While I am continuing to develop <code>filibustr</code>, I have already published version 0.2.0 to CRAN, the primary R package repository. You can install the latest version of the package in R using <code>install.packages("filibustr")</code>.</p>
 <p>As the frontiers of quantitative political science research and the best practices in data science continue to advance, it is important that political scientists have access to up-to-date research tools. I am committed to maintaining <code>filibustr</code> as long as the package is demanded. By following the best practices for R package development, I will make <code>filibustr</code> a robust package from the initial release. Then, I plan to support <code>filibustr</code> long-term so it can become a valuable resource for many future political science researchers.</p>
-</div></section><section id="dedication-and-acknowledgements" class="level2 appendix" data-number="10"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">10</span> Dedication and Acknowledgements</h2><div class="quarto-appendix-contents">
+</section>
+
+
+
+
+<div id="quarto-appendix" class="default"><section id="dedication-and-acknowledgements" class="level2 appendix" data-number="10"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">10</span> Dedication and Acknowledgements</h2><div class="quarto-appendix-contents">
 
 <p><em>In memory of Michael Berman. You’re the reason this all happened.</em></p>
 <p>I’d like to thank my advisors, Joe Ferrie and Daniel Galvin, and the Political Science Honors Program coordinator, Andrew Roberts. I received additional guidance from Sen.&nbsp;Patrick Leahy, Northwestern professors Laurel Harbridge-Yong, Brian Libgober, and Jorg Spenkuch, and Ryan DeTamble of American University.</p>
 <p>The study resulting in this thesis was assisted by a Conference Travel Grant from the Office of Undergraduate Research which is administered by Northwestern University’s Office of the Provost. However, the conclusions, opinions, and other statements in this thesis are the author’s and not necessarily those of the sponsoring institution.</p>
 <div style="page-break-after: always;"></div>
-</div></section><section id="references" class="level2 unnumbered appendix" data-number="11"><h2 class="quarto-appendix-heading"></h2><div class="quarto-appendix-contents">
+</div></section><section id="references" class="level2 appendix" data-number="11"><h2 class="anchored quarto-appendix-heading"><span class="header-section-number">11</span> References</h2><div class="quarto-appendix-contents">
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Figure&nbsp;1&nbsp;(a): Growth in ideological polarization in Congress, 1971-2022 (reproduced from <span class="citation" data-cites="desilverPolarizationTodayCongress2022">Desilver (<a href="#ref-desilverPolarizationTodayCongress2022" role="doc-biblioref">2022</a>)</span>)</span>
+<span class="glightbox-desc lightbox-desc-2">Figure&nbsp;1&nbsp;(b): Decline in bipartisan cosponsorship in Congress, 1973-2016 (reproduced from <span class="citation" data-cites="harbridge-yongBipartisanPathEffective2023">Harbridge-Yong et al. (<a href="#ref-harbridge-yongBipartisanPathEffective2023" role="doc-biblioref">2023</a>)</span>)</span>
+<span class="glightbox-desc lightbox-desc-3">Figure&nbsp;1&nbsp;(c): Decline in productivity in Congress, 1989-2023 (reproduced from <span class="citation" data-cites="solenderCapitolHillStunner2023">Solender (<a href="#ref-solenderCapitolHillStunner2023" role="doc-biblioref">2023</a>)</span>)</span>
+<span class="glightbox-desc lightbox-desc-4">Figure&nbsp;3: Frequency of cloture actions, 65th–117th Congresses (1917–2022)</span>
+<span class="glightbox-desc lightbox-desc-5">Figure&nbsp;4: Expected benefits of passage under WS (maximum expected benefits marked)</span>
+<span class="glightbox-desc lightbox-desc-6">Figure&nbsp;5: Expected benefits of passage under WS<sub>K</sub> with a three-fifths cloture rule (maximum expected benefits marked)</span>
+<span class="glightbox-desc lightbox-desc-7">Figure&nbsp;6: Change in proponents’ expected benefits before (left) and after (right) abolishing the filibuster</span>
+<span class="glightbox-desc lightbox-desc-8">Figure&nbsp;7: Voteview vote probabilities on the Inflation Reduction Act (2022)</span>
+<span class="glightbox-desc lightbox-desc-9">Figure&nbsp;8: Voteview vote probabilities on the Infrastructure Investment and Jobs Act (2021)</span>
+<span class="glightbox-desc lightbox-desc-10">Figure&nbsp;9: Potential impact of higher-cost filibusters on failed cloture votes (1977-2022)</span>
+<span class="glightbox-desc lightbox-desc-11">Figure&nbsp;10: Senate confirmation votes on presidential nominations (1989-2022)</span>
+<span class="glightbox-desc lightbox-desc-12">Figure&nbsp;11: Predicted outcomes of Senate confirmation votes (1989-2022)</span>
+</div>
 
-</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">11 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+</div></section><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
 <div id="ref-agiestaCNNPollAmericans2021" class="csl-entry" role="listitem">
 Agiesta, J. (2021, April 29). <em>CNN Poll: Americans want bipartisanship, but most don’t think it will happen</em>. CNN. <a href="https://www.cnn.com/2021/04/29/politics/cnn-poll-bipartisanship/index.html">https://www.cnn.com/2021/04/29/politics/cnn-poll-bipartisanship/index.html</a>
 </div>
@@ -1785,6 +1884,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
