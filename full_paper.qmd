@@ -26,6 +26,7 @@ format:
   pdf:
     toc-depth: 2
     shift-heading-level-by: -1
+    output-file: "Feinleib_Redesigning_the_Filibuster_2024.pdf"
   html:
     toc-depth: 3
 bibliography: full_bib.json
