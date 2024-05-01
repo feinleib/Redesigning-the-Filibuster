@@ -279,21 +279,33 @@ eb_pass <- function(x, alpha) prob_pass(x, alpha) * benefits(x)
 
 ## plotting helpers
 # linetypes legend
-plot_legend <- function(x, y, linetypes) {
-  legend(x = x, y = y, 
-         legend = c(expr(pi), "B", 
-                    # EB or EB_K
-                    expr(!!parse_expr(gsub("_K", "[K]", names(linetypes)[3])))), 
-         lty = c(linetypes$pi, linetypes$B, linetypes$EB),
-         box.col = "white")
+plot_legend <- function(x, y, linetypes, cex = 1) {
+  legend(
+    x = x, y = y, 
+    legend = c(expr(pi), "B", 
+               # EB or EB_K
+               expr(!!parse_expr(gsub("_K", "[K]", names(linetypes)[3])))),
+    lty = c(linetypes$pi, linetypes$B, linetypes$EB),
+    box.col = "white",
+    cex = cex
+  )
 }
 
-# plot frame
-plot_frame <- function(main) {
+# plot frame (empty plot)
+plot_frame <- function(main,
+                       label_cex = 1) {
   plot(NULL, xlim = c(0.51, 1), ylim = c(0,1),
        xlab = "Coalition size", 
        ylab = "Probability of passage/expected benefits",
-       main = main)
+       main = main,
+       # control size of labels
+       cex.axis = label_cex,
+       cex.lab = label_cex,
+       cex.main = label_cex)
+  
+  # control size of axis tick labels
+  axis(1, cex.axis = label_cex)
+  axis(2, cex.axis = label_cex)
 }
 
 # plot curves
@@ -307,13 +319,14 @@ plot_curves <- function(pi_fn, b_fn, eb_fn, linetypes, ...) {
 }
 
 # plot max EB
-plot_max_eb <- function(eb_fn, ...) {
+plot_max_eb <- function(eb_fn, label_cex = 1, ...) {
   max_eb <- which.max(vapply(X = seq(0.51, 1, 0.01), 
                              FUN = \(x) eb_fn(x, ...),
                              FUN.VALUE = numeric(1))) * 0.01 + 0.5
   points(max_eb, eb_fn(max_eb, ...), 
          # diamond shape
-         pch = 18, cex = 2)
+         pch = 18, 
+         cex = 2 * label_cex)
 }
 ```
 
@@ -322,20 +335,33 @@ plot_max_eb <- function(eb_fn, ...) {
 #| fig-cap: Expected benefits of passage under WS (maximum expected benefits marked)
 #| fig-asp: 1.1
 
-plot_eb <- function(alpha) {
+plot_eb <- function(alpha,
+                    leg_x = 0.85, leg_y = 0.75, 
+                    pdf_cex = 0.7, html_cex = 1,
+                    pdf_label_cex = 0.8, html_label_cex = 1) {
   linetypes <- list(pi = "dashed",
                     B = "dotted",
                     EB = "solid")
   
+  label_cex <- ifelse(knitr::is_latex_output(),
+                      pdf_label_cex,
+                      html_label_cex)
+  legend_cex <- ifelse(knitr::is_latex_output(),
+                       pdf_cex,
+                       html_cex)
+  
   # plot frame
-  plot_frame(main = expr(paste(alpha, " = ", !!alpha)))
+  plot_frame(main = expr(paste(alpha, " = ", !!alpha)),
+             label_cex = label_cex)
   # plot curves (pi, B, EB)
   plot_curves(pi_fn = prob_pass, b_fn = benefits, eb_fn = eb_pass, 
               linetypes = linetypes, alpha = alpha)
   # plot linetype legend
-  plot_legend(x = 0.85, y = 0.75, linetypes = linetypes)
+  plot_legend(x = leg_x, y = leg_y, linetypes = linetypes,
+              # control legend size depending on output format
+              cex = legend_cex)
   # plot max EB
-  plot_max_eb(eb_pass, alpha = alpha)
+  plot_max_eb(eb_pass, alpha = alpha, label_cex = label_cex)
 }
 
 par(mfrow = c(2,2))
@@ -379,22 +405,37 @@ eb_pass_k <- function(x, alpha, alpha_star, k) {
 #| fig-cap: Expected benefits of passage under WS~K~ with a three-fifths cloture rule (maximum expected benefits marked)
 #| fig-asp: 1.1
 
-plot_eb_k <- function(alpha, alpha_star, k) {
+plot_eb_k <- function(alpha, alpha_star, k,
+                      leg_x = 0.8, leg_y = 0.75, 
+                      pdf_cex = 0.7, html_cex = 1,
+                      pdf_label_cex = 0.8, html_label_cex = 1) {
   linetypes <- list(pi = "dashed",
                     B = "dotted",
                     EB_K = "solid")
   
+  label_cex <- ifelse(knitr::is_latex_output(),
+                      pdf_label_cex,
+                      html_label_cex)
+  legend_cex <- ifelse(knitr::is_latex_output(),
+                       pdf_cex,
+                       html_cex)
+  
   # plot frame
   plot_frame(main = expr(paste(alpha, " = ", !!alpha, ", ",
-                               alpha, "*", " = ", !!alpha_star)))
+                               alpha, "*", " = ", !!alpha_star)),
+             label_cex = label_cex)
   # plot curves (pi, B, EB_K)
   plot_curves(pi_fn = prob_pass_k, b_fn = benefits, eb_fn = eb_pass_k, 
               linetypes = linetypes, alpha = alpha, 
               k = k, alpha_star = alpha_star)
   # plot linetype legend
-  plot_legend(x = 0.8, y = 0.75, linetypes = linetypes)
+  plot_legend(x = leg_x, y = leg_y, linetypes = linetypes,
+              # control legend size depending on output format
+              cex = legend_cex)
   # plot max EB
-  plot_max_eb(eb_pass_k, alpha = alpha, alpha_star = alpha_star, k = k)
+  plot_max_eb(eb_pass_k, 
+              alpha = alpha, alpha_star = alpha_star, k = k,
+              label_cex = label_cex)
 }
 
 par(mfrow = c(2,2))
@@ -491,14 +532,23 @@ To analyze each of the proposed changes to the filibuster and cloture rule, we w
 ### Proposal 1: Abolishing the Filibuster {#sec-abolishing-filibuster}
 Abolishing the filibuster (dropping the cloture threshold to a simple majority) would make it easier for proponents to pass bills by raising their expected benefits $EB_{prop}$ and decreasing their costs. The expected benefits increase because the probability of passage would increase from $\pi(\alpha)$ to $\pi(\alpha^*)$ for coalitions of less than 60 votes, as shown in @fig-abolish-filibuster below.
 
-```{r abolishing the filibuster figure}
+```{r plot abolishing the filibuster effects}
 #| label: fig-abolish-filibuster
-#| fig-cap: "Change in proponents' expected benefits after abolishing the filibuster"
-#| fig-asp: 0.57
+#| fig-cap: "Change in proponents' expected benefits before (left) and after (right) abolishing the filibuster"
+#| fig-asp: 0.58
 
 par(mfrow = c(1, 2))
-plot_eb_k(alpha = 0.25, alpha_star = 0.1, k = 0.60)
-plot_eb(0.1)
+
+# lots of elements need to be shrunk in this plot, especially for PDF output
+plot_eb_k(alpha = 0.25, alpha_star = 0.1, k = 0.60, 
+          pdf_cex = 0.58, html_cex = 0.88,
+          leg_x = 0.8, leg_y = 0.8,
+          pdf_label_cex = 0.7, html_label_cex = 0.95)
+
+plot_eb(alpha = 0.1, 
+        pdf_cex = 0.58, html_cex = 0.88,
+        leg_x = 0.8, leg_y = 0.8,
+        pdf_label_cex = 0.7, html_label_cex = 0.95)
 ```
 
 This change in expected benefits allows legislative entrepreneurs to pass bills with smaller proponent coalitions. Reducing the cloture threshold to a simple majority would also decrease costs to the proponents, especially the cost of consuming floor time $C_{prop,t}$ and the cost of debate and attendance $C_{prop,d}$, because they would be able to end debate without having 60 votes. To be clear, the obstructionists do not fully disappear from the model after abolishing the filibuster. The obstructionists still have the ability to attempt a filibuster; it is just much easier for proponents to quickly defeat the filibuster with a simple majority.^[Perhaps "abolishing the filibuster" is not the most accurate term. The term has been around for likely well over a century, however [@SenateRulesProposition1925, p. 399], and I am in no position to rename it.] Therefore, the expected benefits to the obstructionists of filibustering $EB_{obst}$ largely vanish.
