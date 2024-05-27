@@ -214,6 +214,49 @@
 		}
 	},
 	{
+		"id": "bernhardCommitmentConsequencesReneging2013",
+		"type": "article-journal",
+		"container-title": "Legislative Studies Quarterly",
+		"DOI": "10.1111/lsq.12024",
+		"ISSN": "03629805",
+		"issue": "4",
+		"journalAbbreviation": "Legislative Studies Quarterly",
+		"language": "en",
+		"page": "461-487",
+		"source": "DOI.org (Crossref)",
+		"title": "Commitment and consequences: Reneging on cosponsorship pledges in the U.S. House",
+		"title-short": "Commitment and Consequences",
+		"URL": "https://onlinelibrary.wiley.com/doi/10.1111/lsq.12024",
+		"volume": "38",
+		"author": [
+			{
+				"family": "Bernhard",
+				"given": "William"
+			},
+			{
+				"family": "Sulkin",
+				"given": "Tracy"
+			}
+		],
+		"accessed": {
+			"date-parts": [
+				[
+					"2023",
+					5,
+					17
+				]
+			]
+		},
+		"issued": {
+			"date-parts": [
+				[
+					"2013",
+					11
+				]
+			]
+		}
+	},
+	{
 		"id": "govtrackMotionInvokeCloture2023",
 		"type": "webpage",
 		"abstract": "Senate Vote #97 in 2023, in the United States Congress.",
@@ -1211,7 +1254,7 @@
 		"id": "feinleib1975ClotureRule2018",
 		"type": "webpage",
 		"abstract": "Explore the history of Senate Rule XXII (22), the cloture rule.  In 1975, Senators Walter Mondale (D-MN) and James Pearson (R-KS) led the efforts to pass Senate Resolution 4 to reduce the cloture threshold from two-thirds to three-fifths of senators.",
-		"container-title": "THE 1975 CLOTURE RULE",
+		"container-title": "The 1975 cloture rule",
 		"language": "en",
 		"title": "The 1975 cloture rule",
 		"URL": "http://cloture.weebly.com/",
@@ -1440,7 +1483,7 @@
 		"title": "filibustr: Data utilities for congressional research",
 		"title-short": "filibustr",
 		"URL": "https://CRAN.R-project.org/package=filibustr",
-		"version": "0.1.1",
+		"version": "0.2.1",
 		"author": [
 			{
 				"family": "Feinleib",
@@ -1460,8 +1503,8 @@
 			"date-parts": [
 				[
 					"2024",
-					2,
-					13
+					5,
+					2
 				]
 			]
 		}
@@ -3014,7 +3057,7 @@
 		"type": "dataset",
 		"language": "en-US",
 		"publisher": "Center for Effective Lawmaking",
-		"title": "Legislative Effectiveness Scores",
+		"title": "Legislative effectiveness scores",
 		"URL": "https://thelawmakers.org/",
 		"author": [
 			{
