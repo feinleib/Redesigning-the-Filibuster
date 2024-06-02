@@ -551,11 +551,9 @@ where $\beta_{block}$ and $\beta_{position}$ represent the obstructionists' bene
 As with proponents, the probability and benefits of success for obstructionists depend on the size of the obstructionist faction.
 Both forms of benefits for the obstructionists are shared among all the members of the obstructionist faction. Thus, for an individual obstructionist, the benefits of obstruction are:
 $$
-\beta_{block} = 
-\frac{.5 - \omega}{\frac{\sum\beta_{block}}{2}}
+\beta_{block} = \left( \frac{.5 - \omega}{.5} \right) \sum\beta_{block}
 \qquad
-\beta_{position} = 
-\frac{.5 - \omega}{\frac{\sum\beta_{position}}{2}}
+\beta_{position} = \left( \frac{.5 - \omega}{.5} \right) \sum\beta_{position}
 $$
 where $\sum\beta_{block}$ and $\sum\beta_{position}$ are the total benefits of obstruction shared among the obstructionists. This formulation uses the proponents' benefits as a baseline: the formula for $B$ in the WS model can be written in similar terms given $\sum B = 1$. For each $\beta$, if there is a single obstructionist, then that member alone accrues the entire benefit. If $\omega = 0.50$ (i.e., the obstructionists make up half the chamber), then obstruction produces no benefits, as in that case, the bill opponents already have enough votes to block a bill without any additional obstruction.
 
