@@ -1,7 +1,9 @@
 ---
 title: Redesigning the Filibuster for More Effective Lawmaking in a Polarized Senate
 author: 
-  - name: Max H. Feinleib
+  - name: 
+      given: Max H. 
+      family: Feinleib
     orcid: 0009-0002-9604-3533
     email: maxfeinleib2024@u.northwestern.edu
     affiliation:
@@ -38,6 +40,8 @@ lot: true
 lightbox: true
 execute:
   echo: false
+citation:
+  url: https://feinleib.quarto.pub/redesigning-the-filibuster-2024/
 ---
 
 \pagebreak
